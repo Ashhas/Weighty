@@ -1,4 +1,4 @@
-package com.example.barbones_architecture
+package com.example.weighty
 
 import io.flutter.embedding.android.FlutterActivity
 
