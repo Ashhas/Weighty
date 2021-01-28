@@ -2,6 +2,7 @@ import 'file:///E:/Personal/Projects/Weighty/lib/ui/dashboard/dashboard_screen.d
 import 'file:///E:/Personal/Projects/Weighty/lib/ui/history/history_screen.dart';
 import 'package:weighty/bloc/home/navigation_bloc.dart';
 import 'package:weighty/ui/addweight/add_weight_screen.dart';
+import 'package:weighty/ui/settings/settings_screen.dart';
 import 'package:weighty/util/strings.dart';
 import 'package:weighty/util/theme.dart';
 import 'package:flutter/material.dart';
@@ -54,12 +55,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
         );
         break;
       case 3:
-        return HistoryScreen();
+        return HistoryScreen(
+          dataBox: _weightEntryDb,
+        );
         break;
       case 4:
-        return Text(
-          'Index 2: School',
-        );
+        return SettingsScreen();
         break;
       default:
         return DashboardScreen();

@@ -38,11 +38,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     setState(() {
-      personName = prefs.getString('peronName');
-      startWeightDate = prefs.getString('startWeightDate');
-      startWeight = prefs.getDouble('startWeight');
-      targetWeightDate = prefs.getString('targetWeightDate');
-      targetWeight = prefs.getDouble('targetWeight');
+      personName = prefs.getString(GlobalStrings.userName);
+      startWeightDate = prefs.getString(GlobalStrings.userStartWeightDate);
+      startWeight = prefs.getDouble(GlobalStrings.userStartWeight);
+      targetWeightDate = prefs.getString(GlobalStrings.userTargetWeightDate);
+      targetWeight = prefs.getDouble(GlobalStrings.userTargetWeight);
     });
   }
 

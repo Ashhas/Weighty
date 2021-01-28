@@ -2,6 +2,7 @@ import 'package:weighty/data/model/measurement.dart';
 import 'package:weighty/ui/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weighty/util/strings.dart';
 
 import 'package:weighty/util/theme.dart';
 import 'package:weighty/bloc/home/navigation_bloc.dart';
@@ -23,11 +24,18 @@ Future<void> main() async {
 
 Future<void> _setPrefsData() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.setString('peronName', 'David Brown');
-  await prefs.setString('startWeightDate', '2020-01-01 00:00:00.000');
-  await prefs.setDouble('startWeight', 120);
-  await prefs.setString('targetWeightDate', '2020-04-01 00:00:00.000');
-  await prefs.setDouble('targetWeight', 100);
+  await prefs.setString(GlobalStrings.userName, 'David Brown');
+  await prefs.setString(GlobalStrings.userGender, 'Male');
+  await prefs.setInt(GlobalStrings.userAge, 20);
+  await prefs.setDouble(GlobalStrings.userHeight, 175);
+  await prefs.setString(GlobalStrings.weightUnitType, "KG");
+  await prefs.setBool(GlobalStrings.reminderStatus, false);
+  await prefs.setString(
+      GlobalStrings.userStartWeightDate, '2020-01-01 00:00:00.000');
+  await prefs.setDouble(GlobalStrings.userStartWeight, 120);
+  await prefs.setString(
+      GlobalStrings.userTargetWeightDate, '2020-04-01 00:00:00.000');
+  await prefs.setDouble(GlobalStrings.userTargetWeight, 100);
 }
 
 Future<void> _initializeHiveDb() async {

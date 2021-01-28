@@ -35,41 +35,44 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppThemes.backgroundColor,
-      appBar: AppBar(
-        elevation: 0,
         backgroundColor: AppThemes.backgroundColor,
-        title: Column(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: AppThemes.backgroundColor,
+          title: Column(
+            children: [
+              Text(
+                GlobalStrings.addWeightTitle,
+                style: AppThemes.screenTitleTxtStyle,
+              ),
+              Text(
+                GlobalStrings.addWeightLabel,
+                style: AppThemes.screenLabelTxtStyle,
+              )
+            ],
+          ),
+          centerTitle: true,
+        ),
+        body: Column(
           children: [
-            Text(
-              GlobalStrings.addWeightTitle,
-              style: AppThemes.screenTitleTxtStyle,
+            TableCalendar(
+              calendarController: _calendarController,
+              startingDayOfWeek: StartingDayOfWeek.monday,
+              onDaySelected: _onDaySelected,
+              daysOfWeekStyle:
+                  DaysOfWeekStyle(weekendStyle: TextStyle(color: Colors.black)),
+              calendarStyle: CalendarStyle(
+                  highlightToday: true,
+                  highlightSelected: true,
+                  outsideDaysVisible: false,
+                  weekendStyle: TextStyle(color: Colors.black)),
+              headerStyle: HeaderStyle(
+                centerHeaderTitle: true,
+                formatButtonVisible: false,
+              ),
             ),
-            Text(
-              GlobalStrings.addWeightLabel,
-              style: AppThemes.screenLabelTxtStyle,
-            )
           ],
-        ),
-        centerTitle: true,
-      ),
-      body: TableCalendar(
-        calendarController: _calendarController,
-        startingDayOfWeek: StartingDayOfWeek.monday,
-        onDaySelected: _onDaySelected,
-        daysOfWeekStyle:
-            DaysOfWeekStyle(weekendStyle: TextStyle(color: Colors.black)),
-        calendarStyle: CalendarStyle(
-            highlightToday: true,
-            highlightSelected: true,
-            outsideDaysVisible: false,
-            weekendStyle: TextStyle(color: Colors.black)),
-        headerStyle: HeaderStyle(
-          centerHeaderTitle: true,
-          formatButtonVisible: false,
-        ),
-      ),
-    );
+        ));
   }
 
   void _onDaySelected(DateTime selectedDay, List events, List holidays) {
