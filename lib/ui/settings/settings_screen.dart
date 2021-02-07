@@ -77,51 +77,61 @@ class _SettingsScreenState extends State<SettingsScreen> {
         centerTitle: true,
       ),
       body: SettingsList(
+        backgroundColor: AppThemes.backgroundColor,
         sections: [
           SettingsSection(
-            title: 'Profile',
+            title: GlobalStrings.profileTileSection,
+            titleTextStyle: AppThemes.settingsTileGroupTitleTxtStyle,
             tiles: [
               SettingsTile(
-                title: 'Name',
-                trailing: Text(userName ?? ""),
+                title: GlobalStrings.nameTile,
+                titleTextStyle: AppThemes.settingsTileTxtStyle,
+                trailing: Text(userName ?? "",
+                    style: AppThemes.settingsTileContentTxtStyle),
                 onPressed: (BuildContext context) {
                   _showNamePopup();
                 },
               ),
               SettingsTile(
-                title: 'Age',
-                trailing: Text(userAge.toString() ?? ""),
+                title: GlobalStrings.ageTile,
+                titleTextStyle: AppThemes.settingsTileTxtStyle,
+                trailing: Text(userAge.toString() ?? "",
+                    style: AppThemes.settingsTileContentTxtStyle),
                 onPressed: (BuildContext context) {
                   _showAgePopup();
                 },
               ),
               SettingsTile(
-                title: 'Height',
-                trailing: Text(userHeight.toString() ?? ""),
+                title: GlobalStrings.HeightTile,
+                titleTextStyle: AppThemes.settingsTileTxtStyle,
+                trailing: Text(userHeight.toString() ?? "",
+                    style: AppThemes.settingsTileContentTxtStyle),
                 onPressed: (BuildContext context) {
                   _showHeightPopup();
                 },
               ),
               SettingsTile(
-                title: 'Start Weight',
+                title: GlobalStrings.StartWeightTile,
+                titleTextStyle: AppThemes.settingsTileTxtStyle,
                 trailing: Text(
-                  startWeight.toString() +
-                          " on " +
-                          startWeightDateFormat.toString() ??
-                      "",
-                ),
+                    startWeight.toString() +
+                            " on " +
+                            startWeightDateFormat.toString() ??
+                        "",
+                    style: AppThemes.settingsTileContentTxtStyle),
                 onPressed: (BuildContext context) {
                   _showStartWeightPopup();
                 },
               ),
               SettingsTile(
-                title: 'Target Weight',
+                title: GlobalStrings.targetWeightTile,
+                titleTextStyle: AppThemes.settingsTileTxtStyle,
                 trailing: Text(
-                  targetWeight.toString() +
-                          " on " +
-                          targetWeightDateFormat.toString() ??
-                      "",
-                ),
+                    targetWeight.toString() +
+                            " on " +
+                            targetWeightDateFormat.toString() ??
+                        "",
+                    style: AppThemes.settingsTileContentTxtStyle),
                 onPressed: (BuildContext context) {
                   _showTargetWeightPopup();
                 },
@@ -129,52 +139,56 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ],
           ),
           SettingsSection(
-            title: "Options",
+            title: GlobalStrings.optionsTileSection,
+            titleTextStyle: AppThemes.settingsTileGroupTitleTxtStyle,
             tiles: [
               SettingsTile(
-                title: "Units",
-                trailing: Text(weightUnitType ?? ""),
+                title: GlobalStrings.unitTile,
+                trailing: Text(weightUnitType ?? "",
+                    style: AppThemes.settingsTileContentTxtStyle),
                 onPressed: (BuildContext context) {
                   _showUnitsPopup();
                 },
               ),
               SettingsTile.switchTile(
-                title: "Reminder",
+                title: GlobalStrings.reminderTile,
                 onToggle: null,
                 switchValue: reminderStatus ?? false,
               ),
             ],
           ),
           SettingsSection(
-            title: "Manage Data",
+            title: GlobalStrings.manageDataTileSection,
+            titleTextStyle: AppThemes.settingsTileGroupTitleTxtStyle,
             tiles: [
               SettingsTile(
-                title: "Export",
+                title: GlobalStrings.exportTile,
                 trailing: Icon(Icons.chevron_right),
               ),
               SettingsTile(
-                title: "Delete All",
+                title: GlobalStrings.deleteTile,
                 trailing: Icon(Icons.chevron_right),
               ),
               SettingsTile(
-                title: "Sync",
+                title: GlobalStrings.syncTile,
                 trailing: Icon(Icons.chevron_right),
               )
             ],
           ),
           SettingsSection(
-            title: "More",
+            title: GlobalStrings.moreDataTileSection,
+            titleTextStyle: AppThemes.settingsTileGroupTitleTxtStyle,
             tiles: [
               SettingsTile(
-                title: "Help & Feedback",
+                title: GlobalStrings.helpFeedbackTile,
                 trailing: Icon(Icons.chevron_right),
               ),
               SettingsTile(
-                title: "Rate App",
+                title: GlobalStrings.RatingTile,
                 trailing: Icon(Icons.chevron_right),
               ),
               SettingsTile(
-                title: "More Apps",
+                title: GlobalStrings.devInfoTile,
                 trailing: Icon(Icons.chevron_right),
               )
             ],
@@ -221,7 +235,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               Icons.check,
                               color: Colors.white,
                             ),
-                            color: AppThemes.currentWeightColor,
+                            color: AppThemes.primaryColor,
                             onPressed: () async {
                               setState(() {
                                 prefs.setString(GlobalStrings.userName,
@@ -308,7 +322,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               Icons.check,
                               color: Colors.white,
                             ),
-                            color: AppThemes.currentWeightColor,
+                            color: AppThemes.primaryColor,
                             onPressed: () async {
                               await prefs.setDouble(GlobalStrings.userHeight,
                                   double.parse(textFormController.text));
@@ -347,15 +361,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: EdgeInsets.only(right: 8.0, top: 8.0, left: 8.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Center(
-                          child: Text(
-                            "START WEIGHT",
-                            style: AppThemes.smallBoldTxtStyle,
-                          ),
+                        Text(
+                          "START WEIGHT",
+                          style: AppThemes.smallBoldTxtStyle,
                         ),
                         TextFormField(
                           controller: textFormController,
@@ -373,7 +385,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               Icons.check,
                               color: Colors.white,
                             ),
-                            color: AppThemes.currentWeightColor,
+                            color: AppThemes.primaryColor,
                             onPressed: () async {
                               await prefs.setDouble(
                                   GlobalStrings.userStartWeight,
@@ -439,7 +451,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               Icons.check,
                               color: Colors.white,
                             ),
-                            color: AppThemes.currentWeightColor,
+                            color: AppThemes.primaryColor,
                             onPressed: () async {
                               await prefs.setDouble(
                                   GlobalStrings.userTargetWeight,
@@ -470,6 +482,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   void _showUnitsPopup() {
     print('CALLBACK: _openEventPopup');
+    String _dropDownValue;
+
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -489,9 +503,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             style: AppThemes.smallBoldTxtStyle,
                           ),
                         ),
-                        TextFormField(
-                          controller: textFormController,
-                        ),
+                        new DropdownButton<String>(
+                          hint: _dropDownValue == null
+                              ? Text("Choose Unit")
+                              : _dropDownValue,
+                          isExpanded: true,
+                          items: GlobalStrings.unitTypes.map((String value) {
+                            return new DropdownMenuItem<String>(
+                              value: value,
+                              child: new Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              _dropDownValue = value;
+                            });
+                          },
+                        )
                       ],
                     ),
                   ),
@@ -505,11 +533,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               Icons.check,
                               color: Colors.white,
                             ),
-                            color: AppThemes.currentWeightColor,
+                            color: AppThemes.primaryColor,
                             onPressed: () async {
                               await prefs.setString(
-                                  GlobalStrings.weightUnitType,
-                                  textFormController.text);
+                                  GlobalStrings.weightUnitType, _dropDownValue);
 
                               //Close Dialog
                               Navigator.of(context).pop();

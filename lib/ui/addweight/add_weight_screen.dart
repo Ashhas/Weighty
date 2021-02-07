@@ -93,6 +93,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
                             .toString()),
                         style: AppThemes.weightNumberBigTxtStyle,
                       )),
+                  Divider(),
                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Column(
@@ -118,7 +119,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
                               Icons.check,
                               color: Colors.white,
                             ),
-                            color: AppThemes.currentWeightColor,
+                            color: AppThemes.primaryColor,
                             onPressed: () {
                               widget.dataBox.add(MeasurementModel(selectedDay,
                                   double.parse(textFormController.text)));

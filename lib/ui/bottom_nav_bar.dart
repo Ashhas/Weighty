@@ -3,6 +3,7 @@ import 'file:///E:/Personal/Projects/Weighty/lib/ui/history/history_screen.dart'
 import 'package:weighty/bloc/home/navigation_bloc.dart';
 import 'package:weighty/ui/addweight/add_weight_screen.dart';
 import 'package:weighty/ui/settings/settings_screen.dart';
+import 'package:weighty/ui/weight_chart_screen/weight_chart_screen.dart';
 import 'package:weighty/util/strings.dart';
 import 'package:weighty/util/theme.dart';
 import 'package:flutter/material.dart';
@@ -45,8 +46,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
         );
         break;
       case 1:
-        return Text(
-          'Index 1: Business',
+        return WeightChartScreen(
+          dataBox: _weightEntryDb,
         );
         break;
       case 2:

@@ -51,45 +51,51 @@ class _HistoryScreenState extends State<HistoryScreen> {
           ),
           centerTitle: true,
         ),
-        body: Column(
-          children: [
-            _buildCustomHeader(),
-            Expanded(
-              child: _buildsameMonthEventList(),
-            ),
-          ],
+        body: Container(
+          color: AppThemes.backgroundColor,
+          child: Column(
+            children: [
+              _buildCustomHeader(),
+              Expanded(
+                child: _buildsameMonthEventList(),
+              ),
+            ],
+          ),
         ));
   }
 
   Widget _buildCustomHeader() {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0, right: 8.0, left: 8.0),
-      child: Center(
-          child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          IconButton(
-            icon: Icon(Icons.chevron_left),
-            onPressed: () {
-              setState(() {
-                _selectPreviousMonth();
-              });
-            },
-          ),
-          Text(
-            DateFormat.yMMMM().format(_currentMonth),
-            style: TextStyle(fontSize: 20.0),
-          ),
-          IconButton(
-            icon: Icon(Icons.chevron_right),
-            onPressed: () {
-              setState(() {
-                _selectNextMonth();
-              });
-            },
-          )
-        ],
-      )),
+    return Container(
+      color: AppThemes.backgroundColor,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 8.0, right: 8.0, left: 8.0),
+        child: Center(
+            child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(
+              icon: Icon(Icons.chevron_left),
+              onPressed: () {
+                setState(() {
+                  _selectPreviousMonth();
+                });
+              },
+            ),
+            Text(
+              DateFormat.yMMMM().format(_currentMonth),
+              style: TextStyle(fontSize: 20.0),
+            ),
+            IconButton(
+              icon: Icon(Icons.chevron_right),
+              onPressed: () {
+                setState(() {
+                  _selectNextMonth();
+                });
+              },
+            )
+          ],
+        )),
+      ),
     );
   }
 
@@ -99,6 +105,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
         element.dateAdded.month == _currentMonth.month);
 
     return Container(
+        color: AppThemes.backgroundColor,
         child: (_samemontheventsFilter.length == 0)
             ? Center(
                 child: Text("No appointment record in current month!",

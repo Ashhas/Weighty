@@ -4,11 +4,8 @@ class AppThemes {
   static const Color primaryColor = Color.fromRGBO(76, 179, 250, 1.0);
   static const Color secondaryColor = Color.fromRGBO(95, 122, 165, 1.0);
   static const Color contentColor = Color.fromRGBO(145, 171, 188, 1.0);
-  static const Color lastColor = Color.fromRGBO(223, 229, 243, 1.0);
-  static const Color currentWeightColor = Color.fromRGBO(76, 178, 250, 1.0);
-  static const Color weightTextColor = Color.fromRGBO(147, 166, 180, 1.0);
-  static const Color weightNumberColor = Color.fromRGBO(57, 88, 142, 1.0);
   static const Color backgroundColor = Color.fromRGBO(249, 248, 253, 1.0);
+  static const Color weightNumberColor = Color.fromRGBO(57, 88, 142, 1.0);
 
   static const TextStyle screenTitleTxtStyle = TextStyle(
     fontSize: 20,
@@ -24,7 +21,7 @@ class AppThemes {
   );
   static const TextStyle currentWeightTxtStyle = TextStyle(
     fontSize: 40,
-    color: currentWeightColor,
+    color: primaryColor,
     fontFamily: "ProximaNova",
     fontWeight: FontWeight.w400,
   );
@@ -36,7 +33,7 @@ class AppThemes {
   );
   static const TextStyle weightNumberMediumTxtStyle = TextStyle(
     fontSize: 13,
-    color: weightTextColor,
+    color: secondaryColor,
     fontFamily: "ProximaNova",
     fontWeight: FontWeight.w400,
   );
@@ -50,16 +47,34 @@ class AppThemes {
 
   static const TextStyle smallBoldTxtStyle = TextStyle(
     fontSize: 12,
-    color: weightTextColor,
+    color: secondaryColor,
     fontFamily: "ProximaNova",
     fontWeight: FontWeight.w700,
+  );
+  static const TextStyle settingsTileTxtStyle = TextStyle(
+    fontSize: 16,
+    color: secondaryColor,
+    fontFamily: "ProximaNova",
+    fontWeight: FontWeight.w500,
+  );
+  static const TextStyle settingsTileContentTxtStyle = TextStyle(
+    fontSize: 14,
+    color: contentColor,
+    fontFamily: "ProximaNova",
+    fontWeight: FontWeight.w500,
+  );
+  static const TextStyle settingsTileGroupTitleTxtStyle = TextStyle(
+    fontSize: 16,
+    color: contentColor,
+    fontFamily: "ProximaNova",
+    fontWeight: FontWeight.w400,
   );
 
   static ThemeData getLightTheme() {
     return ThemeData(
       primaryColor: primaryColor,
       accentColor: secondaryColor,
-      canvasColor: lastColor,
+      canvasColor: backgroundColor,
       backgroundColor: contentColor,
     );
   }
