@@ -1,8 +1,9 @@
 import 'package:weighty/bloc/home/navigation_bloc.dart';
-import 'package:weighty/ui/dashboard/widgets/latest_weight_stats_widget.dart';
-import 'package:weighty/ui/dashboard/widgets/latest_weight_widget.dart';
+import 'package:weighty/ui/dashboard/widgets/weight_stats_widget.dart';
+import 'package:weighty/ui/dashboard/widgets/current_weight_widget.dart';
 import 'package:weighty/ui/dashboard/widgets/start_weight_widget.dart';
 import 'package:weighty/ui/dashboard/widgets/target_weight_widget.dart';
+import 'package:weighty/ui/dashboard/widgets/weight_progress_card.dart';
 import 'package:weighty/util/strings.dart';
 import 'package:weighty/util/theme.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: AppThemes.backgroundColor,
+          backgroundColor: AppThemes.lightBackgroundColor,
           title: Column(
             children: [
               Text(
@@ -74,47 +75,29 @@ class _DashboardScreenState extends State<DashboardScreen> {
             }
           },
           child: Container(
-            color: AppThemes.backgroundColor,
-            child: Column(
-              children: [
-                SizedBox(height: 15),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25),
-                  child: Stack(
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: StartWeightWidget(
-                          startWeight: startWeight,
-                          startWeightDate: startWeightDate,
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: TargetWeightWidget(
-                          targetWeight: targetWeight,
-                          targetWeightDate: targetWeightDate,
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: LatestWeightWidget(
-                          dataBox: widget.dataBox,
-                          targetWeight: targetWeight,
-                          startWeight: startWeight,
-                        ),
-                      )
-                    ],
-                  ),
+              color: AppThemes.lightBackgroundColor,
+              child: Padding(
+                padding: EdgeInsets.only(left: 15, right: 15),
+                child: Column(
+                  children: [
+                    SizedBox(height: 15),
+                    WeightProgressCard(
+                      dataBox: widget.dataBox,
+                      targetWeight: targetWeight,
+                      startWeight: startWeight,
+                      targetWeightDate: targetWeightDate,
+                      startWeightDate: startWeightDate,
+                    ),
+                    SizedBox(height: 5),
+                    WeightStatsWidget(
+                      dataBox: widget.dataBox,
+                      targetWeight: targetWeight,
+                      startWeight: startWeight,
+                    ),
+                    SizedBox(height: 5),
+                  ],
                 ),
-                LatestWeightStatsWidget(
-                  dataBox: widget.dataBox,
-                  targetWeight: targetWeight,
-                  startWeight: startWeight,
-                ),
-              ],
-            ),
-          ),
+              )),
         ));
   }
 }

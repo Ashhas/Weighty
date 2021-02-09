@@ -44,7 +44,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: AppThemes.backgroundColor,
+          backgroundColor: AppThemes.lightBackgroundColor,
           title: Text(
             GlobalStrings.historyTitle,
             style: AppThemes.screenTitleTxtStyle,
@@ -52,7 +52,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
           centerTitle: true,
         ),
         body: Container(
-          color: AppThemes.backgroundColor,
+          color: AppThemes.lightBackgroundColor,
           child: Column(
             children: [
               _buildCustomHeader(),
@@ -66,7 +66,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
   Widget _buildCustomHeader() {
     return Container(
-      color: AppThemes.backgroundColor,
+      color: AppThemes.lightBackgroundColor,
       child: Padding(
         padding: const EdgeInsets.only(bottom: 8.0, right: 8.0, left: 8.0),
         child: Center(
@@ -105,7 +105,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
         element.dateAdded.month == _currentMonth.month);
 
     return Container(
-        color: AppThemes.backgroundColor,
+        color: AppThemes.lightBackgroundColor,
         child: (_samemontheventsFilter.length == 0)
             ? Center(
                 child: Text("No appointment record in current month!",

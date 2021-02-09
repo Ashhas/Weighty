@@ -69,7 +69,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: AppThemes.backgroundColor,
+        backgroundColor: AppThemes.lightBackgroundColor,
         title: Text(
           GlobalStrings.settingsTitle,
           style: AppThemes.screenTitleTxtStyle,
@@ -77,7 +77,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         centerTitle: true,
       ),
       body: SettingsList(
-        backgroundColor: AppThemes.backgroundColor,
+        backgroundColor: AppThemes.lightBackgroundColor,
         sections: [
           SettingsSection(
             title: GlobalStrings.profileTileSection,
@@ -235,7 +235,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               Icons.check,
                               color: Colors.white,
                             ),
-                            color: AppThemes.primaryColor,
+                            color: AppThemes.lightPrimaryColor,
                             onPressed: () async {
                               setState(() {
                                 prefs.setString(GlobalStrings.userName,
@@ -322,7 +322,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               Icons.check,
                               color: Colors.white,
                             ),
-                            color: AppThemes.primaryColor,
+                            color: AppThemes.lightPrimaryColor,
                             onPressed: () async {
                               await prefs.setDouble(GlobalStrings.userHeight,
                                   double.parse(textFormController.text));
@@ -385,7 +385,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               Icons.check,
                               color: Colors.white,
                             ),
-                            color: AppThemes.primaryColor,
+                            color: AppThemes.lightPrimaryColor,
                             onPressed: () async {
                               await prefs.setDouble(
                                   GlobalStrings.userStartWeight,
@@ -451,7 +451,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               Icons.check,
                               color: Colors.white,
                             ),
-                            color: AppThemes.primaryColor,
+                            color: AppThemes.lightPrimaryColor,
                             onPressed: () async {
                               await prefs.setDouble(
                                   GlobalStrings.userTargetWeight,
@@ -533,7 +533,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               Icons.check,
                               color: Colors.white,
                             ),
-                            color: AppThemes.primaryColor,
+                            color: AppThemes.lightPrimaryColor,
                             onPressed: () async {
                               await prefs.setString(
                                   GlobalStrings.weightUnitType, _dropDownValue);

@@ -1,5 +1,3 @@
-import 'file:///E:/Personal/Projects/Weighty/lib/ui/dashboard/dashboard_screen.dart';
-import 'file:///E:/Personal/Projects/Weighty/lib/ui/history/history_screen.dart';
 import 'package:weighty/bloc/home/navigation_bloc.dart';
 import 'package:weighty/ui/addweight/add_weight_screen.dart';
 import 'package:weighty/ui/settings/settings_screen.dart';
@@ -11,6 +9,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../util/theme.dart';
+import 'dashboard/dashboard_screen.dart';
+import 'history/history_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   @override
@@ -99,7 +101,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
+        unselectedItemColor: AppThemes.lightPrimaryTextColor,
         onTap: _onItemTapped,
       ),
     );

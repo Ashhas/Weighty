@@ -35,10 +35,10 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppThemes.backgroundColor,
+        backgroundColor: AppThemes.lightBackgroundColor,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: AppThemes.backgroundColor,
+          backgroundColor: AppThemes.lightBackgroundColor,
           title: Column(
             children: [
               Text(
@@ -119,7 +119,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
                               Icons.check,
                               color: Colors.white,
                             ),
-                            color: AppThemes.primaryColor,
+                            color: AppThemes.lightPrimaryColor,
                             onPressed: () {
                               widget.dataBox.add(MeasurementModel(selectedDay,
                                   double.parse(textFormController.text)));
