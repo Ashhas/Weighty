@@ -5,6 +5,11 @@
 A Weight Track & Management app made w/ Flutter
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+![MIT License](https://img.shields.io/github/license/redsolver/noteless?style=for-the-badge)
+![MIT License](https://img.shields.io/github/license/Ashhas/Weighty?style=for-the-badge)
+![GPL-3.0 License](https://img.shields.io/github/license/redsolver/skydroid?style=for-the-badge)
+![GPL-3.0 License](https://img.shields.io/github/license/Ashhas/Weighty?style=for-the-badge)
+
 
 ## Features
 
