@@ -4,7 +4,7 @@
 
 A Weight Track & Management app made w/ Flutter
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0?style=for-the-badge)
 
 ## Features
 
