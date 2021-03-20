@@ -17,7 +17,6 @@ A Weight Track & Management app made w/ Flutter
 <p>
   <img src="https://github.com/redsolver/skydroid/raw/master/screenshots/screen1.jpg" width="250">
   <img src="https://github.com/redsolver/skydroid/raw/master/screenshots/screen2.jpg" width="250">
-  <img src="https://github.com/redsolver/skydroid/raw/master/screenshots/screen3.jpg" width="250">
 </p>
 
 ## Download
