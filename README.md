@@ -23,6 +23,6 @@ A Weight Track & Management app made w/ Flutter
 
 [https://github.com/redsolver/noteless/releases](https://github.com/redsolver/noteless/releases)
 
-## Changelog
+## License
 
-### 0.0.1
+The app is GPL-3.0 licensed.
