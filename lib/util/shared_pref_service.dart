@@ -41,9 +41,10 @@ class SharedPreferencesService {
   Future<void> setUsername(String userName) async =>
       await _preferences.setString(SharedPrefKeys.userName, userName);
 
-  Future<void> setStartWeight(double userTargetWeight) async =>
-      await _preferences.setDouble(
-          SharedPrefKeys.userTargetWeight, userTargetWeight);
+  Future<void> setStartWeight(double userStartWeight) async {
+    await _preferences.setDouble(
+        SharedPrefKeys.userStartWeight, userStartWeight);
+  }
 
   Future<void> setStartWeightDate(String userStartWeightDate) async =>
       await _preferences.setString(
@@ -67,9 +68,7 @@ class SharedPreferencesService {
   Future<void> setReminderStatus(bool reminderStatus) async =>
       await _preferences.setBool(SharedPrefKeys.reminderStatus, reminderStatus);
 
-  String get getUsername {
-    _preferences.getString(SharedPrefKeys.userName);
-  }
+  String get getUsername => _preferences.getString(SharedPrefKeys.userName);
 
   double get getStartWeight =>
       _preferences.getDouble(SharedPrefKeys.userStartWeight);
@@ -77,11 +76,8 @@ class SharedPreferencesService {
   String get getStartWeightDate =>
       _preferences.getString(SharedPrefKeys.userStartWeightDate);
 
-  double get getTargetWeight {
-    double numDble = _preferences.getDouble(SharedPrefKeys.userTargetWeight);
-    print("getTarget" + numDble.toString());
-    return numDble;
-  }
+  double get getTargetWeight =>
+      _preferences.getDouble(SharedPrefKeys.userTargetWeight);
 
   String get getTargetWeightDate =>
       _preferences.getString(SharedPrefKeys.userTargetWeightDate);
