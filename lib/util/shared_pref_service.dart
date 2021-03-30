@@ -41,10 +41,9 @@ class SharedPreferencesService {
   Future<void> setUsername(String userName) async =>
       await _preferences.setString(SharedPrefKeys.userName, userName);
 
-  Future<void> setStartWeight(double userStartWeight) async {
-    await _preferences.setDouble(
-        SharedPrefKeys.userStartWeight, userStartWeight);
-  }
+  Future<void> setStartWeight(double userStartWeight) async =>
+      await _preferences.setDouble(
+          SharedPrefKeys.userStartWeight, userStartWeight);
 
   Future<void> setStartWeightDate(String userStartWeightDate) async =>
       await _preferences.setString(
