@@ -71,7 +71,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
         body: BlocListener<NavigationBloc, NavigationState>(
           listener: (context, state) {
-            print(state);
             if (state is DashboardOpenedState) {
               _getPrefsData();
             }

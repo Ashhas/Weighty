@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weighty/bloc/app_theme/theme_bloc.dart';
 import 'package:weighty/util/shared_pref_service.dart';
 import 'package:weighty/util/strings.dart';
 import 'package:weighty/util/theme.dart';
@@ -21,6 +23,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   double userHeight;
   String weightUnitType;
   bool reminderStatus;
+  bool themeSwitch;
   double startWeight;
   String startWeightDate;
   String startWeightDateFormat;
@@ -37,6 +40,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Future _initSettings() async {
     textFormController = TextEditingController();
+    themeSwitch = false;
   }
 
   Future _getPrefsData() async {
@@ -134,6 +138,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 title: GlobalStrings.reminderTile,
                 onToggle: null,
                 switchValue: reminderStatus ?? false,
+              ),
+              SettingsTile.switchTile(
+                title: GlobalStrings.themeTile,
+                onToggle: (bool value) {
+                  setState(() {
+                    if (value) {
+                      BlocProvider.of<ThemeBloc>(context)
+                          .add(ThemeChangedEvent(GlobalStrings.lightTheme));
+                    } else {
+                      BlocProvider.of<ThemeBloc>(context)
+                          .add(ThemeChangedEvent(GlobalStrings.darkTheme));
+                    }
+                    themeSwitch = value;
+                  });
+                },
+                switchValue: themeSwitch,
               ),
             ],
           ),

@@ -86,6 +86,15 @@ class AppThemes {
       backgroundColor: lightContentColor,
     );
   }
+
+  static ThemeData getDarkTheme() {
+    return ThemeData(
+      primaryColor: darkPrimaryColor,
+      accentColor: darkSecondaryColor,
+      canvasColor: darkBackgroundColor,
+      backgroundColor: darkContentColor,
+    );
+  }
 }
 
 extension LightThemeExt on ThemeData {

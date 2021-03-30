@@ -1,3 +1,4 @@
+import 'package:weighty/bloc/app_theme/theme_bloc.dart';
 import 'package:weighty/data/model/measurement.dart';
 import 'package:weighty/ui/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -28,9 +29,9 @@ Future<void> _setPrefsData() async {
   sharedPrefService.setUsername('David Brown');
   sharedPrefService.setWeightUnitType('KG');
   sharedPrefService.setReminderStatus(false);
-  sharedPrefService.setStartWeight(120);
+  sharedPrefService.setStartWeight(120.0);
   sharedPrefService.setStartWeightDate('2020-01-01 00:00:00.000');
-  sharedPrefService.setTargetWeight(100);
+  sharedPrefService.setTargetWeight(100.0);
   sharedPrefService.setTargetWeightDate('2020-04-01 00:00:00.000');
 }
 
@@ -54,12 +55,32 @@ Future<void> _initializeHiveDb() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<NavigationBloc>(
-      create: (_) => NavigationBloc()..add(NavigateToDashboard()),
-      child: MaterialApp(
-        title: 'Weighty',
-        home: BottomNavBar(),
-      ),
-    );
+    // return BlocProvider<NavigationBloc>(
+    //   create: (_) => NavigationBloc()..add(NavigateToDashboard()),
+    //   child: MaterialApp(
+    //     title: 'Weighty',
+    //     home: BottomNavBar(),
+    //   ),
+    // );
+
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<NavigationBloc>(
+            create: (_) => NavigationBloc()..add(NavigateToDashboard()),
+          ),
+          BlocProvider<ThemeBloc>(
+              create: (_) => ThemeBloc()..add(ThemeLoadStartedEvent()))
+        ],
+        child: BlocBuilder<ThemeBloc, ThemeState>(
+          builder: (context, themeState) {
+            return MaterialApp(
+              title: 'Weighty',
+              themeMode: themeState.themeMode,
+              theme: AppThemes.getLightTheme(),
+              darkTheme: AppThemes.getDarkTheme(),
+              home: BottomNavBar(),
+            );
+          },
+        ));
   }
 }

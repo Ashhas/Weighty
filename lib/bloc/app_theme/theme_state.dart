@@ -1,14 +1,9 @@
 part of 'theme_bloc.dart';
 
-@immutable
-abstract class ThemeState extends Equatable {
-  const ThemeState();
-}
-
-class CurrentThemeState extends ThemeState {
+class ThemeState extends Equatable {
   final ThemeMode themeMode;
 
-  CurrentThemeState(this.themeMode) : assert(themeMode != null);
+  ThemeState(this.themeMode) : assert(themeMode != null);
 
   @override
   List<Object> get props => [themeMode];

@@ -11,7 +11,7 @@ part 'theme_event.dart';
 part 'theme_state.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
-  ThemeBloc(ThemeState initialState) : super(initialState);
+  ThemeBloc() : super(ThemeState(ThemeMode.light));
 
   @override
   Stream<ThemeState> mapEventToState(ThemeEvent event) async* {
@@ -28,11 +28,11 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
 
     if (selectedThemeMode == null) {
       sharedPrefService.setThemeMode(GlobalStrings.systemTheme);
-      yield CurrentThemeState(ThemeMode.system);
+      yield ThemeState(ThemeMode.system);
     } else if (selectedThemeMode == GlobalStrings.darkTheme) {
-      yield CurrentThemeState(ThemeMode.dark);
+      yield ThemeState(ThemeMode.dark);
     } else if (selectedThemeMode == GlobalStrings.lightTheme) {
-      yield CurrentThemeState(ThemeMode.light);
+      yield ThemeState(ThemeMode.light);
     }
   }
 
@@ -42,13 +42,13 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
 
     if (selectedThemeMode == GlobalStrings.systemTheme) {
       sharedPrefService.setThemeMode(GlobalStrings.systemTheme);
-      yield CurrentThemeState(ThemeMode.system);
+      yield ThemeState(ThemeMode.system);
     } else if (selectedThemeMode == GlobalStrings.darkTheme) {
       sharedPrefService.setThemeMode(GlobalStrings.darkTheme);
-      yield CurrentThemeState(ThemeMode.dark);
+      yield ThemeState(ThemeMode.dark);
     } else if (selectedThemeMode == GlobalStrings.lightTheme) {
       sharedPrefService.setThemeMode(GlobalStrings.lightTheme);
-      yield CurrentThemeState(ThemeMode.light);
+      yield ThemeState(ThemeMode.light);
     }
   }
 }
