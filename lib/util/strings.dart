@@ -1,6 +1,11 @@
 class GlobalStrings {
   static const appName = 'Weighty';
 
+  //Theme String
+  static const darkTheme = 'darkTheme';
+  static const lightTheme = 'lightTheme';
+  static const systemTheme = 'systemTheme';
+
   //Navbar Strings
   static const dashboardTitle = 'Dashboard';
   static const statisticsTitle = 'Stats';
@@ -40,16 +45,4 @@ class GlobalStrings {
   static const RatingTile = 'Rate App';
   static const devInfoTile = 'Dev Info';
   static const unitTypes = ['KG', 'Pounds'];
-
-  //Shared Preferences IDs
-  static const userName = 'userName';
-  static const userGender = 'gender';
-  static const userAge = 'age';
-  static const userHeight = 'height';
-  static const userStartWeight = 'startWeight';
-  static const userStartWeightDate = 'startWeightDate';
-  static const userTargetWeight = 'targetWeight';
-  static const userTargetWeightDate = 'targetWeightDate';
-  static const weightUnitType = 'weightUnitType';
-  static const reminderStatus = 'reminderStatus';
 }

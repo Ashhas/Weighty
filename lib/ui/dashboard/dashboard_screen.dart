@@ -1,9 +1,11 @@
 import 'package:weighty/bloc/home/navigation_bloc.dart';
+import 'package:weighty/ui/dashboard/widgets/small_weight_chart_widget.dart';
 import 'package:weighty/ui/dashboard/widgets/weight_stats_widget.dart';
 import 'package:weighty/ui/dashboard/widgets/current_weight_widget.dart';
 import 'package:weighty/ui/dashboard/widgets/start_weight_widget.dart';
 import 'package:weighty/ui/dashboard/widgets/target_weight_widget.dart';
 import 'package:weighty/ui/dashboard/widgets/weight_progress_card.dart';
+import 'package:weighty/util/shared_pref_service.dart';
 import 'package:weighty/util/strings.dart';
 import 'package:weighty/util/theme.dart';
 import 'package:flutter/material.dart';
@@ -36,14 +38,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Future _getPrefsData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final sharedPrefService = await SharedPreferencesService.instance;
 
     setState(() {
-      personName = prefs.getString(GlobalStrings.userName);
-      startWeightDate = prefs.getString(GlobalStrings.userStartWeightDate);
-      startWeight = prefs.getDouble(GlobalStrings.userStartWeight);
-      targetWeightDate = prefs.getString(GlobalStrings.userTargetWeightDate);
-      targetWeight = prefs.getDouble(GlobalStrings.userTargetWeight);
+      personName = sharedPrefService.getUsername;
+      startWeight = sharedPrefService.getStartWeight;
+      startWeightDate = sharedPrefService.getStartWeightDate;
+      targetWeight = sharedPrefService.getTargetWeight;
+      targetWeightDate = sharedPrefService.getTargetWeightDate;
     });
   }
 
@@ -95,6 +97,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       startWeight: startWeight,
                     ),
                     SizedBox(height: 5),
+                    SmallWeightChartWidget()
                   ],
                 ),
               )),

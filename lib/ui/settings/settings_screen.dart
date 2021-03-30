@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weighty/util/shared_pref_service.dart';
 import 'package:weighty/util/strings.dart';
 import 'package:weighty/util/theme.dart';
 import 'package:intl/intl.dart';
@@ -13,7 +14,7 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   TextEditingController textFormController;
-  SharedPreferences prefs;
+  SharedPreferencesService sharedPrefService;
   String userName;
   String userGender;
   int userAge;
@@ -39,19 +40,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future _getPrefsData() async {
-    prefs = await SharedPreferences.getInstance();
+    sharedPrefService = await SharedPreferencesService.instance;
 
     setState(() {
-      userName = prefs.getString(GlobalStrings.userName);
-      userGender = prefs.getString(GlobalStrings.userGender);
-      userAge = prefs.getInt(GlobalStrings.userAge);
-      userHeight = prefs.getDouble(GlobalStrings.userHeight);
-      weightUnitType = prefs.getString(GlobalStrings.weightUnitType);
-      reminderStatus = prefs.getBool(GlobalStrings.reminderStatus);
-      startWeightDate = prefs.getString(GlobalStrings.userStartWeightDate);
-      startWeight = prefs.getDouble(GlobalStrings.userStartWeight);
-      targetWeightDate = prefs.getString(GlobalStrings.userTargetWeightDate);
-      targetWeight = prefs.getDouble(GlobalStrings.userTargetWeight);
+      userName = sharedPrefService.getUsername;
+      startWeight = sharedPrefService.getStartWeight;
+      startWeightDate = sharedPrefService.getStartWeightDate;
+      targetWeight = sharedPrefService.getTargetWeight;
+      targetWeightDate = sharedPrefService.getTargetWeightDate;
+      weightUnitType = sharedPrefService.getWeightUnitType;
+      reminderStatus = sharedPrefService.getReminderStatus;
     });
   }
 
@@ -90,24 +88,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     style: AppThemes.settingsTileContentTxtStyle),
                 onPressed: (BuildContext context) {
                   _showNamePopup();
-                },
-              ),
-              SettingsTile(
-                title: GlobalStrings.ageTile,
-                titleTextStyle: AppThemes.settingsTileTxtStyle,
-                trailing: Text(userAge.toString() ?? "",
-                    style: AppThemes.settingsTileContentTxtStyle),
-                onPressed: (BuildContext context) {
-                  _showAgePopup();
-                },
-              ),
-              SettingsTile(
-                title: GlobalStrings.HeightTile,
-                titleTextStyle: AppThemes.settingsTileTxtStyle,
-                trailing: Text(userHeight.toString() ?? "",
-                    style: AppThemes.settingsTileContentTxtStyle),
-                onPressed: (BuildContext context) {
-                  _showHeightPopup();
                 },
               ),
               SettingsTile(
@@ -238,95 +218,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             color: AppThemes.lightPrimaryColor,
                             onPressed: () async {
                               setState(() {
-                                prefs.setString(GlobalStrings.userName,
-                                    textFormController.text);
+                                sharedPrefService
+                                    .setUsername(textFormController.text);
                               });
-                              //Close Dialog
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                          RaisedButton(
-                            child: Icon(
-                              Icons.close,
-                              color: Colors.grey,
-                            ),
-                            onPressed: () {
-                              //Close Dialog
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      ))
-                ],
-              ),
-            ),
-          );
-        });
-  }
-
-  void _showAgePopup() {
-    print('CALLBACK: _openEventPopup');
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return new NumberPickerDialog.integer(
-            minValue: 1,
-            maxValue: 100,
-            title: new Text("Pick a new price"),
-            initialIntegerValue: 10,
-          );
-        }).then((value) async {
-      if (value != null) {
-        //setState
-        setState(() {
-          prefs.setInt(GlobalStrings.userAge, value);
-        });
-      }
-    });
-  }
-
-  void _showHeightPopup() {
-    print('CALLBACK: _openEventPopup');
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: Form(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Text(
-                            "HEIGHT",
-                            style: AppThemes.smallBoldTxtStyle,
-                          ),
-                        ),
-                        TextFormField(
-                          controller: textFormController,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          RaisedButton(
-                            child: Icon(
-                              Icons.check,
-                              color: Colors.white,
-                            ),
-                            color: AppThemes.lightPrimaryColor,
-                            onPressed: () async {
-                              await prefs.setDouble(GlobalStrings.userHeight,
-                                  double.parse(textFormController.text));
-
                               //Close Dialog
                               Navigator.of(context).pop();
                             },
@@ -387,8 +281,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                             color: AppThemes.lightPrimaryColor,
                             onPressed: () async {
-                              await prefs.setDouble(
-                                  GlobalStrings.userStartWeight,
+                              sharedPrefService.setStartWeight(
                                   double.parse(textFormController.text));
 
                               //Close Dialog
@@ -453,8 +346,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                             color: AppThemes.lightPrimaryColor,
                             onPressed: () async {
-                              await prefs.setDouble(
-                                  GlobalStrings.userTargetWeight,
+                              sharedPrefService.setTargetWeight(
                                   double.parse(textFormController.text));
 
                               //Close Dialog
@@ -535,8 +427,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                             color: AppThemes.lightPrimaryColor,
                             onPressed: () async {
-                              await prefs.setString(
-                                  GlobalStrings.weightUnitType, _dropDownValue);
+                              sharedPrefService
+                                  .setWeightUnitType(_dropDownValue);
 
                               //Close Dialog
                               Navigator.of(context).pop();
