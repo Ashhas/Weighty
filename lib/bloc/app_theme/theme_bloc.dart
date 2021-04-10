@@ -18,36 +18,32 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     if (event is ThemeLoadStartedEvent) {
       yield* _mapThemeLoadStartedEventToState();
     } else if (event is ThemeChangedEvent) {
-      yield* _mapThemeChangedEvenToState(event.themeModeString);
+      yield* _mapThemeChangedEvenToState(event.themeDarkMode);
     }
   }
 
   Stream<ThemeState> _mapThemeLoadStartedEventToState() async* {
     final sharedPrefService = await SharedPreferencesService.instance;
-    final selectedThemeMode = sharedPrefService.getThemeMode;
+    final themeDarkMode = sharedPrefService.getThemeDarkMode;
 
-    if (selectedThemeMode == null) {
-      sharedPrefService.setThemeMode(GlobalStrings.systemTheme);
+    if (themeDarkMode == null) {
+      sharedPrefService.setThemeDarkMode(false);
       yield ThemeState(ThemeMode.system);
-    } else if (selectedThemeMode == GlobalStrings.darkTheme) {
+    } else if (themeDarkMode == true) {
       yield ThemeState(ThemeMode.dark);
-    } else if (selectedThemeMode == GlobalStrings.lightTheme) {
+    } else if (themeDarkMode == false) {
       yield ThemeState(ThemeMode.light);
     }
   }
 
-  Stream<ThemeState> _mapThemeChangedEvenToState(
-      String selectedThemeMode) async* {
+  Stream<ThemeState> _mapThemeChangedEvenToState(bool themeDarkMode) async* {
     final sharedPrefService = await SharedPreferencesService.instance;
 
-    if (selectedThemeMode == GlobalStrings.systemTheme) {
-      sharedPrefService.setThemeMode(GlobalStrings.systemTheme);
-      yield ThemeState(ThemeMode.system);
-    } else if (selectedThemeMode == GlobalStrings.darkTheme) {
-      sharedPrefService.setThemeMode(GlobalStrings.darkTheme);
+    if (themeDarkMode == true) {
+      sharedPrefService.setThemeDarkMode(true);
       yield ThemeState(ThemeMode.dark);
-    } else if (selectedThemeMode == GlobalStrings.lightTheme) {
-      sharedPrefService.setThemeMode(GlobalStrings.lightTheme);
+    } else if (themeDarkMode == false) {
+      sharedPrefService.setThemeDarkMode(false);
       yield ThemeState(ThemeMode.light);
     }
   }

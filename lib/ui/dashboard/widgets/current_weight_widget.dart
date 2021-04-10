@@ -46,17 +46,17 @@ class _CurrentWeightWidgetState extends State<CurrentWeightWidget> {
       children: [
         Text(
           GlobalStrings.weightCurrentTitle,
-          style: AppThemes.weightNumberMediumTxtStyle,
+          style: Theme.of(context).textTheme.bodyText2,
         ),
         Text(
           measurement != null ? measurement.weightEntry.toString() : "-",
-          style: AppThemes.weightNumberBigTxtStyle,
+          style: Theme.of(context).textTheme.headline1,
         ),
         Text(
           measurement != null
               ? new DateFormat.yMMMd('en_US').format(measurement.dateAdded)
               : "-",
-          style: AppThemes.weightNumberMediumTxtStyle,
+          style: Theme.of(context).textTheme.bodyText2,
         ),
       ],
     );
