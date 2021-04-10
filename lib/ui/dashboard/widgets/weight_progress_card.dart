@@ -1,10 +1,10 @@
 import 'package:weighty/data/model/measurement.dart';
-import 'package:weighty/util/theme.dart';
+import 'package:weighty/util/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-import '../../../util/theme.dart';
-import '../../../util/theme.dart';
+import '../../../util/themes.dart';
+import '../../../util/themes.dart';
 import 'current_weight_widget.dart';
 import 'start_weight_widget.dart';
 import 'target_weight_widget.dart';
