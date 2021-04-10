@@ -35,19 +35,19 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppThemes.lightBackgroundColor,
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: AppThemes.lightBackgroundColor,
+          backgroundColor: Theme.of(context).backgroundColor,
           title: Column(
             children: [
               Text(
                 GlobalStrings.addWeightTitle,
-                style: AppThemes.screenTitleTxtStyle,
+                style: Theme.of(context).textTheme.headline6,
               ),
               Text(
                 GlobalStrings.addWeightLabel,
-                style: AppThemes.screenLabelTxtStyle,
+                style: Theme.of(context).textTheme.headline5,
               )
             ],
           ),
@@ -91,7 +91,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
                         (new DateFormat.yMMMd('en_US')
                             .format(selectedDay)
                             .toString()),
-                        style: AppThemes.weightNumberBigTxtStyle,
+                        style: Theme.of(context).textTheme.bodyText1,
                       )),
                   Divider(),
                   Padding(
@@ -101,7 +101,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
                       children: [
                         Text(
                           "ADD WEIGHT",
-                          style: AppThemes.smallBoldTxtStyle,
+                          style: Theme.of(context).textTheme.subtitle1,
                         ),
                         TextFormField(
                           controller: textFormController,
@@ -119,7 +119,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
                               Icons.check,
                               color: Colors.white,
                             ),
-                            color: AppThemes.lightPrimaryColor,
+                            color: Theme.of(context).primaryColor,
                             onPressed: () {
                               widget.dataBox.add(MeasurementModel(selectedDay,
                                   double.parse(textFormController.text)));

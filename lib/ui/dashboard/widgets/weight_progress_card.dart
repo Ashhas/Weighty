@@ -60,18 +60,18 @@ class _WeightProgressCardState extends State<WeightProgressCard> {
         children: [
           Text(
             "Weight Loss Progress",
-            style: AppThemes.weightNumberMediumTxtStyle,
+            style: Theme.of(context).textTheme.bodyText2,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 measurement != null ? percentageDone.toInt().toString() : "-",
-                style: AppThemes.weightNumberMediumTxtStyle,
+                style: Theme.of(context).textTheme.bodyText2,
               ),
               Text(
                 "% Completed",
-                style: TextStyle(color: AppThemes.lightPrimaryTextColor),
+                style: TextStyle(color: Theme.of(context).shadowColor),
               ),
             ],
           ),
@@ -100,7 +100,7 @@ class _WeightProgressCardState extends State<WeightProgressCard> {
             child: LinearProgressIndicator(
               value: percentageDone / 100,
               valueColor:
-                  AlwaysStoppedAnimation<Color>(AppThemes.lightPrimaryColor),
+                  AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
               backgroundColor: Colors.grey,
             ),
           ),

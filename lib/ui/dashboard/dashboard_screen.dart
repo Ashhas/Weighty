@@ -54,16 +54,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: AppThemes.lightBackgroundColor,
+          backgroundColor: Theme.of(context).backgroundColor,
           title: Column(
             children: [
               Text(
                 personName ?? "",
-                style: AppThemes.screenTitleTxtStyle,
+                style: Theme.of(context).textTheme.headline6,
               ),
               Text(
                 GlobalStrings.dashboardLabel,
-                style: AppThemes.screenLabelTxtStyle,
+                style: Theme.of(context).textTheme.headline5,
               )
             ],
           ),
@@ -76,7 +76,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             }
           },
           child: Container(
-              color: AppThemes.lightBackgroundColor,
+              color: Theme.of(context).backgroundColor,
               child: Padding(
                 padding: EdgeInsets.only(left: 15, right: 15),
                 child: Column(

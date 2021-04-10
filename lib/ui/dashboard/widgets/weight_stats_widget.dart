@@ -42,11 +42,11 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
                 children: [
                   Text(
                     "172.4",
-                    style: AppThemes.weightNumberBoldTxtStyle,
+                    style: Theme.of(context).textTheme.subtitle2,
                   ),
                   Text(
                     "MOVING AVG",
-                    style: AppThemes.weightNumberMediumTxtStyle,
+                    style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ],
               ),
@@ -56,11 +56,11 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
               children: [
                 Text(
                   "1.4",
-                  style: AppThemes.weightNumberBoldTxtStyle,
+                  style: Theme.of(context).textTheme.subtitle2,
                 ),
                 Text(
                   "AVG. WEEKLY LOSS",
-                  style: AppThemes.weightNumberMediumTxtStyle,
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
               ],
             ),
@@ -72,11 +72,11 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
                       ? ((targetWeight - measurement.weightEntry) * -1)
                           .toString()
                       : "-",
-                  style: AppThemes.weightNumberBoldTxtStyle,
+                  style: Theme.of(context).textTheme.subtitle2,
                 ),
                 Text(
                   "LEFT TO GO",
-                  style: AppThemes.weightNumberMediumTxtStyle,
+                  style: Theme.of(context).textTheme.bodyText2,
                 ),
               ],
             ),

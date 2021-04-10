@@ -11,10 +11,10 @@ class ThemeLoadStartedEvent extends ThemeEvent {
 }
 
 class ThemeChangedEvent extends ThemeEvent {
-  final String themeModeString;
+  final bool themeDarkMode;
 
-  ThemeChangedEvent(this.themeModeString) : assert(themeModeString != null);
+  ThemeChangedEvent(this.themeDarkMode) : assert(themeDarkMode != null);
 
   @override
-  List<Object> get props => [themeModeString];
+  List<Object> get props => [themeDarkMode];
 }

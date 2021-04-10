@@ -27,15 +27,15 @@ class _StartWeightWidgetState extends State<StartWeightWidget> {
       children: [
         Text(
           GlobalStrings.weightStartedTitle,
-          style: AppThemes.weightNumberMediumTxtStyle,
+          style: Theme.of(context).textTheme.bodyText2,
         ),
         Text(
           widget.startWeight.toString() ?? "",
-          style: AppThemes.weightNumberBigTxtStyle,
+          style: Theme.of(context).textTheme.headline1,
         ),
         Text(
           startWeightDateFormat ?? "-",
-          style: AppThemes.weightNumberMediumTxtStyle,
+          style: Theme.of(context).textTheme.bodyText2,
         ),
       ],
     );

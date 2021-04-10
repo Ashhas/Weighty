@@ -5,7 +5,7 @@ class SharedPrefKeys {
   SharedPrefKeys._();
 
   //User Prefs
-  static const String themeMode = 'themeMode';
+  static const String themeDarkMode = 'themeDarkMode';
 
   //User Info
   static const userName = 'userName';
@@ -57,8 +57,8 @@ class SharedPreferencesService {
       await _preferences.setString(
           SharedPrefKeys.userTargetWeightDate, userTargetWeightDate);
 
-  Future<void> setThemeMode(String themeMode) async =>
-      await _preferences.setString(SharedPrefKeys.themeMode, themeMode);
+  Future<void> setThemeDarkMode(bool themeMode) async =>
+      await _preferences.setBool(SharedPrefKeys.themeDarkMode, themeMode);
 
   Future<void> setWeightUnitType(String weightUnitType) async =>
       await _preferences.setString(
@@ -81,7 +81,8 @@ class SharedPreferencesService {
   String get getTargetWeightDate =>
       _preferences.getString(SharedPrefKeys.userTargetWeightDate);
 
-  String get getThemeMode => _preferences.getString(SharedPrefKeys.themeMode);
+  bool get getThemeDarkMode =>
+      _preferences.getBool(SharedPrefKeys.themeDarkMode);
 
   String get getWeightUnitType =>
       _preferences.getString(SharedPrefKeys.weightUnitType);

@@ -38,7 +38,7 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
                   Expanded(
                     child: Text(
                       "Weight",
-                      style: AppThemes.weightNumberMediumTxtStyle,
+                      style: Theme.of(context).textTheme.bodyText2,
                     ),
                   ),
                   Text("169"),

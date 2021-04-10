@@ -41,7 +41,7 @@ class GlobalStrings {
   static const exportTile = 'Export';
   static const deleteTile = 'Delete All';
   static const syncTile = 'Sync';
-  static const themeTile = 'Theme';
+  static const themeTile = 'Dark Theme';
   static const helpFeedbackTile = 'Help & Feedback';
   static const RatingTile = 'Rate App';
   static const devInfoTile = 'Dev Info';

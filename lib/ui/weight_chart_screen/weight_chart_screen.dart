@@ -30,15 +30,15 @@ class _AddWeightScreenState extends State<WeightChartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppThemes.lightBackgroundColor,
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: AppThemes.lightBackgroundColor,
+          backgroundColor: Theme.of(context).backgroundColor,
           title: Column(
             children: [
               Text(
                 GlobalStrings.weightChartTitle,
-                style: AppThemes.screenTitleTxtStyle,
+                style: Theme.of(context).textTheme.headline6,
               ),
             ],
           ),

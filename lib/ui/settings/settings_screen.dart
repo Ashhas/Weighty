@@ -54,6 +54,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       targetWeightDate = sharedPrefService.getTargetWeightDate;
       weightUnitType = sharedPrefService.getWeightUnitType;
       reminderStatus = sharedPrefService.getReminderStatus;
+      themeSwitch = sharedPrefService.getThemeDarkMode;
     });
   }
 
@@ -71,51 +72,49 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: AppThemes.lightBackgroundColor,
-        title: Text(
-          GlobalStrings.settingsTitle,
-          style: AppThemes.screenTitleTxtStyle,
-        ),
+        backgroundColor: Theme.of(context).backgroundColor,
+        title: Text(GlobalStrings.settingsTitle,
+            style: Theme.of(context).textTheme.headline4),
         centerTitle: true,
       ),
       body: SettingsList(
-        backgroundColor: AppThemes.lightBackgroundColor,
+        backgroundColor: Theme.of(context).backgroundColor,
         sections: [
           SettingsSection(
             title: GlobalStrings.profileTileSection,
-            titleTextStyle: AppThemes.settingsTileGroupTitleTxtStyle,
+            titleTextStyle: Theme.of(context).textTheme.headline3,
             tiles: [
               SettingsTile(
                 title: GlobalStrings.nameTile,
-                titleTextStyle: AppThemes.settingsTileTxtStyle,
+                titleTextStyle: Theme.of(context).textTheme.headline4,
                 trailing: Text(userName ?? "",
-                    style: AppThemes.settingsTileContentTxtStyle),
+                    style: Theme.of(context).textTheme.headline2),
                 onPressed: (BuildContext context) {
                   _showNamePopup();
                 },
               ),
               SettingsTile(
                 title: GlobalStrings.StartWeightTile,
-                titleTextStyle: AppThemes.settingsTileTxtStyle,
+                titleTextStyle: Theme.of(context).textTheme.headline4,
                 trailing: Text(
                     startWeight.toString() +
                             " on " +
                             startWeightDateFormat.toString() ??
                         "",
-                    style: AppThemes.settingsTileContentTxtStyle),
+                    style: Theme.of(context).textTheme.headline2),
                 onPressed: (BuildContext context) {
                   _showStartWeightPopup();
                 },
               ),
               SettingsTile(
                 title: GlobalStrings.targetWeightTile,
-                titleTextStyle: AppThemes.settingsTileTxtStyle,
+                titleTextStyle: Theme.of(context).textTheme.headline4,
                 trailing: Text(
                     targetWeight.toString() +
                             " on " +
                             targetWeightDateFormat.toString() ??
                         "",
-                    style: AppThemes.settingsTileContentTxtStyle),
+                    style: Theme.of(context).textTheme.headline2),
                 onPressed: (BuildContext context) {
                   _showTargetWeightPopup();
                 },
@@ -124,12 +123,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           SettingsSection(
             title: GlobalStrings.optionsTileSection,
-            titleTextStyle: AppThemes.settingsTileGroupTitleTxtStyle,
+            titleTextStyle: Theme.of(context).textTheme.headline3,
             tiles: [
               SettingsTile(
                 title: GlobalStrings.unitTile,
                 trailing: Text(weightUnitType ?? "",
-                    style: AppThemes.settingsTileContentTxtStyle),
+                    style: Theme.of(context).textTheme.headline2),
                 onPressed: (BuildContext context) {
                   _showUnitsPopup();
                 },
@@ -145,10 +144,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   setState(() {
                     if (value) {
                       BlocProvider.of<ThemeBloc>(context)
-                          .add(ThemeChangedEvent(GlobalStrings.lightTheme));
+                          .add(ThemeChangedEvent(true));
                     } else {
                       BlocProvider.of<ThemeBloc>(context)
-                          .add(ThemeChangedEvent(GlobalStrings.darkTheme));
+                          .add(ThemeChangedEvent(false));
                     }
                     themeSwitch = value;
                   });
@@ -159,7 +158,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           SettingsSection(
             title: GlobalStrings.manageDataTileSection,
-            titleTextStyle: AppThemes.settingsTileGroupTitleTxtStyle,
+            titleTextStyle: Theme.of(context).textTheme.headline3,
             tiles: [
               SettingsTile(
                 title: GlobalStrings.exportTile,
@@ -177,7 +176,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           SettingsSection(
             title: GlobalStrings.moreDataTileSection,
-            titleTextStyle: AppThemes.settingsTileGroupTitleTxtStyle,
+            titleTextStyle: Theme.of(context).textTheme.headline3,
             tiles: [
               SettingsTile(
                 title: GlobalStrings.helpFeedbackTile,
@@ -216,7 +215,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Center(
                           child: Text(
                             "NAME",
-                            style: AppThemes.smallBoldTxtStyle,
+                            style: Theme.of(context).textTheme.subtitle1,
                           ),
                         ),
                         TextFormField(
@@ -235,7 +234,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               Icons.check,
                               color: Colors.white,
                             ),
-                            color: AppThemes.lightPrimaryColor,
+                            color: Theme.of(context).primaryColor,
                             onPressed: () async {
                               setState(() {
                                 sharedPrefService
@@ -281,7 +280,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       children: [
                         Text(
                           "START WEIGHT",
-                          style: AppThemes.smallBoldTxtStyle,
+                          style: Theme.of(context).textTheme.subtitle1,
                         ),
                         TextFormField(
                           controller: textFormController,
@@ -299,7 +298,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               Icons.check,
                               color: Colors.white,
                             ),
-                            color: AppThemes.lightPrimaryColor,
+                            color: Theme.of(context).primaryColor,
                             onPressed: () async {
                               sharedPrefService.setStartWeight(
                                   double.parse(textFormController.text));
@@ -345,7 +344,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Center(
                           child: Text(
                             "TARGET WEIGHT",
-                            style: AppThemes.smallBoldTxtStyle,
+                            style: Theme.of(context).textTheme.subtitle1,
                           ),
                         ),
                         TextFormField(
@@ -364,7 +363,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               Icons.check,
                               color: Colors.white,
                             ),
-                            color: AppThemes.lightPrimaryColor,
+                            color: Theme.of(context).primaryColor,
                             onPressed: () async {
                               sharedPrefService.setTargetWeight(
                                   double.parse(textFormController.text));
@@ -412,7 +411,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         Center(
                           child: Text(
                             "UNIT",
-                            style: AppThemes.smallBoldTxtStyle,
+                            style: Theme.of(context).textTheme.subtitle1,
                           ),
                         ),
                         new DropdownButton<String>(
@@ -445,7 +444,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               Icons.check,
                               color: Colors.white,
                             ),
-                            color: AppThemes.lightPrimaryColor,
+                            color: Theme.of(context).primaryColor,
                             onPressed: () async {
                               sharedPrefService
                                   .setWeightUnitType(_dropDownValue);
