@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weighty/bloc/app_theme/theme_bloc.dart';
 import 'package:weighty/util/shared_pref_service.dart';
 import 'package:weighty/util/strings.dart';
-import 'package:weighty/util/themes.dart';
-import 'package:intl/intl.dart';
-import 'package:numberpicker/numberpicker.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override

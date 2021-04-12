@@ -1,10 +1,9 @@
-import 'package:weighty/data/model/measurement.dart';
-import 'package:weighty/util/strings.dart';
-import 'package:weighty/util/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:weighty/data/model/measurement.dart';
+import 'package:weighty/util/strings.dart';
 
 class AddWeightScreen extends StatefulWidget {
   final Box dataBox;

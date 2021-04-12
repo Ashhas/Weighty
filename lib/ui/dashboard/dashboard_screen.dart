@@ -1,16 +1,12 @@
-import 'package:weighty/bloc/app_init/initialization_bloc.dart';
-import 'package:weighty/ui/dashboard/widgets/small_weight_chart_widget.dart';
-import 'package:weighty/ui/dashboard/widgets/weight_stats_widget.dart';
-import 'package:weighty/ui/dashboard/widgets/current_weight_widget.dart';
-import 'package:weighty/ui/dashboard/widgets/start_weight_widget.dart';
-import 'package:weighty/ui/dashboard/widgets/target_weight_widget.dart';
-import 'package:weighty/ui/dashboard/widgets/weight_progress_card.dart';
-import 'package:weighty/util/shared_pref_service.dart';
-import 'package:weighty/util/strings.dart';
-import 'package:weighty/util/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
+import 'package:weighty/bloc/app_init/initialization_bloc.dart';
+import 'package:weighty/ui/dashboard/widgets/small_weight_chart_widget.dart';
+import 'package:weighty/ui/dashboard/widgets/weight_stats_widget.dart';
+import 'package:weighty/ui/dashboard/widgets/weight_progress_card.dart';
+import 'package:weighty/util/shared_pref_service.dart';
+import 'package:weighty/util/strings.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
