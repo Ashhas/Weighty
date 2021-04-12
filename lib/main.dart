@@ -9,7 +9,7 @@ import 'package:weighty/util/shared_pref_service.dart';
 import 'package:weighty/util/strings.dart';
 
 import 'package:weighty/util/themes.dart';
-import 'package:weighty/bloc/home/navigation_bloc.dart';
+import 'package:weighty/bloc/navigation//navigation_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';

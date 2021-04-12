@@ -1,4 +1,4 @@
-import 'package:weighty/bloc/home/navigation_bloc.dart';
+import 'package:weighty/bloc/navigation/navigation_bloc.dart';
 import 'package:weighty/ui/addweight/add_weight_screen.dart';
 import 'package:weighty/ui/settings/settings_screen.dart';
 import 'package:weighty/ui/weight_chart_screen/weight_chart_screen.dart';
