@@ -73,7 +73,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   void _onItemTapped(int index) {
     setState(() {
-      navigationBloc.add(NavigateToDashboard());
+      navigationBloc.add(NavigateToScreen(index));
       _selectedIndex = index;
     });
   }

@@ -5,12 +5,12 @@ abstract class NavigationState extends Equatable {
   const NavigationState();
 }
 
-class NavigationDefaultState extends NavigationState {
+class NavigationDefault extends NavigationState {
   @override
   List<Object> get props => [];
 }
 
-class DashboardOpenedState extends NavigationState {
+class NavigatedToScreen extends NavigationState {
   @override
   List<Object> get props => [];
 }

@@ -1,4 +1,5 @@
-import 'package:weighty/bloc/home/navigation_bloc.dart';
+import 'package:weighty/bloc/app_init/initialization_bloc.dart';
+import 'package:weighty/bloc/navigation/navigation_bloc.dart';
 import 'package:weighty/ui/dashboard/widgets/small_weight_chart_widget.dart';
 import 'package:weighty/ui/dashboard/widgets/weight_stats_widget.dart';
 import 'package:weighty/ui/dashboard/widgets/current_weight_widget.dart';
@@ -69,9 +70,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
           centerTitle: true,
         ),
-        body: BlocListener<NavigationBloc, NavigationState>(
+        body: BlocListener<InitializationBloc, InitializationState>(
           listener: (context, state) {
-            if (state is DashboardOpenedState) {
+            if (state is Initialized) {
               _getPrefsData();
             }
           },
