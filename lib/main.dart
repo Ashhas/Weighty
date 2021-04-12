@@ -1,4 +1,5 @@
 import 'package:weighty/bloc/app_theme/theme_bloc.dart';
+import 'package:weighty/bloc/simple_bloc_observer.dart';
 import 'package:weighty/data/model/measurement.dart';
 import 'package:weighty/ui/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,9 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
+  //Initialize Bloc Observer
+  Bloc.observer = SimpleBlocObserver();
+
   //Hive initialization
   _initializeHiveDb();
 
