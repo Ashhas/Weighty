@@ -8,8 +8,6 @@ import 'package:weighty/ui/dashboard/widgets/weight_progress_card.dart';
 import 'package:weighty/util/shared_pref_service.dart';
 import 'package:weighty/util/strings.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
-
 class DashboardScreen extends StatefulWidget {
   final Box dataBox;
 

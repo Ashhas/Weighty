@@ -6,7 +6,7 @@ class SharedPrefKeys {
   //User Prefs
   static const String themeDarkMode = 'themeDarkMode';
 
-  //User Info
+  //User Info Keys
   static const userName = 'userName';
   static const userGender = 'gender';
   static const userAge = 'age';
