@@ -1,5 +1,4 @@
 import 'package:weighty/bloc/app_init/initialization_bloc.dart';
-import 'package:weighty/bloc/navigation/navigation_bloc.dart';
 import 'package:weighty/ui/dashboard/widgets/small_weight_chart_widget.dart';
 import 'package:weighty/ui/dashboard/widgets/weight_stats_widget.dart';
 import 'package:weighty/ui/dashboard/widgets/current_weight_widget.dart';
