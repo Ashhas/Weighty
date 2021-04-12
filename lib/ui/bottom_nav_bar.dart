@@ -1,15 +1,18 @@
-import 'file:///E:/Personal/Projects/Weighty/lib/ui/dashboard/dashboard_screen.dart';
-import 'file:///E:/Personal/Projects/Weighty/lib/ui/history/history_screen.dart';
 import 'package:weighty/bloc/home/navigation_bloc.dart';
 import 'package:weighty/ui/addweight/add_weight_screen.dart';
 import 'package:weighty/ui/settings/settings_screen.dart';
+import 'package:weighty/ui/weight_chart_screen/weight_chart_screen.dart';
 import 'package:weighty/util/strings.dart';
-import 'package:weighty/util/theme.dart';
+import 'package:weighty/util/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../util/themes.dart';
+import 'dashboard/dashboard_screen.dart';
+import 'history/history_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   @override
@@ -45,8 +48,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
         );
         break;
       case 1:
-        return Text(
-          'Index 1: Business',
+        return WeightChartScreen(
+          dataBox: _weightEntryDb,
         );
         break;
       case 2:
@@ -97,8 +100,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
               icon: Icon(Icons.settings), label: GlobalStrings.settingsTitle),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: Theme.of(context).focusColor,
+        unselectedItemColor: Theme.of(context).shadowColor,
         onTap: _onItemTapped,
       ),
     );

@@ -1,6 +1,6 @@
 import 'package:weighty/data/model/measurement.dart';
 import 'package:weighty/util/strings.dart';
-import 'package:weighty/util/theme.dart';
+import 'package:weighty/util/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
@@ -35,19 +35,19 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppThemes.backgroundColor,
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: AppThemes.backgroundColor,
+          backgroundColor: Theme.of(context).backgroundColor,
           title: Column(
             children: [
               Text(
                 GlobalStrings.addWeightTitle,
-                style: AppThemes.screenTitleTxtStyle,
+                style: Theme.of(context).textTheme.headline6,
               ),
               Text(
                 GlobalStrings.addWeightLabel,
-                style: AppThemes.screenLabelTxtStyle,
+                style: Theme.of(context).textTheme.headline5,
               )
             ],
           ),
@@ -91,8 +91,9 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
                         (new DateFormat.yMMMd('en_US')
                             .format(selectedDay)
                             .toString()),
-                        style: AppThemes.weightNumberBigTxtStyle,
+                        style: Theme.of(context).textTheme.bodyText1,
                       )),
+                  Divider(),
                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Column(
@@ -100,7 +101,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
                       children: [
                         Text(
                           "ADD WEIGHT",
-                          style: AppThemes.smallBoldTxtStyle,
+                          style: Theme.of(context).textTheme.subtitle1,
                         ),
                         TextFormField(
                           controller: textFormController,
@@ -118,7 +119,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
                               Icons.check,
                               color: Colors.white,
                             ),
-                            color: AppThemes.currentWeightColor,
+                            color: Theme.of(context).primaryColor,
                             onPressed: () {
                               widget.dataBox.add(MeasurementModel(selectedDay,
                                   double.parse(textFormController.text)));

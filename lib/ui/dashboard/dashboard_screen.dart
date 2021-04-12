@@ -1,10 +1,13 @@
 import 'package:weighty/bloc/home/navigation_bloc.dart';
-import 'package:weighty/ui/dashboard/widgets/latest_weight_stats_widget.dart';
-import 'package:weighty/ui/dashboard/widgets/latest_weight_widget.dart';
+import 'package:weighty/ui/dashboard/widgets/small_weight_chart_widget.dart';
+import 'package:weighty/ui/dashboard/widgets/weight_stats_widget.dart';
+import 'package:weighty/ui/dashboard/widgets/current_weight_widget.dart';
 import 'package:weighty/ui/dashboard/widgets/start_weight_widget.dart';
 import 'package:weighty/ui/dashboard/widgets/target_weight_widget.dart';
+import 'package:weighty/ui/dashboard/widgets/weight_progress_card.dart';
+import 'package:weighty/util/shared_pref_service.dart';
 import 'package:weighty/util/strings.dart';
-import 'package:weighty/util/theme.dart';
+import 'package:weighty/util/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
@@ -35,14 +38,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Future _getPrefsData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final sharedPrefService = await SharedPreferencesService.instance;
 
     setState(() {
-      personName = prefs.getString(GlobalStrings.userName);
-      startWeightDate = prefs.getString(GlobalStrings.userStartWeightDate);
-      startWeight = prefs.getDouble(GlobalStrings.userStartWeight);
-      targetWeightDate = prefs.getString(GlobalStrings.userTargetWeightDate);
-      targetWeight = prefs.getDouble(GlobalStrings.userTargetWeight);
+      personName = sharedPrefService.getUsername;
+      startWeight = sharedPrefService.getStartWeight;
+      startWeightDate = sharedPrefService.getStartWeightDate;
+      targetWeight = sharedPrefService.getTargetWeight;
+      targetWeightDate = sharedPrefService.getTargetWeightDate;
     });
   }
 
@@ -51,16 +54,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: AppThemes.backgroundColor,
+          backgroundColor: Theme.of(context).backgroundColor,
           title: Column(
             children: [
               Text(
                 personName ?? "",
-                style: AppThemes.screenTitleTxtStyle,
+                style: Theme.of(context).textTheme.headline6,
               ),
               Text(
                 GlobalStrings.dashboardLabel,
-                style: AppThemes.screenLabelTxtStyle,
+                style: Theme.of(context).textTheme.headline5,
               )
             ],
           ),
@@ -68,53 +71,35 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
         body: BlocListener<NavigationBloc, NavigationState>(
           listener: (context, state) {
-            print(state);
             if (state is DashboardOpenedState) {
               _getPrefsData();
             }
           },
           child: Container(
-            color: AppThemes.backgroundColor,
-            child: Column(
-              children: [
-                SizedBox(height: 15),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25),
-                  child: Stack(
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: StartWeightWidget(
-                          startWeight: startWeight,
-                          startWeightDate: startWeightDate,
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: TargetWeightWidget(
-                          targetWeight: targetWeight,
-                          targetWeightDate: targetWeightDate,
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: LatestWeightWidget(
-                          dataBox: widget.dataBox,
-                          targetWeight: targetWeight,
-                          startWeight: startWeight,
-                        ),
-                      )
-                    ],
-                  ),
+              color: Theme.of(context).backgroundColor,
+              child: Padding(
+                padding: EdgeInsets.only(left: 15, right: 15),
+                child: Column(
+                  children: [
+                    SizedBox(height: 15),
+                    WeightProgressCard(
+                      dataBox: widget.dataBox,
+                      targetWeight: targetWeight,
+                      startWeight: startWeight,
+                      targetWeightDate: targetWeightDate,
+                      startWeightDate: startWeightDate,
+                    ),
+                    SizedBox(height: 5),
+                    WeightStatsWidget(
+                      dataBox: widget.dataBox,
+                      targetWeight: targetWeight,
+                      startWeight: startWeight,
+                    ),
+                    SizedBox(height: 5),
+                    SmallWeightChartWidget()
+                  ],
                 ),
-                LatestWeightStatsWidget(
-                  dataBox: widget.dataBox,
-                  targetWeight: targetWeight,
-                  startWeight: startWeight,
-                ),
-              ],
-            ),
-          ),
+              )),
         ));
   }
 }

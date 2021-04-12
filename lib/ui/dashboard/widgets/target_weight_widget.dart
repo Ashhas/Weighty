@@ -1,5 +1,5 @@
 import 'package:weighty/util/strings.dart';
-import 'package:weighty/util/theme.dart';
+import 'package:weighty/util/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -27,15 +27,15 @@ class _TargetWeightWidgetState extends State<TargetWeightWidget> {
       children: [
         Text(
           GlobalStrings.weightTargetTitle,
-          style: AppThemes.weightNumberMediumTxtStyle,
+          style: Theme.of(context).textTheme.bodyText2,
         ),
         Text(
           widget.targetWeight.toString() ?? "",
-          style: AppThemes.weightNumberBigTxtStyle,
+          style: Theme.of(context).textTheme.headline1,
         ),
         Text(
           startWeightDateFormat ?? "-",
-          style: AppThemes.weightNumberMediumTxtStyle,
+          style: Theme.of(context).textTheme.bodyText2,
         ),
       ],
     );
