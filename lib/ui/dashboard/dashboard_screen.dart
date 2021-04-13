@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:weighty/bloc/app_init/initialization_bloc.dart';
+import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
 import 'package:weighty/ui/dashboard/widgets/small_weight_chart_widget.dart';
 import 'package:weighty/ui/dashboard/widgets/weight_stats_widget.dart';
 import 'package:weighty/ui/dashboard/widgets/weight_progress_card.dart';
@@ -9,9 +10,7 @@ import 'package:weighty/util/shared_pref_service.dart';
 import 'package:weighty/util/strings.dart';
 
 class DashboardScreen extends StatefulWidget {
-  final Box dataBox;
-
-  const DashboardScreen({this.dataBox}) : super();
+  const DashboardScreen() : super();
 
   @override
   _DashboardScreenState createState() => _DashboardScreenState();
@@ -27,7 +26,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   void initState() {
     super.initState();
-
+    BlocProvider.of<DashboardBloc>(context).add(DashboardStarted());
     _getPrefsData();
   }
 
@@ -77,7 +76,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   children: [
                     SizedBox(height: 15),
                     WeightProgressCard(
-                      dataBox: widget.dataBox,
                       targetWeight: targetWeight,
                       startWeight: startWeight,
                       targetWeightDate: targetWeightDate,
@@ -85,12 +83,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                     SizedBox(height: 5),
                     WeightStatsWidget(
-                      dataBox: widget.dataBox,
                       targetWeight: targetWeight,
                       startWeight: startWeight,
                     ),
                     SizedBox(height: 5),
-                    SmallWeightChartWidget()
+                    SmallWeightChartWidget(),
                   ],
                 ),
               )),

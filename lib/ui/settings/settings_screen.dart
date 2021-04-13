@@ -141,10 +141,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   setState(() {
                     if (value) {
                       BlocProvider.of<ThemeBloc>(context)
-                          .add(ThemeChangedEvent(true));
+                          .add(ThemeChanged(true));
                     } else {
                       BlocProvider.of<ThemeBloc>(context)
-                          .add(ThemeChangedEvent(false));
+                          .add(ThemeChanged(false));
                     }
                     themeSwitch = value;
                   });

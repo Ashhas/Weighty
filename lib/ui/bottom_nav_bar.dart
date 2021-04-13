@@ -34,9 +34,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Widget _navPages(int index) {
     switch (index) {
       case 0:
-        return DashboardScreen(
-          dataBox: _weightEntryDb,
-        );
+        return DashboardScreen();
         break;
       case 1:
         return WeightChartScreen(
