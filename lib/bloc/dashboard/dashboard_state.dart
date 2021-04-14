@@ -20,9 +20,11 @@ class DashboardLoading extends DashboardState {
 
 class DashboardLoaded extends DashboardState {
   final MeasurementModel measurement;
+  final String username;
 
-  DashboardLoaded(this.measurement) : assert(measurement != null);
+  DashboardLoaded(this.measurement, this.username)
+      : assert(measurement != null);
 
   @override
-  List<Object> get props => [measurement];
+  List<Object> get props => [];
 }

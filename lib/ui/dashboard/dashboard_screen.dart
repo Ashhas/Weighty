@@ -27,7 +27,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     super.initState();
     BlocProvider.of<DashboardBloc>(context).add(DashboardStarted());
-    _getPrefsData();
   }
 
   Future _getPrefsData() async {
@@ -35,62 +34,53 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     setState(() {
       personName = sharedPrefService.getUsername;
-      startWeight = sharedPrefService.getStartWeight;
-      startWeightDate = sharedPrefService.getStartWeightDate;
-      targetWeight = sharedPrefService.getTargetWeight;
-      targetWeightDate = sharedPrefService.getTargetWeightDate;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Theme.of(context).backgroundColor,
-          title: Column(
-            children: [
-              Text(
-                personName ?? "",
-                style: Theme.of(context).textTheme.headline6,
+    return Scaffold(body:
+        BlocBuilder<DashboardBloc, DashboardState>(builder: (context, state) {
+      if (state is DashboardLoaded) {
+        return Container(
+            color: Theme.of(context).backgroundColor,
+            child: Padding(
+              padding: EdgeInsets.only(left: 15, right: 15),
+              child: Column(
+                children: [
+                  _buildAppBar(state.username),
+                  SizedBox(height: 15),
+                  WeightProgressCard(),
+                  SizedBox(height: 5),
+                  WeightStatsWidget(),
+                  SizedBox(height: 5),
+                  SmallWeightChartWidget(),
+                ],
               ),
-              Text(
-                GlobalStrings.dashboardLabel,
-                style: Theme.of(context).textTheme.headline5,
-              )
-            ],
+            ));
+      } else {
+        return Container();
+      }
+    }));
+  }
+
+  _buildAppBar(String username) {
+    return AppBar(
+      elevation: 0,
+      backgroundColor: Theme.of(context).backgroundColor,
+      title: Column(
+        children: [
+          Text(
+            username,
+            style: Theme.of(context).textTheme.headline6,
           ),
-          centerTitle: true,
-        ),
-        body: BlocListener<InitializationBloc, InitializationState>(
-          listener: (context, state) {
-            if (state is Initialized) {
-              _getPrefsData();
-            }
-          },
-          child: Container(
-              color: Theme.of(context).backgroundColor,
-              child: Padding(
-                padding: EdgeInsets.only(left: 15, right: 15),
-                child: Column(
-                  children: [
-                    SizedBox(height: 15),
-                    WeightProgressCard(
-                      targetWeight: targetWeight,
-                      startWeight: startWeight,
-                      targetWeightDate: targetWeightDate,
-                      startWeightDate: startWeightDate,
-                    ),
-                    SizedBox(height: 5),
-                    WeightStatsWidget(
-                      targetWeight: targetWeight,
-                      startWeight: startWeight,
-                    ),
-                    SizedBox(height: 5),
-                    SmallWeightChartWidget(),
-                  ],
-                ),
-              )),
-        ));
+          Text(
+            GlobalStrings.dashboardLabel,
+            style: Theme.of(context).textTheme.headline5,
+          )
+        ],
+      ),
+      centerTitle: true,
+    );
   }
 }

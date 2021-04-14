@@ -40,8 +40,6 @@ class InitializationBloc
     //Initializing Hive DB
     await Hive.initFlutter();
     Hive.registerAdapter(MeasurementModelAdapter());
-
-    //Choosing DB Path
     var dir = await getApplicationDocumentsDirectory();
     Hive.init(dir.path);
 

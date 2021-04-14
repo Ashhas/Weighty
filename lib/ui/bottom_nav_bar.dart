@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:weighty/bloc/app_init/initialization_bloc.dart';
 import 'package:weighty/ui/addweight/add_weight_screen.dart';
 import 'package:weighty/ui/settings/settings_screen.dart';
 import 'package:weighty/ui/weight_chart_screen/weight_chart_screen.dart';
@@ -69,8 +71,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: _navPages(_selectedIndex),
+      body: BlocBuilder<InitializationBloc, InitializationState>(
+        builder: (context, state) {
+          if (state is Initialized) {
+            return Center(
+              child: _navPages(_selectedIndex),
+            );
+          } else {
+            return Container();
+          }
+        },
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
