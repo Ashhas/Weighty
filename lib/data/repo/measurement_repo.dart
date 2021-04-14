@@ -11,7 +11,7 @@ class MeasurementRepository {
     Hive.init(dir.path);
 
     Box _weightEntryDb = await Hive.openBox('weightInfo');
-    return _weightEntryDb.values.toList();
+    return _weightEntryDb.values.toList().cast<MeasurementModel>();
   }
 
   Future<MeasurementModel> getLatestMeasurement() async {

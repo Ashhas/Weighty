@@ -39,9 +39,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         return DashboardScreen();
         break;
       case 1:
-        return WeightChartScreen(
-          dataBox: _weightEntryDb,
-        );
+        return WeightChartScreen();
         break;
       case 2:
         return AddWeightScreen(
@@ -49,9 +47,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         );
         break;
       case 3:
-        return HistoryScreen(
-          dataBox: _weightEntryDb,
-        );
+        return HistoryScreen();
         break;
       case 4:
         return SettingsScreen();

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:weighty/bloc/history/history_bloc.dart';
 import 'package:weighty/data/model/measurement.dart';
 import 'package:weighty/util/strings.dart';
 
 class HistoryScreen extends StatefulWidget {
-  final Box dataBox;
-
-  const HistoryScreen({this.dataBox}) : super();
+  const HistoryScreen() : super();
 
   @override
   _HistoryScreenState createState() => _HistoryScreenState();
@@ -16,14 +15,15 @@ class HistoryScreen extends StatefulWidget {
 
 class _HistoryScreenState extends State<HistoryScreen> {
   CalendarController _calendarController;
-  List<MeasurementModel> _sameMonthEvents;
+  List<MeasurementModel> _fetchAllEvents;
   DateTime _currentMonth;
 
   @override
   void initState() {
     super.initState();
+    BlocProvider.of<HistoryBloc>(context).add(HistoryStarted());
     _calendarController = CalendarController();
-    _sameMonthEvents = List<MeasurementModel>();
+    _fetchAllEvents = List<MeasurementModel>();
     _currentMonth = DateTime.now();
   }
 
@@ -35,11 +35,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.dataBox != null) {
-      _sameMonthEvents =
-          widget.dataBox.values.toList().cast<MeasurementModel>();
-    }
-
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -55,9 +50,17 @@ class _HistoryScreenState extends State<HistoryScreen> {
           child: Column(
             children: [
               _buildCustomHeader(),
-              Expanded(
-                child: _buildsameMonthEventList(),
-              ),
+              BlocBuilder<HistoryBloc, HistoryState>(builder: (context, state) {
+                if (state is HistoryLoaded) {
+                  _fetchAllEvents = state.allMeasurements;
+
+                  return Expanded(
+                    child: _buildSameMonthEventList(),
+                  );
+                } else {
+                  return Container();
+                }
+              }),
             ],
           ),
         ));
@@ -98,21 +101,21 @@ class _HistoryScreenState extends State<HistoryScreen> {
     );
   }
 
-  Widget _buildsameMonthEventList() {
-    var _samemontheventsFilter = _sameMonthEvents.where((element) =>
+  Widget _buildSameMonthEventList() {
+    var _sameMonthEventsFilter = _fetchAllEvents.where((element) =>
         element.dateAdded.year == _currentMonth.year &&
         element.dateAdded.month == _currentMonth.month);
 
     return Container(
         color: Theme.of(context).backgroundColor,
-        child: (_samemontheventsFilter.length == 0)
+        child: (_sameMonthEventsFilter.length == 0)
             ? Center(
                 child: Text("No appointment record in current month!",
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.black, fontSize: 16)),
               )
             : ListView(
-                children: _samemontheventsFilter
+                children: _sameMonthEventsFilter
                     .map((event) => Container(
                         decoration: BoxDecoration(
                           border: Border.all(width: 0.8),

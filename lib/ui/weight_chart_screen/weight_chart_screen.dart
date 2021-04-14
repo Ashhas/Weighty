@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:weighty/util/strings.dart';
 
 class WeightChartScreen extends StatefulWidget {
-  final Box dataBox;
-
-  const WeightChartScreen({this.dataBox}) : super();
+  const WeightChartScreen() : super();
 
   @override
   _AddWeightScreenState createState() => _AddWeightScreenState();

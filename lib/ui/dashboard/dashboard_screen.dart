@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
-import 'package:weighty/bloc/app_init/initialization_bloc.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
 import 'package:weighty/ui/dashboard/widgets/small_weight_chart_widget.dart';
 import 'package:weighty/ui/dashboard/widgets/weight_stats_widget.dart';
 import 'package:weighty/ui/dashboard/widgets/weight_progress_card.dart';
-import 'package:weighty/util/shared_pref_service.dart';
 import 'package:weighty/util/strings.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -17,24 +14,10 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  String personName;
-  double startWeight;
-  String startWeightDate;
-  double targetWeight;
-  String targetWeightDate;
-
   @override
   void initState() {
     super.initState();
     BlocProvider.of<DashboardBloc>(context).add(DashboardStarted());
-  }
-
-  Future _getPrefsData() async {
-    final sharedPrefService = await SharedPreferencesService.instance;
-
-    setState(() {
-      personName = sharedPrefService.getUsername;
-    });
   }
 
   @override
