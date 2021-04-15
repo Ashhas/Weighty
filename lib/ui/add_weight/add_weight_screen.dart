@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:weighty/data/model/measurement.dart';
+import 'package:weighty/bloc/add_weight/add_weight_bloc.dart';
 import 'package:weighty/util/strings.dart';
 
 class AddWeightScreen extends StatefulWidget {
-  final Box dataBox;
-
-  const AddWeightScreen({this.dataBox}) : super();
+  const AddWeightScreen() : super();
 
   @override
   _AddWeightScreenState createState() => _AddWeightScreenState();
@@ -22,6 +20,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
   void initState() {
     super.initState();
     _calendarController = CalendarController();
+    BlocProvider.of<AddWeightBloc>(context).add(AddWeightStarted());
   }
 
   @override
@@ -75,7 +74,6 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
   }
 
   void _onDaySelected(DateTime selectedDay, List events, List holidays) {
-    print('CALLBACK: _onDaySelected');
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -120,8 +118,9 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
                             ),
                             color: Theme.of(context).primaryColor,
                             onPressed: () {
-                              widget.dataBox.add(MeasurementModel(selectedDay,
-                                  double.parse(textFormController.text)));
+                              BlocProvider.of<AddWeightBloc>(context).add(
+                                  AddNewMeasurement(
+                                      selectedDay, textFormController.text));
 
                               //Close Dialog
                               Navigator.of(context).pop();

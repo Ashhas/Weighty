@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weighty/bloc/add_weight/add_weight_bloc.dart';
 import 'package:weighty/bloc/app_init/initialization_bloc.dart';
 import 'package:weighty/bloc/app_theme/theme_bloc.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
@@ -42,6 +43,9 @@ class MyApp extends StatelessWidget {
                       measurementRepository: measurementRepository)),
               BlocProvider<HistoryBloc>(
                   create: (_) => HistoryBloc(
+                      measurementRepository: measurementRepository)),
+              BlocProvider<AddWeightBloc>(
+                  create: (_) => AddWeightBloc(
                       measurementRepository: measurementRepository)),
             ],
             child: BlocBuilder<ThemeBloc, ThemeState>(

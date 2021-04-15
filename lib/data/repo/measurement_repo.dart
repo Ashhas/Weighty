@@ -21,4 +21,12 @@ class MeasurementRepository {
     Box _weightEntryDb = await Hive.openBox('weightInfo');
     return _weightEntryDb.values.last;
   }
+
+  Future<void> setNewMeasurement(MeasurementModel newMeasurement) async {
+    var dir = await getApplicationDocumentsDirectory();
+    Hive.init(dir.path);
+
+    Box _weightEntryDb = await Hive.openBox('weightInfo');
+    _weightEntryDb.add(newMeasurement);
+  }
 }

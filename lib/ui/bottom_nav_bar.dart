@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:weighty/bloc/app_init/initialization_bloc.dart';
-import 'package:weighty/ui/addweight/add_weight_screen.dart';
+import 'package:weighty/ui/add_weight/add_weight_screen.dart';
 import 'package:weighty/ui/settings/settings_screen.dart';
 import 'package:weighty/ui/weight_chart_screen/weight_chart_screen.dart';
 import 'package:weighty/util/strings.dart';
@@ -17,20 +15,10 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int _selectedIndex = 0;
-  Box _weightEntryDb;
 
   @override
   void initState() {
     super.initState();
-
-    _initDataBox();
-  }
-
-  Future _initDataBox() async {
-    // Create DB
-    var dir = await getApplicationDocumentsDirectory();
-    Hive.init(dir.path);
-    _weightEntryDb = await Hive.openBox('weightInfo');
   }
 
   Widget _navPages(int index) {
@@ -42,9 +30,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         return WeightChartScreen();
         break;
       case 2:
-        return AddWeightScreen(
-          dataBox: _weightEntryDb,
-        );
+        return AddWeightScreen();
         break;
       case 3:
         return HistoryScreen();
