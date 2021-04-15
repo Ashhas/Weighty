@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:weighty/bloc/app_theme/theme_bloc.dart';
+import 'package:weighty/bloc/settings/settings_bloc.dart';
 import 'package:weighty/util/shared_pref_service.dart';
 import 'package:weighty/util/strings.dart';
 
@@ -31,6 +32,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     super.initState();
+    BlocProvider.of<SettingsBloc>(context).add(SettingsStarted());
     _initSettings();
     _getPrefsData();
   }

@@ -5,6 +5,7 @@ import 'package:weighty/bloc/app_init/initialization_bloc.dart';
 import 'package:weighty/bloc/app_theme/theme_bloc.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
 import 'package:weighty/bloc/history/history_bloc.dart';
+import 'package:weighty/bloc/settings/settings_bloc.dart';
 import 'package:weighty/bloc/simple_bloc_observer.dart';
 import 'package:weighty/data/repo/measurement_repo.dart';
 import 'package:weighty/ui/bottom_nav_bar.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
               BlocProvider<AddWeightBloc>(
                   create: (_) => AddWeightBloc(
                       measurementRepository: measurementRepository)),
+              BlocProvider<SettingsBloc>(create: (_) => SettingsBloc())
             ],
             child: BlocBuilder<ThemeBloc, ThemeState>(
               builder: (context, themeState) {
