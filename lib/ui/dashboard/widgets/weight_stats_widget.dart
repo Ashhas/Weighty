@@ -1,24 +1,15 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
-import 'package:weighty/data/model/measurement.dart';
-import 'package:weighty/util/themes.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 
 class WeightStatsWidget extends StatefulWidget {
-  final double targetWeight;
-  final double startWeight;
-
-  WeightStatsWidget({this.targetWeight, this.startWeight}) : super();
+  WeightStatsWidget() : super();
 
   @override
   _WeightStatsWidgetState createState() => _WeightStatsWidgetState();
 }
 
 class _WeightStatsWidgetState extends State<WeightStatsWidget> {
-  double startWeight = 0;
-  double targetWeight = 0;
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DashboardBloc, DashboardState>(
@@ -26,11 +17,6 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
       return BlocBuilder<DashboardBloc, DashboardState>(
           builder: (context, state) {
         if (state is DashboardLoaded) {
-          // measurement = widget.dataBox.values.last;
-          if (widget.startWeight != null) {
-            startWeight = widget.startWeight;
-            targetWeight = widget.targetWeight;
-          }
           return Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
@@ -70,11 +56,9 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
                   Column(
                     children: [
                       Text(
-                        state.measurement != null
-                            ? ((targetWeight - state.measurement.weightEntry) *
-                                    -1)
-                                .toString()
-                            : "-",
+                        ((state.targetWeight - state.measurement.weightEntry) *
+                                -1)
+                            .toString(),
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                       Text(
