@@ -22,19 +22,12 @@ class _CurrentWeightWidgetState extends State<CurrentWeightWidget> {
           return Column(
             children: [
               Text(
-                GlobalStrings.weightStartedTitle,
+                GlobalStrings.weightCurrentTitle,
                 style: Theme.of(context).textTheme.bodyText2,
               ),
               Text(
                 state.measurement.weightEntry.toString(),
-                style: Theme.of(context).textTheme.headline1,
-              ),
-              Text(
-                DateFormat.yMMMd('en_US')
-                    .format(
-                        DateTime.parse(state.measurement.dateAdded.toString()))
-                    .toString(),
-                style: Theme.of(context).textTheme.bodyText2,
+                style: Theme.of(context).textTheme.subtitle2,
               ),
             ],
           );

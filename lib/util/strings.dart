@@ -15,9 +15,9 @@ class GlobalStrings {
 
   //Dashboard Strings
   static const dashboardLabel = 'Weight Loss Progress';
-  static const weightStartedTitle = 'STARTED';
-  static const weightCurrentTitle = 'CURRENT';
-  static const weightTargetTitle = 'TARGET';
+  static const weightStartedTitle = 'Initial Weight';
+  static const weightCurrentTitle = 'Current Weight';
+  static const weightTargetTitle = 'Desired Weight';
 
   //Weight Chart Screen Strings
   static const weightChartTitle = 'Weight Chart';

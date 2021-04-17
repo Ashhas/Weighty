@@ -24,11 +24,7 @@ class _StartWeightWidgetState extends State<StartWeightWidget> {
               ),
               Text(
                 state.startWeight.toString(),
-                style: Theme.of(context).textTheme.headline1,
-              ),
-              Text(
-                state.startWeightDate,
-                style: Theme.of(context).textTheme.bodyText2,
+                style: Theme.of(context).textTheme.subtitle2,
               ),
             ],
           );

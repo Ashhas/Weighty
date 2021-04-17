@@ -1,16 +1,19 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
-import 'package:weighty/util/strings.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class TargetWeightWidget extends StatefulWidget {
-  TargetWeightWidget() : super();
+import '../../../util/strings.dart';
+
+class LatestWeightWidget extends StatefulWidget {
+  LatestWeightWidget() : super();
 
   @override
-  _TargetWeightWidgetState createState() => _TargetWeightWidgetState();
+  _CurrentWeightWidgetState createState() => _CurrentWeightWidgetState();
 }
 
-class _TargetWeightWidgetState extends State<TargetWeightWidget> {
+class _CurrentWeightWidgetState extends State<LatestWeightWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DashboardBloc, DashboardState>(
@@ -19,12 +22,15 @@ class _TargetWeightWidgetState extends State<TargetWeightWidget> {
           return Column(
             children: [
               Text(
-                GlobalStrings.weightTargetTitle,
+                "Last Weigh-in: ",
                 style: Theme.of(context).textTheme.bodyText2,
               ),
               Text(
-                state.targetWeight.toString(),
-                style: Theme.of(context).textTheme.subtitle2,
+                DateFormat.yMMMd('en_US')
+                    .format(
+                        DateTime.parse(state.measurement.dateAdded.toString()))
+                    .toString(),
+                style: Theme.of(context).textTheme.bodyText2,
               ),
             ],
           );

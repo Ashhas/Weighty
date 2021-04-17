@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:weighty/ui/dashboard/widgets/latest_weight_date_widget.dart';
 import 'current_weight_widget.dart';
 import 'start_weight_widget.dart';
 import 'target_weight_widget.dart';
@@ -19,15 +20,20 @@ class _WeightProgressCardState extends State<WeightProgressCard> {
       builder: (context, state) {
         if (state is DashboardLoaded) {
           return Card(
-            child: Column(
-              children: [
-                _buildCardTitle(state.percentageDone),
-                SizedBox(height: 30),
-                _buildWeightProgressRow(),
-                SizedBox(height: 20),
-                _buildProgressBar(state.percentageDone),
-                SizedBox(height: 20),
-              ],
+            child: Padding(
+              padding: EdgeInsets.only(top: 15, left: 25, right: 25),
+              child: Column(
+                children: [
+                  _buildCardTitle(state.percentageDone),
+                  SizedBox(height: 15),
+                  _buildCurrentWeightRow(),
+                  Divider(),
+                  _buildWeightProgressRow(),
+                  SizedBox(height: 20),
+                  _buildProgressBar(state.percentageDone),
+                  SizedBox(height: 20),
+                ],
+              ),
             ),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
@@ -41,49 +47,42 @@ class _WeightProgressCardState extends State<WeightProgressCard> {
   }
 
   Widget _buildCardTitle(double percentageDone) {
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(
-          "Weight Loss Progress",
+          "Weight Measurements",
           style: Theme.of(context).textTheme.bodyText2,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              percentageDone.toInt().toString(),
-              style: Theme.of(context).textTheme.bodyText2,
-            ),
-            Text(
-              "% Completed",
-              style: TextStyle(color: Theme.of(context).shadowColor),
-            ),
-          ],
-        ),
+      ],
+    );
+  }
+
+  Widget _buildCurrentWeightRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        CurrentWeightWidget(),
+        LatestWeightWidget(),
       ],
     );
   }
 
   Widget _buildWeightProgressRow() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         StartWeightWidget(),
-        CurrentWeightWidget(),
         TargetWeightWidget(),
       ],
     );
   }
 
   Widget _buildProgressBar(double percentageDone) {
-    return Padding(
-      padding: EdgeInsets.only(left: 10, right: 10),
-      child: LinearProgressIndicator(
-        value: percentageDone / 100,
-        valueColor:
-            AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
-        backgroundColor: Colors.grey,
-      ),
+    return LinearProgressIndicator(
+      value: percentageDone / 100,
+      valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
+      backgroundColor: Colors.grey,
     );
   }
 }

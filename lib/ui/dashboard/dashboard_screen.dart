@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
 import 'package:weighty/ui/dashboard/widgets/small_weight_chart_widget.dart';
-import 'package:weighty/ui/dashboard/widgets/weight_stats_widget.dart';
 import 'package:weighty/ui/dashboard/widgets/weight_progress_card.dart';
 import 'package:weighty/util/strings.dart';
 
@@ -34,8 +33,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   _buildAppBar(state.username),
                   SizedBox(height: 15),
                   WeightProgressCard(),
-                  SizedBox(height: 5),
-                  WeightStatsWidget(),
                   SizedBox(height: 5),
                   SmallWeightChartWidget(),
                 ],
