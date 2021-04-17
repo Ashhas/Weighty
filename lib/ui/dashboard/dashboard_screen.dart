@@ -1,105 +1,69 @@
-import 'package:weighty/bloc/home/navigation_bloc.dart';
-import 'package:weighty/ui/dashboard/widgets/small_weight_chart_widget.dart';
-import 'package:weighty/ui/dashboard/widgets/weight_stats_widget.dart';
-import 'package:weighty/ui/dashboard/widgets/current_weight_widget.dart';
-import 'package:weighty/ui/dashboard/widgets/start_weight_widget.dart';
-import 'package:weighty/ui/dashboard/widgets/target_weight_widget.dart';
-import 'package:weighty/ui/dashboard/widgets/weight_progress_card.dart';
-import 'package:weighty/util/shared_pref_service.dart';
-import 'package:weighty/util/strings.dart';
-import 'package:weighty/util/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
+import 'package:weighty/ui/dashboard/widgets/small_weight_chart_widget.dart';
+import 'package:weighty/ui/dashboard/widgets/weight_stats_widget.dart';
+import 'package:weighty/ui/dashboard/widgets/weight_progress_card.dart';
+import 'package:weighty/util/strings.dart';
 
 class DashboardScreen extends StatefulWidget {
-  final Box dataBox;
-
-  const DashboardScreen({this.dataBox}) : super();
+  const DashboardScreen() : super();
 
   @override
   _DashboardScreenState createState() => _DashboardScreenState();
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  String personName;
-  double startWeight;
-  String startWeightDate;
-  double targetWeight;
-  String targetWeightDate;
-
   @override
   void initState() {
     super.initState();
-
-    _getPrefsData();
-  }
-
-  Future _getPrefsData() async {
-    final sharedPrefService = await SharedPreferencesService.instance;
-
-    setState(() {
-      personName = sharedPrefService.getUsername;
-      startWeight = sharedPrefService.getStartWeight;
-      startWeightDate = sharedPrefService.getStartWeightDate;
-      targetWeight = sharedPrefService.getTargetWeight;
-      targetWeightDate = sharedPrefService.getTargetWeightDate;
-    });
+    BlocProvider.of<DashboardBloc>(context).add(DashboardStarted());
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Theme.of(context).backgroundColor,
-          title: Column(
-            children: [
-              Text(
-                personName ?? "",
-                style: Theme.of(context).textTheme.headline6,
+    return Scaffold(body:
+        BlocBuilder<DashboardBloc, DashboardState>(builder: (context, state) {
+      if (state is DashboardLoaded) {
+        return Container(
+            color: Theme.of(context).backgroundColor,
+            child: Padding(
+              padding: EdgeInsets.only(left: 15, right: 15),
+              child: Column(
+                children: [
+                  _buildAppBar(state.username),
+                  SizedBox(height: 15),
+                  WeightProgressCard(),
+                  SizedBox(height: 5),
+                  WeightStatsWidget(),
+                  SizedBox(height: 5),
+                  SmallWeightChartWidget(),
+                ],
               ),
-              Text(
-                GlobalStrings.dashboardLabel,
-                style: Theme.of(context).textTheme.headline5,
-              )
-            ],
+            ));
+      } else {
+        return Container();
+      }
+    }));
+  }
+
+  _buildAppBar(String username) {
+    return AppBar(
+      elevation: 0,
+      backgroundColor: Theme.of(context).backgroundColor,
+      title: Column(
+        children: [
+          Text(
+            username,
+            style: Theme.of(context).textTheme.headline6,
           ),
-          centerTitle: true,
-        ),
-        body: BlocListener<NavigationBloc, NavigationState>(
-          listener: (context, state) {
-            if (state is DashboardOpenedState) {
-              _getPrefsData();
-            }
-          },
-          child: Container(
-              color: Theme.of(context).backgroundColor,
-              child: Padding(
-                padding: EdgeInsets.only(left: 15, right: 15),
-                child: Column(
-                  children: [
-                    SizedBox(height: 15),
-                    WeightProgressCard(
-                      dataBox: widget.dataBox,
-                      targetWeight: targetWeight,
-                      startWeight: startWeight,
-                      targetWeightDate: targetWeightDate,
-                      startWeightDate: startWeightDate,
-                    ),
-                    SizedBox(height: 5),
-                    WeightStatsWidget(
-                      dataBox: widget.dataBox,
-                      targetWeight: targetWeight,
-                      startWeight: startWeight,
-                    ),
-                    SizedBox(height: 5),
-                    SmallWeightChartWidget()
-                  ],
-                ),
-              )),
-        ));
+          Text(
+            GlobalStrings.dashboardLabel,
+            style: Theme.of(context).textTheme.headline5,
+          )
+        ],
+      ),
+      centerTitle: true,
+    );
   }
 }

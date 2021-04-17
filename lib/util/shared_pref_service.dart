@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefKeys {
@@ -7,7 +6,7 @@ class SharedPrefKeys {
   //User Prefs
   static const String themeDarkMode = 'themeDarkMode';
 
-  //User Info
+  //User Info Keys
   static const userName = 'userName';
   static const userGender = 'gender';
   static const userAge = 'age';

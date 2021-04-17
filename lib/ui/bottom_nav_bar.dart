@@ -1,18 +1,12 @@
-import 'package:weighty/bloc/home/navigation_bloc.dart';
-import 'package:weighty/ui/addweight/add_weight_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weighty/bloc/app_init/initialization_bloc.dart';
+import 'package:weighty/ui/add_weight/add_weight_screen.dart';
 import 'package:weighty/ui/settings/settings_screen.dart';
 import 'package:weighty/ui/weight_chart_screen/weight_chart_screen.dart';
 import 'package:weighty/util/strings.dart';
-import 'package:weighty/util/themes.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../util/themes.dart';
-import 'dashboard/dashboard_screen.dart';
-import 'history/history_screen.dart';
+import 'package:weighty/ui/dashboard/dashboard_screen.dart';
+import 'package:weighty/ui/history/history_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   @override
@@ -21,46 +15,25 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int _selectedIndex = 0;
-  Box _weightEntryDb;
-  NavigationBloc navigationBloc;
 
   @override
   void initState() {
     super.initState();
-
-    navigationBloc = BlocProvider.of<NavigationBloc>(context);
-
-    _initDataBox();
-  }
-
-  Future _initDataBox() async {
-    // Create DB
-    var dir = await getApplicationDocumentsDirectory();
-    Hive.init(dir.path);
-    _weightEntryDb = await Hive.openBox('weightInfo');
   }
 
   Widget _navPages(int index) {
     switch (index) {
       case 0:
-        return DashboardScreen(
-          dataBox: _weightEntryDb,
-        );
+        return DashboardScreen();
         break;
       case 1:
-        return WeightChartScreen(
-          dataBox: _weightEntryDb,
-        );
+        return WeightChartScreen();
         break;
       case 2:
-        return AddWeightScreen(
-          dataBox: _weightEntryDb,
-        );
+        return AddWeightScreen();
         break;
       case 3:
-        return HistoryScreen(
-          dataBox: _weightEntryDb,
-        );
+        return HistoryScreen();
         break;
       case 4:
         return SettingsScreen();
@@ -73,7 +46,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   void _onItemTapped(int index) {
     setState(() {
-      navigationBloc.add(NavigateToDashboard());
       _selectedIndex = index;
     });
   }
@@ -81,8 +53,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: _navPages(_selectedIndex),
+      body: BlocBuilder<InitializationBloc, InitializationState>(
+        builder: (context, state) {
+          if (state is Initialized) {
+            return Center(
+              child: _navPages(_selectedIndex),
+            );
+          } else {
+            return Container();
+          }
+        },
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: [

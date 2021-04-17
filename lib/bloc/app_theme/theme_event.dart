@@ -5,15 +5,15 @@ abstract class ThemeEvent extends Equatable {
   const ThemeEvent();
 }
 
-class ThemeLoadStartedEvent extends ThemeEvent {
+class ThemeLoadStarted extends ThemeEvent {
   @override
   List<Object> get props => [];
 }
 
-class ThemeChangedEvent extends ThemeEvent {
+class ThemeChanged extends ThemeEvent {
   final bool themeDarkMode;
 
-  ThemeChangedEvent(this.themeDarkMode) : assert(themeDarkMode != null);
+  ThemeChanged(this.themeDarkMode) : assert(themeDarkMode != null);
 
   @override
   List<Object> get props => [themeDarkMode];
