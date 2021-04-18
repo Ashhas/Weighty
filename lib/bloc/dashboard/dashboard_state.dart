@@ -26,6 +26,7 @@ class DashboardLoaded extends DashboardState {
   final double targetWeight;
   final String targetWeightDate;
   final double percentageDone;
+  final List<MeasurementModel> filteredMeasurements;
 
   DashboardLoaded(
       this.measurement,
@@ -34,7 +35,8 @@ class DashboardLoaded extends DashboardState {
       this.startWeightDate,
       this.targetWeight,
       this.targetWeightDate,
-      this.percentageDone)
+      this.percentageDone,
+      this.filteredMeasurements)
       : assert(measurement != null);
 
   @override

@@ -37,17 +37,51 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     String targetWeightDate = new DateFormat.yMMMd('en_US')
         .format(DateTime.parse(sharedPrefService.getTargetWeightDate));
 
-    //Get Data from DB
-    MeasurementModel measurement =
+    //Get Latest Measurement from DB
+    MeasurementModel latestMeasurement =
         await measurementRepository.getLatestMeasurement();
 
-    //Calculate Percentage Done
-    double percentageDone = ((startWeight - measurement.weightEntry) *
-        100 /
-        (startWeight - targetWeight));
+    //Get Filtered Measurements for 2 Months
+    List<MeasurementModel> filteredMeasurements =
+        await _filterMeasurementTwoMonths();
 
-    yield DashboardLoaded(measurement, username, startWeight, startWeightDate,
-        targetWeight, targetWeightDate, percentageDone);
+    //Calculate Percentage Done
+    double percentageDone = _calculatePercentageDone(
+      startWeight,
+      targetWeight,
+      latestMeasurement.weightEntry,
+    );
+
+    yield DashboardLoaded(
+        latestMeasurement,
+        username,
+        startWeight,
+        startWeightDate,
+        targetWeight,
+        targetWeightDate,
+        percentageDone,
+        filteredMeasurements);
+  }
+
+  Future<List<MeasurementModel>> _filterMeasurementTwoMonths() async {
+    List<MeasurementModel> allMeasurements =
+        await measurementRepository.getAllMeasurements();
+
+    //Filter
+    List<MeasurementModel> filteredMeasurements = allMeasurements
+        .where((m) =>
+            m.dateAdded.difference(DateTime.now()).inDays.abs() <= 60 &&
+            m.dateAdded.isBefore(DateTime.now().add(Duration(days: 1))))
+        .toList();
+
+    filteredMeasurements.sort((a, b) => a.dateAdded.compareTo(b.dateAdded));
+
+    return filteredMeasurements;
+  }
+
+  double _calculatePercentageDone(
+      double startWeight, double targetWeight, double weightEntry) {
+    return ((startWeight - weightEntry) * 100 / (startWeight - targetWeight));
   }
 
   @override

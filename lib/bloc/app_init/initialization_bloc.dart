@@ -47,10 +47,15 @@ class InitializationBloc
     Box _weightInfo = await Hive.openBox('weightInfo');
 
     //Create Fake Data
-    var entry1 = MeasurementModel(DateTime.now(), 200);
+    var entry1 = MeasurementModel(DateTime(2021, 2, 24), 120);
     _weightInfo.add(entry1);
-    var entry2 = MeasurementModel(DateTime.now(), 115);
-    _weightInfo.add(entry2);
+    var entry2 = MeasurementModel(DateTime(2021, 3, 14), 115);
+    _weightInfo.add(entry2); //Create Fake Data
+    var entry3 =
+        MeasurementModel(DateTime.now().subtract(Duration(days: 1)), 113);
+    _weightInfo.add(entry3);
+    var entry4 = MeasurementModel(DateTime.now(), 109);
+    _weightInfo.add(entry4);
 
     yield Initialized();
   }
