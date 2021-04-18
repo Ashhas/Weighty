@@ -19,7 +19,7 @@ class AppThemes {
     return ThemeData(
         primaryColor: _lightPrimaryColor,
         accentColor: _lightSecondaryColor,
-        canvasColor: _lightBackgroundColor,
+        canvasColor: _lightContentColor,
         backgroundColor: _lightBackgroundColor,
         focusColor: Colors.blue,
         shadowColor: _lightPrimaryTextColor,

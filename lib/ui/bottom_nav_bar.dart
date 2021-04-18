@@ -80,6 +80,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               icon: Icon(Icons.settings), label: GlobalStrings.settingsTitle),
         ],
         currentIndex: _selectedIndex,
+        backgroundColor: Theme.of(context).canvasColor,
         selectedItemColor: Theme.of(context).focusColor,
         unselectedItemColor: Theme.of(context).shadowColor,
         onTap: _onItemTapped,
