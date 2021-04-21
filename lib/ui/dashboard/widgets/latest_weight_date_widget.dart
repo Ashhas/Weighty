@@ -23,14 +23,26 @@ class _CurrentWeightWidgetState extends State<LatestWeightWidget> {
             children: [
               Text(
                 "Last Weigh-in: ",
-                style: Theme.of(context).textTheme.bodyText2,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.black,
+                  // color: Colors.white,
+                  fontFamily: "Roboto",
+                  fontWeight: FontWeight.w500,
+                ),
               ),
               Text(
                 DateFormat.yMMMd('en_US')
                     .format(
                         DateTime.parse(state.measurement.dateAdded.toString()))
                     .toString(),
-                style: Theme.of(context).textTheme.bodyText2,
+                style: TextStyle(
+                  fontSize: 17,
+                  color: Colors.black,
+                  // color: Colors.white,
+                  fontFamily: "Roboto",
+                  fontWeight: FontWeight.w800,
+                ),
               ),
             ],
           );

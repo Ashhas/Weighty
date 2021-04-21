@@ -20,12 +20,38 @@ class _TargetWeightWidgetState extends State<TargetWeightWidget> {
             children: [
               Text(
                 GlobalStrings.weightTargetTitle,
-                style: Theme.of(context).textTheme.bodyText2,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.grey,
+                  // color: Colors.white,
+                  fontFamily: "Roboto",
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-              Text(
-                state.targetWeight.toString(),
-                style: Theme.of(context).textTheme.subtitle2,
-              ),
+              Row(
+                children: [
+                  Text(
+                    state.targetWeight.toString(),
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.grey,
+                      // color: Colors.white,
+                      fontFamily: "Roboto",
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  Text(
+                    " KG",
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.grey,
+                      // color: Colors.white,
+                      fontFamily: "Roboto",
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ],
+              )
             ],
           );
         } else {

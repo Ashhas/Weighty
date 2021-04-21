@@ -10,8 +10,9 @@ class AppThemes {
 
   static const Color _darkPrimaryColor = Color(0xFF6A55F8);
   static const Color _darkSecondaryColor = Color(0xFFF8AE6B);
-  static const Color _darkContentColor = Color(0xFF39405F);
-  static const Color _darkBackgroundColor = Color(0xFF39405F);
+  static const Color _darkContentColor = Color(0xFF262a34);
+  static const Color _darkCardColor = Color(0xFF262a34);
+  static const Color _darkBackgroundColor = Color(0xFF191b21);
   static const Color _darkPrimaryTextColor = Color(0xFFFFFFFF);
   static const Color _darkSecondaryTextColor = Color(0xFFC7BFFF);
 
@@ -114,6 +115,8 @@ class AppThemes {
         backgroundColor: _darkBackgroundColor,
         focusColor: Colors.blue,
         shadowColor: _darkPrimaryTextColor,
+        cardColor: _darkCardColor,
+        highlightColor: Colors.white,
         textTheme: TextTheme(
           ///ScreenTitle TxtStyle
           headline6: TextStyle(

@@ -20,23 +20,23 @@ class _WeightProgressCardState extends State<WeightProgressCard> {
       builder: (context, state) {
         if (state is DashboardLoaded) {
           return Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
             child: Padding(
-              padding: EdgeInsets.only(top: 15, left: 25, right: 25),
+              padding: EdgeInsets.only(top: 15, left: 15, right: 25),
               child: Column(
                 children: [
                   _buildCardTitle(state.percentageDone),
-                  SizedBox(height: 15),
+                  SizedBox(height: 10),
                   _buildCurrentWeightRow(),
                   Divider(),
                   _buildWeightProgressRow(),
-                  SizedBox(height: 20),
+                  SizedBox(height: 10),
                   _buildProgressBar(state.percentageDone),
                   SizedBox(height: 20),
                 ],
               ),
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
             ),
           );
         } else {
@@ -52,7 +52,13 @@ class _WeightProgressCardState extends State<WeightProgressCard> {
       children: [
         Text(
           "Weight Measurements",
-          style: Theme.of(context).textTheme.bodyText2,
+          style: TextStyle(
+            fontSize: 19,
+            color: Colors.black,
+            // color: Colors.white,
+            fontFamily: "Roboto",
+            fontWeight: FontWeight.w700,
+          ),
         ),
       ],
     );
@@ -83,6 +89,7 @@ class _WeightProgressCardState extends State<WeightProgressCard> {
       value: percentageDone / 100,
       valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
       backgroundColor: Colors.grey,
+      minHeight: 6,
     );
   }
 }

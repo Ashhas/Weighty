@@ -20,15 +20,43 @@ class _CurrentWeightWidgetState extends State<CurrentWeightWidget> {
       builder: (BuildContext context, state) {
         if (state is DashboardLoaded) {
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 GlobalStrings.weightCurrentTitle,
-                style: Theme.of(context).textTheme.bodyText2,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.black,
+                  // color: Colors.white,
+                  fontFamily: "Roboto",
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-              Text(
-                state.measurement.weightEntry.toString(),
-                style: Theme.of(context).textTheme.subtitle2,
-              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    state.measurement.weightEntry.toString(),
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.black,
+                      // color: Colors.white,
+                      fontFamily: "Roboto",
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  Text(
+                    " KG",
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.grey,
+                      // color: Colors.white,
+                      fontFamily: "Roboto",
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ],
+              )
             ],
           );
         } else {
