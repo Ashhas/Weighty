@@ -51,36 +51,36 @@ flutter:
 
     - family: Roboto
       fonts:
-        - asset: fonts/Roboto-Black.otf
-        - asset: fonts/Roboto-BlackItalic.otf
-        - asset: fonts/Roboto-Bold.otf
-        - asset: fonts/Roboto-BoldItalic.otf
-        - asset: fonts/Roboto-Italic.otf
-        - asset: fonts/Roboto-Light.otf
-        - asset: fonts/Roboto-LightItalic.otf
-        - asset: fonts/Roboto-Medium.otf
-        - asset: fonts/Roboto-MediumItalic.otf
-        - asset: fonts/Roboto-Regular.otf
-        - asset: fonts/Roboto-Thin.otf
-        - asset: fonts/Roboto-ThinItalic.otf
+        - asset: fonts/Roboto-Black.ttf
+        - asset: fonts/Roboto-BlackItalic.ttf
+        - asset: fonts/Roboto-Bold.ttf
+        - asset: fonts/Roboto-BoldItalic.ttf
+        - asset: fonts/Roboto-Italic.ttf
+        - asset: fonts/Roboto-Light.ttf
+        - asset: fonts/Roboto-LightItalic.ttf
+        - asset: fonts/Roboto-Medium.ttf
+        - asset: fonts/Roboto-MediumItalic.ttf
+        - asset: fonts/Roboto-Regular.ttf
+        - asset: fonts/Roboto-Thin.ttf
+        - asset: fonts/Roboto-ThinItalic.ttf
 
     - family: Poppins
       fonts:
-        - asset: fonts/Poppins-Black.otf
-        - asset: fonts/Poppins-BlackItalic.otf
-        - asset: fonts/Poppins-Bold.otf
-        - asset: fonts/Poppins-BoldItalic.otf
-        - asset: fonts/Poppins-ExtraBold.otf
-        - asset: fonts/Poppins-ExtraBoldItalic.otf
-        - asset: fonts/Poppins-ExtraLight.otf
-        - asset: fonts/Poppins-ExtraLightItalic.otf
-        - asset: fonts/Poppins-Italic.otf
-        - asset: fonts/Poppins-Light.otf
-        - asset: fonts/Poppins-LightItalic.otf
-        - asset: fonts/Poppins-Medium.otf
-        - asset: fonts/Poppins-MediumItalic.otf
-        - asset: fonts/Poppins-Regular.otf
-        - asset: fonts/Poppins-Thin.otf
-        - asset: fonts/Poppins-ThinItalic.otf
+        - asset: fonts/Poppins-Black.ttf
+        - asset: fonts/Poppins-BlackItalic.ttf
+        - asset: fonts/Poppins-Bold.ttf
+        - asset: fonts/Poppins-BoldItalic.ttf
+        - asset: fonts/Poppins-ExtraBold.ttf
+        - asset: fonts/Poppins-ExtraBoldItalic.ttf
+        - asset: fonts/Poppins-ExtraLight.ttf
+        - asset: fonts/Poppins-ExtraLightItalic.ttf
+        - asset: fonts/Poppins-Italic.ttf
+        - asset: fonts/Poppins-Light.ttf
+        - asset: fonts/Poppins-LightItalic.ttf
+        - asset: fonts/Poppins-Medium.ttf
+        - asset: fonts/Poppins-MediumItalic.ttf
+        - asset: fonts/Poppins-Regular.ttf
+        - asset: fonts/Poppins-Thin.ttf
+        - asset: fonts/Poppins-ThinItalic.ttf
 
   uses-material-design: true
