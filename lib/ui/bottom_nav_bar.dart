@@ -77,7 +77,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           BottomNavigationBarItem(
               icon: Icon(Icons.access_time), label: GlobalStrings.historyTitle),
           BottomNavigationBarItem(
-              icon: Icon(Icons.settings), label: GlobalStrings.settingsTitle),
+              icon: Icon(Icons.more_horiz_sharp), label: GlobalStrings.settingsTitle),
         ],
         currentIndex: _selectedIndex,
         backgroundColor: Theme.of(context).backgroundColor,

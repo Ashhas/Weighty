@@ -21,23 +21,18 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
         if (state is DashboardLoaded) {
           return Card(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(15.0),
             ),
             child: Padding(
-              padding: EdgeInsets.only(top: 25, left: 20, right: 20, bottom: 5),
-              child: Column(
-                children: [
-                  Container(
-                      child: AspectRatio(
-                          aspectRatio: 1.70,
-                          child: LineChart(
-                            mainData(state.startWeight, state.targetWeight,
-                                state.filteredMeasurements),
-                            swapAnimationDuration: Duration(milliseconds: 150),
-                            swapAnimationCurve: Curves.linear, // Optional
-                          ))),
-                ],
-              ),
+              padding: EdgeInsets.only(top: 20, left: 15, right: 15, bottom: 5),
+              child: AspectRatio(
+                  aspectRatio: 1.70,
+                  child: LineChart(
+                    mainData(state.startWeight, state.targetWeight,
+                        state.filteredMeasurements),
+                    swapAnimationDuration: Duration(milliseconds: 150),
+                    swapAnimationCurve: Curves.linear, // Optional
+                  )),
             ),
           );
         } else {

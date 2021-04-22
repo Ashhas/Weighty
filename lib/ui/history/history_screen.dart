@@ -15,7 +15,6 @@ class HistoryScreen extends StatefulWidget {
 
 class _HistoryScreenState extends State<HistoryScreen> {
   CalendarController _calendarController;
-  List<MeasurementModel> _fetchAllEvents;
   DateTime _currentMonth;
 
   @override
@@ -23,7 +22,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
     super.initState();
     BlocProvider.of<HistoryBloc>(context).add(HistoryStarted());
     _calendarController = CalendarController();
-    _fetchAllEvents = List<MeasurementModel>();
     _currentMonth = DateTime.now();
   }
 
@@ -36,73 +34,67 @@ class _HistoryScreenState extends State<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Theme.of(context).backgroundColor,
-          title: Text(
-            GlobalStrings.historyTitle,
-            style: Theme.of(context).textTheme.headline6,
-          ),
-          centerTitle: true,
+      backgroundColor: Theme.of(context).backgroundColor,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Theme.of(context).backgroundColor,
+        title: Text(
+          GlobalStrings.historyTitle,
+          style: Theme.of(context).textTheme.headline6,
         ),
-        body: Container(
-          color: Theme.of(context).backgroundColor,
-          child: Column(
-            children: [
-              _buildCustomHeader(),
-              BlocBuilder<HistoryBloc, HistoryState>(builder: (context, state) {
-                if (state is HistoryLoaded) {
-                  _fetchAllEvents = state.allMeasurements;
-
-                  return Expanded(
-                    child: _buildSameMonthEventList(),
-                  );
-                } else {
-                  return Container();
-                }
-              }),
-            ],
-          ),
-        ));
+        centerTitle: true,
+      ),
+      body: Column(
+        children: [
+          _buildCustomHeader(),
+          BlocBuilder<HistoryBloc, HistoryState>(builder: (context, state) {
+            if (state is HistoryLoaded) {
+              return Expanded(
+                  child: _buildSameMonthEventList(state.allMeasurements));
+            } else {
+              return Container();
+            }
+          }),
+        ],
+      ),
+    );
   }
 
   Widget _buildCustomHeader() {
     return Container(
       color: Theme.of(context).backgroundColor,
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 8.0, right: 8.0, left: 8.0),
-        child: Center(
-            child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            IconButton(
-              icon: Icon(Icons.chevron_left),
-              onPressed: () {
-                setState(() {
-                  _selectPreviousMonth();
-                });
-              },
-            ),
-            Text(
-              DateFormat.yMMMM().format(_currentMonth),
-              style: TextStyle(fontSize: 20.0),
-            ),
-            IconButton(
-              icon: Icon(Icons.chevron_right),
-              onPressed: () {
-                setState(() {
-                  _selectNextMonth();
-                });
-              },
-            )
-          ],
-        )),
-      ),
+          padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                icon: Icon(Icons.chevron_left),
+                onPressed: () {
+                  setState(() {
+                    _selectPreviousMonth();
+                  });
+                },
+              ),
+              Text(
+                DateFormat.yMMMM().format(_currentMonth),
+                style: TextStyle(fontSize: 20.0),
+              ),
+              IconButton(
+                icon: Icon(Icons.chevron_right),
+                onPressed: () {
+                  setState(() {
+                    _selectNextMonth();
+                  });
+                },
+              )
+            ],
+          )),
     );
   }
 
-  Widget _buildSameMonthEventList() {
-    var _sameMonthEventsFilter = _fetchAllEvents.where((element) =>
+  Widget _buildSameMonthEventList(List<MeasurementModel> fetchAllEvents) {
+    var _sameMonthEventsFilter = fetchAllEvents.where((element) =>
         element.dateAdded.year == _currentMonth.year &&
         element.dateAdded.month == _currentMonth.month);
 
@@ -116,24 +108,22 @@ class _HistoryScreenState extends State<HistoryScreen> {
               )
             : ListView(
                 children: _sameMonthEventsFilter
-                    .map((event) => Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 0.8),
-                        ),
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 4.0),
-                        child: (event is MeasurementModel)
-                            ? ListTile(
-                                leading: Text(
-                                  DateFormat.d().format(event.dateAdded) +
-                                      '  ' +
-                                      DateFormat.E().format(event.dateAdded),
-                                ),
-                                title: Text(event.weightEntry.toString()),
-                                trailing: Icon(Icons.arrow_right),
-                                onTap: () {},
-                              )
-                            : null))
+                    .map((event) => ListTile(
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                  DateFormat.yMMMMd('en_US')
+                                      .format(event.dateAdded)
+                                      .toString(),
+                                  style: TextStyle(fontSize: 15)),
+                              Text(event.weightEntry.toString(),
+                                  style: TextStyle(fontSize: 15))
+                            ],
+                          ),
+                          trailing: Icon(Icons.arrow_right),
+                          onTap: () {},
+                        ))
                     .toList()));
   }
 

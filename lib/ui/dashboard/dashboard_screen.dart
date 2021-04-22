@@ -22,29 +22,46 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: _buildAppBar(),
         body: BlocBuilder<DashboardBloc, DashboardState>(
             builder: (context, state) {
           if (state is DashboardLoaded) {
-            return Container(
-                color: Theme.of(context).backgroundColor,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 20, right: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildNameWidget(),
-                      SizedBox(height: 25),
-                      WeightProgressCard(),
-                      SizedBox(height: 5),
-                      SmallWeightChartWidget(),
-                    ],
-                  ),
+            return Padding(
+                padding: EdgeInsets.only(left: 23, right: 23),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 5),
+                    _buildNameWidget(),
+                    SizedBox(height: 20),
+                    WeightProgressCard(),
+                    SizedBox(height: 5),
+                    SmallWeightChartWidget(),
+                  ],
                 ));
           } else {
             return Container();
           }
         }));
+  }
+
+  _buildAppBar() {
+    return AppBar(
+        elevation: 0,
+        leadingWidth: 120,
+        backgroundColor: Theme.of(context).backgroundColor,
+        leading: Padding(
+          padding: EdgeInsets.only(left: 23, top: 35),
+          child:
+              Text(DateFormat.yMMMd('en_US').format(DateTime.now()).toString(),
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
+                    fontFamily: "Roboto",
+                    fontWeight: FontWeight.w600,
+                  )),
+        ));
   }
 
   _buildNameWidget() {
@@ -56,9 +73,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Text(
               "Hey Aschwin!",
               style: TextStyle(
-                fontSize: 35,
+                fontSize: 28,
                 color: Colors.black,
-                // color: Colors.white,
                 fontFamily: "Roboto",
                 fontWeight: FontWeight.w700,
               ),
@@ -67,25 +83,5 @@ class _DashboardScreenState extends State<DashboardScreen> {
         )
       ],
     );
-  }
-
-  _buildAppBar() {
-    return AppBar(
-        elevation: 0,
-        toolbarHeight: 40,
-        backgroundColor: Theme.of(context).backgroundColor,
-        leadingWidth: 120,
-        leading: Padding(
-          padding: EdgeInsets.only(left: 20, top: 20),
-          child:
-              Text(DateFormat.yMMMd('en_US').format(DateTime.now()).toString(),
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
-                    // color: Colors.white,
-                    fontFamily: "Roboto",
-                    fontWeight: FontWeight.w700,
-                  )),
-        ));
   }
 }
