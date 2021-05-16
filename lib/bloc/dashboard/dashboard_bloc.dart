@@ -52,6 +52,18 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       latestMeasurement.weightEntry,
     );
 
+    //Calculate Total Lost
+    double totalLost = _calculateTotalLost(
+      startWeight,
+      latestMeasurement.weightEntry,
+    );
+
+    //Calculate Amount Left to Go
+    double amountLeft = _calculateAmountLeft(
+      targetWeight,
+      latestMeasurement.weightEntry,
+    );
+
     yield DashboardLoaded(
         latestMeasurement,
         username,
@@ -60,6 +72,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         targetWeight,
         targetWeightDate,
         percentageDone,
+        totalLost,
+        amountLeft,
         filteredMeasurements);
   }
 
@@ -82,6 +96,14 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   double _calculatePercentageDone(
       double startWeight, double targetWeight, double weightEntry) {
     return ((startWeight - weightEntry) * 100 / (startWeight - targetWeight));
+  }
+
+  double _calculateTotalLost(double startWeight, double currentWeight) {
+    return startWeight - currentWeight;
+  }
+
+  double _calculateAmountLeft(double targetWeight, double currentWeight) {
+    return currentWeight - targetWeight;
   }
 
   @override

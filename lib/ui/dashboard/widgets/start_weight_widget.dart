@@ -19,16 +19,6 @@ class _StartWeightWidgetState extends State<StartWeightWidget> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                GlobalStrings.weightStartedTitle,
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.grey,
-                  // color: Colors.white,
-                  fontFamily: "Roboto",
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
               Row(
                 children: [
                   Text(
@@ -52,7 +42,17 @@ class _StartWeightWidgetState extends State<StartWeightWidget> {
                     ),
                   ),
                 ],
-              )
+              ),
+              Text(
+                GlobalStrings.weightStartedTitle,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.grey,
+                  // color: Colors.white,
+                  fontFamily: "Roboto",
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ],
           );
         } else {

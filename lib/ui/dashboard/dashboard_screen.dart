@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
-import 'package:weighty/ui/dashboard/widgets/small_weight_chart_widget.dart';
 import 'package:weighty/ui/dashboard/widgets/weight_progress_card.dart';
+import 'package:weighty/ui/dashboard/widgets/weight_stats_card.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen() : super();
@@ -23,23 +22,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
-        appBar: _buildAppBar(),
         body: BlocBuilder<DashboardBloc, DashboardState>(
             builder: (context, state) {
           if (state is DashboardLoaded) {
             return Padding(
-                padding: EdgeInsets.only(left: 23, right: 23),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 5),
-                    _buildNameWidget(),
-                    SizedBox(height: 20),
-                    WeightProgressCard(),
-                    SizedBox(height: 5),
-                    SmallWeightChartWidget(),
-                  ],
-                ));
+              padding: EdgeInsets.only(left: 10, right: 10),
+              child: Column(
+                children: [
+                  _buildAppBar(),
+                  SizedBox(height: 25),
+                  WeightProgressCard(),
+                  SizedBox(height: 25),
+                  WeightStatsWidget(),
+                ],
+              ),
+            );
           } else {
             return Container();
           }
@@ -48,40 +45,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   _buildAppBar() {
     return AppBar(
-        elevation: 0,
-        leadingWidth: 120,
-        backgroundColor: Theme.of(context).backgroundColor,
-        leading: Padding(
-          padding: EdgeInsets.only(left: 23, top: 35),
-          child:
-              Text(DateFormat.yMMMd('en_US').format(DateTime.now()).toString(),
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.black,
-                    fontFamily: "Roboto",
-                    fontWeight: FontWeight.w600,
-                  )),
-        ));
-  }
-
-  _buildNameWidget() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Text(
-              "Hey Aschwin!",
-              style: TextStyle(
-                fontSize: 28,
-                color: Colors.black,
-                fontFamily: "Roboto",
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ],
-        )
-      ],
+      elevation: 0,
+      backgroundColor: Theme.of(context).backgroundColor,
+      title: Text(
+        "Weighty",
+        style: TextStyle(color: Colors.black),
+      ),
+      centerTitle: true,
     );
   }
 }

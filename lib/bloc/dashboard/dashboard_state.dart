@@ -26,18 +26,22 @@ class DashboardLoaded extends DashboardState {
   final double targetWeight;
   final String targetWeightDate;
   final double percentageDone;
+  final double totalLost;
+  final double amountLeft;
   final List<MeasurementModel> filteredMeasurements;
 
   DashboardLoaded(
-      this.measurement,
-      this.username,
-      this.startWeight,
-      this.startWeightDate,
-      this.targetWeight,
-      this.targetWeightDate,
-      this.percentageDone,
-      this.filteredMeasurements)
-      : assert(measurement != null);
+    this.measurement,
+    this.username,
+    this.startWeight,
+    this.startWeightDate,
+    this.targetWeight,
+    this.targetWeightDate,
+    this.percentageDone,
+    this.totalLost,
+    this.amountLeft,
+    this.filteredMeasurements,
+  ) : assert(measurement != null);
 
   @override
   List<Object> get props => [];

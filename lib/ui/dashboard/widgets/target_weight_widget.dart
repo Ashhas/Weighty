@@ -18,16 +18,6 @@ class _TargetWeightWidgetState extends State<TargetWeightWidget> {
         if (state is DashboardLoaded) {
           return Column(
             children: [
-              Text(
-                GlobalStrings.weightTargetTitle,
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.grey,
-                  // color: Colors.white,
-                  fontFamily: "Roboto",
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
               Row(
                 children: [
                   Text(
@@ -51,7 +41,17 @@ class _TargetWeightWidgetState extends State<TargetWeightWidget> {
                     ),
                   ),
                 ],
-              )
+              ),
+              Text(
+                GlobalStrings.weightTargetTitle,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.grey,
+                  // color: Colors.white,
+                  fontFamily: "Roboto",
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ],
           );
         } else {

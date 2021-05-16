@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class AppThemes {
-  static const Color _lightPrimaryColor = Colors.blueAccent;
-  static const Color _lightSecondaryColor = Color(0xFFF8AE6B);
+  static const Color _lightPrimaryColor = Color(0xFF3F49D0);
+  static const Color _lightSecondaryColor = Colors.blueAccent;
   static const Color _lightContentColor = Color(0xFFFFFFFF);
-  static const Color _lightBackgroundColor = Color(0xFFF4F4F8);
+  static const Color _lightBackgroundColor = Color(0xFFF8F8F8);
   static const Color _lightPrimaryTextColor = Color(0xFF1B2542);
-  static const Color _lightSecondaryTextColor = Color(0xFF1B2542);
+  static const Color _lightSecondaryTextColor = Color(0xFFA0AEC5);
 
   static const Color _darkPrimaryColor = Colors.blueAccent;
   static const Color _darkSecondaryColor = Color(0xFFF8AE6B);
@@ -29,7 +29,6 @@ class AppThemes {
           headline6: TextStyle(
             fontSize: 20,
             color: _lightPrimaryTextColor,
-            fontFamily: "ProximaNova",
             fontWeight: FontWeight.w500,
           ),
 
@@ -37,7 +36,6 @@ class AppThemes {
           headline5: TextStyle(
             fontSize: 12,
             color: _lightPrimaryTextColor,
-            fontFamily: "ProximaNova",
             fontWeight: FontWeight.w400,
           ),
 
@@ -45,7 +43,6 @@ class AppThemes {
           headline4: TextStyle(
             fontSize: 16,
             color: _lightPrimaryTextColor,
-            fontFamily: "ProximaNova",
             fontWeight: FontWeight.w500,
           ),
 
@@ -53,7 +50,6 @@ class AppThemes {
           headline3: TextStyle(
             fontSize: 16,
             color: _darkSecondaryTextColor,
-            fontFamily: "ProximaNova",
             fontWeight: FontWeight.w400,
           ),
 
@@ -61,7 +57,6 @@ class AppThemes {
           headline2: TextStyle(
             fontSize: 14,
             color: _lightPrimaryTextColor,
-            fontFamily: "ProximaNova",
             fontWeight: FontWeight.w500,
           ),
 
@@ -69,7 +64,6 @@ class AppThemes {
           headline1: TextStyle(
             fontSize: 40,
             color: _lightPrimaryTextColor,
-            fontFamily: "ProximaNova",
             fontWeight: FontWeight.w400,
           ),
 
@@ -77,7 +71,6 @@ class AppThemes {
           bodyText1: TextStyle(
             fontSize: 30,
             color: _lightPrimaryTextColor,
-            fontFamily: "ProximaNova",
             fontWeight: FontWeight.w400,
           ),
 
@@ -85,7 +78,6 @@ class AppThemes {
           bodyText2: TextStyle(
             fontSize: 13,
             color: _lightSecondaryTextColor,
-            fontFamily: "ProximaNova",
             fontWeight: FontWeight.w400,
           ),
 
@@ -93,7 +85,6 @@ class AppThemes {
           subtitle1: TextStyle(
             fontSize: 12,
             color: _lightPrimaryTextColor,
-            fontFamily: "ProximaNova",
             fontWeight: FontWeight.w700,
           ),
 
@@ -101,7 +92,6 @@ class AppThemes {
           subtitle2: TextStyle(
             fontSize: 25,
             color: _lightPrimaryTextColor,
-            fontFamily: "ProximaNova",
             fontWeight: FontWeight.w700,
           ),
         ));
@@ -122,7 +112,6 @@ class AppThemes {
           headline6: TextStyle(
             fontSize: 20,
             color: _darkPrimaryTextColor,
-            fontFamily: "ProximaNova",
             fontWeight: FontWeight.w500,
           ),
 
@@ -130,7 +119,6 @@ class AppThemes {
           headline5: TextStyle(
             fontSize: 12,
             color: _darkPrimaryTextColor,
-            fontFamily: "ProximaNova",
             fontWeight: FontWeight.w400,
           ),
 
@@ -138,7 +126,6 @@ class AppThemes {
           headline4: TextStyle(
             fontSize: 16,
             color: _darkPrimaryTextColor,
-            fontFamily: "ProximaNova",
             fontWeight: FontWeight.w500,
           ),
 
@@ -146,7 +133,6 @@ class AppThemes {
           headline3: TextStyle(
             fontSize: 16,
             color: _darkSecondaryTextColor,
-            fontFamily: "ProximaNova",
             fontWeight: FontWeight.w400,
           ),
 
@@ -154,7 +140,6 @@ class AppThemes {
           headline2: TextStyle(
             fontSize: 14,
             color: _darkPrimaryTextColor,
-            fontFamily: "ProximaNova",
             fontWeight: FontWeight.w500,
           ),
 
@@ -162,7 +147,6 @@ class AppThemes {
           headline1: TextStyle(
             fontSize: 40,
             color: _darkPrimaryTextColor,
-            fontFamily: "ProximaNova",
             fontWeight: FontWeight.w400,
           ),
 
@@ -170,7 +154,6 @@ class AppThemes {
           bodyText1: TextStyle(
             fontSize: 30,
             color: _darkPrimaryTextColor,
-            fontFamily: "ProximaNova",
             fontWeight: FontWeight.w400,
           ),
 
@@ -178,7 +161,6 @@ class AppThemes {
           bodyText2: TextStyle(
             fontSize: 13,
             color: _darkSecondaryTextColor,
-            fontFamily: "ProximaNova",
             fontWeight: FontWeight.w400,
           ),
 
@@ -186,7 +168,6 @@ class AppThemes {
           subtitle1: TextStyle(
             fontSize: 12,
             color: _darkPrimaryTextColor,
-            fontFamily: "ProximaNova",
             fontWeight: FontWeight.w700,
           ),
 
@@ -194,7 +175,6 @@ class AppThemes {
           subtitle2: TextStyle(
             fontSize: 25,
             color: _darkPrimaryTextColor,
-            fontFamily: "ProximaNova",
             fontWeight: FontWeight.w700,
           ),
         ));
