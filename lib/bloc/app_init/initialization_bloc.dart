@@ -29,7 +29,7 @@ class InitializationBloc
 
     //Setting SharedPref Data
     final sharedPrefService = await SharedPreferencesService.instance;
-    sharedPrefService.setUsername('Kees Smit');
+    sharedPrefService.setUsername('Aschwin Bruyning');
     sharedPrefService.setWeightUnitType('KG');
     sharedPrefService.setReminderStatus(false);
     sharedPrefService.setStartWeight(120.0);

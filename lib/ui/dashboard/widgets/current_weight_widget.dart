@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,21 +46,17 @@ class _CurrentWeightWidgetState extends State<CurrentWeightWidget>
                   children: [
                     Text(
                       state.measurement.weightEntry.toString(),
-                      style: TextStyle(
+                      style: GoogleFonts.roboto(
                         fontSize: 25,
                         color: Colors.black,
-                        // color: Colors.white,
-                        fontFamily: "Roboto",
                         fontWeight: FontWeight.w800,
                       ),
                     ),
                     Text(
                       " KG",
-                      style: TextStyle(
+                      style: GoogleFonts.roboto(
                         fontSize: 15,
                         color: Colors.grey,
-                        // color: Colors.white,
-                        fontFamily: "Roboto",
                         fontWeight: FontWeight.w800,
                       ),
                     ),
@@ -67,11 +64,9 @@ class _CurrentWeightWidgetState extends State<CurrentWeightWidget>
                 ),
                 Text(
                   GlobalStrings.weightCurrentTitle,
-                  style: TextStyle(
+                  style: GoogleFonts.roboto(
                     fontSize: 15,
                     color: Colors.black,
-                    // color: Colors.white,
-                    fontFamily: "Roboto",
                     fontWeight: FontWeight.w500,
                   ),
                 ),

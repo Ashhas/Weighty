@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
 import 'package:weighty/util/strings.dart';
 import 'package:flutter/material.dart';
@@ -23,21 +24,17 @@ class _StartWeightWidgetState extends State<StartWeightWidget> {
                 children: [
                   Text(
                     state.startWeight.toString(),
-                    style: TextStyle(
+                    style: GoogleFonts.roboto(
                       fontSize: 20,
                       color: Colors.grey,
-                      // color: Colors.white,
-                      fontFamily: "Roboto",
                       fontWeight: FontWeight.w800,
                     ),
                   ),
                   Text(
                     " KG",
-                    style: TextStyle(
+                    style: GoogleFonts.roboto(
                       fontSize: 15,
                       color: Colors.grey,
-                      // color: Colors.white,
-                      fontFamily: "Roboto",
                       fontWeight: FontWeight.w800,
                     ),
                   ),
@@ -45,11 +42,9 @@ class _StartWeightWidgetState extends State<StartWeightWidget> {
               ),
               Text(
                 GlobalStrings.weightStartedTitle,
-                style: TextStyle(
+                style: GoogleFonts.roboto(
                   fontSize: 15,
                   color: Colors.grey,
-                  // color: Colors.white,
-                  fontFamily: "Roboto",
                   fontWeight: FontWeight.w500,
                 ),
               ),

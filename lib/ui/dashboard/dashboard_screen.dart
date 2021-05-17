@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
 import 'package:weighty/ui/dashboard/widgets/weight_progress_card.dart';
 import 'package:weighty/ui/dashboard/widgets/weight_stats_card.dart';
@@ -21,9 +22,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
-        body: BlocBuilder<DashboardBloc, DashboardState>(
-            builder: (context, state) {
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: BlocBuilder<DashboardBloc, DashboardState>(
+        builder: (context, state) {
           if (state is DashboardLoaded) {
             return Padding(
               padding: EdgeInsets.only(left: 10, right: 10),
@@ -38,9 +39,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             );
           } else {
-            return Container();
+            return Container(
+              color: Theme.of(context).backgroundColor,
+            );
           }
-        }));
+        },
+      ),
+    );
   }
 
   _buildAppBar() {
@@ -49,7 +54,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       backgroundColor: Theme.of(context).backgroundColor,
       title: Text(
         "Weighty",
-        style: TextStyle(color: Colors.black),
+        style: GoogleFonts.roboto(color: Colors.black),
       ),
       centerTitle: true,
     );

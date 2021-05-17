@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppThemes {
-  static const Color _lightPrimaryColor = Color(0xFF3F49D0);
-  static const Color _lightSecondaryColor = Colors.blueAccent;
+  static const Color _lightPrimaryColor = Color(0xFF4051e6);
+  static const Color _lightSecondaryColor = Color(0xFF00c9bd);
   static const Color _lightContentColor = Color(0xFFFFFFFF);
   static const Color _lightBackgroundColor = Color(0xFFF8F8F8);
   static const Color _lightPrimaryTextColor = Color(0xFF1B2542);
@@ -178,17 +178,5 @@ class AppThemes {
             fontWeight: FontWeight.w700,
           ),
         ));
-  }
-}
-
-extension LightThemeExt on ThemeData {
-  Color get homeButtonLightColor {
-    return Colors.lightBlue;
-  }
-}
-
-extension DarkThemeExt on ThemeData {
-  Color get homeButtonDarkColor {
-    return Color(0xFF5F6368);
   }
 }
