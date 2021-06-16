@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -69,13 +70,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Theme.of(context).primaryColor,
-        title: Text(UiConst.settingsTitle,
-            style: Theme.of(context).textTheme.headline4),
-        centerTitle: true,
-      ),
+      appBar: _buildAppBar(),
       body: SettingsList(
         backgroundColor: Theme.of(context).backgroundColor,
         sections: [
@@ -196,6 +191,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  _buildAppBar() {
+    return AppBar(
+      elevation: 0,
+      backgroundColor: Theme.of(context).primaryColor,
+      title: Column(
+        children: [
+          Text(
+            UiConst.settingsTitle,
+            style: GoogleFonts.roboto(color: Colors.white),
+          ),
+        ],
+      ),
+      centerTitle: true,
+    );
+  }
+
   void _showNamePopup() {
     print('CALLBACK: _openEventPopup');
     showDialog(
@@ -265,129 +276,133 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void _showStartWeightPopup() {
     print('CALLBACK: _openEventPopup');
     showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: Form(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(right: 8.0, top: 8.0, left: 8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "START WEIGHT",
-                          style: Theme.of(context).textTheme.subtitle1,
-                        ),
-                        TextFormField(
-                          controller: textFormController,
-                        ),
-                      ],
-                    ),
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Form(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(right: 8.0, top: 8.0, left: 8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "START WEIGHT",
+                        style: Theme.of(context).textTheme.subtitle1,
+                      ),
+                      TextFormField(
+                        controller: textFormController,
+                      ),
+                    ],
                   ),
-                  Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          RaisedButton(
-                            child: Icon(
-                              Icons.check,
-                              color: Colors.white,
-                            ),
-                            color: Theme.of(context).primaryColor,
-                            onPressed: () async {
-                              sharedPrefService.setStartWeight(
-                                  double.parse(textFormController.text));
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      RaisedButton(
+                        child: Icon(
+                          Icons.check,
+                          color: Colors.white,
+                        ),
+                        color: Theme.of(context).primaryColor,
+                        onPressed: () async {
+                          sharedPrefService.setStartWeight(
+                              double.parse(textFormController.text));
 
-                              //Close Dialog
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                          RaisedButton(
-                            child: Icon(
-                              Icons.close,
-                              color: Colors.grey,
-                            ),
-                            onPressed: () {
-                              //Close Dialog
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      ))
-                ],
-              ),
+                          //Close Dialog
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      RaisedButton(
+                        child: Icon(
+                          Icons.close,
+                          color: Colors.grey,
+                        ),
+                        onPressed: () {
+                          //Close Dialog
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 
   void _showTargetWeightPopup() {
     print('CALLBACK: _openEventPopup');
     showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: Form(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Text(
-                            "TARGET WEIGHT",
-                            style: Theme.of(context).textTheme.subtitle1,
-                          ),
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Form(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Text(
+                          "TARGET WEIGHT",
+                          style: Theme.of(context).textTheme.subtitle1,
                         ),
-                        TextFormField(
-                          controller: textFormController,
-                        ),
-                      ],
-                    ),
+                      ),
+                      TextFormField(
+                        controller: textFormController,
+                      ),
+                    ],
                   ),
-                  Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          RaisedButton(
-                            child: Icon(
-                              Icons.check,
-                              color: Colors.white,
-                            ),
-                            color: Theme.of(context).primaryColor,
-                            onPressed: () async {
-                              sharedPrefService.setTargetWeight(
-                                  double.parse(textFormController.text));
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      RaisedButton(
+                        child: Icon(
+                          Icons.check,
+                          color: Colors.white,
+                        ),
+                        color: Theme.of(context).primaryColor,
+                        onPressed: () async {
+                          sharedPrefService.setTargetWeight(
+                              double.parse(textFormController.text));
 
-                              //Close Dialog
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                          RaisedButton(
-                            child: Icon(
-                              Icons.close,
-                              color: Colors.grey,
-                            ),
-                            onPressed: () {
-                              //Close Dialog
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      ))
-                ],
-              ),
+                          //Close Dialog
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      RaisedButton(
+                        child: Icon(
+                          Icons.close,
+                          color: Colors.grey,
+                        ),
+                        onPressed: () {
+                          //Close Dialog
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 
   void _showUnitsPopup() {
@@ -395,79 +410,80 @@ class _SettingsScreenState extends State<SettingsScreen> {
     String _dropDownValue;
 
     showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: Form(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Text(
-                            "UNIT",
-                            style: Theme.of(context).textTheme.subtitle1,
-                          ),
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Form(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Text(
+                          "UNIT",
+                          style: Theme.of(context).textTheme.subtitle1,
                         ),
-                        new DropdownButton<String>(
-                          hint: _dropDownValue == null
-                              ? Text("Choose Unit")
-                              : _dropDownValue,
-                          isExpanded: true,
-                          items: UiConst.unitTypes.map((String value) {
-                            return new DropdownMenuItem<String>(
-                              value: value,
-                              child: new Text(value),
-                            );
-                          }).toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              _dropDownValue = value;
-                            });
-                          },
-                        )
-                      ],
-                    ),
+                      ),
+                      new DropdownButton<String>(
+                        hint: _dropDownValue == null
+                            ? Text("Choose Unit")
+                            : _dropDownValue,
+                        isExpanded: true,
+                        items: UiConst.unitTypes.map((String value) {
+                          return new DropdownMenuItem<String>(
+                            value: value,
+                            child: new Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            _dropDownValue = value;
+                          });
+                        },
+                      )
+                    ],
                   ),
-                  Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          RaisedButton(
-                            child: Icon(
-                              Icons.check,
-                              color: Colors.white,
-                            ),
-                            color: Theme.of(context).primaryColor,
-                            onPressed: () async {
-                              sharedPrefService
-                                  .setWeightUnitType(_dropDownValue);
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      RaisedButton(
+                        child: Icon(
+                          Icons.check,
+                          color: Colors.white,
+                        ),
+                        color: Theme.of(context).primaryColor,
+                        onPressed: () async {
+                          sharedPrefService.setWeightUnitType(_dropDownValue);
 
-                              //Close Dialog
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                          RaisedButton(
-                            child: Icon(
-                              Icons.close,
-                              color: Colors.grey,
-                            ),
-                            onPressed: () {
-                              //Close Dialog
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      ))
-                ],
-              ),
+                          //Close Dialog
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      RaisedButton(
+                        child: Icon(
+                          Icons.close,
+                          color: Colors.grey,
+                        ),
+                        onPressed: () {
+                          //Close Dialog
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }

@@ -25,20 +25,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Scaffold(
       appBar: _buildAppBar(),
       backgroundColor: Theme.of(context).primaryColor,
-      body: BlocBuilder<DashboardBloc, DashboardState>(
-        builder: (context, state) {
-          if (state is DashboardLoaded) {
-            return Column(
-              children: [
-                SizedBox(height: 15),
-                WeightProgressCard(),
-                WeightStatsWidget(),
-              ],
-            );
-          } else {
-            return Container();
-          }
-        },
+      body: Column(
+        children: [
+          SizedBox(height: 15),
+          WeightProgressCard(),
+          WeightStatsWidget(),
+        ],
       ),
     );
   }

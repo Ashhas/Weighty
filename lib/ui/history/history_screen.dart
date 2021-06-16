@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -35,18 +36,18 @@ class _HistoryScreenState extends State<HistoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Theme.of(context).primaryColor,
-        title: Text(
-          UiConst.historyTitle,
-          style: Theme.of(context).textTheme.headline6,
-        ),
-        centerTitle: true,
-      ),
+      appBar: _buildAppBar(),
       body: Column(
         children: [
+          Divider(
+            height: 1,
+            thickness: 1,
+          ),
           _buildCustomHeader(),
+          Divider(
+            height: 1,
+            thickness: 1,
+          ),
           BlocBuilder<HistoryBloc, HistoryState>(builder: (context, state) {
             if (state is HistoryLoaded) {
               return Expanded(
@@ -57,6 +58,22 @@ class _HistoryScreenState extends State<HistoryScreen> {
           }),
         ],
       ),
+    );
+  }
+
+  _buildAppBar() {
+    return AppBar(
+      elevation: 0,
+      backgroundColor: Theme.of(context).primaryColor,
+      title: Column(
+        children: [
+          Text(
+            UiConst.historyTitle,
+            style: GoogleFonts.roboto(color: Colors.white),
+          ),
+        ],
+      ),
+      centerTitle: true,
     );
   }
 
@@ -99,16 +116,19 @@ class _HistoryScreenState extends State<HistoryScreen> {
         element.dateAdded.month == _currentMonth.month);
 
     return Container(
-        color: Theme.of(context).backgroundColor,
-        child: (_sameMonthEventsFilter.length == 0)
-            ? Center(
-                child: Text("No appointment record in current month!",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.black, fontSize: 16)),
-              )
-            : ListView(
-                children: _sameMonthEventsFilter
-                    .map((event) => ListTile(
+      child: (_sameMonthEventsFilter.length == 0)
+          ? Center(
+              child: Text("No weight entry added in this month!",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black, fontSize: 16)),
+            )
+          : ListView(
+              children: _sameMonthEventsFilter
+                  .map(
+                    (event) => Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTile(
                           title: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -133,8 +153,17 @@ class _HistoryScreenState extends State<HistoryScreen> {
                           ),
                           trailing: Icon(Icons.arrow_right),
                           onTap: () {},
-                        ))
-                    .toList()));
+                        ),
+                        Divider(
+                          height: 1,
+                          thickness: 1,
+                        ),
+                      ],
+                    ),
+                  )
+                  .toList(),
+            ),
+    );
   }
 
   void _selectPreviousMonth() {

@@ -27,15 +27,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
         return DashboardScreen();
         break;
       case 1:
-        return WeightChartScreen();
-        break;
-      case 2:
         return AddWeightScreen();
         break;
-      case 3:
+      case 2:
         return HistoryScreen();
         break;
-      case 4:
+      case 3:
         return SettingsScreen();
         break;
       default:
@@ -69,9 +66,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
           BottomNavigationBarItem(
               icon: Icon(Icons.dashboard_outlined),
               label: UiConst.dashboardTitle),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.stacked_line_chart),
-              label: UiConst.statisticsTitle),
           BottomNavigationBarItem(
               icon: Icon(Icons.add), label: UiConst.addTitle),
           BottomNavigationBarItem(

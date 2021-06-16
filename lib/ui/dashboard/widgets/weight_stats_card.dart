@@ -13,20 +13,20 @@ class WeightStatsWidget extends StatefulWidget {
 class _WeightStatsWidgetState extends State<WeightStatsWidget> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DashboardBloc, DashboardState>(
-      builder: (context, state) {
-        if (state is DashboardLoaded) {
-          return Flexible(
-            fit: FlexFit.loose,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).cardColor,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
-                ),
-              ),
-              child: LayoutBuilder(
+    return Flexible(
+      fit: FlexFit.loose,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15),
+            topRight: Radius.circular(15),
+          ),
+        ),
+        child: BlocBuilder<DashboardBloc, DashboardState>(
+          builder: (context, state) {
+            if (state is DashboardLoaded) {
+              return LayoutBuilder(
                 builder: (context, constraint) {
                   return SingleChildScrollView(
                     child: ConstrainedBox(
@@ -51,13 +51,13 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
                     ),
                   );
                 },
-              ),
-            ),
-          );
-        } else {
-          return Container();
-        }
-      },
+              );
+            } else {
+              return Container();
+            }
+          },
+        ),
+      ),
     );
   }
 
