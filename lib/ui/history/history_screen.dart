@@ -37,7 +37,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text(
           UiConst.historyTitle,
           style: Theme.of(context).textTheme.headline6,

@@ -71,7 +71,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text(UiConst.settingsTitle,
             style: Theme.of(context).textTheme.headline4),
         centerTitle: true,

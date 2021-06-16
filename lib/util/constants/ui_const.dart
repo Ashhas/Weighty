@@ -8,9 +8,9 @@ class UiConst {
 
   //Dashboard Strings
   static const dashboardLabel = 'Weight Loss Progress';
-  static const weightStartedTitle = 'Initial Weight';
+  static const weightStartedTitle = 'Start';
   static const weightCurrentTitle = 'Current Weight';
-  static const weightTargetTitle = 'Desired Weight';
+  static const weightTargetTitle = 'Goal';
 
   //Weight Chart Screen Strings
   static const weightChartTitle = 'Weight Chart';

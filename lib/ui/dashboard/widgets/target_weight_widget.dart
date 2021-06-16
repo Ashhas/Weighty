@@ -17,37 +17,40 @@ class _TargetWeightWidgetState extends State<TargetWeightWidget> {
     return BlocBuilder<DashboardBloc, DashboardState>(
       builder: (BuildContext context, state) {
         if (state is DashboardLoaded) {
-          return Column(
-            children: [
-              Row(
-                children: [
-                  Text(
-                    state.targetWeight.toString(),
-                    style: GoogleFonts.roboto(
-                      fontSize: 20,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w800,
+          return Container(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      state.targetWeight.toString(),
+                      style: GoogleFonts.roboto(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
-                  ),
-                  Text(
-                    " KG",
-                    style: GoogleFonts.roboto(
-                      fontSize: 15,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w800,
+                    Text(
+                      " KG",
+                      style: GoogleFonts.roboto(
+                        fontSize: 15,
+                        color: Colors.white.withOpacity(0.6),
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Text(
-                UiConst.weightTargetTitle,
-                style: GoogleFonts.roboto(
-                  fontSize: 15,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w500,
+                  ],
                 ),
-              ),
-            ],
+                Text(
+                  UiConst.weightTargetTitle,
+                  style: GoogleFonts.roboto(
+                    fontSize: 15,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
           );
         } else {
           return Container();

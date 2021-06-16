@@ -19,20 +19,16 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
     return BlocBuilder<DashboardBloc, DashboardState>(
       builder: (context, state) {
         if (state is DashboardLoaded) {
-          return Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
-            ),
-            child: Padding(
-              padding: EdgeInsets.only(top: 20, left: 15, right: 15, bottom: 5),
-              child: AspectRatio(
-                  aspectRatio: 1.70,
-                  child: LineChart(
-                    mainData(state.startWeight, state.targetWeight,
-                        state.filteredMeasurements),
-                    swapAnimationDuration: Duration(milliseconds: 150),
-                    swapAnimationCurve: Curves.linear, // Optional
-                  )),
+          return Padding(
+            padding: EdgeInsets.only(top: 20, left: 15, right: 15, bottom: 5),
+            child: AspectRatio(
+              aspectRatio: 1.70,
+              child: LineChart(
+                mainData(state.startWeight, state.targetWeight,
+                    state.filteredMeasurements),
+                swapAnimationDuration: Duration(milliseconds: 150),
+                swapAnimationCurve: Curves.linear, // Optional
+              ),
             ),
           );
         } else {

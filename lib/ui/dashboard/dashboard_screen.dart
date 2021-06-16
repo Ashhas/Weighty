@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,26 +23,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+      appBar: _buildAppBar(),
+      backgroundColor: Theme.of(context).primaryColor,
       body: BlocBuilder<DashboardBloc, DashboardState>(
         builder: (context, state) {
           if (state is DashboardLoaded) {
-            return Padding(
-              padding: EdgeInsets.only(left: 10, right: 10),
-              child: Column(
-                children: [
-                  _buildAppBar(),
-                  SizedBox(height: 25),
-                  WeightProgressCard(),
-                  SizedBox(height: 25),
-                  WeightStatsWidget(),
-                ],
-              ),
+            return Column(
+              children: [
+                SizedBox(height: 15),
+                WeightProgressCard(),
+                WeightStatsWidget(),
+              ],
             );
           } else {
-            return Container(
-              color: Theme.of(context).backgroundColor,
-            );
+            return Container();
           }
         },
       ),
@@ -51,10 +46,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
   _buildAppBar() {
     return AppBar(
       elevation: 0,
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).primaryColor,
       title: Text(
         "Weighty",
-        style: GoogleFonts.roboto(color: Colors.black),
+        style: GoogleFonts.roboto(color: Colors.white),
       ),
       centerTitle: true,
     );

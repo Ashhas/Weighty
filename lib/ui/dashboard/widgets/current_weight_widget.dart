@@ -32,8 +32,8 @@ class _CurrentWeightWidgetState extends State<CurrentWeightWidget>
       builder: (BuildContext context, state) {
         if (state is DashboardLoaded) {
           return CircularPercentIndicator(
-            radius: 140.0,
-            lineWidth: 8.0,
+            radius: 150.0,
+            lineWidth: 4.0,
             animation: true,
             percent: state.percentageDone / 100,
             center: Column(
@@ -47,7 +47,7 @@ class _CurrentWeightWidgetState extends State<CurrentWeightWidget>
                       state.measurement.weightEntry.toString(),
                       style: GoogleFonts.roboto(
                         fontSize: 25,
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.w800,
                       ),
                     ),
@@ -55,7 +55,7 @@ class _CurrentWeightWidgetState extends State<CurrentWeightWidget>
                       " KG",
                       style: GoogleFonts.roboto(
                         fontSize: 15,
-                        color: Colors.grey,
+                        color: Colors.white.withOpacity(0.6),
                         fontWeight: FontWeight.w800,
                       ),
                     ),
@@ -65,14 +65,15 @@ class _CurrentWeightWidgetState extends State<CurrentWeightWidget>
                   UiConst.weightCurrentTitle,
                   style: GoogleFonts.roboto(
                     fontSize: 15,
-                    color: Colors.black,
+                    color: Colors.white,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
               ],
             ),
             circularStrokeCap: CircularStrokeCap.round,
-            progressColor: Theme.of(context).accentColor,
+            progressColor: Colors.white,
+            backgroundColor: Colors.grey.withOpacity(0.5),
           );
         } else {
           return Container();

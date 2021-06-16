@@ -18,30 +18,24 @@ class _WeightProgressCardState extends State<WeightProgressCard> {
     return BlocBuilder<DashboardBloc, DashboardState>(
       builder: (context, state) {
         if (state is DashboardLoaded) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildStartWeightWidget(),
-              _buildCurrentWeightWidget(),
-              _buildTargetWeightWidget(),
-            ],
+          return Container(
+            height: 180,
+            width: double.infinity,
+            color: Theme.of(context).primaryColor,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                StartWeightWidget(),
+                CurrentWeightWidget(),
+                TargetWeightWidget(),
+              ],
+            ),
           );
         } else {
           return Container();
         }
       },
     );
-  }
-
-  Widget _buildCurrentWeightWidget() {
-    return CurrentWeightWidget();
-  }
-
-  Widget _buildTargetWeightWidget() {
-    return TargetWeightWidget();
-  }
-
-  Widget _buildStartWeightWidget() {
-    return StartWeightWidget();
   }
 }

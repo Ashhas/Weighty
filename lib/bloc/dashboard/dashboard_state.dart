@@ -28,6 +28,7 @@ class DashboardLoaded extends DashboardState {
   final double percentageDone;
   final double totalLost;
   final double amountLeft;
+  final double amountLostThisWeek;
   final List<MeasurementModel> filteredMeasurements;
 
   DashboardLoaded(
@@ -40,6 +41,7 @@ class DashboardLoaded extends DashboardState {
     this.percentageDone,
     this.totalLost,
     this.amountLeft,
+    this.amountLostThisWeek,
     this.filteredMeasurements,
   ) : assert(measurement != null);
 

@@ -3,7 +3,7 @@ import 'package:weighty/util/constants/color_const.dart';
 
 class FontConst {
   static final LARGE = TextStyle(
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w600,
     color: ColorConst.lightPrimaryTextColor,
   );
 
@@ -32,6 +32,10 @@ class FontConst {
       REGULAR.copyWith(fontSize: 14, color: ColorConst.lightPrimaryTextColor);
   static final REGULAR_SMALL_WHITE =
       REGULAR.copyWith(fontSize: 14, color: ColorConst.darkPrimaryTextColor);
+  static final REGULAR_LARGE_BLACK =
+      LARGE.copyWith(fontSize: 17, color: ColorConst.lightPrimaryTextColor);
+  static final REGULAR_LARGE_WHITE =
+      LARGE.copyWith(fontSize: 17, color: ColorConst.darkPrimaryTextColor);
   static final REGULAR_TILE_BLACK =
       REGULAR.copyWith(fontSize: 16, color: ColorConst.lightPrimaryTextColor);
   static final REGULAR_TILE_WHITE =

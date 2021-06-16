@@ -25,7 +25,7 @@ class _AddWeightScreenState extends State<WeightChartScreen> {
         backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: Theme.of(context).backgroundColor,
+          backgroundColor: Theme.of(context).primaryColor,
           title: Column(
             children: [
               Text(
