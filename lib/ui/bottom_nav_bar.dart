@@ -4,7 +4,7 @@ import 'package:weighty/bloc/app_init/initialization_bloc.dart';
 import 'package:weighty/ui/add_weight/add_weight_screen.dart';
 import 'package:weighty/ui/settings/settings_screen.dart';
 import 'package:weighty/ui/weight_chart_screen/weight_chart_screen.dart';
-import 'package:weighty/util/strings.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 import 'package:weighty/ui/dashboard/dashboard_screen.dart';
 import 'package:weighty/ui/history/history_screen.dart';
 
@@ -68,17 +68,17 @@ class _BottomNavBarState extends State<BottomNavBar> {
         items: [
           BottomNavigationBarItem(
               icon: Icon(Icons.dashboard_outlined),
-              label: GlobalStrings.dashboardTitle),
+              label: UiConst.dashboardTitle),
           BottomNavigationBarItem(
               icon: Icon(Icons.stacked_line_chart),
-              label: GlobalStrings.statisticsTitle),
+              label: UiConst.statisticsTitle),
           BottomNavigationBarItem(
-              icon: Icon(Icons.add), label: GlobalStrings.addTitle),
+              icon: Icon(Icons.add), label: UiConst.addTitle),
           BottomNavigationBarItem(
-              icon: Icon(Icons.access_time), label: GlobalStrings.historyTitle),
+              icon: Icon(Icons.access_time), label: UiConst.historyTitle),
           BottomNavigationBarItem(
               icon: Icon(Icons.more_horiz_sharp),
-              label: GlobalStrings.settingsTitle),
+              label: UiConst.settingsTitle),
         ],
         currentIndex: _selectedIndex,
         backgroundColor: Theme.of(context).backgroundColor,

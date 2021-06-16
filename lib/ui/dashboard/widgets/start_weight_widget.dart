@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
-import 'package:weighty/util/strings.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 import 'package:flutter/material.dart';
 
 class StartWeightWidget extends StatefulWidget {
@@ -41,7 +41,7 @@ class _StartWeightWidgetState extends State<StartWeightWidget> {
                 ],
               ),
               Text(
-                GlobalStrings.weightStartedTitle,
+                UiConst.weightStartedTitle,
                 style: GoogleFonts.roboto(
                   fontSize: 15,
                   color: Colors.grey,

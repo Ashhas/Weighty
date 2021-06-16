@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weighty/util/strings.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 
 class WeightChartScreen extends StatefulWidget {
   const WeightChartScreen() : super();
@@ -29,7 +29,7 @@ class _AddWeightScreenState extends State<WeightChartScreen> {
           title: Column(
             children: [
               Text(
-                GlobalStrings.weightChartTitle,
+                UiConst.weightChartTitle,
                 style: Theme.of(context).textTheme.headline6,
               ),
             ],

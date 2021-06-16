@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:weighty/bloc/history/history_bloc.dart';
 import 'package:weighty/data/model/measurement.dart';
-import 'package:weighty/util/strings.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen() : super();
@@ -39,7 +39,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
         elevation: 0,
         backgroundColor: Theme.of(context).backgroundColor,
         title: Text(
-          GlobalStrings.historyTitle,
+          UiConst.historyTitle,
           style: Theme.of(context).textTheme.headline6,
         ),
         centerTitle: true,

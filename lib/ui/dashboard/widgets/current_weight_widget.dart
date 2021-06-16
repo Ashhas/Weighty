@@ -4,8 +4,7 @@ import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-
-import '../../../util/strings.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 
 class CurrentWeightWidget extends StatefulWidget {
   CurrentWeightWidget() : super();
@@ -63,7 +62,7 @@ class _CurrentWeightWidgetState extends State<CurrentWeightWidget>
                   ],
                 ),
                 Text(
-                  GlobalStrings.weightCurrentTitle,
+                  UiConst.weightCurrentTitle,
                   style: GoogleFonts.roboto(
                     fontSize: 15,
                     color: Colors.black,

@@ -9,7 +9,7 @@ import 'package:weighty/bloc/settings/settings_bloc.dart';
 import 'package:weighty/bloc/simple_bloc_observer.dart';
 import 'package:weighty/data/repo/measurement_repo.dart';
 import 'package:weighty/ui/bottom_nav_bar.dart';
-import 'package:weighty/util/themes.dart';
+import 'package:weighty/util/constants/theme_const.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,8 +55,8 @@ class MyApp extends StatelessWidget {
                 return MaterialApp(
                   title: 'Weighty',
                   themeMode: themeState.themeMode,
-                  theme: AppThemes.getLightTheme(),
-                  darkTheme: AppThemes.getDarkTheme(),
+                  theme: AppTheme.getLightTheme(),
+                  darkTheme: AppTheme.getDarkTheme(),
                   home: BottomNavBar(),
                 );
               },

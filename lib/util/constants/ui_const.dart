@@ -1,11 +1,4 @@
-class GlobalStrings {
-  static const appName = 'Weighty';
-
-  //Theme String
-  static const darkTheme = 'darkTheme';
-  static const lightTheme = 'lightTheme';
-  static const systemTheme = 'systemTheme';
-
+class UiConst {
   //Navbar Strings
   static const dashboardTitle = 'Dashboard';
   static const statisticsTitle = 'Stats';

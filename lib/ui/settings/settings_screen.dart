@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:weighty/bloc/app_theme/theme_bloc.dart';
 import 'package:weighty/bloc/settings/settings_bloc.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 import 'package:weighty/util/shared_pref_service.dart';
-import 'package:weighty/util/strings.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -72,7 +72,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Theme.of(context).backgroundColor,
-        title: Text(GlobalStrings.settingsTitle,
+        title: Text(UiConst.settingsTitle,
             style: Theme.of(context).textTheme.headline4),
         centerTitle: true,
       ),
@@ -80,11 +80,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
         backgroundColor: Theme.of(context).backgroundColor,
         sections: [
           SettingsSection(
-            title: GlobalStrings.profileTileSection,
+            title: UiConst.profileTileSection,
             titleTextStyle: Theme.of(context).textTheme.headline3,
             tiles: [
               SettingsTile(
-                title: GlobalStrings.nameTile,
+                title: UiConst.nameTile,
                 titleTextStyle: Theme.of(context).textTheme.headline4,
                 trailing: Text(userName ?? "",
                     style: Theme.of(context).textTheme.headline2),
@@ -93,7 +93,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
               ),
               SettingsTile(
-                title: GlobalStrings.StartWeightTile,
+                title: UiConst.StartWeightTile,
                 titleTextStyle: Theme.of(context).textTheme.headline4,
                 trailing: Text(
                     startWeight.toString() +
@@ -106,7 +106,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
               ),
               SettingsTile(
-                title: GlobalStrings.targetWeightTile,
+                title: UiConst.targetWeightTile,
                 titleTextStyle: Theme.of(context).textTheme.headline4,
                 trailing: Text(
                     targetWeight.toString() +
@@ -121,11 +121,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ],
           ),
           SettingsSection(
-            title: GlobalStrings.optionsTileSection,
+            title: UiConst.optionsTileSection,
             titleTextStyle: Theme.of(context).textTheme.headline3,
             tiles: [
               SettingsTile(
-                title: GlobalStrings.unitTile,
+                title: UiConst.unitTile,
                 trailing: Text(weightUnitType ?? "",
                     style: Theme.of(context).textTheme.headline2),
                 onPressed: (BuildContext context) {
@@ -133,12 +133,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
               ),
               SettingsTile.switchTile(
-                title: GlobalStrings.reminderTile,
+                title: UiConst.reminderTile,
                 onToggle: null,
                 switchValue: reminderStatus ?? false,
               ),
               SettingsTile.switchTile(
-                title: GlobalStrings.themeTile,
+                title: UiConst.themeTile,
                 onToggle: (bool value) {
                   setState(() {
                     if (value) {
@@ -156,37 +156,37 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ],
           ),
           SettingsSection(
-            title: GlobalStrings.manageDataTileSection,
+            title: UiConst.manageDataTileSection,
             titleTextStyle: Theme.of(context).textTheme.headline3,
             tiles: [
               SettingsTile(
-                title: GlobalStrings.exportTile,
+                title: UiConst.exportTile,
                 trailing: Icon(Icons.chevron_right),
               ),
               SettingsTile(
-                title: GlobalStrings.deleteTile,
+                title: UiConst.deleteTile,
                 trailing: Icon(Icons.chevron_right),
               ),
               SettingsTile(
-                title: GlobalStrings.syncTile,
+                title: UiConst.syncTile,
                 trailing: Icon(Icons.chevron_right),
               )
             ],
           ),
           SettingsSection(
-            title: GlobalStrings.moreDataTileSection,
+            title: UiConst.moreDataTileSection,
             titleTextStyle: Theme.of(context).textTheme.headline3,
             tiles: [
               SettingsTile(
-                title: GlobalStrings.helpFeedbackTile,
+                title: UiConst.helpFeedbackTile,
                 trailing: Icon(Icons.chevron_right),
               ),
               SettingsTile(
-                title: GlobalStrings.RatingTile,
+                title: UiConst.RatingTile,
                 trailing: Icon(Icons.chevron_right),
               ),
               SettingsTile(
-                title: GlobalStrings.devInfoTile,
+                title: UiConst.devInfoTile,
                 trailing: Icon(Icons.chevron_right),
               )
             ],
@@ -418,7 +418,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ? Text("Choose Unit")
                               : _dropDownValue,
                           isExpanded: true,
-                          items: GlobalStrings.unitTypes.map((String value) {
+                          items: UiConst.unitTypes.map((String value) {
                             return new DropdownMenuItem<String>(
                               value: value,
                               child: new Text(value),
