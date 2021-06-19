@@ -10,7 +10,7 @@ part 'theme_event.dart';
 part 'theme_state.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
-  ThemeBloc() : super(ThemeState(ThemeMode.light));
+  ThemeBloc() : super(CurrentThemeState(themeMode: ThemeMode.light));
 
   @override
   Stream<ThemeState> mapEventToState(ThemeEvent event) async* {
@@ -27,23 +27,30 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
 
     if (themeDarkMode == null) {
       sharedPrefService.setThemeDarkMode(false);
-      yield ThemeState(ThemeMode.system);
+      yield CurrentThemeState(
+          themeMode: ThemeMode.system, isDarkTheme: themeDarkMode);
     } else if (themeDarkMode == true) {
-      yield ThemeState(ThemeMode.dark);
+      yield CurrentThemeState(
+          themeMode: ThemeMode.dark, isDarkTheme: themeDarkMode);
     } else if (themeDarkMode == false) {
-      yield ThemeState(ThemeMode.light);
+      yield CurrentThemeState(
+          themeMode: ThemeMode.light, isDarkTheme: themeDarkMode);
     }
   }
 
   Stream<ThemeState> _mapThemeChangedEvenToState(bool themeDarkMode) async* {
     final sharedPrefService = await SharedPreferencesService.instance;
 
+    yield ThemeHasChanged();
+
     if (themeDarkMode == true) {
       sharedPrefService.setThemeDarkMode(true);
-      yield ThemeState(ThemeMode.dark);
+      yield CurrentThemeState(
+          themeMode: ThemeMode.dark, isDarkTheme: themeDarkMode);
     } else if (themeDarkMode == false) {
       sharedPrefService.setThemeDarkMode(false);
-      yield ThemeState(ThemeMode.light);
+      yield CurrentThemeState(
+          themeMode: ThemeMode.light, isDarkTheme: themeDarkMode);
     }
   }
 }

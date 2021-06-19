@@ -33,7 +33,11 @@ class _WeightProgressCardState extends State<WeightProgressCard> {
             ),
           );
         } else {
-          return Container();
+          return Container(
+            height: 180,
+            width: double.infinity,
+            color: Theme.of(context).primaryColor,
+          );
         }
       },
     );

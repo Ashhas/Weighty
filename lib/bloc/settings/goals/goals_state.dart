@@ -1,24 +1,29 @@
-part of 'settings_bloc.dart';
+part of 'goals_bloc.dart';
 
 @immutable
-abstract class SettingsState extends Equatable {
-  const SettingsState();
+abstract class GoalsState extends Equatable {
+  const GoalsState();
 
   @override
   List<Object> get props => [];
 }
 
-class SettingsOpened extends SettingsState {
+class GoalsOpened extends GoalsState {
   @override
   List<Object> get props => [];
 }
 
-class SettingsLoading extends SettingsState {
+class GoalsLoading extends GoalsState {
   @override
   List<Object> get props => [];
 }
 
-class SettingsLoaded extends SettingsState {
+class GoalsUpdated extends GoalsState {
+  @override
+  List<Object> get props => [];
+}
+
+class GoalsLoaded extends GoalsState {
   final String appVersion;
   final double startWeight;
   final String startWeightDate;
@@ -26,7 +31,7 @@ class SettingsLoaded extends SettingsState {
   final String targetWeightDate;
   final double currentWeight;
 
-  SettingsLoaded(
+  GoalsLoaded(
       {this.appVersion,
       this.startWeight,
       this.startWeightDate,

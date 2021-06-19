@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:weighty/bloc/app_init/initialization_bloc.dart';
 import 'package:weighty/ui/add_weight/add_weight_screen.dart';
 import 'package:weighty/ui/settings/settings_screen.dart';
@@ -75,6 +76,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ],
         currentIndex: _selectedIndex,
         type: BottomNavigationBarType.fixed,
+        selectedLabelStyle: GoogleFonts.roboto(
+          fontSize: 12,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+        unselectedLabelStyle: GoogleFonts.roboto(
+          fontSize: 12,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
         backgroundColor: Theme.of(context).backgroundColor,
         selectedItemColor: Theme.of(context).focusColor,
         unselectedItemColor: Theme.of(context).shadowColor,

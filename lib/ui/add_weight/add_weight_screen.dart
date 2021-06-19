@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:weighty/bloc/add_weight/add_weight_bloc.dart';
+import 'package:weighty/ui/add_weight/widgets/add_weight_dialog.dart';
 import 'package:weighty/util/constants/ui_const.dart';
 
 class AddWeightScreen extends StatefulWidget {
@@ -89,72 +90,8 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          content: Form(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      (new DateFormat.yMMMd('en_US')
-                          .format(selectedDay)
-                          .toString()),
-                      style: Theme.of(context).textTheme.bodyText1,
-                    )),
-                Divider(),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "ADD WEIGHT",
-                        style: Theme.of(context).textTheme.subtitle1,
-                      ),
-                      TextFormField(
-                        controller: textFormController,
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      RaisedButton(
-                        child: Icon(
-                          Icons.check,
-                          color: Colors.white,
-                        ),
-                        color: Theme.of(context).primaryColor,
-                        onPressed: () {
-                          BlocProvider.of<AddWeightBloc>(context).add(
-                              AddNewMeasurement(
-                                  selectedDay, textFormController.text));
-
-                          //Close Dialog
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      RaisedButton(
-                        child: Icon(
-                          Icons.close,
-                          color: Colors.grey,
-                        ),
-                        onPressed: () {
-                          //Close Dialog
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-        );
+        return AddWeightDialog(
+            selectedDay: selectedDay, textFormController: textFormController);
       },
     );
   }
