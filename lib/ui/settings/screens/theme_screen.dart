@@ -53,7 +53,7 @@ class _ThemeScreenState extends State<ThemeScreen> {
       ),
       title: Text(
         "Theme",
-        style: Theme.of(context).primaryTextTheme.headline4,
+        style: TextStyle(color: Colors.white)
       ),
     );
   }

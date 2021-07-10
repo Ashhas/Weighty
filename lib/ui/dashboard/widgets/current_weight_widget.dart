@@ -35,7 +35,7 @@ class _CurrentWeightWidgetState extends State<CurrentWeightWidget>
             radius: 150.0,
             lineWidth: 4.0,
             animation: true,
-            percent: state.percentageDone / 100,
+            percent: state.percentageDone,
             center: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,

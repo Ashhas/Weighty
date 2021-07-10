@@ -21,7 +21,7 @@ class _WeightProgressCardState extends State<WeightProgressCard> {
           return Container(
             height: 180,
             width: double.infinity,
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).canvasColor,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -36,7 +36,7 @@ class _WeightProgressCardState extends State<WeightProgressCard> {
           return Container(
             height: 180,
             width: double.infinity,
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).canvasColor,
           );
         }
       },

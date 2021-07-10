@@ -17,7 +17,7 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
       fit: FlexFit.loose,
       child: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
+          color: Theme.of(context).backgroundColor,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(15),
             topRight: Radius.circular(15),
@@ -65,14 +65,12 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Container(
-        height: 30,
+        height: 25,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(titleName,
                 style: Theme.of(context).primaryTextTheme.headline6),
-            Icon(Icons.arrow_forward_ios_sharp,
-                color: Theme.of(context).buttonColor),
           ],
         ),
       ),
@@ -91,9 +89,10 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
               Row(
                 children: [
                   Text(
-                    totalLost.toString(),
+                    totalLost.toStringAsFixed(2),
                     style: GoogleFonts.roboto(
-                        textStyle: Theme.of(context).textTheme.subtitle2),
+                        textStyle:
+                            Theme.of(context).primaryTextTheme.bodyText2),
                   ),
                   Text(
                     " KG",
@@ -108,7 +107,7 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
               Text(
                 "Total Lost",
                 style: GoogleFonts.roboto(
-                    textStyle: Theme.of(context).textTheme.bodyText2),
+                    textStyle: Theme.of(context).primaryTextTheme.bodyText2),
               ),
             ],
           ),
@@ -118,9 +117,10 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
               Row(
                 children: [
                   Text(
-                    amountLostThisWeek.toString(),
+                    amountLostThisWeek.toStringAsFixed(2),
                     style: GoogleFonts.roboto(
-                        textStyle: Theme.of(context).textTheme.subtitle2),
+                        textStyle:
+                            Theme.of(context).primaryTextTheme.bodyText2),
                   ),
                   Text(
                     " KG",
@@ -135,7 +135,7 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
               Text(
                 "Lost This Week",
                 style: GoogleFonts.roboto(
-                    textStyle: Theme.of(context).textTheme.bodyText2),
+                    textStyle: Theme.of(context).primaryTextTheme.bodyText2),
               ),
             ],
           ),
@@ -145,9 +145,10 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
               Row(
                 children: [
                   Text(
-                    amountLeft.toString(),
+                    amountLeft.toStringAsFixed(2),
                     style: GoogleFonts.roboto(
-                        textStyle: Theme.of(context).textTheme.subtitle2),
+                        textStyle:
+                            Theme.of(context).primaryTextTheme.bodyText2),
                   ),
                   Text(
                     " KG",
@@ -162,7 +163,7 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
               Text(
                 "Left to Go",
                 style: GoogleFonts.roboto(
-                    textStyle: Theme.of(context).textTheme.bodyText2),
+                    textStyle: Theme.of(context).primaryTextTheme.bodyText2),
               ),
             ],
           ),

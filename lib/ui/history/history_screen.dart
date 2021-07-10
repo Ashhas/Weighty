@@ -142,16 +142,17 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                     fontFamily: "Roboto",
                                     fontWeight: FontWeight.w400,
                                   )),
-                              Text(event.weightEntry.toString(),
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                    fontFamily: "Roboto",
-                                    fontWeight: FontWeight.w900,
-                                  ))
+                              Text(
+                                event.weightEntry.toString(),
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                  fontFamily: "Roboto",
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              )
                             ],
                           ),
-                          trailing: Icon(Icons.arrow_right),
                           onTap: () {},
                         ),
                         Divider(

@@ -27,7 +27,7 @@ class _AboutScreenState extends State<AboutScreen> {
               title: "Github",
               titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
               leading: Icon(Icons.developer_board_outlined,
-                  color: Theme.of(context).buttonColor),
+                  color: Colors.grey),
               onPressed: (BuildContext context) {
                 _launchURL();
               },
@@ -88,7 +88,7 @@ class _AboutScreenState extends State<AboutScreen> {
             ),
             Text(
               "Weighty",
-              style: TextStyle(color: Colors.black, fontSize: 20),
+              style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             SizedBox(height: 20),
           ],

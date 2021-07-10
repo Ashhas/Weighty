@@ -17,6 +17,7 @@ class SharedPrefKeys {
   static const userTargetWeightDate = 'targetWeightDate';
   static const weightUnitType = 'weightUnitType';
   static const reminderStatus = 'reminderStatus';
+  static const onBoardingSeenBefore = 'onboardingscreen';
 }
 
 class SharedPreferencesService {
@@ -36,6 +37,10 @@ class SharedPreferencesService {
 
     return _instance;
   }
+
+  Future<void> setOnBoardingSeenBefore(bool onBoardingSeenBefore) async =>
+      await _preferences.setBool(
+          SharedPrefKeys.onBoardingSeenBefore, onBoardingSeenBefore);
 
   Future<void> setUsername(String userName) async =>
       await _preferences.setString(SharedPrefKeys.userName, userName);
@@ -65,6 +70,9 @@ class SharedPreferencesService {
 
   Future<void> setReminderStatus(bool reminderStatus) async =>
       await _preferences.setBool(SharedPrefKeys.reminderStatus, reminderStatus);
+
+  bool get getOnBoardingSeenBefore =>
+      _preferences.getBool(SharedPrefKeys.onBoardingSeenBefore);
 
   String get getUsername => _preferences.getString(SharedPrefKeys.userName);
 

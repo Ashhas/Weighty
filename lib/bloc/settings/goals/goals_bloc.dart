@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:equatable/equatable.dart';
 import 'package:weighty/data/model/measurement.dart';
 import 'package:weighty/data/repo/measurement_repo.dart';
@@ -50,6 +51,8 @@ class GoalsBloc extends Bloc<GoalsEvent, GoalsState> {
 
   Stream<GoalsState> _mapChangeStartWeightToState(
       String newStartWeight) async* {
+    print(newStartWeight);
+
     //Update Information
     final sharedPrefService = await SharedPreferencesService.instance;
     sharedPrefService.setStartWeight(double.parse(newStartWeight));

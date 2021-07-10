@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:weighty/bloc/add_weight/add_weight_bloc.dart';
 import 'package:weighty/ui/add_weight/widgets/add_weight_dialog.dart';
@@ -50,6 +49,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
               highlightToday: true,
               highlightSelected: true,
               outsideDaysVisible: false,
+              selectedColor: Theme.of(context).primaryColor,
               weekendStyle: TextStyle(color: Colors.black),
             ),
             headerStyle: HeaderStyle(

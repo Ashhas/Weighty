@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'package:intl/intl.dart';
-import 'package:meta/meta.dart';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
 import 'package:weighty/data/model/measurement.dart';
 import 'package:weighty/data/repo/measurement_repo.dart';
 import 'package:weighty/util/shared_pref_service.dart';
@@ -31,11 +31,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     final sharedPrefService = await SharedPreferencesService.instance;
     String username = sharedPrefService.getUsername;
     double startWeight = sharedPrefService.getStartWeight;
-    String startWeightDate = new DateFormat.yMMMd('en_US')
-        .format(DateTime.parse(sharedPrefService.getStartWeightDate));
     double targetWeight = sharedPrefService.getTargetWeight;
-    String targetWeightDate = new DateFormat.yMMMd('en_US')
-        .format(DateTime.parse(sharedPrefService.getTargetWeightDate));
 
     //Get Latest Measurement from DB
     MeasurementModel latestMeasurement =
@@ -71,9 +67,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         latestMeasurement,
         username,
         startWeight,
-        startWeightDate,
         targetWeight,
-        targetWeightDate,
         percentageDone,
         totalLost,
         amountLeft,
@@ -99,7 +93,16 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
   double _calculatePercentageDone(
       {double startWeight, double targetWeight, double weightEntry}) {
-    return ((startWeight - weightEntry) * 100 / (startWeight - targetWeight));
+    double calculatedPercentage =
+        ((startWeight - weightEntry) * 100 / (startWeight - targetWeight));
+
+    if (calculatedPercentage < 0) {
+      return 0;
+    } else if (calculatedPercentage > 100) {
+      return 1;
+    } else {
+      return calculatedPercentage / 100;
+    }
   }
 
   double _calculateTotalLost({double startWeight, double currentWeight}) {

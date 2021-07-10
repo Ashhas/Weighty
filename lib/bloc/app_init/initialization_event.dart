@@ -5,7 +5,12 @@ abstract class InitializationEvent extends Equatable {
   const InitializationEvent();
 }
 
-class AppStarted extends InitializationEvent {
+class InitializeApp extends InitializationEvent {
+  @override
+  List<Object> get props => [];
+}
+
+class FinishOnBoarding extends InitializationEvent {
   @override
   List<Object> get props => [];
 }

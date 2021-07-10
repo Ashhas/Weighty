@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:weighty/bloc/app_init/initialization_bloc.dart';
 import 'package:weighty/ui/add_weight/add_weight_screen.dart';
 import 'package:weighty/ui/settings/settings_screen.dart';
-import 'package:weighty/ui/weight_chart_screen/weight_chart_screen.dart';
 import 'package:weighty/util/constants/ui_const.dart';
 import 'package:weighty/ui/dashboard/dashboard_screen.dart';
 import 'package:weighty/ui/history/history_screen.dart';
@@ -65,8 +64,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.dashboard_outlined),
-              label: UiConst.dashboardTitle),
+            icon: Icon(Icons.dashboard_outlined),
+            label: UiConst.dashboardTitle,
+          ),
           BottomNavigationBarItem(
               icon: Icon(Icons.add), label: UiConst.addTitle),
           BottomNavigationBarItem(
@@ -78,17 +78,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
         type: BottomNavigationBarType.fixed,
         selectedLabelStyle: GoogleFonts.roboto(
           fontSize: 12,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
         ),
         unselectedLabelStyle: GoogleFonts.roboto(
           fontSize: 12,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
         ),
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).bottomAppBarColor,
         selectedItemColor: Theme.of(context).focusColor,
         unselectedItemColor: Theme.of(context).shadowColor,
+        elevation: 6.0,
         onTap: _onItemTapped,
       ),
     );

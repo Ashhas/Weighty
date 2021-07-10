@@ -7,10 +7,11 @@ class AppTheme {
     return ThemeData(
       primaryColor: ColorConst.lightPrimaryColor,
       accentColor: ColorConst.lightAccentColor,
-      backgroundColor: ColorConst.lightBackgroundColor,
-      canvasColor: ColorConst.lightCanvasColor,
-      focusColor: ColorConst.lightBottomAppBar,
+      focusColor: ColorConst.lightFocusColor,
       shadowColor: ColorConst.lightShadowColor,
+      canvasColor: ColorConst.lightCanvasColor,
+      backgroundColor: ColorConst.lightBackgroundColor,
+      bottomAppBarColor: ColorConst.lightBottomAppBar,
       primaryTextTheme: TextTheme(
         bodyText2: FontConst.REGULAR_DEFAULT_BLACK,
         bodyText1: FontConst.REGULAR_SMALL_BLACK,
@@ -21,6 +22,7 @@ class AppTheme {
         headline2: FontConst.LARGE_NAME_TITLE,
         headline1: FontConst.LARGE_TILE_WHITE,
         subtitle1: FontConst.REGULAR_SMALL_BLACK,
+        subtitle2: FontConst.REGULAR_SMALL_ERROR,
       ),
     );
   }
@@ -29,10 +31,11 @@ class AppTheme {
     return ThemeData(
       primaryColor: ColorConst.darkPrimaryColor,
       accentColor: ColorConst.darkAccentColor,
-      backgroundColor: ColorConst.darkBackgroundColor,
-      canvasColor: ColorConst.darkCanvasColor,
-      focusColor: ColorConst.darkBottomAppBar,
+      focusColor: ColorConst.darkFocusColor,
       shadowColor: ColorConst.darkShadowColor,
+      canvasColor: ColorConst.darkCanvasColor,
+      backgroundColor: ColorConst.darkBackgroundColor,
+      bottomAppBarColor: ColorConst.darkBottomAppBar,
       primaryTextTheme: TextTheme(
         bodyText2: FontConst.REGULAR_DEFAULT_WHITE,
         bodyText1: FontConst.REGULAR_SMALL_WHITE,
@@ -43,6 +46,7 @@ class AppTheme {
         headline2: FontConst.LARGE_NAME_TITLE,
         headline1: FontConst.LARGE_TILE_WHITE,
         subtitle1: FontConst.REGULAR_SMALL_WHITE,
+        subtitle2: FontConst.REGULAR_SMALL_ERROR,
       ),
     );
   }

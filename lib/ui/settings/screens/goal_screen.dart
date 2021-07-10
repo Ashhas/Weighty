@@ -106,7 +106,7 @@ class _GoalScreenState extends State<GoalScreen> {
       ),
       title: Text(
         "Goal Preferences",
-        style: Theme.of(context).primaryTextTheme.headline4,
+        style: TextStyle(color: Colors.white),
       ),
     );
   }

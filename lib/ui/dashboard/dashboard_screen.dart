@@ -24,7 +24,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: Theme.of(context).canvasColor,
       body: Column(
         children: [
           SizedBox(height: 15),
@@ -38,7 +38,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   _buildAppBar() {
     return AppBar(
       elevation: 0,
-      backgroundColor: Theme.of(context).primaryColor,
+      backgroundColor: Theme.of(context).canvasColor,
       title: Text(
         "Weighty",
         style: GoogleFonts.roboto(color: Colors.white),

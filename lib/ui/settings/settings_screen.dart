@@ -94,7 +94,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
       leading: Icon(
         Icons.verified,
-        color: Theme.of(context).highlightColor,
+        color: Colors.grey,
       ),
       onPressed: (BuildContext context) {
         Navigator.push(
@@ -111,7 +111,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
       leading: Icon(
         Icons.notifications_active,
-        color: Theme.of(context).highlightColor,
+        color: Colors.grey,
       ),
       onPressed: (BuildContext context) {
         Navigator.push(
@@ -129,7 +129,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
       leading: Icon(
         Icons.dark_mode,
-        color: Theme.of(context).highlightColor,
+        color: Colors.grey,
       ),
       onPressed: (BuildContext context) {
         Navigator.push(
@@ -146,7 +146,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
       leading: Icon(
         Icons.info_outline,
-        color: Theme.of(context).highlightColor,
+        color: Colors.grey,
       ),
       onPressed: (BuildContext context) {
         Navigator.push(
@@ -164,7 +164,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
       leading: Icon(
         Icons.help_outline,
-        color: Theme.of(context).highlightColor,
+        color: Colors.grey,
       ),
       onPressed: (BuildContext context) {
         Navigator.push(

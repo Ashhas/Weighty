@@ -5,12 +5,12 @@ abstract class InitializationState extends Equatable {
   const InitializationState();
 }
 
-class Uninitialized extends InitializationState {
+class InitStarted extends InitializationState {
   @override
   List<Object> get props => [];
 }
 
-class CreatingTestDataState extends InitializationState {
+class Uninitialized extends InitializationState {
   @override
   List<Object> get props => [];
 }
