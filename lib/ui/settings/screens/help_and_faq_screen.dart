@@ -36,7 +36,7 @@ class _HelpFaqScreenState extends State<HelpFaqScreen> {
       ),
       title: Text(
         "Help/FAQ",
-        style: Theme.of(context).primaryTextTheme.headline4,
+        style: TextStyle(color: Colors.white),
       ),
     );
   }

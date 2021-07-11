@@ -1,10 +1,7 @@
 class VariableConst {
+  //App Variables
   static const appName = 'Weighty';
 
+  //URL
   static const githubUrl = 'https://github.com/Ashhas/Weighty';
-
-  //Theme String
-  static const darkTheme = 'darkTheme';
-  static const lightTheme = 'lightTheme';
-  static const systemTheme = 'systemTheme';
 }

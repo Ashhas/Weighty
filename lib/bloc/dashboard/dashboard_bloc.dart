@@ -29,9 +29,12 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
     //Get Data from SharePref
     final sharedPrefService = await SharedPreferencesService.instance;
-    String username = sharedPrefService.getUsername;
     double startWeight = sharedPrefService.getStartWeight;
     double targetWeight = sharedPrefService.getTargetWeight;
+
+    //Get Latest Measurement from DB
+    MeasurementModel firstMeasurement =
+        await measurementRepository.getFirstMeasurement();
 
     //Get Latest Measurement from DB
     MeasurementModel latestMeasurement =
@@ -39,7 +42,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
     //Get Filtered Measurements for 2 Months
     List<MeasurementModel> filteredMeasurements =
-        await _filterMeasurementTwoMonths();
+        await _filterMeasurementThisMonth();
 
     //Calculate Percentage Done
     double percentageDone = _calculatePercentageDone(
@@ -50,7 +53,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
     //Calculate Total Lost
     double totalLost = _calculateTotalLost(
-      startWeight: startWeight,
+      firstWeight: firstMeasurement.weightEntry,
       currentWeight: latestMeasurement.weightEntry,
     );
 
@@ -65,7 +68,6 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
     yield DashboardLoaded(
         latestMeasurement,
-        username,
         startWeight,
         targetWeight,
         percentageDone,
@@ -75,18 +77,14 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         filteredMeasurements);
   }
 
-  Future<List<MeasurementModel>> _filterMeasurementTwoMonths() async {
+  Future<List<MeasurementModel>> _filterMeasurementThisMonth() async {
     List<MeasurementModel> allMeasurements =
         await measurementRepository.getAllMeasurements();
 
     //Filter
     List<MeasurementModel> filteredMeasurements = allMeasurements
-        .where((m) =>
-            m.dateAdded.difference(DateTime.now()).inDays.abs() <= 60 &&
-            m.dateAdded.isBefore(DateTime.now().add(Duration(days: 1))))
+        .where((m) => m.dateAdded.month == DateTime.now().month)
         .toList();
-
-    filteredMeasurements.sort((a, b) => a.dateAdded.compareTo(b.dateAdded));
 
     return filteredMeasurements;
   }
@@ -105,8 +103,12 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     }
   }
 
-  double _calculateTotalLost({double startWeight, double currentWeight}) {
-    return startWeight - currentWeight;
+  double _calculateTotalLost({double firstWeight, double currentWeight}) {
+    if (firstWeight < currentWeight) {
+      return currentWeight - firstWeight;
+    } else {
+      return firstWeight - currentWeight;
+    }
   }
 
   double _calculateAmountLeft({double targetWeight, double currentWeight}) {

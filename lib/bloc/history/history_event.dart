@@ -12,3 +12,12 @@ class HistoryStarted extends HistoryEvent {
   @override
   List<Object> get props => [];
 }
+
+class DeleteMeasurement extends HistoryEvent {
+  final MeasurementModel measurementModel;
+
+  DeleteMeasurement(this.measurementModel);
+
+  @override
+  List<Object> get props => [];
+}

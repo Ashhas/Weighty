@@ -12,22 +12,32 @@ class SmallWeightChartWidget extends StatefulWidget {
 }
 
 class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
-  List<Color> colors = [Colors.lightGreen];
+  List<Color> lineColors = [Color(0xFF3f51b5).withOpacity(0.8)];
+  List<Color> underBarColors = [Color(0xFF3f51b5).withOpacity(0.1)];
+  List<int> dashLine = [5];
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DashboardBloc, DashboardState>(
       builder: (context, state) {
         if (state is DashboardLoaded) {
-          return Padding(
-            padding: EdgeInsets.only(top: 20, left: 15, right: 15, bottom: 5),
-            child: AspectRatio(
-              aspectRatio: 1.70,
-              child: LineChart(
-                mainData(state.startWeight, state.targetWeight,
-                    state.filteredMeasurements),
-                swapAnimationDuration: Duration(milliseconds: 150),
-                swapAnimationCurve: Curves.linear, // Optional
+          return AspectRatio(
+            aspectRatio: 2.3,
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: 19,
+                  bottom: 12,
+                  left: 15,
+                  right: 15,
+                ),
+                child: LineChart(
+                  mainData(
+                      state.startWeight,
+                      state.targetWeight,
+                      state.measurement.weightEntry,
+                      state.filteredMeasurements),
+                ),
               ),
             ),
           );
@@ -39,19 +49,24 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
   }
 
   LineChartData mainData(double startWeight, double targetWeight,
-      List<MeasurementModel> filteredList) {
+      double currentWeight, List<MeasurementModel> filteredList) {
     var hz = [
       HorizontalLine(
-          color: Colors.red,
-          y: startWeight,
-          label: HorizontalLineLabel(
-            show: true,
-          )),
-      HorizontalLine(
-        color: Colors.lightGreen,
-        y: targetWeight,
+        color: Colors.grey.withOpacity(0.2),
+        y: startWeight,
+        dashArray: dashLine,
         label: HorizontalLineLabel(
           show: true,
+          style: TextStyle(color: Colors.black),
+        ),
+      ),
+      HorizontalLine(
+        color: Colors.grey.withOpacity(0.2),
+        y: targetWeight,
+        dashArray: dashLine,
+        label: HorizontalLineLabel(
+          show: true,
+          style: TextStyle(color: Colors.black),
         ),
       ),
     ];
@@ -60,17 +75,15 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
       gridData: FlGridData(
         show: true,
         drawVerticalLine: false,
-        drawHorizontalLine: true,
+        drawHorizontalLine: false,
+        verticalInterval: 1,
         horizontalInterval: 5,
       ),
       titlesData: FlTitlesData(
         show: true,
-        leftTitles: SideTitles(
-          showTitles: false,
-        ),
         bottomTitles: SideTitles(
-          showTitles: true,
-          reservedSize: 30,
+          showTitles: false,
+          reservedSize: 35,
           getTextStyles: (value) => const TextStyle(
               color: Color(0xff68737d),
               fontWeight: FontWeight.bold,
@@ -104,36 +117,45 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
             }
             return '';
           },
-          margin: 10,
+          margin: 8,
+        ),
+        leftTitles: SideTitles(
+          showTitles: false,
         ),
       ),
-      minX: filteredList.first.dateAdded.month.toDouble(),
-      maxX: (filteredList.last.dateAdded.month.toDouble() +
-          ((filteredList.last.dateAdded.day) / 31)),
+      borderData: FlBorderData(show: false),
+      minX: filteredList.first.dateAdded.day.toDouble(),
+      maxX: filteredList.last.dateAdded.day.toDouble() + 0.5,
       minY: targetWeight,
-      maxY: startWeight + 10,
+      maxY: startWeight + 2,
       lineBarsData: [
         LineChartBarData(
           spots: filteredList
-              .map((element) => FlSpot(
-                  element.dateAdded.month.toDouble() +
-                      ((element.dateAdded.day) / 31),
-                  element.weightEntry))
+              .map((element) =>
+                  FlSpot(element.dateAdded.day.toDouble(), element.weightEntry))
               .toList(),
-          isCurved: false,
-          colors: colors,
+          isCurved: true,
+          colors: lineColors,
           barWidth: 3,
           isStrokeCapRound: true,
           dotData: FlDotData(
             show: true,
           ),
+          belowBarData: BarAreaData(
+            show: true,
+            spotsLine: BarAreaSpotsLine(
+              show: true,
+              flLineStyle: FlLine(
+                color: Colors.grey.withOpacity(0.5),
+                strokeWidth: 0.6,
+              ),
+            ),
+            colors: underBarColors.toList(),
+          ),
         ),
       ],
       extraLinesData: ExtraLinesData(
         horizontalLines: hz,
-      ),
-      borderData: FlBorderData(
-        show: false,
       ),
     );
   }

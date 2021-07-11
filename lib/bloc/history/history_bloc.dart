@@ -17,17 +17,27 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
   @override
   Stream<HistoryState> mapEventToState(HistoryEvent event) async* {
     if (event is HistoryStarted) {
-      yield* _mapDashboardStartedToState();
+      yield* _mapHistoryStartedToState();
+    }
+    if (event is DeleteMeasurement) {
+      yield* _mapDeleteMeasurementToState(event.measurementModel);
     }
   }
 
-  Stream<HistoryState> _mapDashboardStartedToState() async* {
+  Stream<HistoryState> _mapHistoryStartedToState() async* {
     yield HistoryLoading();
 
     final List<MeasurementModel> measurements =
         await measurementRepository.getAllMeasurements();
+    var sortedMeasurements =
+        new List<MeasurementModel>.from(measurements.reversed);
 
-    yield HistoryLoaded(measurements);
+    yield HistoryLoaded(sortedMeasurements);
+  }
+
+  Stream<HistoryState> _mapDeleteMeasurementToState(
+      MeasurementModel measurementModel) async* {
+    measurementRepository.deleteMeasurement(measurementModel);
   }
 
   @override

@@ -10,7 +10,6 @@ import 'package:weighty/bloc/settings/settings_bloc.dart';
 import 'package:weighty/bloc/simple_bloc_observer.dart';
 import 'package:weighty/bloc/theme/theme_bloc.dart';
 import 'package:weighty/data/repo/measurement_repo.dart';
-import 'package:weighty/ui/bottom_nav_bar.dart';
 import 'package:weighty/ui/splash/splash_screen.dart';
 import 'package:weighty/util/constants/theme_const.dart';
 
@@ -38,28 +37,41 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider<InitializationBloc>(
-            create: (_) => InitializationBloc()..add(InitializeApp()),
+            create: (_) => InitializationBloc()
+              ..add(
+                InitializeApp(),
+              ),
           ),
           BlocProvider<ThemeBloc>(
-              create: (_) => ThemeBloc()..add(ThemeLoadStarted())),
+            create: (_) => ThemeBloc()
+              ..add(
+                ThemeLoadStarted(),
+              ),
+          ),
           BlocProvider<DashboardBloc>(
-              create: (_) =>
-                  DashboardBloc(measurementRepository: measurementRepository)),
+            create: (_) =>
+                DashboardBloc(measurementRepository: measurementRepository),
+          ),
           BlocProvider<HistoryBloc>(
-              create: (_) =>
-                  HistoryBloc(measurementRepository: measurementRepository)),
+            create: (_) =>
+                HistoryBloc(measurementRepository: measurementRepository),
+          ),
           BlocProvider<AddWeightBloc>(
-              create: (_) =>
-                  AddWeightBloc(measurementRepository: measurementRepository)),
+            create: (_) =>
+                AddWeightBloc(measurementRepository: measurementRepository),
+          ),
           BlocProvider<SettingsBloc>(
-              create: (_) =>
-                  SettingsBloc(measurementRepository: measurementRepository)),
+            create: (_) =>
+                SettingsBloc(measurementRepository: measurementRepository),
+          ),
           BlocProvider<GoalsBloc>(
-              create: (_) =>
-                  GoalsBloc(measurementRepository: measurementRepository)),
+            create: (_) =>
+                GoalsBloc(measurementRepository: measurementRepository),
+          ),
           BlocProvider<OnBoardingBloc>(
-              create: (_) =>
-                  OnBoardingBloc(measurementRepository: measurementRepository))
+            create: (_) =>
+                OnBoardingBloc(measurementRepository: measurementRepository),
+          )
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, themeState) {

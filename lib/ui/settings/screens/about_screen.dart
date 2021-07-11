@@ -26,8 +26,7 @@ class _AboutScreenState extends State<AboutScreen> {
             SettingsTile(
               title: "Github",
               titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
-              leading: Icon(Icons.developer_board_outlined,
-                  color: Colors.grey),
+              leading: Icon(Icons.developer_board_outlined, color: Colors.grey),
               onPressed: (BuildContext context) {
                 _launchURL();
               },

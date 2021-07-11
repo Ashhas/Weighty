@@ -111,9 +111,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
   }
 
   Widget _buildSameMonthEventList(List<MeasurementModel> fetchAllEvents) {
-    var _sameMonthEventsFilter = fetchAllEvents.where((element) =>
-        element.dateAdded.year == _currentMonth.year &&
-        element.dateAdded.month == _currentMonth.month);
+    List<MeasurementModel> _sameMonthEventsFilter = fetchAllEvents
+        .where((element) =>
+            element.dateAdded.year == _currentMonth.year &&
+            element.dateAdded.month == _currentMonth.month)
+        .toList();
 
     return Container(
       child: (_sameMonthEventsFilter.length == 0)
@@ -125,41 +127,59 @@ class _HistoryScreenState extends State<HistoryScreen> {
           : ListView(
               children: _sameMonthEventsFilter
                   .map(
-                    (event) => Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ListTile(
-                          title: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                  DateFormat.yMMMMd('en_US')
-                                      .format(event.dateAdded)
-                                      .toString(),
+                    (event) => Dismissible(
+                      key: ObjectKey(event),
+                      direction: DismissDirection.endToStart,
+                      background: Container(
+                        alignment: Alignment.centerRight,
+                        padding: EdgeInsets.only(right: 20.0),
+                        color: Colors.red,
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ListTile(
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                    DateFormat.yMMMMd('en_US')
+                                        .format(event.dateAdded)
+                                        .toString(),
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                      fontFamily: "Roboto",
+                                      fontWeight: FontWeight.w400,
+                                    )),
+                                Text(
+                                  event.weightEntry.toString(),
                                   style: TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 18,
                                     color: Colors.black,
                                     fontFamily: "Roboto",
-                                    fontWeight: FontWeight.w400,
-                                  )),
-                              Text(
-                                event.weightEntry.toString(),
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black,
-                                  fontFamily: "Roboto",
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              )
-                            ],
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                )
+                              ],
+                            ),
+                            onTap: () {},
                           ),
-                          onTap: () {},
-                        ),
-                        Divider(
-                          height: 1,
-                          thickness: 1,
-                        ),
-                      ],
+                          Divider(
+                            height: 1,
+                            thickness: 1,
+                          ),
+                        ],
+                      ),
+                      onDismissed: (direction) {
+                        _sameMonthEventsFilter.remove(event);
+                        BlocProvider.of<HistoryBloc>(context)
+                            .add(DeleteMeasurement(event));
+                      },
                     ),
                   )
                   .toList(),

@@ -29,6 +29,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         children: [
           SizedBox(height: 15),
           WeightProgressCard(),
+          SizedBox(height: 15),
           WeightStatsWidget(),
         ],
       ),

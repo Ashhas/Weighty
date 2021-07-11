@@ -20,7 +20,6 @@ class DashboardLoading extends DashboardState {
 
 class DashboardLoaded extends DashboardState {
   final MeasurementModel measurement;
-  final String username;
   final double startWeight;
   final double targetWeight;
   final double percentageDone;
@@ -31,7 +30,6 @@ class DashboardLoaded extends DashboardState {
 
   DashboardLoaded(
     this.measurement,
-    this.username,
     this.startWeight,
     this.targetWeight,
     this.percentageDone,
