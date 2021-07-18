@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:weighty/bloc/on_boarding/on_boarding_bloc.dart';
 import 'package:weighty/ui/on_boarding/on_boarding_goal_screen.dart';
 
@@ -74,8 +75,10 @@ class _OnBoardingStartScreenState extends State<OnBoardingStartScreen> {
                         //Navigate to Goal Screen
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => OnBoardingGoalScreen()),
+                          PageTransition(
+                            type: PageTransitionType.rightToLeft,
+                            child: OnBoardingGoalScreen(),
+                          ),
                         );
                       } else {
                         _showOnlyNumbersMessage();
