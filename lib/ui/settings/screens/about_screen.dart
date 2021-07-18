@@ -97,8 +97,8 @@ class _AboutScreenState extends State<AboutScreen> {
   }
 
   void _launchURL() async {
-    await canLaunch(VariableConst.githubUrl)
-        ? await launch(VariableConst.githubUrl)
-        : throw 'Could not launch ' + VariableConst.githubUrl;
+    await canLaunch(githubUrl)
+        ? await launch(githubUrl)
+        : throw 'Could not launch ' + githubUrl;
   }
 }

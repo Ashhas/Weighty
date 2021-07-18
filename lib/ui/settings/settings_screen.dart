@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:weighty/bloc/settings/settings_bloc.dart';
 import 'package:weighty/ui/settings/screens/about_screen.dart';
 import 'package:weighty/ui/settings/screens/goal_screen.dart';
 import 'package:weighty/ui/settings/screens/help_and_faq_screen.dart';
-import 'package:weighty/ui/settings/screens/manage_data_screen.dart';
 import 'package:weighty/ui/settings/screens/reminder_screen.dart';
 import 'package:weighty/ui/settings/screens/theme_screen.dart';
 import 'package:weighty/util/constants/ui_const.dart';
@@ -56,10 +56,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   _buildGoalTile(),
                   Divider(height: 1, thickness: 1),
                   _buildThemeTile(),
-                  _buildRemindersTile(),
                   Divider(height: 1, thickness: 1),
                   _buildAboutTile(state.appVersion),
-                  _buildHelpAndFaqTile(),
                   SizedBox(height: 100),
                 ],
               ),
@@ -99,7 +97,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
       onPressed: (BuildContext context) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => GoalScreen()),
+          PageTransition(
+              type: PageTransitionType.rightToLeftWithFade,
+              child: GoalScreen()),
         );
       },
     );
@@ -134,7 +134,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
       onPressed: (BuildContext context) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ThemeScreen()),
+          PageTransition(
+              type: PageTransitionType.rightToLeftWithFade,
+              child: ThemeScreen()),
         );
       },
     );
@@ -151,8 +153,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       onPressed: (BuildContext context) {
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) => AboutScreen(appVersion: appVersion)),
+          PageTransition(
+            type: PageTransitionType.rightToLeftWithFade,
+            child: AboutScreen(appVersion: appVersion),
+          ),
         );
       },
     );

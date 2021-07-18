@@ -323,7 +323,7 @@ packages:
       name: intl
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.16.1"
+    version: "0.17.0"
   io:
     dependency: transitive
     description:
@@ -398,6 +398,13 @@ packages:
     dependency: "direct main"
     description:
       name: package_info
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
+  page_transition:
+    dependency: "direct main"
+    description:
+      name: page_transition
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
@@ -575,19 +582,12 @@ packages:
       name: simple_gesture_detector
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.6"
+    version: "0.2.0"
   sky_engine:
     dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.99"
-  smooth_page_indicator:
-    dependency: "direct main"
-    description:
-      name: smooth_page_indicator
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.3"
   source_gen:
     dependency: transitive
     description:
@@ -643,7 +643,7 @@ packages:
       name: table_calendar
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.3.3"
+    version: "3.0.1"
   term_glyph:
     dependency: transitive
     description:

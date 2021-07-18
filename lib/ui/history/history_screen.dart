@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:table_calendar/table_calendar.dart';
 import 'package:weighty/bloc/history/history_bloc.dart';
 import 'package:weighty/data/model/measurement.dart';
 import 'package:weighty/util/constants/ui_const.dart';
@@ -15,20 +14,17 @@ class HistoryScreen extends StatefulWidget {
 }
 
 class _HistoryScreenState extends State<HistoryScreen> {
-  CalendarController _calendarController;
   DateTime _currentMonth;
 
   @override
   void initState() {
     super.initState();
     BlocProvider.of<HistoryBloc>(context).add(HistoryStarted());
-    _calendarController = CalendarController();
     _currentMonth = DateTime.now();
   }
 
   @override
   void dispose() {
-    _calendarController.dispose();
     super.dispose();
   }
 

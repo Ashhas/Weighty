@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:weighty/bloc/add_weight/add_weight_bloc.dart';
+import 'package:weighty/data/model/measurement.dart';
 import 'package:weighty/ui/add_weight/widgets/add_weight_dialog.dart';
 import 'package:weighty/util/constants/ui_const.dart';
+import 'package:weighty/util/constants/variable_const.dart';
 
 class AddWeightScreen extends StatefulWidget {
   const AddWeightScreen() : super();
@@ -15,18 +17,16 @@ class AddWeightScreen extends StatefulWidget {
 
 class _AddWeightScreenState extends State<AddWeightScreen> {
   final textFormController = TextEditingController();
-  CalendarController _calendarController;
+  List<MeasurementModel> allMeasurements = [];
 
   @override
   void initState() {
     super.initState();
-    _calendarController = CalendarController();
     BlocProvider.of<AddWeightBloc>(context).add(AddWeightStarted());
   }
 
   @override
   void dispose() {
-    _calendarController.dispose();
     textFormController.dispose();
     super.dispose();
   }
@@ -39,23 +39,25 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
       body: Column(
         children: [
           TableCalendar(
-            calendarController: _calendarController,
+            firstDay: kFirstDay,
+            lastDay: kLastDay,
+            focusedDay: kFocusedDay,
+            calendarFormat: CalendarFormat.month,
             startingDayOfWeek: StartingDayOfWeek.monday,
-            onDaySelected: _onDaySelected,
+            headerStyle: HeaderStyle(
+              titleCentered: true,
+              formatButtonVisible: false,
+            ),
             daysOfWeekStyle: DaysOfWeekStyle(
               weekendStyle: TextStyle(color: Colors.black),
             ),
             calendarStyle: CalendarStyle(
-              highlightToday: true,
-              highlightSelected: true,
               outsideDaysVisible: false,
-              selectedColor: Theme.of(context).primaryColor,
-              weekendStyle: TextStyle(color: Colors.black),
+              todayDecoration:
+                  BoxDecoration(color: Theme.of(context).primaryColor),
+              weekendTextStyle: TextStyle(color: Colors.black),
             ),
-            headerStyle: HeaderStyle(
-              centerHeaderTitle: true,
-              formatButtonVisible: false,
-            ),
+            onDaySelected: _onDaySelected,
           ),
         ],
       ),
@@ -86,7 +88,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
     );
   }
 
-  void _onDaySelected(DateTime selectedDay, List events, List holidays) {
+  void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
