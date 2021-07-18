@@ -14,28 +14,25 @@ part 'initialization_state.dart';
 
 class InitializationBloc
     extends Bloc<InitializationEvent, InitializationState> {
-  InitializationBloc() : super(Uninitialized());
+  InitializationBloc() : super(InitStarted());
 
   @override
   Stream<InitializationState> mapEventToState(
       InitializationEvent event) async* {
-    if (event is AppStarted) {
-      yield* _mapAppStartedEventToState();
+    if (event is InitializeApp) {
+      yield* _mapInitializeAppEventToState();
+    } else if (event is FinishOnBoarding) {
+      yield* _mapOnBoardingFinishedEventToState();
     }
   }
 
-  Stream<InitializationState> _mapAppStartedEventToState() async* {
-    yield CreatingTestDataState();
+  Stream<InitializationState> _mapInitializeAppEventToState() async* {
+    //Delay for Splash Screen
+    await Future.delayed(Duration(seconds: 1));
 
-    //Setting SharedPref Data
+    //Adding Fake Goal Data
     final sharedPrefService = await SharedPreferencesService.instance;
-    sharedPrefService.setUsername('David Brown');
-    sharedPrefService.setWeightUnitType('KG');
-    sharedPrefService.setReminderStatus(false);
-    sharedPrefService.setStartWeight(120.0);
-    sharedPrefService.setStartWeightDate('2020-01-01 00:00:00.000');
-    sharedPrefService.setTargetWeight(100.0);
-    sharedPrefService.setTargetWeightDate('2020-04-01 00:00:00.000');
+    final onBoardingSeenBefore = sharedPrefService.getOnBoardingSeenBefore;
 
     //Initializing Hive DB
     await Hive.initFlutter();
@@ -43,15 +40,26 @@ class InitializationBloc
     var dir = await getApplicationDocumentsDirectory();
     Hive.init(dir.path);
 
-    // Open DB
-    Box _weightInfo = await Hive.openBox('weightInfo');
+    if (onBoardingSeenBefore == null) {
+      yield Uninitialized();
+    } else if (onBoardingSeenBefore == false) {
+      yield Uninitialized();
+    } else if (onBoardingSeenBefore == true) {
+      yield Initialized();
+    }
+  }
 
-    //Create Fake Data
-    var entry1 = MeasurementModel(DateTime.now(), 200);
-    _weightInfo.add(entry1);
-    var entry2 = MeasurementModel(DateTime.now(), 115);
-    _weightInfo.add(entry2);
+  Stream<InitializationState> _mapOnBoardingFinishedEventToState() async* {
+    //Check if OnBoarding has been finished
+    final sharedPrefService = await SharedPreferencesService.instance;
+    final onBoardingSeenBefore = sharedPrefService.getOnBoardingSeenBefore;
 
-    yield Initialized();
+    if (onBoardingSeenBefore == null) {
+      yield Uninitialized();
+    } else if (onBoardingSeenBefore == false) {
+      yield Uninitialized();
+    } else if (onBoardingSeenBefore == true) {
+      yield Initialized();
+    }
   }
 }

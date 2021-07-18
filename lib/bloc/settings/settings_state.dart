@@ -19,6 +19,21 @@ class SettingsLoading extends SettingsState {
 }
 
 class SettingsLoaded extends SettingsState {
+  final String appVersion;
+  final double startWeight;
+  final String startWeightDate;
+  final double targetWeight;
+  final String targetWeightDate;
+  final double currentWeight;
+
+  SettingsLoaded(
+      {this.appVersion,
+      this.startWeight,
+      this.startWeightDate,
+      this.targetWeight,
+      this.targetWeightDate,
+      this.currentWeight});
+
   @override
   List<Object> get props => [];
 }

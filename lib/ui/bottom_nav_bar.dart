@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/app_init/initialization_bloc.dart';
 import 'package:weighty/ui/add_weight/add_weight_screen.dart';
 import 'package:weighty/ui/settings/settings_screen.dart';
-import 'package:weighty/ui/weight_chart_screen/weight_chart_screen.dart';
-import 'package:weighty/util/strings.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 import 'package:weighty/ui/dashboard/dashboard_screen.dart';
 import 'package:weighty/ui/history/history_screen.dart';
 
@@ -27,15 +26,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
         return DashboardScreen();
         break;
       case 1:
-        return WeightChartScreen();
-        break;
-      case 2:
         return AddWeightScreen();
         break;
-      case 3:
+      case 2:
         return HistoryScreen();
         break;
-      case 4:
+      case 3:
         return SettingsScreen();
         break;
       default:
@@ -67,21 +63,24 @@ class _BottomNavBarState extends State<BottomNavBar> {
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.dashboard_outlined),
-              label: GlobalStrings.dashboardTitle),
+            icon: Icon(Icons.dashboard_outlined),
+            label: UiConst.dashboardTitle,
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.stacked_line_chart),
-              label: GlobalStrings.statisticsTitle),
+              icon: Icon(Icons.add), label: UiConst.addTitle),
           BottomNavigationBarItem(
-              icon: Icon(Icons.add), label: GlobalStrings.addTitle),
+              icon: Icon(Icons.access_time), label: UiConst.historyTitle),
           BottomNavigationBarItem(
-              icon: Icon(Icons.access_time), label: GlobalStrings.historyTitle),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.settings), label: GlobalStrings.settingsTitle),
+              icon: Icon(Icons.more_horiz_sharp), label: UiConst.settingsTitle),
         ],
         currentIndex: _selectedIndex,
+        type: BottomNavigationBarType.fixed,
+        selectedLabelStyle: TextStyle(fontSize: 12),
+        unselectedLabelStyle: TextStyle(fontSize: 12),
+        backgroundColor: Theme.of(context).bottomAppBarColor,
         selectedItemColor: Theme.of(context).focusColor,
         unselectedItemColor: Theme.of(context).shadowColor,
+        elevation: 6.0,
         onTap: _onItemTapped,
       ),
     );
