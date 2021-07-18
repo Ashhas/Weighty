@@ -1,131 +1,185 @@
-import 'package:intl/intl.dart';
-import 'package:table_calendar/table_calendar.dart';
-import 'package:weighty/data/model/measurement.dart';
-import 'package:weighty/util/strings.dart';
-import 'package:weighty/util/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weighty/bloc/history/history_bloc.dart';
+import 'package:weighty/data/model/measurement.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 
 class HistoryScreen extends StatefulWidget {
-  final Box dataBox;
-
-  const HistoryScreen({this.dataBox}) : super();
+  const HistoryScreen() : super();
 
   @override
   _HistoryScreenState createState() => _HistoryScreenState();
 }
 
 class _HistoryScreenState extends State<HistoryScreen> {
-  CalendarController _calendarController;
-  List<MeasurementModel> _sameMonthEvents;
   DateTime _currentMonth;
 
   @override
   void initState() {
     super.initState();
-    _calendarController = CalendarController();
-    _sameMonthEvents = List<MeasurementModel>();
+    BlocProvider.of<HistoryBloc>(context).add(HistoryStarted());
     _currentMonth = DateTime.now();
   }
 
   @override
   void dispose() {
-    _calendarController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (widget.dataBox != null) {
-      _sameMonthEvents =
-          widget.dataBox.values.toList().cast<MeasurementModel>();
-    }
-
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: AppThemes.backgroundColor,
-          title: Text(
-            GlobalStrings.historyTitle,
-            style: AppThemes.screenTitleTxtStyle,
-          ),
-          centerTitle: true,
-        ),
-        body: Column(
-          children: [
-            _buildCustomHeader(),
-            Expanded(
-              child: _buildsameMonthEventList(),
-            ),
-          ],
-        ));
-  }
-
-  Widget _buildCustomHeader() {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0, right: 8.0, left: 8.0),
-      child: Center(
-          child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      backgroundColor: Theme.of(context).backgroundColor,
+      appBar: _buildAppBar(),
+      body: Column(
         children: [
-          IconButton(
-            icon: Icon(Icons.chevron_left),
-            onPressed: () {
-              setState(() {
-                _selectPreviousMonth();
-              });
-            },
+          Divider(
+            height: 1,
+            thickness: 1,
           ),
-          Text(
-            DateFormat.yMMMM().format(_currentMonth),
-            style: TextStyle(fontSize: 20.0),
+          _buildCustomHeader(),
+          Divider(
+            height: 1,
+            thickness: 1,
           ),
-          IconButton(
-            icon: Icon(Icons.chevron_right),
-            onPressed: () {
-              setState(() {
-                _selectNextMonth();
-              });
-            },
-          )
+          BlocBuilder<HistoryBloc, HistoryState>(builder: (context, state) {
+            if (state is HistoryLoaded) {
+              return Expanded(
+                  child: _buildSameMonthEventList(state.allMeasurements));
+            } else {
+              return Container();
+            }
+          }),
         ],
-      )),
+      ),
     );
   }
 
-  Widget _buildsameMonthEventList() {
-    var _samemontheventsFilter = _sameMonthEvents.where((element) =>
-        element.dateAdded.year == _currentMonth.year &&
-        element.dateAdded.month == _currentMonth.month);
+  _buildAppBar() {
+    return AppBar(
+      elevation: 0,
+      backgroundColor: Theme.of(context).primaryColor,
+      title: Column(
+        children: [
+          Text(
+            UiConst.historyTitle,
+            style: TextStyle(color: Colors.white),
+          ),
+        ],
+      ),
+      centerTitle: true,
+    );
+  }
+
+  Widget _buildCustomHeader() {
+    return Container(
+      color: Theme.of(context).backgroundColor,
+      child: Padding(
+          padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                icon: Icon(Icons.chevron_left),
+                onPressed: () {
+                  setState(() {
+                    _selectPreviousMonth();
+                  });
+                },
+              ),
+              Text(
+                DateFormat.yMMMM().format(_currentMonth),
+                style: TextStyle(fontSize: 20.0),
+              ),
+              IconButton(
+                icon: Icon(Icons.chevron_right),
+                onPressed: () {
+                  setState(() {
+                    _selectNextMonth();
+                  });
+                },
+              )
+            ],
+          )),
+    );
+  }
+
+  Widget _buildSameMonthEventList(List<MeasurementModel> fetchAllEvents) {
+    List<MeasurementModel> _sameMonthEventsFilter = fetchAllEvents
+        .where((element) =>
+            element.dateAdded.year == _currentMonth.year &&
+            element.dateAdded.month == _currentMonth.month)
+        .toList();
 
     return Container(
-        child: (_samemontheventsFilter.length == 0)
-            ? Center(
-                child: Text("No appointment record in current month!",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.black, fontSize: 16)),
-              )
-            : ListView(
-                children: _samemontheventsFilter
-                    .map((event) => Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 0.8),
+      child: (_sameMonthEventsFilter.length == 0)
+          ? Center(
+              child: Text("No weight entry added in this month!",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black, fontSize: 16)),
+            )
+          : ListView(
+              children: _sameMonthEventsFilter
+                  .map(
+                    (event) => Dismissible(
+                      key: ObjectKey(event),
+                      direction: DismissDirection.endToStart,
+                      background: Container(
+                        alignment: Alignment.centerRight,
+                        padding: EdgeInsets.only(right: 20.0),
+                        color: Colors.red,
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.white,
                         ),
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 4.0),
-                        child: (event is MeasurementModel)
-                            ? ListTile(
-                                leading: Text(
-                                  DateFormat.d().format(event.dateAdded) +
-                                      '  ' +
-                                      DateFormat.E().format(event.dateAdded),
-                                ),
-                                title: Text(event.weightEntry.toString()),
-                                trailing: Icon(Icons.arrow_right),
-                                onTap: () {},
-                              )
-                            : null))
-                    .toList()));
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ListTile(
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                    DateFormat.yMMMMd('en_US')
+                                        .format(event.dateAdded)
+                                        .toString(),
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                      fontFamily: "Roboto",
+                                      fontWeight: FontWeight.w400,
+                                    )),
+                                Text(
+                                  event.weightEntry.toString(),
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                    fontFamily: "Roboto",
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                )
+                              ],
+                            ),
+                            onTap: () {},
+                          ),
+                          Divider(
+                            height: 1,
+                            thickness: 1,
+                          ),
+                        ],
+                      ),
+                      onDismissed: (direction) {
+                        _sameMonthEventsFilter.remove(event);
+                        BlocProvider.of<HistoryBloc>(context)
+                            .add(DeleteMeasurement(event));
+                      },
+                    ),
+                  )
+                  .toList(),
+            ),
+    );
   }
 
   void _selectPreviousMonth() {

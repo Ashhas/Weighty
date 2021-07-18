@@ -1,43 +1,60 @@
-import 'package:weighty/util/strings.dart';
-import 'package:weighty/util/theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 
 class TargetWeightWidget extends StatefulWidget {
-  final String targetWeightDate;
-  final double targetWeight;
-
-  TargetWeightWidget({this.targetWeightDate, this.targetWeight}) : super();
+  TargetWeightWidget() : super();
 
   @override
   _TargetWeightWidgetState createState() => _TargetWeightWidgetState();
 }
 
 class _TargetWeightWidgetState extends State<TargetWeightWidget> {
-  String startWeightDateFormat;
-
   @override
   Widget build(BuildContext context) {
-    if (widget.targetWeightDate != null) {
-      startWeightDateFormat = new DateFormat.yMMMd('en_US')
-          .format(DateTime.parse(widget.targetWeightDate));
-    }
-
-    return Column(
-      children: [
-        Text(
-          GlobalStrings.weightTargetTitle,
-          style: AppThemes.weightNumberMediumTxtStyle,
-        ),
-        Text(
-          widget.targetWeight.toString() ?? "",
-          style: AppThemes.weightNumberBigTxtStyle,
-        ),
-        Text(
-          startWeightDateFormat ?? "-",
-          style: AppThemes.weightNumberMediumTxtStyle,
-        ),
-      ],
+    return BlocBuilder<DashboardBloc, DashboardState>(
+      builder: (BuildContext context, state) {
+        if (state is DashboardLoaded) {
+          return Container(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      state.targetWeight.toString(),
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    Text(
+                      " KG",
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.white.withOpacity(0.6),
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ],
+                ),
+                Text(
+                  UiConst.weightTargetTitle,
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          );
+        } else {
+          return Container();
+        }
+      },
     );
   }
 }

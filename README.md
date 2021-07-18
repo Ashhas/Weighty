@@ -15,13 +15,14 @@ A Weight Track & Management app made w/ Flutter
 ## Screenshots
 
 <p>
-  <img src="https://github.com/redsolver/skydroid/raw/master/screenshots/screen1.jpg" width="250">
-  <img src="https://github.com/redsolver/skydroid/raw/master/screenshots/screen2.jpg" width="250">
+  <img src="https://github.com/Ashhas/Weighty/blob/dashboard_ui/screenshots/dashboard.jpg" width="250">
+  <img src="https://github.com/Ashhas/Weighty/blob/dashboard_ui/screenshots/add.jpg" width="250">
+  <img src="https://github.com/Ashhas/Weighty/blob/dashboard_ui/screenshots/history.jpg" width="250">
 </p>
 
 ## Download
 
-[https://github.com/redsolver/noteless/releases](https://github.com/redsolver/noteless/releases)
+[https://github.com/Ashhas/Weighty/releases](https://github.com/redsolver/noteless/releases)
 
 ## License
 

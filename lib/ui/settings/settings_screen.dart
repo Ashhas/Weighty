@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weighty/util/strings.dart';
-import 'package:weighty/util/theme.dart';
-import 'package:intl/intl.dart';
-import 'package:numberpicker/numberpicker.dart';
+import 'package:weighty/bloc/settings/settings_bloc.dart';
+import 'package:weighty/ui/settings/screens/about_screen.dart';
+import 'package:weighty/ui/settings/screens/goal_screen.dart';
+import 'package:weighty/ui/settings/screens/help_and_faq_screen.dart';
+import 'package:weighty/ui/settings/screens/reminder_screen.dart';
+import 'package:weighty/ui/settings/screens/theme_screen.dart';
+import 'package:weighty/util/constants/ui_const.dart';
+import 'package:weighty/util/shared_pref_service.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -13,13 +18,14 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   TextEditingController textFormController;
-  SharedPreferences prefs;
+  SharedPreferencesService sharedPrefService;
   String userName;
   String userGender;
   int userAge;
   double userHeight;
   String weightUnitType;
   bool reminderStatus;
+  bool themeSwitch;
   double startWeight;
   String startWeightDate;
   String startWeightDateFormat;
@@ -30,507 +36,145 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     super.initState();
-    _initSettings();
-    _getPrefsData();
-  }
-
-  Future _initSettings() async {
-    textFormController = TextEditingController();
-  }
-
-  Future _getPrefsData() async {
-    prefs = await SharedPreferences.getInstance();
-
-    setState(() {
-      userName = prefs.getString(GlobalStrings.userName);
-      userGender = prefs.getString(GlobalStrings.userGender);
-      userAge = prefs.getInt(GlobalStrings.userAge);
-      userHeight = prefs.getDouble(GlobalStrings.userHeight);
-      weightUnitType = prefs.getString(GlobalStrings.weightUnitType);
-      reminderStatus = prefs.getBool(GlobalStrings.reminderStatus);
-      startWeightDate = prefs.getString(GlobalStrings.userStartWeightDate);
-      startWeight = prefs.getDouble(GlobalStrings.userStartWeight);
-      targetWeightDate = prefs.getString(GlobalStrings.userTargetWeightDate);
-      targetWeight = prefs.getDouble(GlobalStrings.userTargetWeight);
-    });
+    BlocProvider.of<SettingsBloc>(context).add(SettingsStarted());
   }
 
   @override
   Widget build(BuildContext context) {
-    if (startWeightDate != null) {
-      startWeightDateFormat =
-          new DateFormat.yMMMd('en_US').format(DateTime.parse(startWeightDate));
-    }
-    if (targetWeightDate != null) {
-      targetWeightDateFormat = new DateFormat.yMMMd('en_US')
-          .format(DateTime.parse(targetWeightDate));
-    }
-
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: AppThemes.backgroundColor,
-        title: Text(
-          GlobalStrings.settingsTitle,
-          style: AppThemes.screenTitleTxtStyle,
-        ),
-        centerTitle: true,
-      ),
-      body: SettingsList(
-        sections: [
-          SettingsSection(
-            title: 'Profile',
-            tiles: [
-              SettingsTile(
-                title: 'Name',
-                trailing: Text(userName ?? ""),
-                onPressed: (BuildContext context) {
-                  _showNamePopup();
-                },
+      appBar: _buildAppBar(),
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: BlocBuilder<SettingsBloc, SettingsState>(
+        builder: (context, state) {
+          if (state is SettingsLoaded) {
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildGoalTile(),
+                  Divider(height: 1, thickness: 1),
+                  _buildThemeTile(),
+                  Divider(height: 1, thickness: 1),
+                  _buildAboutTile(state.appVersion),
+                  SizedBox(height: 100),
+                ],
               ),
-              SettingsTile(
-                title: 'Age',
-                trailing: Text(userAge.toString() ?? ""),
-                onPressed: (BuildContext context) {
-                  _showAgePopup();
-                },
-              ),
-              SettingsTile(
-                title: 'Height',
-                trailing: Text(userHeight.toString() ?? ""),
-                onPressed: (BuildContext context) {
-                  _showHeightPopup();
-                },
-              ),
-              SettingsTile(
-                title: 'Start Weight',
-                trailing: Text(
-                  startWeight.toString() +
-                          " on " +
-                          startWeightDateFormat.toString() ??
-                      "",
-                ),
-                onPressed: (BuildContext context) {
-                  _showStartWeightPopup();
-                },
-              ),
-              SettingsTile(
-                title: 'Target Weight',
-                trailing: Text(
-                  targetWeight.toString() +
-                          " on " +
-                          targetWeightDateFormat.toString() ??
-                      "",
-                ),
-                onPressed: (BuildContext context) {
-                  _showTargetWeightPopup();
-                },
-              ),
-            ],
-          ),
-          SettingsSection(
-            title: "Options",
-            tiles: [
-              SettingsTile(
-                title: "Units",
-                trailing: Text(weightUnitType ?? ""),
-                onPressed: (BuildContext context) {
-                  _showUnitsPopup();
-                },
-              ),
-              SettingsTile.switchTile(
-                title: "Reminder",
-                onToggle: null,
-                switchValue: reminderStatus ?? false,
-              ),
-            ],
-          ),
-          SettingsSection(
-            title: "Manage Data",
-            tiles: [
-              SettingsTile(
-                title: "Export",
-                trailing: Icon(Icons.chevron_right),
-              ),
-              SettingsTile(
-                title: "Delete All",
-                trailing: Icon(Icons.chevron_right),
-              ),
-              SettingsTile(
-                title: "Sync",
-                trailing: Icon(Icons.chevron_right),
-              )
-            ],
-          ),
-          SettingsSection(
-            title: "More",
-            tiles: [
-              SettingsTile(
-                title: "Help & Feedback",
-                trailing: Icon(Icons.chevron_right),
-              ),
-              SettingsTile(
-                title: "Rate App",
-                trailing: Icon(Icons.chevron_right),
-              ),
-              SettingsTile(
-                title: "More Apps",
-                trailing: Icon(Icons.chevron_right),
-              )
-            ],
-          )
-        ],
+            );
+          } else {
+            return Container();
+          }
+        },
       ),
     );
   }
 
-  void _showNamePopup() {
-    print('CALLBACK: _openEventPopup');
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: Form(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Text(
-                            "NAME",
-                            style: AppThemes.smallBoldTxtStyle,
-                          ),
-                        ),
-                        TextFormField(
-                          controller: textFormController,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          RaisedButton(
-                            child: Icon(
-                              Icons.check,
-                              color: Colors.white,
-                            ),
-                            color: AppThemes.currentWeightColor,
-                            onPressed: () async {
-                              setState(() {
-                                prefs.setString(GlobalStrings.userName,
-                                    textFormController.text);
-                              });
-                              //Close Dialog
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                          RaisedButton(
-                            child: Icon(
-                              Icons.close,
-                              color: Colors.grey,
-                            ),
-                            onPressed: () {
-                              //Close Dialog
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      ))
-                ],
-              ),
-            ),
-          );
-        });
+  _buildAppBar() {
+    return AppBar(
+      elevation: 0,
+      backgroundColor: Theme.of(context).primaryColor,
+      title: Column(
+        children: [
+          Text(
+            UiConst.settingsTitle,
+            style: TextStyle(color: Colors.white),
+          ),
+        ],
+      ),
+      centerTitle: true,
+    );
   }
 
-  void _showAgePopup() {
-    print('CALLBACK: _openEventPopup');
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return new NumberPickerDialog.integer(
-            minValue: 1,
-            maxValue: 100,
-            title: new Text("Pick a new price"),
-            initialIntegerValue: 10,
-          );
-        }).then((value) async {
-      if (value != null) {
-        //setState
-        setState(() {
-          prefs.setInt(GlobalStrings.userAge, value);
-        });
-      }
-    });
+  Widget _buildGoalTile() {
+    return SettingsTile(
+      title: "Goal Preferences",
+      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      leading: Icon(
+        Icons.verified,
+        color: Colors.grey,
+      ),
+      onPressed: (BuildContext context) {
+        Navigator.push(
+          context,
+          PageTransition(
+              type: PageTransitionType.rightToLeftWithFade,
+              child: GoalScreen()),
+        );
+      },
+    );
   }
 
-  void _showHeightPopup() {
-    print('CALLBACK: _openEventPopup');
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: Form(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Text(
-                            "HEIGHT",
-                            style: AppThemes.smallBoldTxtStyle,
-                          ),
-                        ),
-                        TextFormField(
-                          controller: textFormController,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          RaisedButton(
-                            child: Icon(
-                              Icons.check,
-                              color: Colors.white,
-                            ),
-                            color: AppThemes.currentWeightColor,
-                            onPressed: () async {
-                              await prefs.setDouble(GlobalStrings.userHeight,
-                                  double.parse(textFormController.text));
-
-                              //Close Dialog
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                          RaisedButton(
-                            child: Icon(
-                              Icons.close,
-                              color: Colors.grey,
-                            ),
-                            onPressed: () {
-                              //Close Dialog
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      ))
-                ],
-              ),
-            ),
-          );
-        });
+  Widget _buildRemindersTile() {
+    return SettingsTile(
+      title: "Reminders",
+      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      leading: Icon(
+        Icons.notifications_active,
+        color: Colors.grey,
+      ),
+      onPressed: (BuildContext context) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ReminderScreen()),
+        );
+      },
+      enabled: false,
+    );
   }
 
-  void _showStartWeightPopup() {
-    print('CALLBACK: _openEventPopup');
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: Form(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Text(
-                            "START WEIGHT",
-                            style: AppThemes.smallBoldTxtStyle,
-                          ),
-                        ),
-                        TextFormField(
-                          controller: textFormController,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          RaisedButton(
-                            child: Icon(
-                              Icons.check,
-                              color: Colors.white,
-                            ),
-                            color: AppThemes.currentWeightColor,
-                            onPressed: () async {
-                              await prefs.setDouble(
-                                  GlobalStrings.userStartWeight,
-                                  double.parse(textFormController.text));
-
-                              //Close Dialog
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                          RaisedButton(
-                            child: Icon(
-                              Icons.close,
-                              color: Colors.grey,
-                            ),
-                            onPressed: () {
-                              //Close Dialog
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      ))
-                ],
-              ),
-            ),
-          );
-        });
+  Widget _buildThemeTile() {
+    return SettingsTile(
+      title: "Theme",
+      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      leading: Icon(
+        Icons.dark_mode,
+        color: Colors.grey,
+      ),
+      onPressed: (BuildContext context) {
+        Navigator.push(
+          context,
+          PageTransition(
+              type: PageTransitionType.rightToLeftWithFade,
+              child: ThemeScreen()),
+        );
+      },
+    );
   }
 
-  void _showTargetWeightPopup() {
-    print('CALLBACK: _openEventPopup');
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: Form(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Text(
-                            "TARGET WEIGHT",
-                            style: AppThemes.smallBoldTxtStyle,
-                          ),
-                        ),
-                        TextFormField(
-                          controller: textFormController,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          RaisedButton(
-                            child: Icon(
-                              Icons.check,
-                              color: Colors.white,
-                            ),
-                            color: AppThemes.currentWeightColor,
-                            onPressed: () async {
-                              await prefs.setDouble(
-                                  GlobalStrings.userTargetWeight,
-                                  double.parse(textFormController.text));
-
-                              //Close Dialog
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                          RaisedButton(
-                            child: Icon(
-                              Icons.close,
-                              color: Colors.grey,
-                            ),
-                            onPressed: () {
-                              //Close Dialog
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      ))
-                ],
-              ),
-            ),
-          );
-        });
+  Widget _buildAboutTile(String appVersion) {
+    return SettingsTile(
+      title: "About",
+      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      leading: Icon(
+        Icons.info_outline,
+        color: Colors.grey,
+      ),
+      onPressed: (BuildContext context) {
+        Navigator.push(
+          context,
+          PageTransition(
+            type: PageTransitionType.rightToLeftWithFade,
+            child: AboutScreen(appVersion: appVersion),
+          ),
+        );
+      },
+    );
   }
 
-  void _showUnitsPopup() {
-    print('CALLBACK: _openEventPopup');
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: Form(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Text(
-                            "UNIT",
-                            style: AppThemes.smallBoldTxtStyle,
-                          ),
-                        ),
-                        TextFormField(
-                          controller: textFormController,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          RaisedButton(
-                            child: Icon(
-                              Icons.check,
-                              color: Colors.white,
-                            ),
-                            color: AppThemes.currentWeightColor,
-                            onPressed: () async {
-                              await prefs.setString(
-                                  GlobalStrings.weightUnitType,
-                                  textFormController.text);
-
-                              //Close Dialog
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                          RaisedButton(
-                            child: Icon(
-                              Icons.close,
-                              color: Colors.grey,
-                            ),
-                            onPressed: () {
-                              //Close Dialog
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      ))
-                ],
-              ),
-            ),
-          );
-        });
+  Widget _buildHelpAndFaqTile() {
+    return SettingsTile(
+      title: "Help/FAQ",
+      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      leading: Icon(
+        Icons.help_outline,
+        color: Colors.grey,
+      ),
+      onPressed: (BuildContext context) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HelpFaqScreen()),
+        );
+      },
+    );
   }
 }
