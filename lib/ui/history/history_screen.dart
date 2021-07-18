@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/history/history_bloc.dart';
@@ -65,7 +64,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
         children: [
           Text(
             UiConst.historyTitle,
-            style: GoogleFonts.roboto(color: Colors.white),
+            style: TextStyle(color: Colors.white),
           ),
         ],
       ),

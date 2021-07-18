@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:weighty/ui/on_boarding/on_boarding_goal_screen.dart';
 import 'package:weighty/ui/on_boarding/on_boarding_start_weight_screen.dart';
 
 class OnBoardingEntryScreen extends StatefulWidget {
@@ -34,7 +32,7 @@ class _OnBoardingEntryScreenState extends State<OnBoardingEntryScreen> {
                         width: MediaQuery.of(context).size.height * 0.2,
                         child: Image(
                           image: AssetImage(
-                            "assets/weight-icon.jpg",
+                            "assets/app_icon.png",
                           ),
                         ),
                       ),
@@ -43,7 +41,7 @@ class _OnBoardingEntryScreenState extends State<OnBoardingEntryScreen> {
                       ),
                       Text(
                         "Weighty",
-                        style: GoogleFonts.roboto(
+                        style: TextStyle(
                             fontSize: 30.5,
                             fontWeight: FontWeight.w700,
                             color: Colors.black),
@@ -58,7 +56,7 @@ class _OnBoardingEntryScreenState extends State<OnBoardingEntryScreen> {
                       padding: EdgeInsets.symmetric(horizontal: 40.0),
                       child: Text(
                         "Your personal weight tracker and management app!",
-                        style: GoogleFonts.roboto(
+                        style: TextStyle(
                             fontSize: 15.5,
                             fontWeight: FontWeight.w400,
                             color: Colors.black),
@@ -83,7 +81,7 @@ class _OnBoardingEntryScreenState extends State<OnBoardingEntryScreen> {
                     },
                     child: Text(
                       "Get Started",
-                      style: GoogleFonts.roboto(
+                      style: TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.w600,
                           color: Colors.white),

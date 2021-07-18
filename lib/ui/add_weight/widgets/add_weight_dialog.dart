@@ -5,15 +5,27 @@ import 'package:weighty/bloc/add_weight/add_weight_bloc.dart';
 
 class AddWeightDialog extends StatefulWidget {
   final DateTime selectedDay;
-  final TextEditingController textFormController;
 
-  const AddWeightDialog({this.selectedDay, this.textFormController}) : super();
+  const AddWeightDialog({this.selectedDay}) : super();
 
   @override
   _AddWeightDialogState createState() => _AddWeightDialogState();
 }
 
 class _AddWeightDialogState extends State<AddWeightDialog> {
+  TextEditingController textFormController;
+
+  @override
+  void initState() {
+    textFormController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    textFormController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -40,7 +52,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                   TextFormField(
-                    controller: widget.textFormController,
+                    controller: textFormController,
                   ),
                 ],
               ),
@@ -58,8 +70,8 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                     color: Theme.of(context).primaryColor,
                     onPressed: () {
                       BlocProvider.of<AddWeightBloc>(context).add(
-                          AddNewMeasurement(widget.selectedDay,
-                              widget.textFormController.text));
+                          AddNewMeasurement(
+                              widget.selectedDay, textFormController.text));
 
                       //Close Dialog
                       Navigator.of(context).pop();

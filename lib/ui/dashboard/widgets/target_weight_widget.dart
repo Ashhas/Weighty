@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:weighty/util/constants/ui_const.dart';
@@ -25,7 +24,7 @@ class _TargetWeightWidgetState extends State<TargetWeightWidget> {
                   children: [
                     Text(
                       state.targetWeight.toString(),
-                      style: GoogleFonts.roboto(
+                      style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
                         fontWeight: FontWeight.w800,
@@ -33,7 +32,7 @@ class _TargetWeightWidgetState extends State<TargetWeightWidget> {
                     ),
                     Text(
                       " KG",
-                      style: GoogleFonts.roboto(
+                      style: TextStyle(
                         fontSize: 15,
                         color: Colors.white.withOpacity(0.6),
                         fontWeight: FontWeight.w800,
@@ -43,7 +42,7 @@ class _TargetWeightWidgetState extends State<TargetWeightWidget> {
                 ),
                 Text(
                   UiConst.weightTargetTitle,
-                  style: GoogleFonts.roboto(
+                  style: TextStyle(
                     fontSize: 15,
                     color: Colors.white,
                     fontWeight: FontWeight.w500,

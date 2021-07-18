@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:settings_ui/settings_ui.dart';
@@ -78,7 +77,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         children: [
           Text(
             UiConst.settingsTitle,
-            style: GoogleFonts.roboto(color: Colors.white),
+            style: TextStyle(color: Colors.white),
           ),
         ],
       ),

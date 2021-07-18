@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
 import 'package:weighty/ui/dashboard/widgets/small_weight_chart_widget.dart';
@@ -87,25 +86,14 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
             children: [
               Row(
                 children: [
-                  Text(
-                    (percentageCompleted * 100).round().toString(),
-                    style: GoogleFonts.roboto(
-                        textStyle:
-                            Theme.of(context).primaryTextTheme.bodyText2),
-                  ),
-                  Text(
-                    "%",
-                    style: GoogleFonts.roboto(
-                        textStyle:
-                            Theme.of(context).primaryTextTheme.bodyText2),
-                  ),
+                  Text((percentageCompleted * 100).round().toString(),
+                      style: Theme.of(context).primaryTextTheme.bodyText2),
+                  Text("%",
+                      style: Theme.of(context).primaryTextTheme.bodyText2),
                 ],
               ),
-              Text(
-                "Completed",
-                style: GoogleFonts.roboto(
-                    textStyle: Theme.of(context).primaryTextTheme.bodyText2),
-              ),
+              Text("Completed",
+                  style: Theme.of(context).primaryTextTheme.bodyText2),
             ],
           ),
           Divider(),
@@ -113,15 +101,11 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
             children: [
               Row(
                 children: [
-                  Text(
-                    totalLost.toStringAsFixed(2),
-                    style: GoogleFonts.roboto(
-                        textStyle:
-                            Theme.of(context).primaryTextTheme.bodyText2),
-                  ),
+                  Text(totalLost.toStringAsFixed(2),
+                      style: Theme.of(context).primaryTextTheme.bodyText2),
                   Text(
                     " KG",
-                    style: GoogleFonts.roboto(
+                    style: TextStyle(
                       fontSize: 15,
                       color: Colors.grey,
                       fontWeight: FontWeight.w800,
@@ -129,11 +113,8 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
                   ),
                 ],
               ),
-              Text(
-                "Total Lost",
-                style: GoogleFonts.roboto(
-                    textStyle: Theme.of(context).primaryTextTheme.bodyText2),
-              ),
+              Text("Total Lost",
+                  style: Theme.of(context).primaryTextTheme.bodyText2),
             ],
           ),
           Divider(),
@@ -141,15 +122,11 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
             children: [
               Row(
                 children: [
-                  Text(
-                    amountLeft.toStringAsFixed(2),
-                    style: GoogleFonts.roboto(
-                        textStyle:
-                            Theme.of(context).primaryTextTheme.bodyText2),
-                  ),
+                  Text(amountLeft.toStringAsFixed(2),
+                      style: Theme.of(context).primaryTextTheme.bodyText2),
                   Text(
                     " KG",
-                    style: GoogleFonts.roboto(
+                    style: TextStyle(
                       fontSize: 15,
                       color: Colors.grey,
                       fontWeight: FontWeight.w800,
@@ -157,11 +134,8 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
                   ),
                 ],
               ),
-              Text(
-                "Left to Go",
-                style: GoogleFonts.roboto(
-                    textStyle: Theme.of(context).primaryTextTheme.bodyText2),
-              ),
+              Text("Left to Go",
+                  style: Theme.of(context).primaryTextTheme.bodyText2),
             ],
           ),
         ],

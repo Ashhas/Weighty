@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:weighty/bloc/add_weight/add_weight_bloc.dart';
 import 'package:weighty/data/model/measurement.dart';
@@ -16,7 +15,6 @@ class AddWeightScreen extends StatefulWidget {
 }
 
 class _AddWeightScreenState extends State<AddWeightScreen> {
-  final textFormController = TextEditingController();
   List<MeasurementModel> allMeasurements = [];
 
   @override
@@ -27,7 +25,6 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
 
   @override
   void dispose() {
-    textFormController.dispose();
     super.dispose();
   }
 
@@ -72,11 +69,11 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
         children: [
           Text(
             UiConst.addWeightTitle,
-            style: GoogleFonts.roboto(color: Colors.white),
+            style: TextStyle(color: Colors.white),
           ),
           Text(
             UiConst.addWeightLabel,
-            style: GoogleFonts.roboto(
+            style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.normal,
               color: Colors.white,
@@ -92,8 +89,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AddWeightDialog(
-            selectedDay: selectedDay, textFormController: textFormController);
+        return AddWeightDialog(selectedDay: selectedDay);
       },
     );
   }

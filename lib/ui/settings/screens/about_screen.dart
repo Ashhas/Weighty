@@ -81,7 +81,7 @@ class _AboutScreenState extends State<AboutScreen> {
               width: 70,
               child: Center(
                 child: Image(
-                  image: AssetImage('assets/weight-icon.jpg'),
+                  image: AssetImage("assets/app_icon.png"),
                 ),
               ),
             ),
