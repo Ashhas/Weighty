@@ -21,7 +21,7 @@ class HistoryLoading extends HistoryState {
 class HistoryLoaded extends HistoryState {
   final List<MeasurementModel> allMeasurements;
 
-  HistoryLoaded(this.allMeasurements) : assert(allMeasurements != null);
+  HistoryLoaded(this.allMeasurements);
 
   @override
   List<Object> get props => [];

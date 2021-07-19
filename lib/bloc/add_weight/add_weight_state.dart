@@ -21,14 +21,13 @@ class AddWeightLoading extends AddWeightState {
 class AddWeightLoaded extends AddWeightState {
   final List<MeasurementModel> allMeasurements;
 
-  AddWeightLoaded(this.allMeasurements) : assert(allMeasurements != null);
+  AddWeightLoaded(this.allMeasurements);
 
   @override
   List<Object> get props => [];
 }
 
 class NewMeasurementAdded extends AddWeightState {
-
   @override
   List<Object> get props => [];
 }
