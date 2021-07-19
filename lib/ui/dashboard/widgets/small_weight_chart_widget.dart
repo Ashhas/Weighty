@@ -32,10 +32,7 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
                   right: 15,
                 ),
                 child: LineChart(
-                  mainData(
-                      state.startWeight,
-                      state.targetWeight,
-                      state.measurement.weightEntry,
+                  mainData(state.startWeight, state.targetWeight,
                       state.filteredMeasurements),
                 ),
               ),
@@ -49,7 +46,7 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
   }
 
   LineChartData mainData(double startWeight, double targetWeight,
-      double currentWeight, List<MeasurementModel> filteredList) {
+      List<MeasurementModel> filteredList) {
     var hz = [
       HorizontalLine(
         color: Colors.grey.withOpacity(0.2),
@@ -71,92 +68,119 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
       ),
     ];
 
-    return LineChartData(
-      gridData: FlGridData(
-        show: true,
-        drawVerticalLine: false,
-        drawHorizontalLine: false,
-        verticalInterval: 1,
-        horizontalInterval: 5,
-      ),
-      titlesData: FlTitlesData(
-        show: true,
-        bottomTitles: SideTitles(
-          showTitles: false,
-          reservedSize: 35,
-          getTextStyles: (value) => const TextStyle(
-              color: Color(0xff68737d),
-              fontWeight: FontWeight.bold,
-              fontSize: 16),
-          getTitles: (value) {
-            switch (value.toInt()) {
-              case 1:
-                return 'JAN';
-              case 2:
-                return 'FEB';
-              case 3:
-                return 'MRT';
-              case 4:
-                return 'APR';
-              case 5:
-                return 'MAY';
-              case 6:
-                return 'JUN';
-              case 7:
-                return 'JUL';
-              case 8:
-                return 'AUG';
-              case 9:
-                return 'SEP';
-              case 10:
-                return 'OCT';
-              case 11:
-                return 'NOV';
-              case 12:
-                return 'DEC';
-            }
-            return '';
-          },
-          margin: 8,
-        ),
-        leftTitles: SideTitles(
-          showTitles: false,
-        ),
-      ),
-      borderData: FlBorderData(show: false),
-      minX: filteredList.first.dateAdded.day.toDouble(),
-      maxX: filteredList.last.dateAdded.day.toDouble() + 0.5,
-      minY: targetWeight,
-      maxY: startWeight + 2,
-      lineBarsData: [
-        LineChartBarData(
-          spots: filteredList
-              .map((element) =>
-                  FlSpot(element.dateAdded.day.toDouble(), element.weightEntry))
-              .toList(),
-          isCurved: true,
-          colors: lineColors,
-          barWidth: 3,
-          isStrokeCapRound: true,
-          dotData: FlDotData(
-            show: true,
-          ),
-          belowBarData: BarAreaData(
-            show: true,
-            spotsLine: BarAreaSpotsLine(
+    return filteredList != null
+        ? LineChartData(
+            gridData: FlGridData(
               show: true,
-              flLineStyle: FlLine(
-                color: Colors.grey.withOpacity(0.5),
-                strokeWidth: 0.6,
+              drawVerticalLine: false,
+              drawHorizontalLine: false,
+              verticalInterval: 1,
+              horizontalInterval: 5,
+            ),
+            titlesData: FlTitlesData(
+              show: true,
+              bottomTitles: SideTitles(
+                showTitles: false,
+                reservedSize: 35,
+                getTextStyles: (value) => const TextStyle(
+                    color: Color(0xff68737d),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16),
+                getTitles: (value) {
+                  switch (value.toInt()) {
+                    case 1:
+                      return 'JAN';
+                    case 2:
+                      return 'FEB';
+                    case 3:
+                      return 'MRT';
+                    case 4:
+                      return 'APR';
+                    case 5:
+                      return 'MAY';
+                    case 6:
+                      return 'JUN';
+                    case 7:
+                      return 'JUL';
+                    case 8:
+                      return 'AUG';
+                    case 9:
+                      return 'SEP';
+                    case 10:
+                      return 'OCT';
+                    case 11:
+                      return 'NOV';
+                    case 12:
+                      return 'DEC';
+                  }
+                  return '';
+                },
+                margin: 8,
+              ),
+              leftTitles: SideTitles(
+                showTitles: false,
               ),
             ),
-            colors: underBarColors.toList(),
-          ),
-        ),
-      ],
-      extraLinesData: ExtraLinesData(
-        horizontalLines: hz,
-      ),
-    );
+            borderData: FlBorderData(show: false),
+            minX: filteredList.first.dateAdded.day.toDouble(),
+            maxX: filteredList.last.dateAdded.day.toDouble() + 0.5,
+            minY: targetWeight,
+            maxY: startWeight + 2,
+            lineBarsData: [
+              LineChartBarData(
+                spots: filteredList
+                    .map((element) => FlSpot(
+                        element.dateAdded.day.toDouble(), element.weightEntry))
+                    .toList(),
+                isCurved: true,
+                colors: lineColors,
+                barWidth: 3,
+                isStrokeCapRound: true,
+                dotData: FlDotData(
+                  show: true,
+                ),
+                belowBarData: BarAreaData(
+                  show: true,
+                  spotsLine: BarAreaSpotsLine(
+                    show: true,
+                    flLineStyle: FlLine(
+                      color: Colors.grey.withOpacity(0.5),
+                      strokeWidth: 0.6,
+                    ),
+                  ),
+                  colors: underBarColors.toList(),
+                ),
+              )
+            ],
+            extraLinesData: ExtraLinesData(
+              horizontalLines: hz,
+            ),
+          )
+        : LineChartData(
+            gridData: FlGridData(
+              show: true,
+              drawVerticalLine: false,
+              drawHorizontalLine: false,
+              verticalInterval: 1,
+              horizontalInterval: 5,
+            ),
+            titlesData: FlTitlesData(
+              show: true,
+              bottomTitles: SideTitles(
+                showTitles: false,
+                margin: 8,
+              ),
+              leftTitles: SideTitles(
+                showTitles: false,
+              ),
+            ),
+            borderData: FlBorderData(show: false),
+            minY: targetWeight,
+            maxY: startWeight + 2,
+            lineBarsData: [],
+            extraLinesData: ExtraLinesData(
+              horizontalLines: hz,
+            ),
+          );
   }
 }

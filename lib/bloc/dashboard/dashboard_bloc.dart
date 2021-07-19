@@ -25,46 +25,51 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   }
 
   Stream<DashboardState> _mapDashboardStartedToState() async* {
+    double startWeight;
+    double targetWeight;
+    double percentageDone;
+    double totalLost;
+    double amountLeft;
+    double amountLostThisWeek;
+    MeasurementModel firstMeasurement;
+    MeasurementModel latestMeasurement;
+    List<MeasurementModel> allMeasurements;
+    List<MeasurementModel> filteredMeasurements;
+
     yield DashboardLoading();
 
-    //Get Data from SharePref
+    //Retrieve data from shared preferences
     final sharedPrefService = await SharedPreferencesService.instance;
-    double startWeight = sharedPrefService.getStartWeight;
-    double targetWeight = sharedPrefService.getTargetWeight;
+    startWeight = sharedPrefService.getStartWeight;
+    targetWeight = sharedPrefService.getTargetWeight;
 
-    //Get Latest Measurement from DB
-    MeasurementModel firstMeasurement =
-        await measurementRepository.getFirstMeasurement();
+    //Retrieve data from database
+    firstMeasurement = await measurementRepository.getFirstMeasurement();
+    latestMeasurement = await measurementRepository.getLatestMeasurement();
+    allMeasurements = await measurementRepository.getAllMeasurements();
 
-    //Get Latest Measurement from DB
-    MeasurementModel latestMeasurement =
-        await measurementRepository.getLatestMeasurement();
+    if (allMeasurements != null) {
+      //Filter Measurements based on date range
+      filteredMeasurements =
+          await _filterMeasurementThisMonth(measurements: allMeasurements);
 
-    //Get Filtered Measurements for 2 Months
-    List<MeasurementModel> filteredMeasurements =
-        await _filterMeasurementThisMonth();
-
-    //Calculate Percentage Done
-    double percentageDone = _calculatePercentageDone(
-      startWeight: startWeight,
-      targetWeight: targetWeight,
-      weightEntry: latestMeasurement.weightEntry,
-    );
-
-    //Calculate Total Lost
-    double totalLost = _calculateTotalLost(
-      firstWeight: firstMeasurement.weightEntry,
-      currentWeight: latestMeasurement.weightEntry,
-    );
-
-    //Calculate Amount Left to Go
-    double amountLeft = _calculateAmountLeft(
-      targetWeight: targetWeight,
-      currentWeight: latestMeasurement.weightEntry,
-    );
-
-    //Calculate Amount Lost so Far
-    double amountLostThisWeek = await _calculateAmountLostThisWeek();
+      //Calculation Methods
+      percentageDone = _calculatePercentageDone(
+        startWeight: startWeight,
+        targetWeight: targetWeight,
+        weightEntry: latestMeasurement.weightEntry,
+      );
+      totalLost = _calculateTotalLost(
+        firstWeight: firstMeasurement.weightEntry,
+        currentWeight: latestMeasurement.weightEntry,
+      );
+      amountLeft = _calculateAmountLeft(
+        targetWeight: targetWeight,
+        currentWeight: latestMeasurement.weightEntry,
+      );
+      amountLostThisWeek =
+          await _calculateAmountLostThisWeek(measurements: allMeasurements);
+    }
 
     yield DashboardLoaded(
         latestMeasurement,
@@ -77,16 +82,17 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         filteredMeasurements);
   }
 
-  Future<List<MeasurementModel>> _filterMeasurementThisMonth() async {
-    List<MeasurementModel> allMeasurements =
-        await measurementRepository.getAllMeasurements();
+  Future<List<MeasurementModel>> _filterMeasurementThisMonth(
+      {List<MeasurementModel> measurements}) async {
+    if (measurements != null) {
+      //Filter
+      List<MeasurementModel> filteredMeasurements = measurements
+          .where((m) => m.dateAdded.month == DateTime.now().month)
+          .toList();
 
-    //Filter
-    List<MeasurementModel> filteredMeasurements = allMeasurements
-        .where((m) => m.dateAdded.month == DateTime.now().month)
-        .toList();
-
-    return filteredMeasurements;
+      return filteredMeasurements;
+    } else
+      return null;
   }
 
   double _calculatePercentageDone(
@@ -115,23 +121,24 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     return currentWeight - targetWeight;
   }
 
-  Future<double> _calculateAmountLostThisWeek() async {
-    List<MeasurementModel> allMeasurements =
-        await measurementRepository.getAllMeasurements();
+  Future<double> _calculateAmountLostThisWeek(
+      {List<MeasurementModel> measurements}) async {
+    if (measurements != null) {
+      //Filter
+      List<MeasurementModel> filteredMeasurements = measurements
+          .where((m) =>
+              m.dateAdded.difference(DateTime.now()).inDays.abs() <= 7 &&
+              m.dateAdded.isBefore(DateTime.now().add(Duration(days: 1))))
+          .toList();
 
-    //Filter
-    List<MeasurementModel> filteredMeasurements = allMeasurements
-        .where((m) =>
-            m.dateAdded.difference(DateTime.now()).inDays.abs() <= 7 &&
-            m.dateAdded.isBefore(DateTime.now().add(Duration(days: 1))))
-        .toList();
+      filteredMeasurements.sort((a, b) => a.dateAdded.compareTo(b.dateAdded));
 
-    filteredMeasurements.sort((a, b) => a.dateAdded.compareTo(b.dateAdded));
+      double lostThisWeek = filteredMeasurements.last.weightEntry -
+          filteredMeasurements.first.weightEntry;
 
-    double lostThisWeek = filteredMeasurements.last.weightEntry -
-        filteredMeasurements.first.weightEntry;
-
-    return lostThisWeek;
+      return lostThisWeek;
+    } else
+      return null;
   }
 
   @override

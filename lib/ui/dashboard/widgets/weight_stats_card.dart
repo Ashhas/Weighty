@@ -86,7 +86,10 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
             children: [
               Row(
                 children: [
-                  Text((percentageCompleted * 100).round().toString(),
+                  Text(
+                      percentageCompleted != null
+                          ? (percentageCompleted * 100).round().toString()
+                          : "-",
                       style: Theme.of(context).primaryTextTheme.bodyText2),
                   Text("%",
                       style: Theme.of(context).primaryTextTheme.bodyText2),
@@ -101,7 +104,7 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
             children: [
               Row(
                 children: [
-                  Text(totalLost.toStringAsFixed(2),
+                  Text(totalLost != null ? totalLost.toStringAsFixed(2) : "-",
                       style: Theme.of(context).primaryTextTheme.bodyText2),
                   Text(
                     " KG",
@@ -122,7 +125,7 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
             children: [
               Row(
                 children: [
-                  Text(amountLeft.toStringAsFixed(2),
+                  Text(amountLeft != null ? amountLeft.toStringAsFixed(2) : "-",
                       style: Theme.of(context).primaryTextTheme.bodyText2),
                   Text(
                     " KG",

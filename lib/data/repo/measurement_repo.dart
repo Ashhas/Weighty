@@ -8,17 +8,29 @@ class MeasurementRepository {
 
   Future<List<MeasurementModel>> getAllMeasurements() async {
     Box _weightEntryDb = await Hive.openBox('weightInfo');
-    return _weightEntryDb.values.toList().cast<MeasurementModel>();
+
+    if (_weightEntryDb.values.isNotEmpty) {
+      return _weightEntryDb.values.toList().cast<MeasurementModel>();
+    } else
+      return null;
   }
 
   Future<MeasurementModel> getFirstMeasurement() async {
     Box _weightEntryDb = await Hive.openBox('weightInfo');
-    return _weightEntryDb.values.first;
+
+    if (_weightEntryDb.values.isNotEmpty) {
+      return _weightEntryDb.values.first;
+    } else
+      return null;
   }
 
   Future<MeasurementModel> getLatestMeasurement() async {
     Box _weightEntryDb = await Hive.openBox('weightInfo');
-    return _weightEntryDb.values.last;
+
+    if (_weightEntryDb.values.isNotEmpty) {
+      return _weightEntryDb.values.last;
+    } else
+      return null;
   }
 
   Future<void> setNewMeasurement(MeasurementModel newMeasurement) async {

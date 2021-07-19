@@ -37,7 +37,7 @@ class DashboardLoaded extends DashboardState {
     this.amountLeft,
     this.amountLostThisWeek,
     this.filteredMeasurements,
-  ) : assert(measurement != null);
+  );
 
   @override
   List<Object> get props => [];
