@@ -18,6 +18,11 @@ class HistoryLoading extends HistoryState {
   List<Object> get props => [];
 }
 
+class MonthChanged extends HistoryState {
+  @override
+  List<Object> get props => [];
+}
+
 class HistoryLoaded extends HistoryState {
   final List<MeasurementModel> allMeasurements;
 
