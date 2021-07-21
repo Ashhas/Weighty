@@ -123,66 +123,72 @@ class _HistoryScreenState extends State<HistoryScreen> {
         .toList();
 
     return Container(
-      child: ListView(
-        children: _sameMonthEventsFilter
-            .map(
-              (event) => Dismissible(
-                key: ObjectKey(event),
-                direction: DismissDirection.endToStart,
-                background: Container(
-                  alignment: Alignment.centerRight,
-                  padding: EdgeInsets.only(right: 20.0),
-                  color: Colors.red,
-                  child: Icon(
-                    Icons.delete,
-                    color: Colors.white,
-                  ),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ListTile(
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: (_sameMonthEventsFilter.length == 0)
+          ? Center(
+              child: Text("No weight entry added in this month!",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.black, fontSize: 16)),
+            )
+          : ListView(
+              children: _sameMonthEventsFilter
+                  .map(
+                    (event) => Dismissible(
+                      key: ObjectKey(event),
+                      direction: DismissDirection.endToStart,
+                      background: Container(
+                        alignment: Alignment.centerRight,
+                        padding: EdgeInsets.only(right: 20.0),
+                        color: Colors.red,
+                        child: Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(
-                              DateFormat.yMMMMd('en_US')
-                                  .format(event.dateAdded)
-                                  .toString(),
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.black,
-                                fontFamily: "Roboto",
-                                fontWeight: FontWeight.w400,
-                              )),
-                          Text(
-                            event.weightEntry.toString(),
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
-                              fontFamily: "Roboto",
-                              fontWeight: FontWeight.w900,
+                          ListTile(
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                    DateFormat.yMMMMd('en_US')
+                                        .format(event.dateAdded)
+                                        .toString(),
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                      fontFamily: "Roboto",
+                                      fontWeight: FontWeight.w400,
+                                    )),
+                                Text(
+                                  event.weightEntry.toString(),
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                    fontFamily: "Roboto",
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                )
+                              ],
                             ),
-                          )
+                            onTap: () {},
+                          ),
+                          Divider(
+                            height: 1,
+                            thickness: 1,
+                          ),
                         ],
                       ),
-                      onTap: () {},
+                      onDismissed: (direction) {
+                        _sameMonthEventsFilter.remove(event);
+                        BlocProvider.of<HistoryBloc>(context)
+                            .add(DeleteMeasurement(event));
+                      },
                     ),
-                    Divider(
-                      height: 1,
-                      thickness: 1,
-                    ),
-                  ],
-                ),
-                onDismissed: (direction) {
-                  _sameMonthEventsFilter.remove(event);
-                  BlocProvider.of<HistoryBloc>(context)
-                      .add(DeleteMeasurement(event));
-                },
-              ),
-            )
-            .toList(),
-      ),
+                  )
+                  .toList(),
+            ),
     );
   }
 
