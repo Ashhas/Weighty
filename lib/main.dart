@@ -61,8 +61,7 @@ class MyApp extends StatelessWidget {
                 AddWeightBloc(measurementRepository: measurementRepository),
           ),
           BlocProvider<SettingsBloc>(
-            create: (_) =>
-                SettingsBloc(measurementRepository: measurementRepository),
+            create: (_) => SettingsBloc(),
           ),
           BlocProvider<GoalsBloc>(
             create: (_) =>

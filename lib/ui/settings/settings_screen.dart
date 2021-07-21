@@ -9,7 +9,6 @@ import 'package:weighty/ui/settings/screens/help_and_faq_screen.dart';
 import 'package:weighty/ui/settings/screens/reminder_screen.dart';
 import 'package:weighty/ui/settings/screens/theme_screen.dart';
 import 'package:weighty/util/constants/ui_const.dart';
-import 'package:weighty/util/shared_pref_service.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -17,22 +16,6 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  TextEditingController textFormController;
-  SharedPreferencesService sharedPrefService;
-  String userName;
-  String userGender;
-  int userAge;
-  double userHeight;
-  String weightUnitType;
-  bool reminderStatus;
-  bool themeSwitch;
-  double startWeight;
-  String startWeightDate;
-  String startWeightDateFormat;
-  double targetWeight;
-  String targetWeightDate;
-  String targetWeightDateFormat;
-
   @override
   void initState() {
     super.initState();
