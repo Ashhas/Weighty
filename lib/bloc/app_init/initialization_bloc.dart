@@ -36,8 +36,6 @@ class InitializationBloc
     //Initializing Hive DB
     await Hive.initFlutter();
     Hive.registerAdapter(MeasurementModelAdapter());
-    var dir = await getApplicationDocumentsDirectory();
-    Hive.init(dir.path);
 
     if (onBoardingSeenBefore == null) {
       yield Uninitialized();
