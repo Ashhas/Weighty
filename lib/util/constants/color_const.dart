@@ -19,13 +19,13 @@ class ColorConst {
   static const Color lightSecondaryTextColor = Color(0xFFA0AEC5);
 
   //Dark Colors
-  static const Color darkPrimaryColor = Color(0xFF5f2c4d);
-  static const Color darkAccentColor = Color(0xFF5f2c4d);
-  static const Color darkFocusColor = Color(0xFF5f2c4d);
+  static const Color darkPrimaryColor = Color(0xFF292c3d);
+  static const Color darkAccentColor = Color(0xFF292c3d);
+  static const Color darkFocusColor = Color(0xFF292c3d);
   static const Color darkShadowColor = Colors.grey;
 
   //Dark Components
-  static const Color darkCanvasColor = Color(0xFF5f2c4d);
+  static const Color darkCanvasColor = Color(0xFF292c3d);
   static const Color darkBottomAppBar = Color(0xFF2a292e);
   static const Color darkBackgroundColor = Color(0xFF2a292e);
 
