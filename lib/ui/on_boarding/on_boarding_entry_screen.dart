@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:weighty/ui/on_boarding/on_boarding_start_weight_screen.dart';
+import 'package:weighty/ui/on_boarding/on_boarding_weight_unit_screen.dart';
 
 class OnBoardingEntryScreen extends StatefulWidget {
   @override
@@ -78,7 +79,7 @@ class _OnBoardingEntryScreenState extends State<OnBoardingEntryScreen> {
                         context,
                         PageTransition(
                           type: PageTransitionType.rightToLeft,
-                          child: OnBoardingStartScreen(),
+                          child: OnBoardingUnitScreen(),
                         ),
                       );
                     },

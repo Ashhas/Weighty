@@ -8,6 +8,7 @@ import 'package:weighty/ui/settings/screens/goal_screen.dart';
 import 'package:weighty/ui/settings/screens/help_and_faq_screen.dart';
 import 'package:weighty/ui/settings/screens/reminder_screen.dart';
 import 'package:weighty/ui/settings/screens/theme_screen.dart';
+import 'package:weighty/ui/settings/screens/weight_unit_screen.dart';
 import 'package:weighty/util/constants/ui_const.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -36,6 +37,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildGoalTile(),
+                  _buildWeightUnitTile(),
                   Divider(height: 1, thickness: 1),
                   _buildThemeTile(),
                   Divider(height: 1, thickness: 1),
@@ -87,21 +89,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Widget _buildRemindersTile() {
+  Widget _buildWeightUnitTile() {
     return SettingsTile(
-      title: "Reminders",
+      title: "Weight Units",
       titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
       leading: Icon(
-        Icons.notifications_active,
+        Icons.fitness_center,
         color: Colors.grey,
       ),
       onPressed: (BuildContext context) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ReminderScreen()),
+          PageTransition(
+              type: PageTransitionType.rightToLeftWithFade,
+              child: WeightUnitScreen()),
         );
       },
-      enabled: false,
     );
   }
 
@@ -121,6 +124,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: ThemeScreen()),
         );
       },
+    );
+  }
+
+  Widget _buildRemindersTile() {
+    return SettingsTile(
+      title: "Reminders",
+      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      leading: Icon(
+        Icons.notifications_active,
+        color: Colors.grey,
+      ),
+      onPressed: (BuildContext context) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ReminderScreen()),
+        );
+      },
+      enabled: false,
     );
   }
 

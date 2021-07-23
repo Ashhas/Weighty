@@ -31,6 +31,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     double totalLost;
     double amountLeft;
     double amountLostThisWeek;
+    String unitType;
     MeasurementModel firstMeasurement;
     MeasurementModel latestMeasurement;
     List<MeasurementModel> allMeasurements;
@@ -42,6 +43,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     final sharedPrefService = await SharedPreferencesService.instance;
     startWeight = sharedPrefService.getStartWeight;
     targetWeight = sharedPrefService.getTargetWeight;
+    unitType = sharedPrefService.getWeightUnitType;
 
     //Retrieve data from database
     firstMeasurement = await measurementRepository.getFirstMeasurement();
@@ -79,6 +81,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         totalLost,
         amountLeft,
         amountLostThisWeek,
+        unitType,
         filteredMeasurements);
   }
 
