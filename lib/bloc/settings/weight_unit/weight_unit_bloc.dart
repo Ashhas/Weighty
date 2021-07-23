@@ -21,7 +21,7 @@ class WeightUnitBloc extends Bloc<WeightUnitEvent, WeightUnitState> {
   }
 
   Stream<WeightUnitState> _mapWeightUnitStartedToState() async* {
-    //Fetch current weightUnit type
+    //Return current weightUnit
     final sharedPrefService = await SharedPreferencesService.instance;
     String weightUnit = sharedPrefService.getWeightUnitType;
 
@@ -32,7 +32,7 @@ class WeightUnitBloc extends Bloc<WeightUnitEvent, WeightUnitState> {
       String weightUnitType) async* {
     yield WeightUnitsUpdated();
 
-    //Save WeightUnit
+    //Save WeightUnit in Shared preferences
     final sharedPrefService = await SharedPreferencesService.instance;
     sharedPrefService.setWeightUnitType(weightUnitType);
 

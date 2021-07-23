@@ -38,7 +38,7 @@ class _WeightUnitScreenState extends State<WeightUnitScreen> {
                 children: [
                   RadioListTile(
                     title: Text("KG"),
-                    value: "KG",
+                    value: metricMeasurement,
                     groupValue: groupValue,
                     onChanged: (value) {
                       groupValue = value;
@@ -49,7 +49,7 @@ class _WeightUnitScreenState extends State<WeightUnitScreen> {
                   Divider(height: 1, thickness: 1),
                   RadioListTile(
                     title: Text("LB"),
-                    value: "LB",
+                    value: imperialMeasurement,
                     groupValue: groupValue,
                     onChanged: (value) {
                       groupValue = value;

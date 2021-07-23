@@ -13,11 +13,6 @@ class WeightUnitsOpened extends WeightUnitState {
   List<Object> get props => [];
 }
 
-class WeightUnitsLoading extends WeightUnitState {
-  @override
-  List<Object> get props => [];
-}
-
 class WeightUnitsUpdated extends WeightUnitState {
   @override
   List<Object> get props => [];
