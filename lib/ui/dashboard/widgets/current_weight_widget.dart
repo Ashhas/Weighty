@@ -59,8 +59,9 @@ class _CurrentWeightWidgetState extends State<CurrentWeightWidget>
                               fontWeight: FontWeight.w800,
                             ),
                           ),
+                    SizedBox(width: 4),
                     Text(
-                      " KG",
+                      state.unitType,
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.white.withOpacity(0.6),

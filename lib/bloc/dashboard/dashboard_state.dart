@@ -26,6 +26,7 @@ class DashboardLoaded extends DashboardState {
   final double totalLost;
   final double amountLeft;
   final double amountLostThisWeek;
+  final String unitType;
   final List<MeasurementModel> filteredMeasurements;
 
   DashboardLoaded(
@@ -36,6 +37,7 @@ class DashboardLoaded extends DashboardState {
     this.totalLost,
     this.amountLeft,
     this.amountLostThisWeek,
+    this.unitType,
     this.filteredMeasurements,
   );
 
