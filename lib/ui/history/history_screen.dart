@@ -76,7 +76,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
   Widget _buildCustomHeader() {
     return Container(
-      height: 40,
+      height: 50,
       color: Theme.of(context).canvasColor,
       child: Padding(
         padding: const EdgeInsets.only(right: 8.0, left: 8.0),
@@ -93,7 +93,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
             ),
             Text(
               DateFormat.yMMMM().format(_currentMonth),
-              style: TextStyle(fontSize: 19.0, color: Colors.white),
+              style: TextStyle(fontSize: 18.0, color: Colors.white),
             ),
             IconButton(
               icon: Icon(Icons.chevron_right, color: Colors.white),
