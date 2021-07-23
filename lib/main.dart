@@ -7,6 +7,7 @@ import 'package:weighty/bloc/history/history_bloc.dart';
 import 'package:weighty/bloc/on_boarding/on_boarding_bloc.dart';
 import 'package:weighty/bloc/settings/goals/goals_bloc.dart';
 import 'package:weighty/bloc/settings/settings_bloc.dart';
+import 'package:weighty/bloc/settings/weight_unit/weight_unit_bloc.dart';
 import 'package:weighty/bloc/simple_bloc_observer.dart';
 import 'package:weighty/bloc/theme/theme_bloc.dart';
 import 'package:weighty/data/repo/measurement_repo.dart';
@@ -66,6 +67,9 @@ class MyApp extends StatelessWidget {
           BlocProvider<GoalsBloc>(
             create: (_) =>
                 GoalsBloc(measurementRepository: measurementRepository),
+          ),
+          BlocProvider<WeightUnitBloc>(
+            create: (_) => WeightUnitBloc(),
           ),
           BlocProvider<OnBoardingBloc>(
             create: (_) =>
