@@ -19,11 +19,21 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
 
   @override
   Stream<OnBoardingState> mapEventToState(OnBoardingEvent event) async* {
-    if (event is AddedStartWeight) {
+    if (event is AddedWeightUnit) {
+      yield* _mapAddedWeightUnitToState(event, state);
+    } else if (event is AddedStartWeight) {
       yield* _mapAddedStartWeightToState(event, state);
     } else if (event is AddedWeightGoal) {
       yield* _mapAddedWeightGoalToState(event, state);
     }
+  }
+
+  Stream<OnBoardingState> _mapAddedWeightUnitToState(
+      AddedWeightUnit event, OnBoardingState state) async* {
+    final sharedPrefService = await SharedPreferencesService.instance;
+
+    //Saving Weight Unit choice
+    sharedPrefService.setWeightUnitType(event.weightUnit);
   }
 
   Stream<OnBoardingState> _mapAddedStartWeightToState(

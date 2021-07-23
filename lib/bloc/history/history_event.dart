@@ -13,6 +13,16 @@ class HistoryStarted extends HistoryEvent {
   List<Object> get props => [];
 }
 
+class NavigateToPreviousMonth extends HistoryEvent {
+  @override
+  List<Object> get props => [];
+}
+
+class NavigateToNextMonth extends HistoryEvent {
+  @override
+  List<Object> get props => [];
+}
+
 class DeleteMeasurement extends HistoryEvent {
   final MeasurementModel measurementModel;
 

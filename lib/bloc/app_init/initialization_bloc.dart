@@ -30,15 +30,12 @@ class InitializationBloc
     //Delay for Splash Screen
     await Future.delayed(Duration(seconds: 1));
 
-    //Adding Fake Goal Data
     final sharedPrefService = await SharedPreferencesService.instance;
     final onBoardingSeenBefore = sharedPrefService.getOnBoardingSeenBefore;
 
     //Initializing Hive DB
     await Hive.initFlutter();
     Hive.registerAdapter(MeasurementModelAdapter());
-    var dir = await getApplicationDocumentsDirectory();
-    Hive.init(dir.path);
 
     if (onBoardingSeenBefore == null) {
       yield Uninitialized();

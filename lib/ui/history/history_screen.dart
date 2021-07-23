@@ -45,8 +45,18 @@ class _HistoryScreenState extends State<HistoryScreen> {
           ),
           BlocBuilder<HistoryBloc, HistoryState>(builder: (context, state) {
             if (state is HistoryLoaded) {
-              return Expanded(
-                  child: _buildSameMonthEventList(state.allMeasurements));
+              return state.allMeasurements != null
+                  ? Expanded(
+                      child: _buildSameMonthEventList(state.allMeasurements),
+                    )
+                  : Expanded(
+                      child: Center(
+                        child: Text("No weight entry added in this month!",
+                            textAlign: TextAlign.center,
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 16)),
+                      ),
+                    );
             } else {
               return Container();
             }
@@ -183,22 +193,21 @@ class _HistoryScreenState extends State<HistoryScreen> {
   }
 
   void _selectPreviousMonth() {
-    setState(() {
-      if (_currentMonth.month == 1) {
-        _currentMonth = DateTime(_currentMonth.year - 1, 12);
-      } else {
-        _currentMonth = DateTime(_currentMonth.year, _currentMonth.month - 1);
-      }
-    });
+    if (_currentMonth.month == 1) {
+      _currentMonth = DateTime(_currentMonth.year - 1, 12);
+    } else {
+      _currentMonth = DateTime(_currentMonth.year, _currentMonth.month - 1);
+    }
+    BlocProvider.of<HistoryBloc>(context).add(NavigateToPreviousMonth());
   }
 
   void _selectNextMonth() {
-    setState(() {
-      if (_currentMonth.month == 12) {
-        _currentMonth = DateTime(_currentMonth.year + 1, 1);
-      } else {
-        _currentMonth = DateTime(_currentMonth.year, _currentMonth.month + 1);
-      }
-    });
+    if (_currentMonth.month == 12) {
+      _currentMonth = DateTime(_currentMonth.year + 1, 1);
+    } else {
+      _currentMonth = DateTime(_currentMonth.year, _currentMonth.month + 1);
+    }
+
+    BlocProvider.of<HistoryBloc>(context).add(NavigateToNextMonth());
   }
 }

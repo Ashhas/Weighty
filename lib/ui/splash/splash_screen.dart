@@ -15,7 +15,20 @@ class _SplashScreenState extends State<SplashScreen> {
     return BlocBuilder<InitializationBloc, InitializationState>(
       builder: (context, initState) {
         if (initState is InitStarted) {
-          return Container(color: Colors.deepOrangeAccent);
+          return Container(
+            color: Theme.of(context).canvasColor,
+            child: Center(
+              child: Container(
+                height: 70,
+                width: 70,
+                child: Center(
+                  child: Image(
+                    image: AssetImage("assets/app_icon.png"),
+                  ),
+                ),
+              ),
+            ),
+          );
         } else if (initState is Uninitialized) {
           return OnBoardingEntryScreen();
         } else if (initState is Initialized) {

@@ -34,7 +34,7 @@ class _CurrentWeightWidgetState extends State<CurrentWeightWidget>
             radius: 150.0,
             lineWidth: 4.0,
             animation: true,
-            percent: state.percentageDone,
+            percent: state.percentageDone != null ? state.percentageDone : 0.0,
             center: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,16 +42,26 @@ class _CurrentWeightWidgetState extends State<CurrentWeightWidget>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    state.measurement != null
+                        ? Text(
+                            state.measurement.weightEntry.toString(),
+                            style: TextStyle(
+                              fontSize: 25,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          )
+                        : Text(
+                            " - ",
+                            style: TextStyle(
+                              fontSize: 25,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                    SizedBox(width: 4),
                     Text(
-                      state.measurement.weightEntry.toString(),
-                      style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                    Text(
-                      " KG",
+                      state.unitType,
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.white.withOpacity(0.6),

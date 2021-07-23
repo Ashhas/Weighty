@@ -8,6 +8,15 @@ class OnBoardingOpened extends OnBoardingEvent {
   List<Object> get props => [];
 }
 
+class AddedWeightUnit extends OnBoardingEvent {
+  final String weightUnit;
+
+  AddedWeightUnit({this.weightUnit});
+
+  @override
+  List<Object> get props => [];
+}
+
 class AddedWeightGoal extends OnBoardingEvent {
   final String targetWeight;
 

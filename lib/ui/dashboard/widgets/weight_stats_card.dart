@@ -39,7 +39,8 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
                             _simpleStatsRow(
                                 totalLost: state.totalLost,
                                 amountLeft: state.amountLeft,
-                                percentageCompleted: state.percentageDone),
+                                percentageCompleted: state.percentageDone,
+                                unitType: state.unitType),
                             SizedBox(height: 15),
                             _titleView(titleName: "Weight Graph"),
                             SmallWeightChartWidget(),
@@ -76,7 +77,10 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
   }
 
   Widget _simpleStatsRow(
-      {double totalLost, double amountLeft, double percentageCompleted}) {
+      {double totalLost,
+      double amountLeft,
+      double percentageCompleted,
+      String unitType}) {
     return Padding(
       padding: EdgeInsets.only(top: 20, bottom: 20),
       child: Row(
@@ -86,7 +90,10 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
             children: [
               Row(
                 children: [
-                  Text((percentageCompleted * 100).round().toString(),
+                  Text(
+                      percentageCompleted != null
+                          ? (percentageCompleted * 100).round().toString()
+                          : "-",
                       style: Theme.of(context).primaryTextTheme.bodyText2),
                   Text("%",
                       style: Theme.of(context).primaryTextTheme.bodyText2),
@@ -101,10 +108,11 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
             children: [
               Row(
                 children: [
-                  Text(totalLost.toStringAsFixed(2),
+                  Text(totalLost != null ? totalLost.toStringAsFixed(2) : "-",
                       style: Theme.of(context).primaryTextTheme.bodyText2),
+                  SizedBox(width: 4),
                   Text(
-                    " KG",
+                    unitType,
                     style: TextStyle(
                       fontSize: 15,
                       color: Colors.grey,
@@ -122,10 +130,11 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
             children: [
               Row(
                 children: [
-                  Text(amountLeft.toStringAsFixed(2),
+                  Text(amountLeft != null ? amountLeft.toStringAsFixed(2) : "-",
                       style: Theme.of(context).primaryTextTheme.bodyText2),
+                  SizedBox(width: 4),
                   Text(
-                    " KG",
+                    unitType,
                     style: TextStyle(
                       fontSize: 15,
                       color: Colors.grey,

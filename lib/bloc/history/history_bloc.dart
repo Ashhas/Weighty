@@ -19,18 +19,65 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
     if (event is HistoryStarted) {
       yield* _mapHistoryStartedToState();
     }
+    if (event is NavigateToPreviousMonth) {
+      yield* _mapNavigateToPreviousMonthToState();
+    }
+    if (event is NavigateToNextMonth) {
+      yield* _mapNavigateToNextMonthToState();
+    }
     if (event is DeleteMeasurement) {
       yield* _mapDeleteMeasurementToState(event.measurementModel);
     }
   }
 
   Stream<HistoryState> _mapHistoryStartedToState() async* {
+    List<MeasurementModel> allMeasurements;
+    var sortedMeasurements;
+
     yield HistoryLoading();
 
-    final List<MeasurementModel> measurements =
-        await measurementRepository.getAllMeasurements();
-    var sortedMeasurements =
-        new List<MeasurementModel>.from(measurements.reversed);
+    allMeasurements = await measurementRepository.getAllMeasurements();
+
+    if (allMeasurements != null) {
+      sortedMeasurements =
+          new List<MeasurementModel>.from(allMeasurements.reversed);
+    }
+
+    yield HistoryLoaded(sortedMeasurements);
+  }
+
+  Stream<HistoryState> _mapNavigateToPreviousMonthToState() async* {
+    yield MonthChanged();
+
+    List<MeasurementModel> allMeasurements;
+    var sortedMeasurements;
+
+    yield HistoryLoading();
+
+    allMeasurements = await measurementRepository.getAllMeasurements();
+
+    if (allMeasurements != null) {
+      sortedMeasurements =
+          new List<MeasurementModel>.from(allMeasurements.reversed);
+    }
+
+    yield HistoryLoaded(sortedMeasurements);
+  }
+
+  Stream<HistoryState> _mapNavigateToNextMonthToState() async* {
+    yield MonthChanged();
+
+    List<MeasurementModel> allMeasurements;
+    var sortedMeasurements;
+
+    yield HistoryLoading();
+
+    allMeasurements = await measurementRepository.getAllMeasurements();
+
+    if (allMeasurements != null) {
+      sortedMeasurements =
+          new List<MeasurementModel>.from(allMeasurements.reversed);
+    }
 
     yield HistoryLoaded(sortedMeasurements);
   }
