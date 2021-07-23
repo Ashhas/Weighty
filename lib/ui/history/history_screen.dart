@@ -34,15 +34,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
       appBar: _buildAppBar(),
       body: Column(
         children: [
-          Divider(
-            height: 1,
-            thickness: 1,
-          ),
           _buildCustomHeader(),
-          Divider(
-            height: 1,
-            thickness: 1,
-          ),
           BlocBuilder<HistoryBloc, HistoryState>(builder: (context, state) {
             if (state is HistoryLoaded) {
               return state.allMeasurements != null
@@ -84,34 +76,36 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
   Widget _buildCustomHeader() {
     return Container(
-      color: Theme.of(context).backgroundColor,
+      height: 40,
+      color: Theme.of(context).canvasColor,
       child: Padding(
-          padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              IconButton(
-                icon: Icon(Icons.chevron_left),
-                onPressed: () {
-                  setState(() {
-                    _selectPreviousMonth();
-                  });
-                },
-              ),
-              Text(
-                DateFormat.yMMMM().format(_currentMonth),
-                style: TextStyle(fontSize: 20.0),
-              ),
-              IconButton(
-                icon: Icon(Icons.chevron_right),
-                onPressed: () {
-                  setState(() {
-                    _selectNextMonth();
-                  });
-                },
-              )
-            ],
-          )),
+        padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              icon: Icon(Icons.chevron_left, color: Colors.white),
+              onPressed: () {
+                setState(() {
+                  _selectPreviousMonth();
+                });
+              },
+            ),
+            Text(
+              DateFormat.yMMMM().format(_currentMonth),
+              style: TextStyle(fontSize: 19.0, color: Colors.white),
+            ),
+            IconButton(
+              icon: Icon(Icons.chevron_right, color: Colors.white),
+              onPressed: () {
+                setState(() {
+                  _selectNextMonth();
+                });
+              },
+            )
+          ],
+        ),
+      ),
     );
   }
 
