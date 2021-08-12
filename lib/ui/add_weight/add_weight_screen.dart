@@ -34,30 +34,32 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
       resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: _buildAppBar(),
-      body: Column(
-        children: [
-          TableCalendar(
-            firstDay: kFirstDay,
-            lastDay: kLastDay,
-            focusedDay: kFocusedDay,
-            calendarFormat: CalendarFormat.month,
-            startingDayOfWeek: StartingDayOfWeek.monday,
-            headerStyle: HeaderStyle(
-              titleCentered: true,
-              formatButtonVisible: false,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            TableCalendar(
+              firstDay: kFirstDay,
+              lastDay: kLastDay,
+              focusedDay: kFocusedDay,
+              calendarFormat: CalendarFormat.month,
+              startingDayOfWeek: StartingDayOfWeek.monday,
+              headerStyle: HeaderStyle(
+                titleCentered: true,
+                formatButtonVisible: false,
+              ),
+              daysOfWeekStyle: DaysOfWeekStyle(
+                weekendStyle: TextStyle(color: Colors.black),
+              ),
+              calendarStyle: CalendarStyle(
+                outsideDaysVisible: false,
+                todayDecoration:
+                    BoxDecoration(color: Theme.of(context).primaryColor),
+                weekendTextStyle: TextStyle(color: Colors.black),
+              ),
+              onDaySelected: _onDaySelected,
             ),
-            daysOfWeekStyle: DaysOfWeekStyle(
-              weekendStyle: TextStyle(color: Colors.black),
-            ),
-            calendarStyle: CalendarStyle(
-              outsideDaysVisible: false,
-              todayDecoration:
-                  BoxDecoration(color: Theme.of(context).primaryColor),
-              weekendTextStyle: TextStyle(color: Colors.black),
-            ),
-            onDaySelected: _onDaySelected,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
