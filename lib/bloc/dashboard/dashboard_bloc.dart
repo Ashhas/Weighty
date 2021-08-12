@@ -69,8 +69,6 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         targetWeight: targetWeight,
         currentWeight: latestMeasurement.weightEntry,
       );
-      amountLostThisWeek =
-          await _calculateAmountLostThisWeek(measurements: allMeasurements);
     }
 
     yield DashboardLoaded(
@@ -122,26 +120,6 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
   double _calculateAmountLeft({double targetWeight, double currentWeight}) {
     return currentWeight - targetWeight;
-  }
-
-  Future<double> _calculateAmountLostThisWeek(
-      {List<MeasurementModel> measurements}) async {
-    if (measurements != null) {
-      //Filter
-      List<MeasurementModel> filteredMeasurements = measurements
-          .where((m) =>
-              m.dateAdded.difference(DateTime.now()).inDays.abs() <= 7 &&
-              m.dateAdded.isBefore(DateTime.now().add(Duration(days: 1))))
-          .toList();
-
-      filteredMeasurements.sort((a, b) => a.dateAdded.compareTo(b.dateAdded));
-
-      double lostThisWeek = filteredMeasurements.last.weightEntry -
-          filteredMeasurements.first.weightEntry;
-
-      return lostThisWeek;
-    } else
-      return null;
   }
 
   @override
