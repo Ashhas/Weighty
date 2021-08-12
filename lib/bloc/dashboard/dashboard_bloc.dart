@@ -30,12 +30,12 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     double percentageDone;
     double totalLost;
     double amountLeft;
-    double amountLostThisWeek;
     String unitType;
     MeasurementModel firstMeasurement;
     MeasurementModel latestMeasurement;
     List<MeasurementModel> allMeasurements;
     List<MeasurementModel> filteredMeasurements;
+    List<MeasurementModel> sortedMeasurements;
 
     yield DashboardLoading();
 
@@ -55,6 +55,14 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       filteredMeasurements =
           await _filterMeasurementThisMonth(measurements: allMeasurements);
 
+      //Sort Measurements based on date
+      sortedMeasurements =
+          await _sortMeasurementsByDate(measurements: filteredMeasurements);
+
+      sortedMeasurements.forEach((element) {
+        print(element.dateAdded.toString() + " - " + element.weightEntry.toString());
+      });
+
       //Calculation Methods
       percentageDone = _calculatePercentageDone(
         startWeight: startWeight,
@@ -69,20 +77,10 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         targetWeight: targetWeight,
         currentWeight: latestMeasurement.weightEntry,
       );
-      amountLostThisWeek =
-          await _calculateAmountLostThisWeek(measurements: allMeasurements);
     }
 
-    yield DashboardLoaded(
-        latestMeasurement,
-        startWeight,
-        targetWeight,
-        percentageDone,
-        totalLost,
-        amountLeft,
-        amountLostThisWeek,
-        unitType,
-        filteredMeasurements);
+    yield DashboardLoaded(latestMeasurement, startWeight, targetWeight,
+        percentageDone, totalLost, amountLeft, unitType, sortedMeasurements);
   }
 
   Future<List<MeasurementModel>> _filterMeasurementThisMonth(
@@ -94,6 +92,17 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           .toList();
 
       return filteredMeasurements;
+    } else
+      return null;
+  }
+
+  Future<List<MeasurementModel>> _sortMeasurementsByDate(
+      {List<MeasurementModel> measurements}) async {
+    if (measurements != null) {
+      //Sort based by date
+      measurements.sort((a, b) => a.dateAdded.compareTo(b.dateAdded));
+
+      return measurements;
     } else
       return null;
   }
@@ -122,26 +131,6 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
   double _calculateAmountLeft({double targetWeight, double currentWeight}) {
     return currentWeight - targetWeight;
-  }
-
-  Future<double> _calculateAmountLostThisWeek(
-      {List<MeasurementModel> measurements}) async {
-    if (measurements != null) {
-      //Filter
-      List<MeasurementModel> filteredMeasurements = measurements
-          .where((m) =>
-              m.dateAdded.difference(DateTime.now()).inDays.abs() <= 7 &&
-              m.dateAdded.isBefore(DateTime.now().add(Duration(days: 1))))
-          .toList();
-
-      filteredMeasurements.sort((a, b) => a.dateAdded.compareTo(b.dateAdded));
-
-      double lostThisWeek = filteredMeasurements.last.weightEntry -
-          filteredMeasurements.first.weightEntry;
-
-      return lostThisWeek;
-    } else
-      return null;
   }
 
   @override

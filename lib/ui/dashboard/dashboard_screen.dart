@@ -39,9 +39,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return AppBar(
       elevation: 0,
       backgroundColor: Theme.of(context).canvasColor,
-      title: Text(
-        "Weighty",
-        style: TextStyle(color: Colors.white),
+      title: Container(
+        height: 30,
+        width: 80,
+        child: Center(
+          child: Image(
+            image: AssetImage("assets/weighty_name_white.png"),
+          ),
+        ),
       ),
       centerTitle: true,
     );
