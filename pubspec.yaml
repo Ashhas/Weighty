@@ -44,10 +44,14 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/app_icon.png"
+  image_path: "assets/weighty_app_icon.png"
 
 flutter:
   assets:
-    - assets/app_icon.png
+    - assets/weighty_app_icon.png
+    - assets/weighty_logo_lightblue.png
+    - assets/weighty_logo_white.png
+    - assets/weighty_logo_name_white.png
+    - assets/weighty_name_white.png
 
   uses-material-design: true

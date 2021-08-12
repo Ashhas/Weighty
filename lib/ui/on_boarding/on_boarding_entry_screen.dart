@@ -34,7 +34,7 @@ class _OnBoardingEntryScreenState extends State<OnBoardingEntryScreen> {
                         width: MediaQuery.of(context).size.height * 0.2,
                         child: Image(
                           image: AssetImage(
-                            "assets/app_icon.png",
+                            "assets/weighty_logo_lightblue.png",
                           ),
                         ),
                       ),
