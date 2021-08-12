@@ -34,7 +34,7 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
                       return IntrinsicHeight(
                         child: Column(
                           children: <Widget>[
-                            SizedBox(height: 25),
+                            SizedBox(height: 20),
                             _titleView(titleName: "Statistics"),
                             _simpleStatsRow(
                                 totalLost: state.totalLost,

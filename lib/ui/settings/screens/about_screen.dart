@@ -77,17 +77,13 @@ class _AboutScreenState extends State<AboutScreen> {
             ),
             SizedBox(height: 15),
             Container(
-              height: 70,
-              width: 70,
+              height: 80,
+              width: 220,
               child: Center(
                 child: Image(
-                  image: AssetImage("assets/app_icon.png"),
+                  image: AssetImage("assets/weighty_logo_name_white.png"),
                 ),
               ),
-            ),
-            Text(
-              "Weighty",
-              style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             SizedBox(height: 20),
           ],
