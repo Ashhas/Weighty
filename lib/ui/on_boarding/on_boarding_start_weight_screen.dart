@@ -76,8 +76,9 @@ class _OnBoardingStartScreenState extends State<OnBoardingStartScreen> {
                         Navigator.push(
                           context,
                           PageTransition(
-                            type: PageTransitionType.rightToLeft,
+                            type: PageTransitionType.rightToLeftJoined,
                             child: OnBoardingGoalScreen(),
+                            childCurrent: context.widget,
                           ),
                         );
                       } else {

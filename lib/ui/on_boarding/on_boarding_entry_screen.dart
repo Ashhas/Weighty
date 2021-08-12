@@ -78,8 +78,9 @@ class _OnBoardingEntryScreenState extends State<OnBoardingEntryScreen> {
                       Navigator.push(
                         context,
                         PageTransition(
-                          type: PageTransitionType.rightToLeft,
+                          type: PageTransitionType.rightToLeftJoined,
                           child: OnBoardingUnitScreen(),
+                          childCurrent: context.widget,
                         ),
                       );
                     },

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:weighty/bloc/on_boarding/on_boarding_bloc.dart';
-import 'package:weighty/ui/on_boarding/on_boarding_goal_screen.dart';
 import 'package:weighty/ui/on_boarding/on_boarding_start_weight_screen.dart';
 
 class OnBoardingUnitScreen extends StatefulWidget {
@@ -53,8 +52,8 @@ class _OnBoardingUnitScreenState extends State<OnBoardingUnitScreen> {
                   SizedBox(height: 5),
                   DropdownButton<String>(
                     focusColor: Colors.white,
+                    dropdownColor: Colors.white,
                     value: _chosenValue,
-                    // elevation: 5,
                     style: TextStyle(color: Colors.white),
                     iconEnabledColor: Colors.black,
                     items: <String>[
@@ -98,8 +97,9 @@ class _OnBoardingUnitScreenState extends State<OnBoardingUnitScreen> {
                       Navigator.push(
                         context,
                         PageTransition(
-                          type: PageTransitionType.rightToLeft,
+                          type: PageTransitionType.rightToLeftJoined,
                           child: OnBoardingStartScreen(),
+                          childCurrent: context.widget,
                         ),
                       );
                     } else {
