@@ -32,52 +32,52 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
 
   Stream<HistoryState> _mapHistoryStartedToState() async* {
     List<MeasurementModel> allMeasurements;
-    var sortedMeasurements;
+    List<MeasurementModel> sortedMeasurements;
 
     yield HistoryLoading();
 
+    //Retrieve all measurements
     allMeasurements = await measurementRepository.getAllMeasurements();
 
-    if (allMeasurements != null) {
-      sortedMeasurements =
-          new List<MeasurementModel>.from(allMeasurements.reversed);
-    }
+    //Sort Measurements based on date
+    sortedMeasurements =
+        await _sortMeasurementsByDateTopDown(measurements: allMeasurements);
 
     yield HistoryLoaded(sortedMeasurements);
   }
 
   Stream<HistoryState> _mapNavigateToPreviousMonthToState() async* {
-    yield MonthChanged();
-
     List<MeasurementModel> allMeasurements;
-    var sortedMeasurements;
+    List<MeasurementModel> sortedMeasurements;
+
+    yield MonthChanged();
 
     yield HistoryLoading();
 
+    //Retrieve all measurements
     allMeasurements = await measurementRepository.getAllMeasurements();
 
-    if (allMeasurements != null) {
-      sortedMeasurements =
-          new List<MeasurementModel>.from(allMeasurements.reversed);
-    }
+    //Sort Measurements based on date
+    sortedMeasurements =
+        await _sortMeasurementsByDateTopDown(measurements: allMeasurements);
 
     yield HistoryLoaded(sortedMeasurements);
   }
 
   Stream<HistoryState> _mapNavigateToNextMonthToState() async* {
-    yield MonthChanged();
-
     List<MeasurementModel> allMeasurements;
-    var sortedMeasurements;
+    List<MeasurementModel> sortedMeasurements;
+
+    yield MonthChanged();
 
     yield HistoryLoading();
 
+    //Retrieve all measurements
     allMeasurements = await measurementRepository.getAllMeasurements();
 
-    if (allMeasurements != null) {
-      sortedMeasurements =
-          new List<MeasurementModel>.from(allMeasurements.reversed);
-    }
+    //Sort Measurements based on date
+    sortedMeasurements =
+        await _sortMeasurementsByDateTopDown(measurements: allMeasurements);
 
     yield HistoryLoaded(sortedMeasurements);
   }
@@ -85,6 +85,28 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
   Stream<HistoryState> _mapDeleteMeasurementToState(
       MeasurementModel measurementModel) async* {
     measurementRepository.deleteMeasurement(measurementModel);
+  }
+
+  Future<List<MeasurementModel>> _sortMeasurementsByDateBottomUp(
+      {List<MeasurementModel> measurements}) async {
+    if (measurements != null) {
+      //Sort based by date
+      measurements.sort((a, b) => a.dateAdded.compareTo(b.dateAdded));
+
+      return measurements;
+    } else
+      return null;
+  }
+
+  Future<List<MeasurementModel>> _sortMeasurementsByDateTopDown(
+      {List<MeasurementModel> measurements}) async {
+    if (measurements != null) {
+      //Sort based by date
+      measurements.sort((a, b) => b.dateAdded.compareTo(a.dateAdded));
+
+      return measurements;
+    } else
+      return null;
   }
 
   @override
