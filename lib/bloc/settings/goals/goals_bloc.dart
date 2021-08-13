@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:equatable/equatable.dart';
 import 'package:weighty/data/model/measurement.dart';
 import 'package:weighty/data/repo/measurement_repo.dart';
@@ -38,15 +37,15 @@ class GoalsBloc extends Bloc<GoalsEvent, GoalsState> {
     String targetWeightDate = sharedPrefService.getTargetWeightDate;
 
     //Latest Weight Entry from DB
-    MeasurementModel latestMeasurement =
-        await measurementRepository.getLatestMeasurement();
+    MeasurementModel currentMeasurement =
+        await measurementRepository.getCurrentMeasurement();
 
     yield GoalsLoaded(
         startWeight: startWeight,
         startWeightDate: startWeightDate,
         targetWeight: targetWeight,
         targetWeightDate: targetWeightDate,
-        currentWeight: latestMeasurement.weightEntry);
+        currentWeight: currentMeasurement.weightEntry);
   }
 
   Stream<GoalsState> _mapChangeStartWeightToState(
@@ -66,15 +65,15 @@ class GoalsBloc extends Bloc<GoalsEvent, GoalsState> {
     String targetWeightDate = sharedPrefService.getTargetWeightDate;
 
     //Latest Weight Entry from DB
-    MeasurementModel latestMeasurement =
-        await measurementRepository.getLatestMeasurement();
+    MeasurementModel currentMeasurement =
+        await measurementRepository.getCurrentMeasurement();
 
     yield GoalsLoaded(
         startWeight: startWeight,
         startWeightDate: startWeightDate,
         targetWeight: targetWeight,
         targetWeightDate: targetWeightDate,
-        currentWeight: latestMeasurement.weightEntry);
+        currentWeight: currentMeasurement.weightEntry);
   }
 
   Stream<GoalsState> _mapChangeTargetWeightToState(

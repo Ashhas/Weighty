@@ -32,7 +32,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     double amountLeft;
     String unitType;
     MeasurementModel firstMeasurement;
-    MeasurementModel latestMeasurement;
+    MeasurementModel currentMeasurement;
     List<MeasurementModel> allMeasurements;
     List<MeasurementModel> filteredMeasurements;
     List<MeasurementModel> sortedMeasurements;
@@ -47,7 +47,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
     //Retrieve data from database
     firstMeasurement = await measurementRepository.getFirstMeasurement();
-    latestMeasurement = await measurementRepository.getLatestMeasurement();
+    currentMeasurement = await measurementRepository.getCurrentMeasurement();
     allMeasurements = await measurementRepository.getAllMeasurements();
 
     if (allMeasurements != null) {
@@ -63,19 +63,19 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       percentageDone = _calculatePercentageDone(
         startWeight: startWeight,
         targetWeight: targetWeight,
-        weightEntry: latestMeasurement.weightEntry,
+        weightEntry: currentMeasurement.weightEntry,
       );
       totalLost = _calculateTotalLost(
         firstWeight: firstMeasurement.weightEntry,
-        currentWeight: latestMeasurement.weightEntry,
+        currentWeight: currentMeasurement.weightEntry,
       );
       amountLeft = _calculateAmountLeft(
         targetWeight: targetWeight,
-        currentWeight: latestMeasurement.weightEntry,
+        currentWeight: currentMeasurement.weightEntry,
       );
     }
 
-    yield DashboardLoaded(latestMeasurement, startWeight, targetWeight,
+    yield DashboardLoaded(currentMeasurement, startWeight, targetWeight,
         percentageDone, totalLost, amountLeft, unitType, sortedMeasurements);
   }
 

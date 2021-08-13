@@ -27,7 +27,7 @@ class ExportBloc extends Bloc<ExportEvent, ExportState> {
 
   Stream<ExportState> _mapStartExportToState() async* {
     double targetWeight;
-    MeasurementModel latestMeasurement;
+    MeasurementModel currentMeasurement;
     List<MeasurementModel> allMeasurements;
     List<MeasurementModel> sortedMeasurements;
 
@@ -38,7 +38,7 @@ class ExportBloc extends Bloc<ExportEvent, ExportState> {
     targetWeight = sharedPrefService.getTargetWeight;
 
     //Retrieve data from database
-    latestMeasurement = await measurementRepository.getLatestMeasurement();
+    currentMeasurement = await measurementRepository.getCurrentMeasurement();
     allMeasurements = await measurementRepository.getAllMeasurements();
 
     if (allMeasurements != null) {
@@ -48,7 +48,7 @@ class ExportBloc extends Bloc<ExportEvent, ExportState> {
 
       //Do Export to Excel
       ExportHandler.generateExcel(
-          sortedMeasurements, latestMeasurement, targetWeight);
+          sortedMeasurements, currentMeasurement, targetWeight);
     }
 
     yield ExportFinished();
