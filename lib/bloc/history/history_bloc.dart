@@ -25,6 +25,9 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
     if (event is NavigateToNextMonth) {
       yield* _mapNavigateToNextMonthToState();
     }
+    if (event is EditMeasurement) {
+      yield* _mapEditMeasurementToState(event.measurementModel, event.updatedWeight);
+    }
     if (event is DeleteMeasurement) {
       yield* _mapDeleteMeasurementToState(event.measurementModel);
     }
@@ -80,6 +83,12 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
         await _sortMeasurementsByDateTopDown(measurements: allMeasurements);
 
     yield HistoryLoaded(sortedMeasurements);
+  }
+
+  Stream<HistoryState> _mapEditMeasurementToState(
+      MeasurementModel measurementModel, String updatedWeight) async* {
+    measurementModel.weightEntry = double.parse(updatedWeight);
+    measurementRepository.editMeasurement(measurementModel);
   }
 
   Stream<HistoryState> _mapDeleteMeasurementToState(

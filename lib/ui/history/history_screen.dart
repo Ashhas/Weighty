@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/history/history_bloc.dart';
 import 'package:weighty/data/model/measurement.dart';
+import 'package:weighty/ui/history/widgets/edit_weight_dialog.dart';
 import 'package:weighty/util/constants/ui_const.dart';
 
 class HistoryScreen extends StatefulWidget {
@@ -167,6 +168,15 @@ class _HistoryScreenState extends State<HistoryScreen> {
                               ],
                             ),
                             onTap: () {},
+                            onLongPress: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return EditWeightDialog(
+                                      selectedMeasurement: event);
+                                },
+                              );
+                            },
                           ),
                           Divider(
                             height: 1,

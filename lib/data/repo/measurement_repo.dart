@@ -36,6 +36,12 @@ class MeasurementRepository {
     _weightEntryDb.add(newMeasurement);
   }
 
+  void editMeasurement(MeasurementModel updatedMeasurement) async {
+    Box _weightEntryDb = await Hive.openBox('weightInfo');
+    _weightEntryDb.delete(updatedMeasurement.delete());
+    _weightEntryDb.add(updatedMeasurement);
+  }
+
   void deleteMeasurement(MeasurementModel deletedMeasurement) async {
     Box _weightEntryDb = await Hive.openBox('weightInfo');
     _weightEntryDb.delete(deletedMeasurement.delete());
