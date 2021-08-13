@@ -6,17 +6,11 @@ import 'package:weighty/data/model/measurement.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:weighty/data/repo/measurement_repo.dart';
 import 'package:weighty/util/shared_pref_service.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ExportHandler {
   static generateExcel(List<MeasurementModel> allMeasurements,
       MeasurementModel currentWeight, double targetWeight) async {
-    final MeasurementRepository measurementRepository =
-        new MeasurementRepository();
-    MeasurementModel latestMeasurement =
-        await measurementRepository.getLatestMeasurement();
-    final sharedPrefService = await SharedPreferencesService.instance;
-    double targetWeight = sharedPrefService.getTargetWeight;
-
     //Request access to storage
     Map<Permission, PermissionStatus> statuses = await [
       Permission.storage,
@@ -56,8 +50,14 @@ class ExportHandler {
     //Save Excel to internal storage
     var fileBytes = excel.save();
 
-    File(join(dir))
+    File excelFile = File(join(dir))
       ..createSync(recursive: true)
       ..writeAsBytesSync(fileBytes);
+
+    //Open Share Menu
+    await Share.shareFiles([dir]);
+
+    //Remove File From Phone
+    excelFile.delete();
   }
 }
