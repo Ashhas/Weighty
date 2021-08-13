@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:weighty/bloc/add_weight/add_weight_bloc.dart';
 import 'package:weighty/data/model/measurement.dart';
@@ -37,26 +38,60 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            TableCalendar(
-              firstDay: kFirstDay,
-              lastDay: kLastDay,
-              focusedDay: kFocusedDay,
-              calendarFormat: CalendarFormat.month,
-              startingDayOfWeek: StartingDayOfWeek.monday,
-              headerStyle: HeaderStyle(
-                titleCentered: true,
-                formatButtonVisible: false,
-              ),
-              daysOfWeekStyle: DaysOfWeekStyle(
-                weekendStyle: TextStyle(color: Colors.black),
-              ),
-              calendarStyle: CalendarStyle(
-                outsideDaysVisible: false,
-                todayDecoration:
-                    BoxDecoration(color: Theme.of(context).primaryColor),
-                weekendTextStyle: TextStyle(color: Colors.black),
-              ),
-              onDaySelected: _onDaySelected,
+            BlocBuilder<AddWeightBloc, AddWeightState>(
+              builder: (context, state) {
+                if (state is AddWeightLoaded) {
+                  return TableCalendar(
+                    firstDay: kFirstDay,
+                    lastDay: kLastDay,
+                    focusedDay: kFocusedDay,
+                    calendarFormat: CalendarFormat.month,
+                    startingDayOfWeek: StartingDayOfWeek.monday,
+                    eventLoader: (day) {
+                      List<DateTime> sortedList = [];
+                      DateFormat formatter = DateFormat('yyyy-MM-dd');
+
+                      if (state.allMeasurements != null) {
+                        state.allMeasurements.forEach(
+                          (element) {
+                            if (formatter.format(day) ==
+                                formatter.format(element.dateAdded)) {
+                              sortedList.add(element.dateAdded);
+                            }
+                          },
+                        );
+                      }
+                      return sortedList;
+                    },
+                    headerStyle: HeaderStyle(
+                      titleCentered: true,
+                      formatButtonVisible: false,
+                    ),
+                    daysOfWeekStyle: DaysOfWeekStyle(
+                      weekendStyle: TextStyle(color: Colors.black),
+                    ),
+                    calendarStyle: CalendarStyle(
+                      outsideDaysVisible: false,
+                      markerSize: 13.0,
+                      markerDecoration: BoxDecoration(
+                          color: Colors.green, shape: BoxShape.circle),
+                      todayDecoration:
+                          BoxDecoration(color: Theme.of(context).primaryColor),
+                      weekendTextStyle: TextStyle(color: Colors.black),
+                    ),
+                    onDaySelected: _onDaySelected,
+                    enabledDayPredicate: (day) {
+                      if (day.isBefore(DateTime.now())) {
+                        return true;
+                      } else {
+                        return false;
+                      }
+                    },
+                  );
+                } else {
+                  return Container();
+                }
+              },
             ),
           ],
         ),

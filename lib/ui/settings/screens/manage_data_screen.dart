@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weighty/bloc/export_measurements/export_bloc.dart';
+import 'package:weighty/bloc/export/export_bloc.dart';
 import 'package:weighty/ui/settings/widgets/settings_tile.dart';
 
 class ManageDataScreen extends StatefulWidget {

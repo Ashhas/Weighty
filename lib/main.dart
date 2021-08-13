@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/add_weight/add_weight_bloc.dart';
 import 'package:weighty/bloc/app_init/initialization_bloc.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
-import 'package:weighty/bloc/export_measurements/export_bloc.dart';
+import 'package:weighty/bloc/export/export_bloc.dart';
 import 'package:weighty/bloc/history/history_bloc.dart';
 import 'package:weighty/bloc/on_boarding/on_boarding_bloc.dart';
 import 'package:weighty/bloc/settings/goals/goals_bloc.dart';

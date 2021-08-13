@@ -23,6 +23,16 @@ class NavigateToNextMonth extends HistoryEvent {
   List<Object> get props => [];
 }
 
+class EditMeasurement extends HistoryEvent {
+  final MeasurementModel measurementModel;
+  final String updatedWeight;
+
+  EditMeasurement(this.measurementModel, this.updatedWeight);
+
+  @override
+  List<Object> get props => [];
+}
+
 class DeleteMeasurement extends HistoryEvent {
   final MeasurementModel measurementModel;
 

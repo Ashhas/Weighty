@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:settings_ui/settings_ui.dart';
 import 'package:weighty/bloc/settings/settings_bloc.dart';
 import 'package:weighty/ui/settings/screens/about_screen.dart';
 import 'package:weighty/ui/settings/screens/goal_screen.dart';
@@ -10,6 +9,7 @@ import 'package:weighty/ui/settings/screens/manage_data_screen.dart';
 import 'package:weighty/ui/settings/screens/reminder_screen.dart';
 import 'package:weighty/ui/settings/screens/theme_screen.dart';
 import 'package:weighty/ui/settings/screens/weight_unit_screen.dart';
+import 'package:weighty/ui/settings/widgets/settings_tile.dart';
 import 'package:weighty/util/constants/ui_const.dart';
 
 class SettingsScreen extends StatefulWidget {
