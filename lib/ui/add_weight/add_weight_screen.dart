@@ -57,6 +57,13 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
                 weekendTextStyle: TextStyle(color: Colors.black),
               ),
               onDaySelected: _onDaySelected,
+              enabledDayPredicate: (day) {
+                if (day.isBefore(DateTime.now())) {
+                  return true;
+                } else {
+                  return false;
+                }
+              },
             ),
           ],
         ),
