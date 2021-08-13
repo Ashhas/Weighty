@@ -26,7 +26,8 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
       yield* _mapNavigateToNextMonthToState();
     }
     if (event is EditMeasurement) {
-      yield* _mapEditMeasurementToState(event.measurementModel, event.updatedWeight);
+      yield* _mapEditMeasurementToState(
+          event.measurementModel, event.updatedWeight);
     }
     if (event is DeleteMeasurement) {
       yield* _mapDeleteMeasurementToState(event.measurementModel);
@@ -94,17 +95,6 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
   Stream<HistoryState> _mapDeleteMeasurementToState(
       MeasurementModel measurementModel) async* {
     measurementRepository.deleteMeasurement(measurementModel);
-  }
-
-  Future<List<MeasurementModel>> _sortMeasurementsByDateBottomUp(
-      {List<MeasurementModel> measurements}) async {
-    if (measurements != null) {
-      //Sort based by date
-      measurements.sort((a, b) => a.dateAdded.compareTo(b.dateAdded));
-
-      return measurements;
-    } else
-      return null;
   }
 
   Future<List<MeasurementModel>> _sortMeasurementsByDateTopDown(
