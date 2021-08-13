@@ -31,7 +31,7 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
                   left: 15,
                   right: 15,
                 ),
-                child: state.filteredMeasurements.isNotEmpty
+                child: state.filteredMeasurements != null
                     ? LineChart(
                         mainData(state.startWeight, state.targetWeight,
                             state.filteredMeasurements),
