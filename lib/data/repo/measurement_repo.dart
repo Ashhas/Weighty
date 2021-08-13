@@ -31,6 +31,21 @@ class MeasurementRepository {
       return null;
   }
 
+  Future<MeasurementModel> getCurrentMeasurement() async {
+    Box _weightEntryDb = await Hive.openBox('weightInfo');
+    List<MeasurementModel> sortedList;
+
+    if (_weightEntryDb.values.isNotEmpty) {
+      sortedList = _weightEntryDb.values.toList().cast<MeasurementModel>();
+
+      //Sort Measurement based on date
+      sortedList.sort((a, b) => a.dateAdded.compareTo(b.dateAdded));
+
+      return sortedList.last;
+    } else
+      return null;
+  }
+
   Future<void> setNewMeasurement(MeasurementModel newMeasurement) async {
     Box _weightEntryDb = await Hive.openBox('weightInfo');
     _weightEntryDb.add(newMeasurement);
