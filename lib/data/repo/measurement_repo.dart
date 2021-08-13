@@ -1,7 +1,5 @@
 import 'package:hive/hive.dart';
 import 'package:weighty/data/model/measurement.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:weighty/util/shared_pref_service.dart';
 
 class MeasurementRepository {
   MeasurementRepository();

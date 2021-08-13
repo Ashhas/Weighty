@@ -6,6 +6,7 @@ import 'package:weighty/bloc/settings/settings_bloc.dart';
 import 'package:weighty/ui/settings/screens/about_screen.dart';
 import 'package:weighty/ui/settings/screens/goal_screen.dart';
 import 'package:weighty/ui/settings/screens/help_and_faq_screen.dart';
+import 'package:weighty/ui/settings/screens/manage_data_screen.dart';
 import 'package:weighty/ui/settings/screens/reminder_screen.dart';
 import 'package:weighty/ui/settings/screens/theme_screen.dart';
 import 'package:weighty/ui/settings/screens/weight_unit_screen.dart';
@@ -40,6 +41,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   _buildWeightUnitTile(),
                   Divider(height: 1, thickness: 1),
                   _buildThemeTile(),
+                  _buildManageDataTile(),
                   Divider(height: 1, thickness: 1),
                   _buildAboutTile(state.appVersion),
                   SizedBox(height: 100),
@@ -159,6 +161,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
           PageTransition(
             type: PageTransitionType.rightToLeftWithFade,
             child: AboutScreen(appVersion: appVersion),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildManageDataTile() {
+    return SettingsTile(
+      title: "Manage Data",
+      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      leading: Icon(
+        Icons.storage,
+        color: Colors.grey,
+      ),
+      onPressed: (BuildContext context) {
+        Navigator.push(
+          context,
+          PageTransition(
+            type: PageTransitionType.rightToLeftWithFade,
+            child: ManageDataScreen(),
           ),
         );
       },

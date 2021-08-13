@@ -4,7 +4,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:weighty/data/model/measurement.dart';
 import 'package:weighty/util/shared_pref_service.dart';
 
