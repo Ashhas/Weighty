@@ -51,12 +51,16 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
                       List<DateTime> sortedList = [];
                       DateFormat formatter = DateFormat('yyyy-MM-dd');
 
-                      state.allMeasurements.forEach((element) {
-                        if (formatter.format(day) ==
-                            formatter.format(element.dateAdded)) {
-                          sortedList.add(element.dateAdded);
-                        }
-                      });
+                      if (state.allMeasurements != null) {
+                        state.allMeasurements.forEach(
+                          (element) {
+                            if (formatter.format(day) ==
+                                formatter.format(element.dateAdded)) {
+                              sortedList.add(element.dateAdded);
+                            }
+                          },
+                        );
+                      }
                       return sortedList;
                     },
                     headerStyle: HeaderStyle(
