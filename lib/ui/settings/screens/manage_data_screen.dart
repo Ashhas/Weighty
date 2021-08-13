@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weighty/bloc/export_measurements/export_bloc.dart';
 import 'package:weighty/ui/settings/widgets/settings_tile.dart';
-import 'package:weighty/util/constants/variable_const.dart';
 
 class ManageDataScreen extends StatefulWidget {
   ManageDataScreen();
@@ -22,26 +22,17 @@ class _ManageDataScreenState extends State<ManageDataScreen> {
         child: Column(
           children: [
             SettingsTile(
-              title: "Github",
+              title: "Export Data",
               titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
-              leading: Icon(Icons.developer_board_outlined,
-                  color: Theme.of(context).buttonColor),
+              leading: Icon(
+                Icons.file_download,
+                color: Colors.grey,
+              ),
               onPressed: (BuildContext context) {
-                _launchURL();
+                BlocProvider.of<ExportBloc>(context).add(StartExport());
               },
             ),
             Divider(height: 1, thickness: 1),
-            SettingsTile(
-              title: "Version",
-              titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
-              subtitleTextStyle: Theme.of(context).primaryTextTheme.subtitle1,
-              onPressed: (BuildContext context) {},
-            ),
-            SettingsTile(
-              title: "Open-source licenses",
-              titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
-              onPressed: (BuildContext context) {},
-            ),
           ],
         ),
       ),
@@ -61,14 +52,8 @@ class _ManageDataScreenState extends State<ManageDataScreen> {
       ),
       title: Text(
         "Manage Data",
-        style: Theme.of(context).primaryTextTheme.headline4,
+        style: TextStyle(color: Colors.white),
       ),
     );
-  }
-
-  void _launchURL() async {
-    await canLaunch(githubUrl)
-        ? await launch(githubUrl)
-        : throw 'Could not launch ' + githubUrl;
   }
 }

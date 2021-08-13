@@ -59,10 +59,6 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       sortedMeasurements =
           await _sortMeasurementsByDate(measurements: filteredMeasurements);
 
-      sortedMeasurements.forEach((element) {
-        print(element.dateAdded.toString() + " - " + element.weightEntry.toString());
-      });
-
       //Calculation Methods
       percentageDone = _calculatePercentageDone(
         startWeight: startWeight,
