@@ -18,16 +18,14 @@ class AddWeightBloc extends Bloc<AddWeightEvent, AddWeightState> {
   @override
   Stream<AddWeightState> mapEventToState(AddWeightEvent event) async* {
     if (event is AddWeightStarted) {
-      yield* _mapDashboardStartedToState();
+      yield* _mapAddWeightStartedToState();
     } else if (event is AddNewMeasurement) {
       yield* _mapAddNewMeasurementToState(
           event.selectedDate, event.measurementInput);
     }
   }
 
-  Stream<AddWeightState> _mapDashboardStartedToState() async* {
-    yield AddWeightLoading();
-
+  Stream<AddWeightState> _mapAddWeightStartedToState() async* {
     final List<MeasurementModel> measurements =
         await measurementRepository.getAllMeasurements();
 
@@ -38,8 +36,6 @@ class AddWeightBloc extends Bloc<AddWeightEvent, AddWeightState> {
       DateTime measurementDate, String measurementInput) async* {
     await measurementRepository.setNewMeasurement(
         MeasurementModel(measurementDate, double.parse(measurementInput)));
-
-    yield NewMeasurementAdded();
   }
 
   @override
