@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/add_weight/add_weight_bloc.dart';
 import 'package:weighty/bloc/app_init/initialization_bloc.dart';
@@ -21,8 +22,11 @@ Future<void> main() async {
   //Initialize Bloc Observer
   Bloc.observer = SimpleBlocObserver();
 
-  //Run app
-  runApp(MyApp());
+  //Set Orientation and Run App
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {

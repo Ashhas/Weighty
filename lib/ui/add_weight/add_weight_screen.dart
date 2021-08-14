@@ -81,7 +81,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
                     ),
                     onDaySelected: _onDaySelected,
                     enabledDayPredicate: (day) {
-                      if (day.day <= DateTime.now().day) {
+                      if (DateTime.now().isAfter(day)) {
                         return true;
                       } else {
                         return false;
