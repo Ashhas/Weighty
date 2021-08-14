@@ -15,6 +15,12 @@ class _EditTargetWeightDialogState extends State<EditTargetWeightDialog> {
   final textFormController = TextEditingController();
 
   @override
+  void initState() {
+    textFormController.text = widget.targetWeight.toString();
+    super.initState();
+  }
+
+  @override
   void dispose() {
     textFormController.dispose();
     super.dispose();
