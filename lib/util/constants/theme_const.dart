@@ -16,7 +16,7 @@ class AppTheme {
         headline1: FontConst.numberBigBoldTextWhite,
         headline2: FontConst.numberMidBoldTextWhite,
         headline3: FontConst.titleViewTextBlack,
-        headline4: FontConst.smallBoldTextWhiteOpacity,
+        headline4: FontConst.smallBoldTextGreyOpacity,
         headline5: FontConst.numberSmallRegularTextBlack,
         subtitle1: FontConst.subtitleBigTextWhite,
         subtitle2: FontConst.subtitleSmallTextBlack,
