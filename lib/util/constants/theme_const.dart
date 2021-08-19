@@ -38,13 +38,13 @@ class AppTheme {
       primaryTextTheme: TextTheme(
         headline1: FontConst.numberBigBoldTextWhite,
         headline2: FontConst.numberMidBoldTextWhite,
-        headline3: FontConst.titleViewTextBlack,
+        headline3: FontConst.titleViewTextWhite,
         headline4: FontConst.smallBoldTextWhiteOpacity,
-        headline5: FontConst.numberSmallRegularTextBlack,
+        headline5: FontConst.numberSmallRegularTextWhite,
         subtitle1: FontConst.subtitleBigTextWhite,
-        subtitle2: FontConst.subtitleSmallTextBlack,
-        bodyText1: FontConst.bodyTextBlack,
-        bodyText2: FontConst.bodyBigTextBlack,
+        subtitle2: FontConst.subtitleSmallTextWhite,
+        bodyText1: FontConst.bodyTextWhite,
+        bodyText2: FontConst.bodyBigTextWhite,
       ),
     );
   }

@@ -17,32 +17,28 @@ class FontConst {
   //Numbers TextStyle
   static final numberSmallRegularTextBlack =
       REGULAR.copyWith(fontSize: 17, color: Colors.black);
-
   static final numberSmallRegularTextWhite =
       REGULAR.copyWith(fontSize: 17, color: Colors.white);
-
   static final numberBigBoldTextWhite =
       BOLD.copyWith(fontSize: 25, color: Colors.white);
-
   static final numberMidBoldTextWhite =
       BOLD.copyWith(fontSize: 20, color: Colors.white);
 
   //Body TextStyle
   static final bodyBigTextBlack =
       REGULAR.copyWith(fontSize: 16, color: Colors.black);
-
   static final bodyBigTextWhite =
       REGULAR.copyWith(fontSize: 16, color: Colors.white);
-
   static final bodyTextBlack =
       REGULAR.copyWith(fontSize: 15, color: Colors.black);
-
   static final bodyTextWhite =
       REGULAR.copyWith(fontSize: 15, color: Colors.white);
 
   //TitleView TextStyle
   static final titleViewTextBlack =
       MEDIUM.copyWith(fontSize: 20, color: Colors.black);
+  static final titleViewTextWhite =
+      MEDIUM.copyWith(fontSize: 20, color: Colors.white);
 
   //WeightUnit TextStyle
   static final smallBoldTextWhiteOpacity =
@@ -51,13 +47,10 @@ class FontConst {
   //SubTitle TextStyle
   static final subtitleBigTextBlack =
       MEDIUM.copyWith(fontSize: 15, color: Colors.black);
-
   static final subtitleBigTextWhite =
       MEDIUM.copyWith(fontSize: 15, color: Colors.white);
-
   static final subtitleSmallTextBlack =
       REGULAR.copyWith(fontSize: 15, color: Colors.black);
-
   static final subtitleSmallTextWhite =
       REGULAR.copyWith(fontSize: 15, color: Colors.white);
 }
