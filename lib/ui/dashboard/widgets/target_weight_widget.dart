@@ -22,33 +22,15 @@ class _TargetWeightWidgetState extends State<TargetWeightWidget> {
               children: [
                 Row(
                   children: [
-                    Text(
-                      state.targetWeight.toString(),
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
+                    Text(state.targetWeight.toString(),
+                        style: Theme.of(context).primaryTextTheme.headline2),
                     SizedBox(width: 4),
-                    Text(
-                      state.unitType,
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.white.withOpacity(0.6),
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
+                    Text(state.unitType,
+                        style: Theme.of(context).primaryTextTheme.headline4),
                   ],
                 ),
-                Text(
-                  UiConst.weightTargetTitle,
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                Text(UiConst.weightTargetTitle,
+                    style: Theme.of(context).primaryTextTheme.subtitle1),
               ],
             ),
           );

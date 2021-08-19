@@ -47,7 +47,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         child: Text("No weight entry added in this month!",
                             textAlign: TextAlign.center,
                             style:
-                                TextStyle(color: Colors.black, fontSize: 16)),
+                                Theme.of(context).primaryTextTheme.subtitle2),
                       ),
                     );
             } else {
@@ -94,7 +94,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
             ),
             Text(
               DateFormat.yMMMM().format(_currentMonth),
-              style: TextStyle(fontSize: 18.0, color: Colors.white),
+              style: Theme.of(context).primaryTextTheme.subtitle1,
             ),
             IconButton(
               icon: Icon(Icons.chevron_right, color: Colors.white),
@@ -122,7 +122,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
           ? Center(
               child: Text("No weight entry added in this month!",
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.black, fontSize: 16)),
+                  style: Theme.of(context).primaryTextTheme.subtitle2),
             )
           : ListView(
               children: _sameMonthEventsFilter
@@ -150,20 +150,14 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                     DateFormat.yMMMMd('en_US')
                                         .format(event.dateAdded)
                                         .toString(),
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.black,
-                                      fontFamily: "Roboto",
-                                      fontWeight: FontWeight.w400,
-                                    )),
+                                    style: Theme.of(context)
+                                        .primaryTextTheme
+                                        .bodyText1),
                                 Text(
                                   event.weightEntry.toString(),
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                    fontFamily: "Roboto",
-                                    fontWeight: FontWeight.w900,
-                                  ),
+                                  style: Theme.of(context)
+                                      .primaryTextTheme
+                                      .subtitle2,
                                 )
                               ],
                             ),

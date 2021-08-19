@@ -2,46 +2,62 @@ import 'package:flutter/material.dart';
 import 'package:weighty/util/constants/color_const.dart';
 
 class FontConst {
-  static final LARGE = TextStyle(
+  static const BOLD = TextStyle(
+    fontWeight: FontWeight.w800,
+  );
+
+  static const MEDIUM = TextStyle(
     fontWeight: FontWeight.w500,
-    color: ColorConst.lightPrimaryTextColor,
   );
 
-  static final REGULAR = TextStyle(
+  static const REGULAR = TextStyle(
     fontWeight: FontWeight.w400,
-    color: ColorConst.lightPrimaryTextColor,
   );
 
-  //LARGE
-  static final LARGE_NAME_TITLE =
-      LARGE.copyWith(fontSize: 25, color: ColorConst.darkPrimaryTextColor);
+  //Numbers TextStyle
+  static final numberSmallRegularTextBlack =
+      REGULAR.copyWith(fontSize: 17, color: Colors.black);
 
-  //LARGE TILE
-  static final LARGE_TILE = LARGE.copyWith(fontSize: 21);
-  static final LARGE_TILE_WHITE =
-      LARGE_TILE.copyWith(color: ColorConst.lightPrimaryTextColor);
-  static final LARGE_TILE_BLACK =
-      LARGE_TILE.copyWith(color: ColorConst.darkPrimaryTextColor);
+  static final numberSmallRegularTextWhite =
+      REGULAR.copyWith(fontSize: 17, color: Colors.white);
 
-  //REGULAR
-  static final REGULAR_DEFAULT_BLACK =
-      REGULAR.copyWith(fontSize: 15, color: ColorConst.lightPrimaryTextColor);
-  static final REGULAR_DEFAULT_WHITE =
-      REGULAR.copyWith(fontSize: 15, color: ColorConst.darkPrimaryTextColor);
-  static final REGULAR_SMALL_BLACK =
-      REGULAR.copyWith(fontSize: 14, color: ColorConst.lightPrimaryTextColor);
-  static final REGULAR_SMALL_WHITE =
-      REGULAR.copyWith(fontSize: 14, color: ColorConst.darkPrimaryTextColor);
-  static final REGULAR_LARGE_BLACK =
-      LARGE.copyWith(fontSize: 18, color: ColorConst.lightPrimaryTextColor);
-  static final REGULAR_LARGE_WHITE =
-      LARGE.copyWith(fontSize: 18, color: ColorConst.darkPrimaryTextColor);
-  static final REGULAR_TILE_BLACK =
-      REGULAR.copyWith(fontSize: 16, color: ColorConst.lightPrimaryTextColor);
-  static final REGULAR_TILE_WHITE =
-      REGULAR.copyWith(fontSize: 16, color: ColorConst.darkPrimaryTextColor);
+  static final numberBigBoldTextWhite =
+      BOLD.copyWith(fontSize: 25, color: Colors.white);
 
-  //Error
-  static final REGULAR_SMALL_ERROR =
-  REGULAR.copyWith(fontSize: 14, color: ColorConst.errorTextColor);
+  static final numberMidBoldTextWhite =
+      BOLD.copyWith(fontSize: 20, color: Colors.white);
+
+  //Body TextStyle
+  static final bodyBigTextBlack =
+      REGULAR.copyWith(fontSize: 16, color: Colors.black);
+
+  static final bodyBigTextWhite =
+      REGULAR.copyWith(fontSize: 16, color: Colors.white);
+
+  static final bodyTextBlack =
+      REGULAR.copyWith(fontSize: 15, color: Colors.black);
+
+  static final bodyTextWhite =
+      REGULAR.copyWith(fontSize: 15, color: Colors.white);
+
+  //TitleView TextStyle
+  static final titleViewTextBlack =
+      MEDIUM.copyWith(fontSize: 20, color: Colors.black);
+
+  //WeightUnit TextStyle
+  static final smallBoldTextWhiteOpacity =
+      BOLD.copyWith(fontSize: 15, color: Colors.white.withOpacity(0.6));
+
+  //SubTitle TextStyle
+  static final subtitleBigTextBlack =
+      MEDIUM.copyWith(fontSize: 15, color: Colors.black);
+
+  static final subtitleBigTextWhite =
+      MEDIUM.copyWith(fontSize: 15, color: Colors.white);
+
+  static final subtitleSmallTextBlack =
+      REGULAR.copyWith(fontSize: 15, color: Colors.black);
+
+  static final subtitleSmallTextWhite =
+      REGULAR.copyWith(fontSize: 15, color: Colors.white);
 }

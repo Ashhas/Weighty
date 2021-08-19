@@ -35,11 +35,9 @@ class _GoalScreenState extends State<GoalScreen> {
                     SettingsTile(
                       title: "Start Weight",
                       titleTextStyle:
-                          Theme.of(context).primaryTextTheme.headline4,
-                      subtitleTextStyle:
-                          Theme.of(context).primaryTextTheme.subtitle1,
+                          Theme.of(context).primaryTextTheme.bodyText2,
                       trailing: Text(state.startWeight.toString(),
-                          style: Theme.of(context).primaryTextTheme.subtitle1),
+                          style: Theme.of(context).primaryTextTheme.bodyText2),
                       onPressed: (BuildContext context) {
                         showDialog(
                           context: context,
@@ -55,22 +53,18 @@ class _GoalScreenState extends State<GoalScreen> {
                     SettingsTile(
                       title: "Current Weight",
                       titleTextStyle:
-                          Theme.of(context).primaryTextTheme.headline4,
-                      subtitleTextStyle:
-                          Theme.of(context).primaryTextTheme.subtitle1,
+                          Theme.of(context).primaryTextTheme.bodyText2,
                       trailing: Text(state.currentWeight.toString(),
-                          style: Theme.of(context).primaryTextTheme.subtitle1),
+                          style: Theme.of(context).primaryTextTheme.bodyText2),
                       onPressed: (BuildContext context) {},
                     ),
                     Divider(height: 1, thickness: 1),
                     SettingsTile(
                       title: "Goal Weight",
                       titleTextStyle:
-                          Theme.of(context).primaryTextTheme.headline4,
-                      subtitleTextStyle:
-                          Theme.of(context).primaryTextTheme.subtitle1,
+                          Theme.of(context).primaryTextTheme.bodyText2,
                       trailing: Text(state.targetWeight.toString(),
-                          style: Theme.of(context).primaryTextTheme.subtitle1),
+                          style: Theme.of(context).primaryTextTheme.bodyText2),
                       onPressed: (BuildContext context) {
                         showDialog(
                           context: context,
