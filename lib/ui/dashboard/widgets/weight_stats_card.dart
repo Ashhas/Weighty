@@ -69,7 +69,7 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(titleName,
-                style: Theme.of(context).primaryTextTheme.headline6),
+                style: Theme.of(context).primaryTextTheme.headline3),
           ],
         ),
       ),
@@ -94,13 +94,13 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
                       percentageCompleted != null
                           ? (percentageCompleted * 100).round().toString()
                           : "-",
-                      style: Theme.of(context).primaryTextTheme.bodyText2),
+                      style: Theme.of(context).primaryTextTheme.headline5),
                   Text("%",
-                      style: Theme.of(context).primaryTextTheme.bodyText2),
+                      style: Theme.of(context).primaryTextTheme.subtitle2),
                 ],
               ),
               Text("Completed",
-                  style: Theme.of(context).primaryTextTheme.bodyText2),
+                  style: Theme.of(context).primaryTextTheme.subtitle2),
             ],
           ),
           Divider(),
@@ -109,20 +109,16 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
               Row(
                 children: [
                   Text(totalLost != null ? totalLost.toStringAsFixed(2) : "-",
-                      style: Theme.of(context).primaryTextTheme.bodyText2),
+                      style: Theme.of(context).primaryTextTheme.headline5),
                   SizedBox(width: 4),
                   Text(
                     unitType,
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w800,
-                    ),
+                    style: Theme.of(context).primaryTextTheme.headline4,
                   ),
                 ],
               ),
               Text("Total Lost",
-                  style: Theme.of(context).primaryTextTheme.bodyText2),
+                  style: Theme.of(context).primaryTextTheme.subtitle2),
             ],
           ),
           Divider(),
@@ -131,20 +127,16 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
               Row(
                 children: [
                   Text(amountLeft != null ? amountLeft.toStringAsFixed(2) : "-",
-                      style: Theme.of(context).primaryTextTheme.bodyText2),
+                      style: Theme.of(context).primaryTextTheme.headline5),
                   SizedBox(width: 4),
                   Text(
                     unitType,
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w800,
-                    ),
+                    style: Theme.of(context).primaryTextTheme.headline4,
                   ),
                 ],
               ),
               Text("Left to Go",
-                  style: Theme.of(context).primaryTextTheme.bodyText2),
+                  style: Theme.of(context).primaryTextTheme.subtitle2),
             ],
           ),
         ],

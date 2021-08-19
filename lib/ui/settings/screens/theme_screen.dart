@@ -51,10 +51,7 @@ class _ThemeScreenState extends State<ThemeScreen> {
           Navigator.pop(context);
         },
       ),
-      title: Text(
-        "Theme",
-        style: TextStyle(color: Colors.white)
-      ),
+      title: Text("Theme", style: TextStyle(color: Colors.white)),
     );
   }
 
@@ -70,7 +67,7 @@ class _ThemeScreenState extends State<ThemeScreen> {
 
           return SettingsSwitchTile(
             title: "Enable Dark Theme",
-            titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+            titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
             switchValue: turnOnDarkTheme,
             switchActiveColor: Theme.of(context).highlightColor,
             onToggle: (bool value) {

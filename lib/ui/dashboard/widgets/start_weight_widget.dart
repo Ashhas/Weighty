@@ -24,30 +24,18 @@ class _StartWeightWidgetState extends State<StartWeightWidget> {
                   children: [
                     Text(
                       state.startWeight.toString(),
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                      ),
+                      style: Theme.of(context).primaryTextTheme.headline2
                     ),
                     SizedBox(width: 4),
                     Text(
                       state.unitType,
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.white.withOpacity(0.6),
-                        fontWeight: FontWeight.w800,
-                      ),
+                      style: Theme.of(context).primaryTextTheme.headline4
                     ),
                   ],
                 ),
                 Text(
                   UiConst.weightStartedTitle,
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: Theme.of(context).primaryTextTheme.subtitle1
                 ),
               ],
             ),

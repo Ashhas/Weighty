@@ -66,9 +66,14 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
                     headerStyle: HeaderStyle(
                       titleCentered: true,
                       formatButtonVisible: false,
+                      titleTextStyle:
+                          Theme.of(context).primaryTextTheme.bodyText2,
                     ),
                     daysOfWeekStyle: DaysOfWeekStyle(
-                      weekendStyle: TextStyle(color: Colors.black),
+                      weekdayStyle:
+                          Theme.of(context).primaryTextTheme.bodyText1,
+                      weekendStyle:
+                          Theme.of(context).primaryTextTheme.bodyText1,
                     ),
                     calendarStyle: CalendarStyle(
                       outsideDaysVisible: false,
@@ -77,7 +82,10 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
                           color: Colors.green, shape: BoxShape.circle),
                       todayDecoration:
                           BoxDecoration(color: Theme.of(context).primaryColor),
-                      weekendTextStyle: TextStyle(color: Colors.black),
+                      defaultTextStyle:
+                          Theme.of(context).primaryTextTheme.bodyText1,
+                      weekendTextStyle:
+                          Theme.of(context).primaryTextTheme.bodyText1,
                     ),
                     onDaySelected: _onDaySelected,
                     enabledDayPredicate: (day) {
