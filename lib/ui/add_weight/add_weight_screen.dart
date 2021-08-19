@@ -89,7 +89,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
                     ),
                     onDaySelected: _onDaySelected,
                     enabledDayPredicate: (day) {
-                      if (DateTime.now().isAfter(day)) {
+                      if (DateTime.now().isAfter(day) || isToday(day)) {
                         return true;
                       } else {
                         return false;
@@ -138,5 +138,11 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
         return AddWeightDialog(selectedDay: selectedDay);
       },
     );
+  }
+
+  bool isToday(DateTime dateToCheck) {
+    return DateTime.now().year == dateToCheck.year &&
+        DateTime.now().month == dateToCheck.month &&
+        DateTime.now().day == dateToCheck.day;
   }
 }
