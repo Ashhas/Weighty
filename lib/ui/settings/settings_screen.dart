@@ -75,7 +75,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildGoalTile() {
     return SettingsTile(
       title: "Goal Preferences",
-      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
       leading: Icon(
         Icons.verified,
         color: Colors.grey,
@@ -94,7 +94,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildWeightUnitTile() {
     return SettingsTile(
       title: "Weight Units",
-      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
       leading: Icon(
         Icons.fitness_center,
         color: Colors.grey,
@@ -113,7 +113,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildThemeTile() {
     return SettingsTile(
       title: "Theme",
-      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
       leading: Icon(
         Icons.dark_mode,
         color: Colors.grey,
@@ -132,7 +132,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildRemindersTile() {
     return SettingsTile(
       title: "Reminders",
-      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
       leading: Icon(
         Icons.notifications_active,
         color: Colors.grey,
@@ -150,7 +150,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildAboutTile(String appVersion) {
     return SettingsTile(
       title: "About",
-      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
       leading: Icon(
         Icons.info_outline,
         color: Colors.grey,
@@ -170,7 +170,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildManageDataTile() {
     return SettingsTile(
       title: "Manage Data",
-      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
       leading: Icon(
         Icons.storage,
         color: Colors.grey,
@@ -190,7 +190,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildHelpAndFaqTile() {
     return SettingsTile(
       title: "Help/FAQ",
-      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
       leading: Icon(
         Icons.help_outline,
         color: Colors.grey,

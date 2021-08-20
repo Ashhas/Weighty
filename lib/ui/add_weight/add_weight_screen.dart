@@ -66,9 +66,14 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
                     headerStyle: HeaderStyle(
                       titleCentered: true,
                       formatButtonVisible: false,
+                      titleTextStyle:
+                          Theme.of(context).primaryTextTheme.bodyText2,
                     ),
                     daysOfWeekStyle: DaysOfWeekStyle(
-                      weekendStyle: TextStyle(color: Colors.black),
+                      weekdayStyle:
+                          Theme.of(context).primaryTextTheme.bodyText1,
+                      weekendStyle:
+                          Theme.of(context).primaryTextTheme.bodyText1,
                     ),
                     calendarStyle: CalendarStyle(
                       outsideDaysVisible: false,
@@ -77,11 +82,14 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
                           color: Colors.green, shape: BoxShape.circle),
                       todayDecoration:
                           BoxDecoration(color: Theme.of(context).primaryColor),
-                      weekendTextStyle: TextStyle(color: Colors.black),
+                      defaultTextStyle:
+                          Theme.of(context).primaryTextTheme.bodyText1,
+                      weekendTextStyle:
+                          Theme.of(context).primaryTextTheme.bodyText1,
                     ),
                     onDaySelected: _onDaySelected,
                     enabledDayPredicate: (day) {
-                      if (DateTime.now().isAfter(day)) {
+                      if (DateTime.now().isAfter(day) || isToday(day)) {
                         return true;
                       } else {
                         return false;
@@ -130,5 +138,11 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
         return AddWeightDialog(selectedDay: selectedDay);
       },
     );
+  }
+
+  bool isToday(DateTime dateToCheck) {
+    return DateTime.now().year == dateToCheck.year &&
+        DateTime.now().month == dateToCheck.month &&
+        DateTime.now().day == dateToCheck.day;
   }
 }

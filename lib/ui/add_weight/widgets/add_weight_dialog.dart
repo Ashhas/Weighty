@@ -39,7 +39,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                   (new DateFormat.yMMMd('en_US')
                       .format(widget.selectedDay)
                       .toString()),
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).primaryTextTheme.bodyText2,
                 )),
             Divider(),
             Padding(
@@ -49,7 +49,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                 children: [
                   Text(
                     "Add Weight",
-                    style: Theme.of(context).textTheme.subtitle1,
+                    style: Theme.of(context).primaryTextTheme.bodyText2,
                   ),
                   TextFormField(
                     controller: textFormController,

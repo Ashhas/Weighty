@@ -45,38 +45,22 @@ class _CurrentWeightWidgetState extends State<CurrentWeightWidget>
                     state.measurement != null
                         ? Text(
                             state.measurement.weightEntry.toString(),
-                            style: TextStyle(
-                              fontSize: 25,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w800,
-                            ),
+                            style: Theme.of(context).primaryTextTheme.headline1,
                           )
                         : Text(
                             " - ",
-                            style: TextStyle(
-                              fontSize: 25,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w800,
-                            ),
+                            style: Theme.of(context).primaryTextTheme.headline1
                           ),
                     SizedBox(width: 4),
                     Text(
                       state.unitType,
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.white.withOpacity(0.6),
-                        fontWeight: FontWeight.w800,
-                      ),
+                      style: Theme.of(context).primaryTextTheme.headline4
                     ),
                   ],
                 ),
                 Text(
                   UiConst.weightCurrentTitle,
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: Theme.of(context).primaryTextTheme.subtitle1
                 ),
               ],
             ),

@@ -23,7 +23,7 @@ class _ManageDataScreenState extends State<ManageDataScreen> {
           children: [
             SettingsTile(
               title: "Export Data",
-              titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+              titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
               leading: Icon(
                 Icons.file_download,
                 color: Colors.grey,
