@@ -18,7 +18,7 @@ class FontConst {
   static final numberSmallRegularTextBlack =
       MEDIUM.copyWith(fontSize: 15, color: ColorConst.lightCanvasColor);
   static final numberSmallRegularTextWhite =
-      REGULAR.copyWith(fontSize: 15, color: Colors.white);
+      MEDIUM.copyWith(fontSize: 15, color: Colors.white);
   static final numberBigBoldTextWhite =
       BOLD.copyWith(fontSize: 25, color: Colors.white);
   static final numberMidBoldTextWhite =

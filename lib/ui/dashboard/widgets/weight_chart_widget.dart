@@ -104,6 +104,7 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
         leftTitles: SideTitles(
           showTitles: true,
           interval: 2,
+          getTextStyles: (value) => Theme.of(context).primaryTextTheme.bodyText1
         ),
       ),
       borderData: FlBorderData(show: false),
