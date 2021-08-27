@@ -26,7 +26,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       backgroundColor: Theme.of(context).canvasColor,
       body: Column(
         children: [
-          SizedBox(height: 15),
+          SizedBox(height: 5),
           WeightProgressCard(),
           SizedBox(height: 15),
           WeightStatsWidget(),
@@ -38,6 +38,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   _buildAppBar() {
     return AppBar(
       elevation: 0,
+      centerTitle: true,
       backgroundColor: Theme.of(context).canvasColor,
       title: Container(
         height: 30,
@@ -48,7 +49,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ),
       ),
-      centerTitle: true,
     );
   }
 }

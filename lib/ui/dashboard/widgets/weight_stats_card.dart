@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
-import 'package:weighty/ui/dashboard/widgets/small_weight_chart_widget.dart';
+import 'package:weighty/ui/dashboard/widgets/weight_chart_widget.dart';
 
 class WeightStatsWidget extends StatefulWidget {
   WeightStatsWidget() : super();
@@ -24,27 +24,30 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
                 decoration: BoxDecoration(
                   color: Theme.of(context).backgroundColor,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15),
+                    topLeft: Radius.circular(25),
+                    topRight: Radius.circular(25),
                   ),
                 ),
                 child: BlocBuilder<DashboardBloc, DashboardState>(
                   builder: (context, state) {
                     if (state is DashboardLoaded) {
                       return IntrinsicHeight(
-                        child: Column(
-                          children: <Widget>[
-                            SizedBox(height: 20),
-                            _titleView(titleName: "Statistics"),
-                            _simpleStatsRow(
-                                totalLost: state.totalLost,
-                                amountLeft: state.amountLeft,
-                                percentageCompleted: state.percentageDone,
-                                unitType: state.unitType),
-                            SizedBox(height: 15),
-                            _titleView(titleName: "Weight Graph"),
-                            SmallWeightChartWidget(),
-                          ],
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 20),
+                          child: Column(
+                            children: [
+                              _titleView(titleName: "Statistics"),
+                              _simpleStatsRow(
+                                  totalLost: state.totalLost,
+                                  amountLeft: state.amountLeft,
+                                  percentageCompleted: state.percentageDone,
+                                  unitType: state.unitType),
+                              SizedBox(height: 30),
+                              _titleView(titleName: "Weight Graph"),
+                              SmallWeightChartWidget(),
+                            ],
+                          ),
                         ),
                       );
                     } else {
@@ -62,7 +65,7 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
 
   Widget _titleView({String titleName}) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.only(bottom: 10),
       child: Container(
         height: 25,
         child: Row(
@@ -82,65 +85,94 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
       double percentageCompleted,
       String unitType}) {
     return Padding(
-      padding: EdgeInsets.only(top: 20, bottom: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Column(
-            children: [
-              Row(
-                children: [
-                  Text(
-                      percentageCompleted != null
-                          ? (percentageCompleted * 100).round().toString()
-                          : "-",
-                      style: Theme.of(context).primaryTextTheme.headline5),
-                  Text("%",
-                      style: Theme.of(context).primaryTextTheme.subtitle2),
-                ],
+      padding: EdgeInsets.symmetric(horizontal: 5),
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        _statItemPercentage(
+          numberValue: percentageCompleted,
+          itemTitle: "Completed",
+        ),
+        Divider(),
+        _statItemGeneral(
+          numberValue: totalLost,
+          unitType: unitType,
+          itemTitle: "Total Lost",
+        ),
+        Divider(),
+        _statItemGeneral(
+          numberValue: amountLeft,
+          unitType: unitType,
+          itemTitle: "Left to Go",
+        ),
+      ]),
+    );
+  }
+
+  Widget _statItemPercentage({double numberValue, String itemTitle}) {
+    return Column(
+      children: [
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              width: 70,
+              height: 70,
+              decoration: BoxDecoration(
+                color: Theme.of(context).shadowColor,
+                shape: BoxShape.circle,
               ),
-              Text("Completed",
-                  style: Theme.of(context).primaryTextTheme.subtitle2),
-            ],
-          ),
-          Divider(),
-          Column(
-            children: [
-              Row(
-                children: [
-                  Text(totalLost != null ? totalLost.toStringAsFixed(2) : "-",
-                      style: Theme.of(context).primaryTextTheme.headline5),
-                  SizedBox(width: 4),
-                  Text(
-                    unitType,
-                    style: Theme.of(context).primaryTextTheme.headline4,
-                  ),
-                ],
+            ),
+            Row(
+              children: [
+                Text(
+                    numberValue != null
+                        ? (numberValue * 100).round().toString()
+                        : "-",
+                    style: Theme.of(context).primaryTextTheme.headline5),
+                Text("%", style: Theme.of(context).primaryTextTheme.subtitle2),
+              ],
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(itemTitle, style: Theme.of(context).primaryTextTheme.subtitle2),
+      ],
+    );
+  }
+
+  Widget _statItemGeneral(
+      {double numberValue, String unitType, String itemTitle}) {
+    return Column(
+      children: [
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              width: 70,
+              height: 70,
+              decoration: BoxDecoration(
+                color: Theme.of(context).shadowColor,
+                shape: BoxShape.circle,
               ),
-              Text("Total Lost",
-                  style: Theme.of(context).primaryTextTheme.subtitle2),
-            ],
-          ),
-          Divider(),
-          Column(
-            children: [
-              Row(
-                children: [
-                  Text(amountLeft != null ? amountLeft.toStringAsFixed(2) : "-",
-                      style: Theme.of(context).primaryTextTheme.headline5),
-                  SizedBox(width: 4),
-                  Text(
-                    unitType,
-                    style: Theme.of(context).primaryTextTheme.headline4,
-                  ),
-                ],
-              ),
-              Text("Left to Go",
-                  style: Theme.of(context).primaryTextTheme.subtitle2),
-            ],
-          ),
-        ],
-      ),
+            ),
+            Row(
+              children: [
+                Text(numberValue != null ? numberValue.toStringAsFixed(1) : "-",
+                    style: Theme.of(context).primaryTextTheme.headline5),
+                Text(
+                  unitType,
+                  style: Theme.of(context).primaryTextTheme.headline4,
+                ),
+              ],
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(itemTitle, style: Theme.of(context).primaryTextTheme.subtitle2),
+      ],
     );
   }
 }
