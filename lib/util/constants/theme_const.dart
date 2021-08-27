@@ -12,6 +12,7 @@ class AppTheme {
       canvasColor: ColorConst.lightCanvasColor,
       backgroundColor: ColorConst.lightBackgroundColor,
       bottomAppBarColor: ColorConst.lightBottomAppBar,
+      hintColor: Colors.grey,
       primaryTextTheme: TextTheme(
         headline1: FontConst.numberBigBoldTextWhite,
         headline2: FontConst.numberMidBoldTextWhite,
@@ -35,6 +36,7 @@ class AppTheme {
       canvasColor: ColorConst.darkCanvasColor,
       backgroundColor: ColorConst.darkBackgroundColor,
       bottomAppBarColor: ColorConst.darkBottomAppBar,
+      hintColor: Colors.grey,
       primaryTextTheme: TextTheme(
         headline1: FontConst.numberBigBoldTextWhite,
         headline2: FontConst.numberMidBoldTextWhite,

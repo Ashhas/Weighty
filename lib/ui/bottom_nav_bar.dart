@@ -79,7 +79,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         unselectedLabelStyle: TextStyle(fontSize: 12),
         backgroundColor: Theme.of(context).bottomAppBarColor,
         selectedItemColor: Theme.of(context).focusColor,
-        unselectedItemColor: Theme.of(context).shadowColor,
+        unselectedItemColor: Theme.of(context).hintColor,
         elevation: 6.0,
         onTap: _onItemTapped,
       ),
