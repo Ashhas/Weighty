@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
 import 'package:weighty/data/model/measurement.dart';
+import 'package:weighty/util/constants/color_const.dart';
 
 class SmallWeightChartWidget extends StatefulWidget {
   SmallWeightChartWidget() : super();
@@ -26,10 +27,8 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
             child: Container(
               child: Padding(
                 padding: const EdgeInsets.only(
-                  top: 19,
-                  bottom: 12,
-                  left: 15,
-                  right: 15,
+                  top: 10,
+                  bottom: 10,
                 ),
                 child: state.filteredMeasurements != null
                     ? LineChart(
@@ -49,34 +48,18 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
 
   LineChartData mainData(double startWeight, double targetWeight,
       List<MeasurementModel> filteredList) {
-    var hz = [
-      HorizontalLine(
-        color: Colors.grey.withOpacity(0.2),
-        y: startWeight,
-        dashArray: dashLine,
-        label: HorizontalLineLabel(
-          show: true,
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
-      HorizontalLine(
-        color: Colors.grey.withOpacity(0.2),
-        y: targetWeight,
-        dashArray: dashLine,
-        label: HorizontalLineLabel(
-          show: true,
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
-    ];
-
     return LineChartData(
       gridData: FlGridData(
         show: true,
         drawVerticalLine: false,
-        drawHorizontalLine: false,
-        verticalInterval: 1,
-        horizontalInterval: 5,
+        drawHorizontalLine: true,
+        horizontalInterval: 1,
+        getDrawingHorizontalLine: (_) {
+          return FlLine(
+            color: Colors.grey.withOpacity(0.2),
+            dashArray: dashLine,
+          );
+        },
       ),
       titlesData: FlTitlesData(
         show: true,
@@ -119,14 +102,15 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
           margin: 8,
         ),
         leftTitles: SideTitles(
-          showTitles: false,
+          showTitles: true,
+          interval: 2,
         ),
       ),
       borderData: FlBorderData(show: false),
       minX: filteredList.first.dateAdded.day.toDouble(),
       maxX: filteredList.last.dateAdded.day.toDouble() + 0.5,
-      minY: targetWeight,
-      maxY: startWeight + 2,
+      minY: filteredList.first.weightEntry - 2,
+      maxY: filteredList.last.weightEntry + 2,
       lineBarsData: [
         LineChartBarData(
           spots: filteredList
@@ -141,20 +125,30 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
             show: true,
           ),
           belowBarData: BarAreaData(
-            show: true,
-            spotsLine: BarAreaSpotsLine(
-              show: true,
-              flLineStyle: FlLine(
-                color: Colors.grey.withOpacity(0.5),
-                strokeWidth: 0.6,
-              ),
-            ),
-            colors: underBarColors.toList(),
+            show: false,
           ),
         )
       ],
+      lineTouchData: LineTouchData(
+        enabled: true,
+        handleBuiltInTouches: true,
+        touchTooltipData: LineTouchTooltipData(
+            tooltipBgColor: ColorConst.lightCanvasColor,
+            getTooltipItems: (value) {
+              return value.map((lineSpot) {
+                return LineTooltipItem(
+                    lineSpot.y.toString(), TextStyle(color: Colors.white));
+              }).toList();
+            }),
+      ),
       extraLinesData: ExtraLinesData(
-        horizontalLines: hz,
+        horizontalLines: [
+          HorizontalLine(
+            color: Colors.grey.withOpacity(0.2),
+            y: filteredList.first.weightEntry - 2,
+            dashArray: dashLine,
+          )
+        ],
       ),
     );
   }
