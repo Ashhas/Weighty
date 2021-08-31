@@ -128,7 +128,7 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
                         ? (numberValue * 100).round().toString()
                         : "-",
                     style: Theme.of(context).primaryTextTheme.headline5),
-                Text("%", style: Theme.of(context).primaryTextTheme.subtitle2),
+                Text("%", style: Theme.of(context).primaryTextTheme.headline5),
               ],
             ),
           ],

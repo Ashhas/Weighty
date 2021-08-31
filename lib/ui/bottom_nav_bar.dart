@@ -67,11 +67,17 @@ class _BottomNavBarState extends State<BottomNavBar> {
             label: UiConst.dashboardTitle,
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.add), label: UiConst.addTitle),
+            icon: Icon(Icons.add),
+            label: UiConst.addTitle,
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.access_time), label: UiConst.historyTitle),
+            icon: Icon(Icons.access_time),
+            label: UiConst.historyTitle,
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.more_horiz_sharp), label: UiConst.settingsTitle),
+            icon: Icon(Icons.more_horiz_sharp),
+            label: UiConst.settingsTitle,
+          ),
         ],
         currentIndex: _selectedIndex,
         type: BottomNavigationBarType.fixed,
