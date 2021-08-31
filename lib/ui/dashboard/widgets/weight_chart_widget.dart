@@ -110,8 +110,8 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
       borderData: FlBorderData(show: false),
       minX: filteredList.first.dateAdded.day.toDouble(),
       maxX: filteredList.last.dateAdded.day.toDouble() + 0.5,
-      minY: filteredList.first.weightEntry - 2,
-      maxY: filteredList.last.weightEntry + 2,
+      minY: filteredList.last.weightEntry - 2,
+      maxY: filteredList.first.weightEntry + 2,
       lineBarsData: [
         LineChartBarData(
           spots: filteredList
