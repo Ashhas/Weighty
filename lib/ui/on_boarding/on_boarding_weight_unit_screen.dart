@@ -30,22 +30,26 @@ class _OnBoardingUnitScreenState extends State<OnBoardingUnitScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              SizedBox(height: 40),
-              Center(
-                child: Text(
-                  "Input your weight information to get started",
-                  style: Theme.of(context).primaryTextTheme.bodyText2,
-                ),
-              ),
-              SizedBox(
-                height: 70,
-              ),
+              SizedBox(height: 60),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     "Choose your weight unit",
-                    style: Theme.of(context).primaryTextTheme.bodyText2,
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    "Choose which unit type you want to use",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w300,
+                      color: Colors.black,
+                    ),
                   ),
                   SizedBox(height: 5),
                   _feedbackMessageWidgets(),
@@ -54,7 +58,7 @@ class _OnBoardingUnitScreenState extends State<OnBoardingUnitScreen> {
                     focusColor: Colors.white,
                     dropdownColor: Colors.white,
                     value: _chosenValue,
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(fontSize: 16, color: Colors.white),
                     iconEnabledColor: Colors.black,
                     items: <String>[
                       'KG',
@@ -85,7 +89,7 @@ class _OnBoardingUnitScreenState extends State<OnBoardingUnitScreen> {
               ),
               SizedBox(height: 70),
               AspectRatio(
-                aspectRatio: 20 / 3,
+                aspectRatio: 20 / 2.4,
                 child: ElevatedButton(
                   onPressed: () {
                     if (_chosenValue != null) {
@@ -108,11 +112,14 @@ class _OnBoardingUnitScreenState extends State<OnBoardingUnitScreen> {
                   },
                   child: Text(
                     "Next",
-                    style: TextStyle(color: Colors.white),
+                    style: Theme.of(context).primaryTextTheme.subtitle1,
                   ),
                   style: ElevatedButton.styleFrom(
                     primary: Theme.of(context).accentColor,
                     onPrimary: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
                   ),
                 ),
               ),

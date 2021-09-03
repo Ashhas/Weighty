@@ -10,8 +10,10 @@ class AppTheme {
       focusColor: ColorConst.lightFocusColor,
       shadowColor: ColorConst.lightShadowColor,
       canvasColor: ColorConst.lightCanvasColor,
+      cardColor: ColorConst.lightBackgroundColor,
       backgroundColor: ColorConst.lightBackgroundColor,
       bottomAppBarColor: ColorConst.lightBottomAppBar,
+      hintColor: Colors.grey,
       primaryTextTheme: TextTheme(
         headline1: FontConst.numberBigBoldTextWhite,
         headline2: FontConst.numberMidBoldTextWhite,
@@ -33,8 +35,10 @@ class AppTheme {
       focusColor: ColorConst.darkFocusColor,
       shadowColor: ColorConst.darkShadowColor,
       canvasColor: ColorConst.darkCanvasColor,
+      cardColor: ColorConst.darkBackgroundColor,
       backgroundColor: ColorConst.darkBackgroundColor,
       bottomAppBarColor: ColorConst.darkBottomAppBar,
+      hintColor: Colors.grey,
       primaryTextTheme: TextTheme(
         headline1: FontConst.numberBigBoldTextWhite,
         headline2: FontConst.numberMidBoldTextWhite,

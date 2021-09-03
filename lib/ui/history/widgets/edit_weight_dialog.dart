@@ -30,6 +30,7 @@ class _EditWeightDialogState extends State<EditWeightDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: Theme.of(context).cardColor,
       content: Form(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -41,9 +42,13 @@ class _EditWeightDialogState extends State<EditWeightDialog> {
                 children: [
                   Text(
                     "Edit Weight",
-                    style: Theme.of(context).textTheme.subtitle1,
+                    style: Theme.of(context).primaryTextTheme.bodyText2,
                   ),
-                  TextFormField(controller: textFormController),
+                  TextFormField(
+                    controller: textFormController,
+                    keyboardType: TextInputType.number,
+                    style: Theme.of(context).primaryTextTheme.bodyText1,
+                  ),
                 ],
               ),
             ),
@@ -57,7 +62,7 @@ class _EditWeightDialogState extends State<EditWeightDialog> {
                       Icons.check,
                       color: Colors.white,
                     ),
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).canvasColor,
                     onPressed: () {
                       BlocProvider.of<HistoryBloc>(context).add(
                         EditMeasurement(widget.selectedMeasurement,

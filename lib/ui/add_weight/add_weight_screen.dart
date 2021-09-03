@@ -81,7 +81,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
                       markerDecoration: BoxDecoration(
                           color: Colors.green, shape: BoxShape.circle),
                       todayDecoration:
-                          BoxDecoration(color: Theme.of(context).primaryColor),
+                          BoxDecoration(color: Theme.of(context).accentColor),
                       defaultTextStyle:
                           Theme.of(context).primaryTextTheme.bodyText1,
                       weekendTextStyle:
