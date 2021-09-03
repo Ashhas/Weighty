@@ -40,43 +40,45 @@ class _OnBoardingGoalScreenState extends State<OnBoardingGoalScreen> {
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              SizedBox(height: 40),
-              Center(
-                child: Text(
-                  "Input your weight information to get started",
-                  style: Theme.of(context).primaryTextTheme.bodyText2,
+              SizedBox(
+                height: 60,
+              ),
+              Text(
+                "Enter your goal weight",
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
                 ),
               ),
-              SizedBox(
-                height: 70,
+              SizedBox(height: 5),
+              Text(
+                "Enter the weight you're working towards",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w300,
+                  color: Colors.black,
+                ),
               ),
-              SizedBox(height: 20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Enter Goal Weight",
-                    style: Theme.of(context).primaryTextTheme.bodyText2,
-                  ),
-                  SizedBox(height: 5),
-                  _feedbackMessageWidgets(),
-                  SizedBox(height: 5),
-                  TextField(
-                    controller: targetWeightController,
-                    autofocus: true,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        fillColor: Color(0xfff3f3f4),
-                        filled: true),
-                  ),
-                ],
+              SizedBox(height: 35),
+              _feedbackMessageWidgets(),
+              SizedBox(height: 5),
+              TextField(
+                controller: targetWeightController,
+                keyboardType: TextInputType.number,
+                autofocus: true,
+                obscureText: false,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  fillColor: Color(0xfff3f3f4),
+                  filled: true,
+                ),
               ),
               SizedBox(height: 40),
               AspectRatio(
-                aspectRatio: 20 / 3,
+                aspectRatio: 20 / 2.4,
                 child: ElevatedButton(
                   onPressed: () {
                     if (targetWeightController.text.isNotEmpty) {
@@ -99,6 +101,9 @@ class _OnBoardingGoalScreenState extends State<OnBoardingGoalScreen> {
                   style: ElevatedButton.styleFrom(
                     primary: Theme.of(context).accentColor,
                     onPrimary: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
                   ),
                 ),
               ),

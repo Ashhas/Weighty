@@ -7,7 +7,7 @@ class FontConst {
   );
 
   static const MEDIUM = TextStyle(
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w600,
   );
 
   static const REGULAR = TextStyle(
@@ -16,9 +16,9 @@ class FontConst {
 
   //Numbers TextStyle
   static final numberSmallRegularTextBlack =
-      REGULAR.copyWith(fontSize: 16, color: Colors.black);
+      MEDIUM.copyWith(fontSize: 15, color: ColorConst.lightCanvasColor);
   static final numberSmallRegularTextWhite =
-      REGULAR.copyWith(fontSize: 16, color: Colors.white);
+      MEDIUM.copyWith(fontSize: 15, color: Colors.white);
   static final numberBigBoldTextWhite =
       BOLD.copyWith(fontSize: 25, color: Colors.white);
   static final numberMidBoldTextWhite =
@@ -36,7 +36,7 @@ class FontConst {
 
   //TitleView TextStyle
   static final titleViewTextBlack =
-      MEDIUM.copyWith(fontSize: 20, color: Colors.black);
+      MEDIUM.copyWith(fontSize: 17, color: Colors.black);
   static final titleViewTextWhite =
       MEDIUM.copyWith(fontSize: 20, color: Colors.white);
 
@@ -44,7 +44,7 @@ class FontConst {
   static final smallBoldTextGreyOpacity =
       BOLD.copyWith(fontSize: 15, color: Colors.grey.withOpacity(0.6));
   static final smallBoldTextWhiteOpacity =
-  BOLD.copyWith(fontSize: 15, color: Colors.white.withOpacity(0.6));
+      BOLD.copyWith(fontSize: 15, color: Colors.white.withOpacity(0.6));
 
   //SubTitle TextStyle
   static final subtitleBigTextBlack =
@@ -52,7 +52,7 @@ class FontConst {
   static final subtitleBigTextWhite =
       MEDIUM.copyWith(fontSize: 15, color: Colors.white);
   static final subtitleSmallTextBlack =
-      REGULAR.copyWith(fontSize: 15, color: Colors.black);
+      REGULAR.copyWith(fontSize: 13, color: Colors.black);
   static final subtitleSmallTextWhite =
-      REGULAR.copyWith(fontSize: 15, color: Colors.white);
+      REGULAR.copyWith(fontSize: 13, color: Colors.white);
 }
