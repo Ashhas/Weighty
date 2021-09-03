@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:weighty/ui/on_boarding/on_boarding_start_weight_screen.dart';
 import 'package:weighty/ui/on_boarding/on_boarding_weight_unit_screen.dart';
 
 class OnBoardingEntryScreen extends StatefulWidget {
@@ -25,13 +24,13 @@ class _OnBoardingEntryScreenState extends State<OnBoardingEntryScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   SizedBox(
-                    height: 70.0,
+                    height: 90.0,
                   ),
                   Column(
                     children: [
                       Container(
-                        height: MediaQuery.of(context).size.width * 0.2,
-                        width: MediaQuery.of(context).size.height * 0.2,
+                        height: MediaQuery.of(context).size.width * 0.25,
+                        width: MediaQuery.of(context).size.height * 0.25,
                         child: Image(
                           image: AssetImage(
                             "assets/weighty_logo_lightblue.png",
@@ -39,29 +38,27 @@ class _OnBoardingEntryScreenState extends State<OnBoardingEntryScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: 15.0,
+                        height: 100.0,
                       ),
                       Text(
                         "Weighty",
                         style: TextStyle(
-                            fontSize: 30.5,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.black),
+                          fontSize: 24,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                        ),
                       ),
                     ],
                   ),
                   SizedBox(
-                    height: 120.0,
+                    height: 30.0,
                   ),
                   Center(
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40.0),
                       child: Text(
                         "Your personal weight tracker and management app!",
-                        style: TextStyle(
-                            fontSize: 15.5,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black),
+                        style: Theme.of(context).primaryTextTheme.bodyText2,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -70,9 +67,9 @@ class _OnBoardingEntryScreenState extends State<OnBoardingEntryScreen> {
               ),
               Container(
                 alignment: AlignmentDirectional.bottomCenter,
-                margin: EdgeInsets.only(bottom: 20.0),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints.tightFor(width: 350, height: 50),
+                margin: EdgeInsets.only(bottom: 35.0),
+                child: AspectRatio(
+                  aspectRatio: 20 / 2.4,
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(
@@ -86,14 +83,14 @@ class _OnBoardingEntryScreenState extends State<OnBoardingEntryScreen> {
                     },
                     child: Text(
                       "Get Started",
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
+                      style: Theme.of(context).primaryTextTheme.subtitle1,
                     ),
                     style: ElevatedButton.styleFrom(
                       primary: Theme.of(context).accentColor,
                       onPrimary: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
                     ),
                   ),
                 ),
