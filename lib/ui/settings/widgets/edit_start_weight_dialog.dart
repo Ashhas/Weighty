@@ -29,6 +29,7 @@ class _EditStartWeightDialogState extends State<EditStartWeightDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: Theme.of(context).cardColor,
       content: Form(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -40,10 +41,12 @@ class _EditStartWeightDialogState extends State<EditStartWeightDialog> {
                 children: [
                   Text(
                     "Start Weight",
-                    style: Theme.of(context).textTheme.subtitle1,
+                    style: Theme.of(context).primaryTextTheme.bodyText2,
                   ),
                   TextFormField(
                     controller: textFormController,
+                    keyboardType: TextInputType.number,
+                    style: Theme.of(context).primaryTextTheme.subtitle1,
                   ),
                 ],
               ),
@@ -58,7 +61,7 @@ class _EditStartWeightDialogState extends State<EditStartWeightDialog> {
                       Icons.check,
                       color: Colors.white,
                     ),
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).highlightColor,
                     onPressed: () {
                       BlocProvider.of<GoalsBloc>(context).add(ChangeStartWeight(
                           startWeight: textFormController.text));

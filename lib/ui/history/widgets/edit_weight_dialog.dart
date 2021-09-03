@@ -42,7 +42,7 @@ class _EditWeightDialogState extends State<EditWeightDialog> {
                 children: [
                   Text(
                     "Edit Weight",
-                    style: Theme.of(context).textTheme.subtitle1,
+                    style: Theme.of(context).primaryTextTheme.bodyText2,
                   ),
                   TextFormField(
                     controller: textFormController,
@@ -62,7 +62,7 @@ class _EditWeightDialogState extends State<EditWeightDialog> {
                       Icons.check,
                       color: Colors.white,
                     ),
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).highlightColor,
                     onPressed: () {
                       BlocProvider.of<HistoryBloc>(context).add(
                         EditMeasurement(widget.selectedMeasurement,
