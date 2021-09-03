@@ -45,6 +45,7 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
                                   unitType: state.unitType),
                               SizedBox(height: 30),
                               _titleView(titleName: "Weight Graph"),
+                              SizedBox(height: 5),
                               SmallWeightChartWidget(),
                             ],
                           ),
