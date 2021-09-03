@@ -25,18 +25,17 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
           return AspectRatio(
             aspectRatio: 2.3,
             child: Container(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  top: 10,
-                  bottom: 10,
-                ),
-                child: state.filteredMeasurements != null
-                    ? LineChart(
-                        mainData(state.startWeight, state.targetWeight,
-                            state.filteredMeasurements),
-                      )
-                    : Container(),
-              ),
+              child: state.filteredMeasurements != null &&
+                      state.filteredMeasurements.length != 0
+                  ? LineChart(
+                      mainData(state.startWeight, state.targetWeight,
+                          state.filteredMeasurements),
+                    )
+                  : Container(
+                      child: Center(
+                        child: Text("No Data"),
+                      ),
+                    ),
             ),
           );
         } else {
@@ -64,47 +63,23 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
       titlesData: FlTitlesData(
         show: true,
         bottomTitles: SideTitles(
-          showTitles: false,
-          reservedSize: 35,
-          getTextStyles: (value) => const TextStyle(
-              color: Color(0xff68737d),
-              fontWeight: FontWeight.bold,
-              fontSize: 16),
-          getTitles: (value) {
-            switch (value.toInt()) {
-              case 1:
-                return 'JAN';
-              case 2:
-                return 'FEB';
-              case 3:
-                return 'MRT';
-              case 4:
-                return 'APR';
-              case 5:
-                return 'MAY';
-              case 6:
-                return 'JUN';
-              case 7:
-                return 'JUL';
-              case 8:
-                return 'AUG';
-              case 9:
-                return 'SEP';
-              case 10:
-                return 'OCT';
-              case 11:
-                return 'NOV';
-              case 12:
-                return 'DEC';
-            }
-            return '';
-          },
+          showTitles: true,
           margin: 8,
+          getTextStyles: (value) =>
+              Theme.of(context).primaryTextTheme.subtitle2,
+          getTitles: (value) {
+            return (value.toInt().toString() +
+                "/" +
+                DateTime.now().month.toString());
+          },
         ),
         leftTitles: SideTitles(
           showTitles: true,
-          interval: 2,
-          getTextStyles: (value) => Theme.of(context).primaryTextTheme.bodyText1
+          interval: 1,
+          margin: 10,
+          reservedSize: 30,
+          getTextStyles: (value) =>
+              Theme.of(context).primaryTextTheme.subtitle2,
         ),
       ),
       borderData: FlBorderData(show: false),
@@ -134,22 +109,16 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
         enabled: true,
         handleBuiltInTouches: true,
         touchTooltipData: LineTouchTooltipData(
-            tooltipBgColor: ColorConst.lightCanvasColor,
-            getTooltipItems: (value) {
-              return value.map((lineSpot) {
+          tooltipBgColor: ColorConst.lightCanvasColor,
+          getTooltipItems: (value) {
+            return value.map(
+              (lineSpot) {
                 return LineTooltipItem(
                     lineSpot.y.toString(), TextStyle(color: Colors.white));
-              }).toList();
-            }),
-      ),
-      extraLinesData: ExtraLinesData(
-        horizontalLines: [
-          HorizontalLine(
-            color: Colors.grey.withOpacity(0.2),
-            y: filteredList.first.weightEntry - 2,
-            dashArray: dashLine,
-          )
-        ],
+              },
+            ).toList();
+          },
+        ),
       ),
     );
   }

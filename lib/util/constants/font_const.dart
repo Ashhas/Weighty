@@ -52,7 +52,7 @@ class FontConst {
   static final subtitleBigTextWhite =
       MEDIUM.copyWith(fontSize: 15, color: Colors.white);
   static final subtitleSmallTextBlack =
-      REGULAR.copyWith(fontSize: 15, color: Colors.black);
+      REGULAR.copyWith(fontSize: 13, color: Colors.black);
   static final subtitleSmallTextWhite =
-      REGULAR.copyWith(fontSize: 15, color: Colors.white);
+      REGULAR.copyWith(fontSize: 13, color: Colors.white);
 }
