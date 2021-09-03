@@ -55,7 +55,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                   TextFormField(
                     controller: textFormController,
                     keyboardType: TextInputType.number,
-                    style: Theme.of(context).primaryTextTheme.subtitle1,
+                    style: Theme.of(context).primaryTextTheme.bodyText1,
                   ),
                 ],
               ),
@@ -70,7 +70,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                       Icons.check,
                       color: Colors.white,
                     ),
-                    color: Theme.of(context).highlightColor,
+                    color: Theme.of(context).canvasColor,
                     onPressed: () {
                       BlocProvider.of<AddWeightBloc>(context).add(
                           AddNewMeasurement(

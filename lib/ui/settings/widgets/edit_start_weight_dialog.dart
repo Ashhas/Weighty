@@ -46,7 +46,7 @@ class _EditStartWeightDialogState extends State<EditStartWeightDialog> {
                   TextFormField(
                     controller: textFormController,
                     keyboardType: TextInputType.number,
-                    style: Theme.of(context).primaryTextTheme.subtitle1,
+                    style: Theme.of(context).primaryTextTheme.bodyText1,
                   ),
                 ],
               ),
@@ -61,7 +61,7 @@ class _EditStartWeightDialogState extends State<EditStartWeightDialog> {
                       Icons.check,
                       color: Colors.white,
                     ),
-                    color: Theme.of(context).highlightColor,
+                    color: Theme.of(context).canvasColor,
                     onPressed: () {
                       BlocProvider.of<GoalsBloc>(context).add(ChangeStartWeight(
                           startWeight: textFormController.text));
