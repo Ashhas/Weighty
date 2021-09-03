@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
-import 'package:weighty/ui/dashboard/widgets/weight_chart_widget.dart';
+import 'package:weighty/ui/dashboard/widgets/chart_widget.dart';
 
 class WeightStatsWidget extends StatefulWidget {
   WeightStatsWidget() : super();
@@ -128,6 +128,7 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
                         ? (numberValue * 100).round().toString()
                         : "-",
                     style: Theme.of(context).primaryTextTheme.headline5),
+                SizedBox(width: 3),
                 Text("%", style: Theme.of(context).primaryTextTheme.headline5),
               ],
             ),
@@ -160,6 +161,7 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
               children: [
                 Text(numberValue != null ? numberValue.toStringAsFixed(1) : "-",
                     style: Theme.of(context).primaryTextTheme.headline5),
+                SizedBox(width: 3),
                 Text(
                   unitType,
                   style: Theme.of(context).primaryTextTheme.headline4,
