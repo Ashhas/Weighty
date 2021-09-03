@@ -51,12 +51,14 @@ class _OnBoardingStartScreenState extends State<OnBoardingStartScreen> {
                   SizedBox(height: 5),
                   TextField(
                     controller: startWeightController,
+                    keyboardType: TextInputType.number,
                     autofocus: true,
                     obscureText: false,
                     decoration: InputDecoration(
-                        border: InputBorder.none,
-                        fillColor: Color(0xfff3f3f4),
-                        filled: true),
+                      border: InputBorder.none,
+                      fillColor: Color(0xfff3f3f4),
+                      filled: true,
+                    ),
                   ),
                 ],
               ),

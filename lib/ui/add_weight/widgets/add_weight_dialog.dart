@@ -29,6 +29,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: Theme.of(context).canvasColor,
       content: Form(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -53,6 +54,8 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                   ),
                   TextFormField(
                     controller: textFormController,
+                    keyboardType: TextInputType.number,
+                    style: Theme.of(context).primaryTextTheme.subtitle1,
                   ),
                 ],
               ),
@@ -67,7 +70,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                       Icons.check,
                       color: Colors.white,
                     ),
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).backgroundColor,
                     onPressed: () {
                       BlocProvider.of<AddWeightBloc>(context).add(
                           AddNewMeasurement(

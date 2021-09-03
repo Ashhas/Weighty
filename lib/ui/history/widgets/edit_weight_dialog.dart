@@ -30,6 +30,7 @@ class _EditWeightDialogState extends State<EditWeightDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: Theme.of(context).canvasColor,
       content: Form(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -43,7 +44,11 @@ class _EditWeightDialogState extends State<EditWeightDialog> {
                     "Edit Weight",
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
-                  TextFormField(controller: textFormController),
+                  TextFormField(
+                    controller: textFormController,
+                    keyboardType: TextInputType.number,
+                    style: Theme.of(context).primaryTextTheme.subtitle1,
+                  ),
                 ],
               ),
             ),

@@ -65,12 +65,14 @@ class _OnBoardingGoalScreenState extends State<OnBoardingGoalScreen> {
                   SizedBox(height: 5),
                   TextField(
                     controller: targetWeightController,
+                    keyboardType: TextInputType.number,
                     autofocus: true,
                     obscureText: false,
                     decoration: InputDecoration(
-                        border: InputBorder.none,
-                        fillColor: Color(0xfff3f3f4),
-                        filled: true),
+                      border: InputBorder.none,
+                      fillColor: Color(0xfff3f3f4),
+                      filled: true,
+                    ),
                   ),
                 ],
               ),
