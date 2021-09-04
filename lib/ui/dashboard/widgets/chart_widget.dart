@@ -33,7 +33,7 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
                     )
                   : Container(
                       child: Center(
-                        child: Text("No Data"),
+                        child: Text("No Data", style: Theme.of(context).primaryTextTheme.subtitle2),
                       ),
                     ),
             ),

@@ -45,8 +45,8 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
 
     //Add first entry to db
     Box _weightInfo = await Hive.openBox('weightInfo');
-    _weightInfo
-        .add(MeasurementModel(DateTime.now(), double.parse(event.startWeight)));
+    _weightInfo.add(MeasurementModel(
+        DateTime.now(), double.parse(event.startWeight.replaceAll(',', '.'))));
   }
 
   Stream<OnBoardingState> _mapAddedWeightGoalToState(
@@ -54,7 +54,8 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
     final sharedPrefService = await SharedPreferencesService.instance;
 
     //Saving Initial TargetWeight
-    sharedPrefService.setTargetWeight(double.parse(event.targetWeight));
+    sharedPrefService
+        .setTargetWeight(double.parse(event.targetWeight.replaceAll(',', '.')));
 
     //Set OnBoarding as seen
     sharedPrefService.setOnBoardingSeenBefore(true);
