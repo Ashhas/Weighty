@@ -50,11 +50,10 @@ class GoalsBloc extends Bloc<GoalsEvent, GoalsState> {
 
   Stream<GoalsState> _mapChangeStartWeightToState(
       String newStartWeight) async* {
-    print(newStartWeight);
-
     //Update Information
     final sharedPrefService = await SharedPreferencesService.instance;
-    sharedPrefService.setStartWeight(double.parse(newStartWeight));
+    sharedPrefService
+        .setStartWeight(double.parse(newStartWeight.replaceAll(',', '.')));
 
     yield GoalsLoading();
 
@@ -80,7 +79,8 @@ class GoalsBloc extends Bloc<GoalsEvent, GoalsState> {
       String newTargetWeight) async* {
     //Update Information
     final sharedPrefService = await SharedPreferencesService.instance;
-    sharedPrefService.setTargetWeight(double.parse(newTargetWeight));
+    sharedPrefService
+        .setTargetWeight(double.parse(newTargetWeight.replaceAll(',', '.')));
 
     yield GoalsLoading();
 

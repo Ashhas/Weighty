@@ -35,11 +35,11 @@ class AddWeightBloc extends Bloc<AddWeightEvent, AddWeightState> {
   Stream<AddWeightState> _mapAddNewMeasurementToState(
       DateTime measurementDate, String measurementInput) async* {
     if (isToday(measurementDate)) {
-      await measurementRepository.setNewMeasurement(
-          MeasurementModel(DateTime.now(), double.parse(measurementInput)));
+      await measurementRepository.setNewMeasurement(MeasurementModel(
+          DateTime.now(), double.parse(measurementInput.replaceAll(',', '.'))));
     } else {
-      await measurementRepository.setNewMeasurement(
-          MeasurementModel(measurementDate, double.parse(measurementInput)));
+      await measurementRepository.setNewMeasurement(MeasurementModel(
+          measurementDate, double.parse(measurementInput.replaceAll(',', '.'))));
     }
   }
 
