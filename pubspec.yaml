@@ -1,7 +1,7 @@
 name: weighty
 description: weight tracking and management app
 
-version: 0.7.3+5
+version: 0.7.4+6
 
 environment:
   sdk: '>=2.10.0 <3.0.0'
