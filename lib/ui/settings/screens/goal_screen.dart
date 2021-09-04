@@ -51,15 +51,6 @@ class _GoalScreenState extends State<GoalScreen> {
                     ),
                     Divider(height: 1, thickness: 1),
                     SettingsTile(
-                      title: "Current Weight",
-                      titleTextStyle:
-                          Theme.of(context).primaryTextTheme.bodyText2,
-                      trailing: Text(state.currentWeight.toString(),
-                          style: Theme.of(context).primaryTextTheme.bodyText2),
-                      onPressed: (BuildContext context) {},
-                    ),
-                    Divider(height: 1, thickness: 1),
-                    SettingsTile(
                       title: "Goal Weight",
                       titleTextStyle:
                           Theme.of(context).primaryTextTheme.bodyText2,

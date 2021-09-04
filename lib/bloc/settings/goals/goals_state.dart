@@ -29,15 +29,13 @@ class GoalsLoaded extends GoalsState {
   final String startWeightDate;
   final double targetWeight;
   final String targetWeightDate;
-  final double currentWeight;
 
   GoalsLoaded(
       {this.appVersion,
       this.startWeight,
       this.startWeightDate,
       this.targetWeight,
-      this.targetWeightDate,
-      this.currentWeight});
+      this.targetWeightDate});
 
   @override
   List<Object> get props => [];

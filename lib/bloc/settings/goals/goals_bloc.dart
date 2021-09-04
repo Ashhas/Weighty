@@ -36,16 +36,11 @@ class GoalsBloc extends Bloc<GoalsEvent, GoalsState> {
     double targetWeight = sharedPrefService.getTargetWeight;
     String targetWeightDate = sharedPrefService.getTargetWeightDate;
 
-    //Latest Weight Entry from DB
-    MeasurementModel currentMeasurement =
-        await measurementRepository.getCurrentMeasurement();
-
     yield GoalsLoaded(
         startWeight: startWeight,
         startWeightDate: startWeightDate,
         targetWeight: targetWeight,
-        targetWeightDate: targetWeightDate,
-        currentWeight: currentMeasurement.weightEntry);
+        targetWeightDate: targetWeightDate);
   }
 
   Stream<GoalsState> _mapChangeStartWeightToState(
@@ -63,16 +58,11 @@ class GoalsBloc extends Bloc<GoalsEvent, GoalsState> {
     double targetWeight = sharedPrefService.getTargetWeight;
     String targetWeightDate = sharedPrefService.getTargetWeightDate;
 
-    //Latest Weight Entry from DB
-    MeasurementModel currentMeasurement =
-        await measurementRepository.getCurrentMeasurement();
-
     yield GoalsLoaded(
         startWeight: startWeight,
         startWeightDate: startWeightDate,
         targetWeight: targetWeight,
-        targetWeightDate: targetWeightDate,
-        currentWeight: currentMeasurement.weightEntry);
+        targetWeightDate: targetWeightDate);
   }
 
   Stream<GoalsState> _mapChangeTargetWeightToState(
@@ -90,16 +80,11 @@ class GoalsBloc extends Bloc<GoalsEvent, GoalsState> {
     double targetWeight = sharedPrefService.getTargetWeight;
     String targetWeightDate = sharedPrefService.getTargetWeightDate;
 
-    //Latest Weight Entry from DB
-    MeasurementModel latestMeasurement =
-        await measurementRepository.getLatestMeasurement();
-
     yield GoalsLoaded(
         startWeight: startWeight,
         startWeightDate: startWeightDate,
         targetWeight: targetWeight,
-        targetWeightDate: targetWeightDate,
-        currentWeight: latestMeasurement.weightEntry);
+        targetWeightDate: targetWeightDate);
   }
 
   @override
