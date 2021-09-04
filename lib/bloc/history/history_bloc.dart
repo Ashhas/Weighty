@@ -88,7 +88,7 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
 
   Stream<HistoryState> _mapEditMeasurementToState(
       MeasurementModel measurementModel, String updatedWeight) async* {
-    measurementModel.weightEntry = double.parse(updatedWeight);
+    measurementModel.weightEntry = double.parse(updatedWeight.replaceAll(',', '.'));
     measurementRepository.editMeasurement(measurementModel);
   }
 

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:weighty/ui/settings/widgets/settings_tile.dart';
@@ -37,11 +38,6 @@ class _AboutScreenState extends State<AboutScreen> {
               titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
               subtitle: widget.appVersion,
               subtitleTextStyle: Theme.of(context).primaryTextTheme.subtitle2,
-              onPressed: (BuildContext context) {},
-            ),
-            SettingsTile(
-              title: "Open-source licenses",
-              titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
               onPressed: (BuildContext context) {},
             ),
           ],
@@ -85,7 +81,12 @@ class _AboutScreenState extends State<AboutScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            Text(
+              "Developed by Aschwin Bruyning",
+              style: Theme.of(context).primaryTextTheme.subtitle1,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 10),
           ],
         ),
       ),
