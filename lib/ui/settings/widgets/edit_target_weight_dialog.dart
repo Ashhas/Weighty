@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/settings/goals/goals_bloc.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 
 class EditTargetWeightDialog extends StatefulWidget {
   final double targetWeight;
@@ -40,7 +41,7 @@ class _EditTargetWeightDialogState extends State<EditTargetWeightDialog> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Target Weight",
+                    UiConst.goalWeightDialogTitle,
                     style: Theme.of(context).primaryTextTheme.bodyText2,
                   ),
                   TextFormField(

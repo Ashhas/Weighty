@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/app_init/initialization_bloc.dart';
 import 'package:weighty/bloc/on_boarding/on_boarding_bloc.dart';
 import 'package:weighty/ui/bottom_nav_bar.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 
 class OnBoardingGoalScreen extends StatefulWidget {
   @override
@@ -46,7 +47,7 @@ class _OnBoardingGoalScreenState extends State<OnBoardingGoalScreen> {
                 height: 60,
               ),
               Text(
-                "Enter your goal weight",
+                UiConst.targetSummaryTitle,
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w400,
@@ -55,7 +56,7 @@ class _OnBoardingGoalScreenState extends State<OnBoardingGoalScreen> {
               ),
               SizedBox(height: 5),
               Text(
-                "Enter the weight you're working towards",
+                UiConst.targetSummarySubtitle,
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w300,
@@ -82,20 +83,16 @@ class _OnBoardingGoalScreenState extends State<OnBoardingGoalScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (targetWeightController.text.isNotEmpty) {
-                      if (num.tryParse(targetWeightController.text) != null) {
-                        //Add Start Weight
-                        BlocProvider.of<OnBoardingBloc>(context).add(
-                            AddedWeightGoal(
-                                targetWeight: targetWeightController.text));
-                      } else {
-                        _showOnlyNumbersMessage();
-                      }
+                      //Add Start Weight
+                      BlocProvider.of<OnBoardingBloc>(context).add(
+                          AddedWeightGoal(
+                              targetWeight: targetWeightController.text));
                     } else {
                       _showNotFilledInMessage();
                     }
                   },
                   child: Text(
-                    "Finish",
+                    UiConst.targetButtonTitle,
                     style: TextStyle(color: Colors.white),
                   ),
                   style: ElevatedButton.styleFrom(
@@ -125,21 +122,7 @@ class _OnBoardingGoalScreenState extends State<OnBoardingGoalScreen> {
               SizedBox(height: 20),
               Center(
                 child: Text(
-                  "Not everything has been filled in",
-                  style: Theme.of(context).primaryTextTheme.subtitle2,
-                ),
-              )
-            ],
-          ),
-        ),
-        Visibility(
-          visible: !onlyNumbers,
-          child: Column(
-            children: [
-              SizedBox(height: 20),
-              Center(
-                child: Text(
-                  "Only Numbers!",
+                  UiConst.incompleteInputError,
                   style: Theme.of(context).primaryTextTheme.subtitle2,
                 ),
               )
@@ -158,18 +141,6 @@ class _OnBoardingGoalScreenState extends State<OnBoardingGoalScreen> {
     Future.delayed(Duration(seconds: 6)).then((value) => {
           setState(() {
             filledIn = true;
-          })
-        });
-  }
-
-  _showOnlyNumbersMessage() {
-    setState(() {
-      onlyNumbers = false;
-    });
-
-    Future.delayed(Duration(seconds: 6)).then((value) => {
-          setState(() {
-            onlyNumbers = true;
           })
         });
   }

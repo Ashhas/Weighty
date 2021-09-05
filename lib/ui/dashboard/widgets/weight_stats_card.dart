@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
 import 'package:weighty/ui/dashboard/widgets/chart_widget.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 
 class WeightStatsWidget extends StatefulWidget {
   WeightStatsWidget() : super();
@@ -37,14 +38,16 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
                               horizontal: 30, vertical: 20),
                           child: Column(
                             children: [
-                              _titleView(titleName: "Statistics"),
+                              _titleView(
+                                  titleName: UiConst.cardStatisticsTitle),
                               _simpleStatsRow(
                                   totalLost: state.totalLost,
                                   amountLeft: state.amountLeft,
                                   percentageCompleted: state.percentageDone,
                                   unitType: state.unitType),
                               SizedBox(height: 30),
-                              _titleView(titleName: "Weight Graph"),
+                              _titleView(
+                                  titleName: UiConst.cardWeightGraphTitle),
                               SizedBox(height: 5),
                               SmallWeightChartWidget(),
                             ],
@@ -90,19 +93,19 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         _statItemPercentage(
           numberValue: percentageCompleted,
-          itemTitle: "Completed",
+          itemTitle: UiConst.completedStatItemTitle,
         ),
         Divider(),
         _statItemGeneral(
           numberValue: totalLost,
           unitType: unitType,
-          itemTitle: "Total Lost",
+          itemTitle: UiConst.weightLostStatItemTitle,
         ),
         Divider(),
         _statItemGeneral(
           numberValue: amountLeft,
           unitType: unitType,
-          itemTitle: "Left to Go",
+          itemTitle: UiConst.weightLeftStatItemTitle,
         ),
       ]),
     );
