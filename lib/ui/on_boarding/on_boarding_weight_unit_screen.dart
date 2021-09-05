@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:weighty/bloc/on_boarding/on_boarding_bloc.dart';
 import 'package:weighty/ui/on_boarding/on_boarding_start_weight_screen.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 
 class OnBoardingUnitScreen extends StatefulWidget {
   @override
@@ -35,7 +36,7 @@ class _OnBoardingUnitScreenState extends State<OnBoardingUnitScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "Choose your weight unit",
+                    UiConst.unitSummaryTitle,
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.w400,
@@ -44,7 +45,7 @@ class _OnBoardingUnitScreenState extends State<OnBoardingUnitScreen> {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    "Choose which unit type you want to use",
+                    UiConst.unitSummarySubtitle,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w300,
@@ -61,8 +62,8 @@ class _OnBoardingUnitScreenState extends State<OnBoardingUnitScreen> {
                     style: TextStyle(fontSize: 16, color: Colors.white),
                     iconEnabledColor: Colors.black,
                     items: <String>[
-                      'KG',
-                      'LB',
+                      UiConst.metricWeightUnit,
+                      UiConst.imperialWeightUnit,
                     ].map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -94,8 +95,11 @@ class _OnBoardingUnitScreenState extends State<OnBoardingUnitScreen> {
                   onPressed: () {
                     if (_chosenValue != null) {
                       //Add Start Weight
-                      BlocProvider.of<OnBoardingBloc>(context)
-                          .add(AddedWeightUnit(weightUnit: _chosenValue));
+                      BlocProvider.of<OnBoardingBloc>(context).add(
+                        AddedWeightUnit(
+                          weightUnit: _chosenValue,
+                        ),
+                      );
 
                       //Navigate to Goal Screen
                       Navigator.push(
@@ -111,7 +115,7 @@ class _OnBoardingUnitScreenState extends State<OnBoardingUnitScreen> {
                     }
                   },
                   child: Text(
-                    "Next",
+                    UiConst.unitButtonTitle,
                     style: Theme.of(context).primaryTextTheme.subtitle1,
                   ),
                   style: ElevatedButton.styleFrom(
@@ -141,7 +145,7 @@ class _OnBoardingUnitScreenState extends State<OnBoardingUnitScreen> {
               SizedBox(height: 20),
               Center(
                 child: Text(
-                  "Not everything has been filled in",
+                  UiConst.incompleteInputError,
                   style: Theme.of(context).primaryTextTheme.subtitle2,
                 ),
               )

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/export/export_bloc.dart';
 import 'package:weighty/ui/settings/widgets/settings_tile.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 
 class ManageDataScreen extends StatefulWidget {
   ManageDataScreen();
@@ -22,7 +23,7 @@ class _ManageDataScreenState extends State<ManageDataScreen> {
         child: Column(
           children: [
             SettingsTile(
-              title: "Export Data",
+              title: UiConst.exportDataTileTitle,
               titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
               leading: Icon(
                 Icons.file_download,
@@ -51,7 +52,7 @@ class _ManageDataScreenState extends State<ManageDataScreen> {
         },
       ),
       title: Text(
-        "Manage Data",
+        UiConst.manageDataScreenTitle,
         style: TextStyle(color: Colors.white),
       ),
     );

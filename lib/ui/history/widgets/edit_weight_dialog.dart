@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/history/history_bloc.dart';
 import 'package:weighty/data/model/measurement.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 
 class EditWeightDialog extends StatefulWidget {
   final MeasurementModel selectedMeasurement;
@@ -41,7 +42,7 @@ class _EditWeightDialogState extends State<EditWeightDialog> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Edit Weight",
+                    UiConst.editWeightDialogTitle,
                     style: Theme.of(context).primaryTextTheme.bodyText2,
                   ),
                   TextFormField(
@@ -65,8 +66,10 @@ class _EditWeightDialogState extends State<EditWeightDialog> {
                     color: Theme.of(context).canvasColor,
                     onPressed: () {
                       BlocProvider.of<HistoryBloc>(context).add(
-                        EditMeasurement(widget.selectedMeasurement,
-                            textFormController.text),
+                        EditMeasurement(
+                          widget.selectedMeasurement,
+                          textFormController.text,
+                        ),
                       );
 
                       //Close Dialog

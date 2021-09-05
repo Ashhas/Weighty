@@ -44,10 +44,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     )
                   : Expanded(
                       child: Center(
-                        child: Text("No weight entry added in this month!",
-                            textAlign: TextAlign.center,
-                            style:
-                                Theme.of(context).primaryTextTheme.subtitle2),
+                        child: Text(
+                          UiConst.noHistoryDataTitle,
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).primaryTextTheme.subtitle2,
+                        ),
                       ),
                     );
             } else {
@@ -120,9 +121,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
     return Container(
       child: (_sameMonthEventsFilter.length == 0)
           ? Center(
-              child: Text("No weight entry added in this month!",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).primaryTextTheme.subtitle2),
+              child: Text(
+                UiConst.monthFilterNoDataTitle,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).primaryTextTheme.subtitle2,
+              ),
             )
           : ListView(
               children: _sameMonthEventsFilter
@@ -157,7 +160,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                   event.weightEntry.toString(),
                                   style: Theme.of(context)
                                       .primaryTextTheme
-                                      .subtitle2,
+                                      .bodyText1,
                                 )
                               ],
                             ),

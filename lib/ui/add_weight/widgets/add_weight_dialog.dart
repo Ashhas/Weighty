@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:weighty/bloc/add_weight/add_weight_bloc.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 
 class AddWeightDialog extends StatefulWidget {
   final DateTime selectedDay;
@@ -49,7 +50,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Add Weight",
+                    UiConst.addWeightDialogTitle,
                     style: Theme.of(context).primaryTextTheme.bodyText2,
                   ),
                   TextFormField(
@@ -73,8 +74,11 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                     color: Theme.of(context).canvasColor,
                     onPressed: () {
                       BlocProvider.of<AddWeightBloc>(context).add(
-                          AddNewMeasurement(
-                              widget.selectedDay, textFormController.text));
+                        AddNewMeasurement(
+                          widget.selectedDay,
+                          textFormController.text,
+                        ),
+                      );
 
                       //Close Dialog
                       Navigator.of(context).pop();

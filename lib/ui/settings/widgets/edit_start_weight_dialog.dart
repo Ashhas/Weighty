@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/settings/goals/goals_bloc.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 
 class EditStartWeightDialog extends StatefulWidget {
   final double startWeight;
@@ -40,7 +41,7 @@ class _EditStartWeightDialogState extends State<EditStartWeightDialog> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Start Weight",
+                    UiConst.startWeightDialogTitle,
                     style: Theme.of(context).primaryTextTheme.bodyText2,
                   ),
                   TextFormField(
@@ -63,8 +64,9 @@ class _EditStartWeightDialogState extends State<EditStartWeightDialog> {
                     ),
                     color: Theme.of(context).canvasColor,
                     onPressed: () {
-                      BlocProvider.of<GoalsBloc>(context).add(ChangeStartWeight(
-                          startWeight: textFormController.text));
+                      BlocProvider.of<GoalsBloc>(context).add(
+                        ChangeStartWeight(startWeight: textFormController.text),
+                      );
 
                       //Close Dialog
                       Navigator.of(context).pop();

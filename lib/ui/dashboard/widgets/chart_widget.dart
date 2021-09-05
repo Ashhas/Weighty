@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
 import 'package:weighty/data/model/measurement.dart';
 import 'package:weighty/util/constants/color_const.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 
 class SmallWeightChartWidget extends StatefulWidget {
   SmallWeightChartWidget() : super();
@@ -28,12 +29,18 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
               child: state.filteredMeasurements != null &&
                       state.filteredMeasurements.length != 0
                   ? LineChart(
-                      mainData(state.startWeight, state.targetWeight,
-                          state.filteredMeasurements),
+                      mainData(
+                        state.startWeight,
+                        state.targetWeight,
+                        state.filteredMeasurements,
+                      ),
                     )
                   : Container(
                       child: Center(
-                        child: Text("No Data", style: Theme.of(context).primaryTextTheme.subtitle2),
+                        child: Text(
+                          UiConst.chartNoDataTitle,
+                          style: Theme.of(context).primaryTextTheme.subtitle2,
+                        ),
                       ),
                     ),
             ),
@@ -114,7 +121,11 @@ class _SmallWeightChartWidgetState extends State<SmallWeightChartWidget> {
             return value.map(
               (lineSpot) {
                 return LineTooltipItem(
-                    lineSpot.y.toString(), TextStyle(color: Colors.white));
+                  lineSpot.y.toString(),
+                  TextStyle(
+                    color: Colors.white,
+                  ),
+                );
               },
             ).toList();
           },

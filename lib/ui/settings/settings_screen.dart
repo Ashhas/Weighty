@@ -74,7 +74,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget _buildGoalTile() {
     return SettingsTile(
-      title: "Goal Preferences",
+      title: UiConst.goalTileTitle,
       titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
       leading: Icon(
         Icons.verified,
@@ -93,7 +93,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget _buildWeightUnitTile() {
     return SettingsTile(
-      title: "Weight Units",
+      title: UiConst.weightUnitTileTitle,
       titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
       leading: Icon(
         Icons.fitness_center,
@@ -112,7 +112,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget _buildThemeTile() {
     return SettingsTile(
-      title: "Theme",
+      title: UiConst.themeTileTitle,
       titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
       leading: Icon(
         Icons.dark_mode,
@@ -131,7 +131,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget _buildRemindersTile() {
     return SettingsTile(
-      title: "Reminders",
+      title: UiConst.remindersTileTitle,
       titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
       leading: Icon(
         Icons.notifications_active,
@@ -149,7 +149,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget _buildAboutTile(String appVersion) {
     return SettingsTile(
-      title: "About",
+      title: UiConst.aboutTileTitle,
       titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
       leading: Icon(
         Icons.info_outline,
@@ -169,7 +169,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget _buildManageDataTile() {
     return SettingsTile(
-      title: "Manage Data",
+      title: UiConst.manageDataTileTitle,
       titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
       leading: Icon(
         Icons.storage,
@@ -189,7 +189,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Widget _buildHelpAndFaqTile() {
     return SettingsTile(
-      title: "Help/FAQ",
+      title: UiConst.helpFaqTileTitle,
       titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
       leading: Icon(
         Icons.help_outline,

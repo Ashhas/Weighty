@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 
 class HelpFaqScreen extends StatefulWidget {
   HelpFaqScreen();
@@ -17,7 +18,9 @@ class _HelpFaqScreenState extends State<HelpFaqScreen> {
       body: Container(
         width: double.infinity,
         child: Center(
-          child: Text("Help/FAQ"),
+          child: Text(
+            UiConst.helpFaqScreenTitle,
+          ),
         ),
       ),
     );
@@ -35,7 +38,7 @@ class _HelpFaqScreenState extends State<HelpFaqScreen> {
         },
       ),
       title: Text(
-        "Help/FAQ",
+        UiConst.helpFaqScreenTitle,
         style: TextStyle(color: Colors.white),
       ),
     );
