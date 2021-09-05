@@ -36,7 +36,7 @@ class FontConst {
 
   //TitleView TextStyle
   static final titleViewTextBlack =
-      MEDIUM.copyWith(fontSize: 17, color: Colors.black);
+      MEDIUM.copyWith(fontSize: 20, color: Colors.black);
   static final titleViewTextWhite =
       MEDIUM.copyWith(fontSize: 20, color: Colors.white);
 

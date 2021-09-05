@@ -4,6 +4,7 @@ import 'package:weighty/bloc/settings/goals/goals_bloc.dart';
 import 'package:weighty/ui/settings/widgets/edit_start_weight_dialog.dart';
 import 'package:weighty/ui/settings/widgets/edit_target_weight_dialog.dart';
 import 'package:weighty/ui/settings/widgets/settings_tile.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 
 class GoalScreen extends StatefulWidget {
   GoalScreen();
@@ -33,7 +34,7 @@ class _GoalScreenState extends State<GoalScreen> {
                 child: Column(
                   children: [
                     SettingsTile(
-                      title: "Start Weight",
+                      title: UiConst.startWeightTileTitle,
                       titleTextStyle:
                           Theme.of(context).primaryTextTheme.bodyText2,
                       trailing: Text(state.startWeight.toString(),
@@ -51,7 +52,7 @@ class _GoalScreenState extends State<GoalScreen> {
                     ),
                     Divider(height: 1, thickness: 1),
                     SettingsTile(
-                      title: "Goal Weight",
+                      title: UiConst.goalWeightTileTitle,
                       titleTextStyle:
                           Theme.of(context).primaryTextTheme.bodyText2,
                       trailing: Text(state.targetWeight.toString(),
@@ -90,7 +91,7 @@ class _GoalScreenState extends State<GoalScreen> {
         },
       ),
       title: Text(
-        "Goal Preferences",
+        UiConst.goalPrefScreenTitle,
         style: TextStyle(color: Colors.white),
       ),
     );

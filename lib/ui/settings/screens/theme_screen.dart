@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/settings/settings_bloc.dart';
 import 'package:weighty/bloc/theme/theme_bloc.dart';
 import 'package:weighty/ui/settings/widgets/settings_switch_tile.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 
 class ThemeScreen extends StatefulWidget {
   ThemeScreen();
@@ -51,7 +52,12 @@ class _ThemeScreenState extends State<ThemeScreen> {
           Navigator.pop(context);
         },
       ),
-      title: Text("Theme", style: TextStyle(color: Colors.white)),
+      title: Text(
+        UiConst.themeScreenTitle,
+        style: TextStyle(
+          color: Colors.white,
+        ),
+      ),
     );
   }
 
@@ -66,7 +72,7 @@ class _ThemeScreenState extends State<ThemeScreen> {
               : turnOnDarkTheme = state.isDarkTheme;
 
           return SettingsSwitchTile(
-            title: "Enable Dark Theme",
+            title: UiConst.enableDarkThemeTileTitle,
             titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
             switchValue: turnOnDarkTheme,
             switchActiveColor: Theme.of(context).highlightColor,

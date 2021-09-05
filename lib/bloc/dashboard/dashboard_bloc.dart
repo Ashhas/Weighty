@@ -31,7 +31,6 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     double totalLost;
     double amountLeft;
     String unitType;
-    MeasurementModel firstMeasurement;
     MeasurementModel currentMeasurement;
     List<MeasurementModel> allMeasurements;
     List<MeasurementModel> filteredMeasurements;
@@ -46,7 +45,6 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     unitType = sharedPrefService.getWeightUnitType;
 
     //Retrieve data from database
-    firstMeasurement = await measurementRepository.getFirstMeasurement();
     currentMeasurement = await measurementRepository.getCurrentMeasurement();
     allMeasurements = await measurementRepository.getAllMeasurements();
 
@@ -66,7 +64,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         weightEntry: currentMeasurement.weightEntry,
       );
       totalLost = _calculateTotalLost(
-        firstWeight: firstMeasurement.weightEntry,
+        startWeight: startWeight,
         currentWeight: currentMeasurement.weightEntry,
       );
       amountLeft = _calculateAmountLeft(
@@ -117,11 +115,11 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     }
   }
 
-  double _calculateTotalLost({double firstWeight, double currentWeight}) {
-    if (firstWeight < currentWeight) {
-      return currentWeight - firstWeight;
+  double _calculateTotalLost({double startWeight, double currentWeight}) {
+    if (startWeight < currentWeight) {
+      return currentWeight - startWeight;
     } else {
-      return firstWeight - currentWeight;
+      return startWeight - currentWeight;
     }
   }
 

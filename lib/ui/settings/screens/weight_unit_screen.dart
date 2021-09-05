@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/settings/weight_unit/weight_unit_bloc.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 import 'package:weighty/util/constants/variable_const.dart';
 
 class WeightUnitScreen extends StatefulWidget {
@@ -36,8 +37,10 @@ class _WeightUnitScreenState extends State<WeightUnitScreen> {
               child: Column(
                 children: [
                   RadioListTile(
-                    title: Text("KG",
-                        style: Theme.of(context).primaryTextTheme.bodyText2),
+                    title: Text(
+                      UiConst.metricWeightUnit,
+                      style: Theme.of(context).primaryTextTheme.bodyText2,
+                    ),
                     value: metricMeasurement,
                     groupValue: groupValue,
                     onChanged: (value) {
@@ -48,8 +51,10 @@ class _WeightUnitScreenState extends State<WeightUnitScreen> {
                   ),
                   Divider(height: 1, thickness: 1),
                   RadioListTile(
-                    title: Text("LB",
-                        style: Theme.of(context).primaryTextTheme.bodyText2),
+                    title: Text(
+                      UiConst.imperialWeightUnit,
+                      style: Theme.of(context).primaryTextTheme.bodyText2,
+                    ),
                     value: imperialMeasurement,
                     groupValue: groupValue,
                     onChanged: (value) {

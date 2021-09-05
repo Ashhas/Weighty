@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:weighty/ui/on_boarding/on_boarding_weight_unit_screen.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 
 class OnBoardingEntryScreen extends StatefulWidget {
   @override
@@ -41,7 +42,7 @@ class _OnBoardingEntryScreenState extends State<OnBoardingEntryScreen> {
                         height: 100.0,
                       ),
                       Text(
-                        "Weighty",
+                        UiConst.appName,
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w500,
@@ -57,7 +58,7 @@ class _OnBoardingEntryScreenState extends State<OnBoardingEntryScreen> {
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40.0),
                       child: Text(
-                        "Your personal weight tracker and management app!",
+                        UiConst.entrySummary,
                         style: Theme.of(context).primaryTextTheme.bodyText2,
                         textAlign: TextAlign.center,
                       ),
@@ -82,7 +83,7 @@ class _OnBoardingEntryScreenState extends State<OnBoardingEntryScreen> {
                       );
                     },
                     child: Text(
-                      "Get Started",
+                      UiConst.entryButtonTitle,
                       style: Theme.of(context).primaryTextTheme.subtitle1,
                     ),
                     style: ElevatedButton.styleFrom(

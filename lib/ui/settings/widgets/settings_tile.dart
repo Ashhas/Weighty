@@ -22,7 +22,7 @@ class SettingsTile extends StatelessWidget {
     this.subtitleMaxLines,
     this.leading,
     this.trailing,
-    @Deprecated('Use onPressed instead') this.onTap,
+    this.onTap,
     this.titleTextStyle,
     this.subtitleTextStyle,
     this.enabled = true,

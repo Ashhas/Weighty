@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:weighty/ui/settings/widgets/settings_tile.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 import 'package:weighty/util/constants/variable_const.dart';
 
 class ReminderScreen extends StatefulWidget {
@@ -19,30 +20,8 @@ class _ReminderScreenState extends State<ReminderScreen> {
       appBar: _buildAppBar(),
       body: Container(
         width: double.infinity,
-        child: Column(
-          children: [
-            SettingsTile(
-              title: "Github",
-              titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
-              leading: Icon(Icons.developer_board_outlined,
-                  color: Theme.of(context).buttonColor),
-              onPressed: (BuildContext context) {
-                _launchURL();
-              },
-            ),
-            Divider(height: 1, thickness: 1),
-            SettingsTile(
-              title: "Version",
-              titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
-              subtitleTextStyle: Theme.of(context).primaryTextTheme.subtitle1,
-              onPressed: (BuildContext context) {},
-            ),
-            SettingsTile(
-              title: "Open-source licenses",
-              titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
-              onPressed: (BuildContext context) {},
-            ),
-          ],
+        child: Text(
+          UiConst.remindersScreenTitle,
         ),
       ),
     );
@@ -60,15 +39,9 @@ class _ReminderScreenState extends State<ReminderScreen> {
         },
       ),
       title: Text(
-        "Reminders",
+        UiConst.remindersScreenTitle,
         style: Theme.of(context).primaryTextTheme.headline4,
       ),
     );
-  }
-
-  void _launchURL() async {
-    await canLaunch(githubUrl)
-        ? await launch(githubUrl)
-        : throw 'Could not launch ' + githubUrl;
   }
 }

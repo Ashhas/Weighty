@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:weighty/ui/settings/widgets/settings_tile.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 import 'package:weighty/util/constants/variable_const.dart';
 
 class AboutScreen extends StatefulWidget {
@@ -25,7 +26,7 @@ class _AboutScreenState extends State<AboutScreen> {
         child: Column(
           children: [
             SettingsTile(
-              title: "Github",
+              title: UiConst.githubTileTitle,
               titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
               leading: Icon(Icons.developer_board_outlined, color: Colors.grey),
               onPressed: (BuildContext context) {
@@ -34,7 +35,7 @@ class _AboutScreenState extends State<AboutScreen> {
             ),
             Divider(height: 1, thickness: 1),
             SettingsTile(
-              title: "Version",
+              title: UiConst.versionTileTitle,
               titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
               subtitle: widget.appVersion,
               subtitleTextStyle: Theme.of(context).primaryTextTheme.subtitle2,
@@ -66,7 +67,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 ),
                 SizedBox(width: 10),
                 Text(
-                  "About",
+                  UiConst.aboutScreenTitle,
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 )
               ],
@@ -82,7 +83,7 @@ class _AboutScreenState extends State<AboutScreen> {
               ),
             ),
             Text(
-              "Developed by Aschwin Bruyning",
+              UiConst.developerCreditTitle,
               style: Theme.of(context).primaryTextTheme.subtitle1,
               textAlign: TextAlign.center,
             ),
@@ -96,6 +97,6 @@ class _AboutScreenState extends State<AboutScreen> {
   void _launchURL() async {
     await canLaunch(githubUrl)
         ? await launch(githubUrl)
-        : throw 'Could not launch ' + githubUrl;
+        : throw UiConst.githubUrlErrorMessage + githubUrl;
   }
 }
