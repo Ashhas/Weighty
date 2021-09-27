@@ -1,26 +1,30 @@
 
 
-# Weighty
+# [Weighty]
 
 A Weight Tracking & Management app made w/ Flutter
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0?style=for-the-badge)
+* Track your daily weight loss
+* Set a goal/target
+* Multiple weight units kilogram(KG) or pounds(LB)
+* Statistics of your weight loss journey
+* Dark theme
+
+# Download
+
+<a href="https://play.google.com/store/apps/details?id=com.ashhas.weighty" target="_blank">
+<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="70"/></a>
 
 ## Screenshots
 
-<p>
-  <img src="https://github.com/Ashhas/Weighty/blob/main/screenshots/dashboard.jpg" width="250">
-  <img src="https://github.com/Ashhas/Weighty/blob/main/screenshots/add.jpg" width="250">
-  <img src="https://github.com/Ashhas/Weighty/blob/main/screenshots/history.jpg" width="250">
-</p>
+<img src="https://github.com/Ashhas/Weighty/blob/main/screenshots/dashboard.jpg" width="225"> <img src="https://github.com/Ashhas/Weighty/blob/main/screenshots/add.jpg" width="225"> <img src="https://github.com/Ashhas/Weighty/blob/main/screenshots/history.jpg" width="225">
 
-## Download
-<a href="https://play.google.com/store/apps/details?id=com.ashhas.weighty"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height=60px /></a>
+# Developer
 
-[https://github.com/Ashhas/Weighty/releases](https://github.com/Ashhas/Weighty/releases)
+* [Aschwin Bruyning](https://b-lam.github.io)
 
-
-
-## License
+# License
 
 The app is GPL-3.0 licensed.
+
+[Weighty]:https://play.google.com/store/apps/details?id=com.ashhas.weighty
