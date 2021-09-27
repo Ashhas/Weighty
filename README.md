@@ -2,6 +2,8 @@
 
 # [Weighty]
 
+<img src="https://github.com/Ashhas/Weighty/blob/main/screenshots/weighty_banner.png" width="750">
+
 A Weight Tracking & Management app made w/ Flutter
 
 * Track your daily weight loss
@@ -17,7 +19,9 @@ A Weight Tracking & Management app made w/ Flutter
 
 # Screenshots
 
-<img src="https://github.com/Ashhas/Weighty/blob/main/screenshots/dashboard.jpg" width="225"> <img src="https://github.com/Ashhas/Weighty/blob/main/screenshots/add.jpg" width="225"> <img src="https://github.com/Ashhas/Weighty/blob/main/screenshots/history.jpg" width="225">
+<img src="https://github.com/Ashhas/Weighty/blob/main/screenshots/dashboard.jpg" width="225">
+<img src="https://github.com/Ashhas/Weighty/blob/main/screenshots/add.jpg" width="225"> 
+<img src="https://github.com/Ashhas/Weighty/blob/main/screenshots/history.jpg" width="225">
 
 # Build
 
