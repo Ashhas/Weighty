@@ -23,7 +23,8 @@ A Weight Tracking & Management app made w/ Flutter
   <img src="https://github.com/Ashhas/Weighty/blob/main/screenshots/add.jpg" width="225"> 
   <img src="https://github.com/Ashhas/Weighty/blob/main/screenshots/history.jpg" width="225">
  </p>
-# Build
+ 
+# How to Build
 
 Before running the project, execute the commands:
 - `flutter clean`
