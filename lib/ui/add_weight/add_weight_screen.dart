@@ -7,6 +7,7 @@ import 'package:weighty/bloc/add_weight/add_weight_bloc.dart';
 import 'package:weighty/bloc/add_weight/date_button/date_button_bloc.dart';
 import 'package:weighty/data/model/measurement.dart';
 import 'package:weighty/ui/add_weight/widgets/add_weight_dialog.dart';
+import 'package:weighty/util/common_functions.dart';
 import 'package:weighty/util/constants/ui_const.dart';
 import 'package:weighty/util/constants/variable_const.dart';
 
@@ -19,11 +20,7 @@ class AddWeightScreen extends StatefulWidget {
 
 class _AddWeightScreenState extends State<AddWeightScreen> {
   String text = '';
-
-  // Color screenColor = Color(0xFF435094);
-  Color screenColor = Color(0xFF3F51B6);
-  Color buttonColor = Colors.black.withOpacity(0.2);
-  DateTime chosenDate = DateTime.now();
+  DateTime chosenDate = kToday;
 
   @override
   void initState() {
@@ -36,7 +33,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: screenColor,
+        backgroundColor: Theme.of(context).primaryColor,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -44,126 +41,13 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
             Container(
               height: MediaQuery.of(context).size.height * 0.11,
               child: Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    _openCalender();
-                  },
-                  child: BlocListener<DateButtonBloc, DateButtonState>(
-                    listener: (BuildContext context, state) {
-                      if (state is ShowChosenDate) {
-                        chosenDate = state.chosenDate;
-                      }
-                    },
-                    child: BlocBuilder<DateButtonBloc, DateButtonState>(
-                      builder: (context, state) {
-                        if (state is ShowChosenDate) {
-                          return Text(
-                              "${isToday(state.chosenDate) ? "Today" : DateFormat("EEE").format(state.chosenDate)} | ${DateFormat("dd/MM/yy").format(state.chosenDate)}");
-                        } else {
-                          return Container();
-                        }
-                      },
-                    ),
-                  ),
-                  style: ButtonStyle(
-                    elevation: MaterialStateProperty.all(0),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                    backgroundColor: MaterialStateProperty.all(
-                      buttonColor,
-                    ),
-                    fixedSize: MaterialStateProperty.all(
-                      Size(
-                        MediaQuery.of(context).size.width * 0.41,
-                        MediaQuery.of(context).size.height * 0.066,
-                      ),
-                    ),
-                  ),
-                ),
+                child: _dateButton(),
               ),
             ),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.25,
-              child: Center(
-                child: Text(
-                  "$text KG",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 50,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.05,
-              child: Center(
-                child: Text(
-                  "Enter New Weight Measurement",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              color: screenColor,
-              child: NumericKeyboard(
-                onKeyboardTap: _onKeyboardTap,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                textColor: Colors.white,
-                rightButtonFn: () {
-                  setState(() {
-                    text = text.substring(0, text.length - 1);
-                  });
-                },
-                rightIcon: Icon(
-                  Icons.backspace,
-                  color: Colors.white,
-                ),
-                leftButtonFn: () {
-                  _onDecimalSeparatorTapped();
-                },
-                leftIcon: Icon(
-                  Icons.circle,
-                  size: 6,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                BlocProvider.of<AddWeightBloc>(context).add(
-                  AddNewMeasurement(
-                    chosenDate,
-                    text,
-                  ),
-                );
-              },
-              child: Text("Save"),
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                ),
-                backgroundColor: MaterialStateProperty.all(
-                  buttonColor,
-                ),
-                fixedSize: MaterialStateProperty.all(
-                  Size(
-                    MediaQuery.of(context).size.width * 0.41,
-                    MediaQuery.of(context).size.height * 0.08,
-                  ),
-                ),
-              ),
-            ),
+            _numContainer(),
+            _numPadTitleContainer(),
+            _numPadKeyboard(),
+            _saveButton(),
           ],
         ),
       ),
@@ -194,9 +78,146 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
     );
   }
 
-  bool isToday(DateTime dateToCheck) {
-    return DateTime.now().year == dateToCheck.year &&
-        DateTime.now().month == dateToCheck.month &&
-        DateTime.now().day == dateToCheck.day;
+  // Date Button
+  _dateButton() {
+    return ElevatedButton(
+      onPressed: () {
+        _openCalender();
+      },
+      child: BlocListener<DateButtonBloc, DateButtonState>(
+        listener: (BuildContext context, state) {
+          if (state is ShowChosenDate) {
+            chosenDate = state.chosenDate;
+          }
+        },
+        child: BlocBuilder<DateButtonBloc, DateButtonState>(
+          builder: (context, state) {
+            if (state is ShowChosenDate) {
+              return Text(
+                  "${CommonFunctions.isToday(state.chosenDate) ? "Today" : DateFormat("EEE").format(state.chosenDate)} | ${DateFormat("dd/MM/yy").format(state.chosenDate)}");
+            } else {
+              return Container();
+            }
+          },
+        ),
+      ),
+      style: ButtonStyle(
+        elevation: MaterialStateProperty.all(0),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+        ),
+        backgroundColor: MaterialStateProperty.all(
+          Theme.of(context).highlightColor,
+        ),
+        fixedSize: MaterialStateProperty.all(
+          Size(
+            MediaQuery.of(context).size.width * 0.41,
+            MediaQuery.of(context).size.height * 0.066,
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Container that shows the input from the num pad
+  _numContainer() {
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.25,
+      child: Center(
+        child: BlocBuilder<AddWeightBloc, AddWeightState>(
+          builder: (context, state) {
+            if (state is AddWeightLoaded) {
+              return Text(
+                "$text ${state.unitType}",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 50,
+                  fontWeight: FontWeight.bold,
+                ),
+              );
+            } else {
+              return Container();
+            }
+          },
+        ),
+      ),
+    );
+  }
+
+  //NumPad title container
+  _numPadTitleContainer() {
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.05,
+      child: Center(
+        child: Text(
+          "Enter New Weight Measurement",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+
+  // NumPad Keyboard
+  _numPadKeyboard() {
+    return NumericKeyboard(
+      onKeyboardTap: _onKeyboardTap,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      textColor: Colors.white,
+      rightButtonFn: () {
+        setState(() {
+          text = text.substring(0, text.length - 1);
+        });
+      },
+      rightIcon: Icon(
+        Icons.chevron_left,
+        color: Colors.white,
+      ),
+      leftButtonFn: () {
+        _onDecimalSeparatorTapped();
+      },
+      leftIcon: Icon(
+        Icons.circle,
+        size: 6,
+        color: Colors.white,
+      ),
+    );
+  }
+
+  // Save Button
+  _saveButton() {
+    return ElevatedButton(
+      onPressed: () {
+        BlocProvider.of<AddWeightBloc>(context).add(
+          AddNewMeasurement(
+            chosenDate,
+            text,
+          ),
+        );
+      },
+      child: Text("Save"),
+      style: ButtonStyle(
+        elevation: MaterialStateProperty.all(0),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+        ),
+        backgroundColor: MaterialStateProperty.all(
+          Theme.of(context).highlightColor,
+        ),
+        fixedSize: MaterialStateProperty.all(
+          Size(
+            MediaQuery.of(context).size.width * 0.41,
+            MediaQuery.of(context).size.height * 0.08,
+          ),
+        ),
+      ),
+    );
   }
 }
