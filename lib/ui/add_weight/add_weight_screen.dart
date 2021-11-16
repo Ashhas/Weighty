@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:numeric_keyboard/numeric_keyboard.dart';
-import 'package:table_calendar/table_calendar.dart';
 import 'package:weighty/bloc/add_weight/add_weight_bloc.dart';
 import 'package:weighty/bloc/add_weight/date_button/date_button_bloc.dart';
-import 'package:weighty/data/model/measurement.dart';
 import 'package:weighty/ui/add_weight/widgets/add_weight_dialog.dart';
 import 'package:weighty/util/common_functions.dart';
 import 'package:weighty/util/constants/ui_const.dart';
@@ -19,7 +17,7 @@ class AddWeightScreen extends StatefulWidget {
 }
 
 class _AddWeightScreenState extends State<AddWeightScreen> {
-  String text = '';
+  String text = UiConst.addWeightDefaultInput;
   DateTime chosenDate = kToday;
 
   @override
@@ -54,32 +52,8 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
     );
   }
 
-  // Handle keyboard tap
-  _onKeyboardTap(String value) {
-    setState(() {
-      text = text + value;
-    });
-  }
-
-  // Handle decimal separator tap
-  _onDecimalSeparatorTapped() {
-    setState(() {
-      text = text + UiConst.addWeightDecimalSeparator;
-    });
-  }
-
-  // Open Calendar widget in dialog
-  _openCalender() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AddWeightDialog();
-      },
-    );
-  }
-
   // Date Button
-  _dateButton() {
+  Widget _dateButton() {
     return ElevatedButton(
       onPressed: () {
         _openCalender();
@@ -122,7 +96,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
   }
 
   // Container that shows the input from the num pad
-  _numContainer() {
+  Widget _numContainer() {
     return Container(
       height: MediaQuery.of(context).size.height * 0.25,
       child: Center(
@@ -147,7 +121,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
   }
 
   //NumPad title container
-  _numPadTitleContainer() {
+  Widget _numPadTitleContainer() {
     return Container(
       height: MediaQuery.of(context).size.height * 0.05,
       child: Center(
@@ -164,15 +138,13 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
   }
 
   // NumPad Keyboard
-  _numPadKeyboard() {
+  Widget _numPadKeyboard() {
     return NumericKeyboard(
       onKeyboardTap: _onKeyboardTap,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       textColor: Colors.white,
       rightButtonFn: () {
-        setState(() {
-          text = text.substring(0, text.length - 1);
-        });
+        _removeInput();
       },
       rightIcon: Icon(
         Icons.chevron_left,
@@ -190,15 +162,18 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
   }
 
   // Save Button
-  _saveButton() {
+  Widget _saveButton() {
     return ElevatedButton(
       onPressed: () {
-        BlocProvider.of<AddWeightBloc>(context).add(
-          AddNewMeasurement(
-            chosenDate,
-            text,
-          ),
-        );
+        if (text != UiConst.addWeightEmptyInput &&
+            text != UiConst.addWeightDefaultInput) {
+          BlocProvider.of<AddWeightBloc>(context).add(
+            AddNewMeasurement(
+              chosenDate,
+              text,
+            ),
+          );
+        }
       },
       child: Text(UiConst.addWeightSaveLabel),
       style: ButtonStyle(
@@ -219,5 +194,49 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
         ),
       ),
     );
+  }
+
+  // Open Calendar widget in dialog
+  _openCalender() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AddWeightDialog();
+      },
+    );
+  }
+
+  // Handle keyboard tap
+  _onKeyboardTap(String value) {
+    setState(() {
+      // Check to replace the initial value with the value tapped
+      if (text == UiConst.addWeightDefaultInput) {
+        text = value;
+      }
+      // Check if there are 6-characters in the string
+      else if (text.length <= 6) {
+        text = text + value;
+      }
+    });
+  }
+
+  // Handle decimal separator tap
+  _onDecimalSeparatorTapped() {
+    setState(() {
+      if (text != UiConst.addWeightEmptyInput &&
+          text != UiConst.addWeightDefaultInput) {
+        text = text + UiConst.addWeightDecimalSeparator;
+      }
+    });
+  }
+
+  // Remove input function
+  _removeInput() {
+    setState(() {
+      // Check if input has a value
+      if (text != UiConst.addWeightEmptyInput) {
+        text = text.substring(0, text.length - 1);
+      }
+    });
   }
 }
