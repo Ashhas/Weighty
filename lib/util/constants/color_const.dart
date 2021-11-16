@@ -32,4 +32,6 @@ class ColorConst {
   //Dark Text
   static const Color darkPrimaryTextColor = Color(0xFFd1d1d3);
   static const Color darkSecondaryTextColor = Color(0xFFd1d1d3);
+
+  //Add
 }
