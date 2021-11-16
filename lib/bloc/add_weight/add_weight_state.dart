@@ -13,21 +13,11 @@ class AddWeightOpened extends AddWeightState {
   List<Object> get props => [];
 }
 
-class AddWeightLoading extends AddWeightState {
-  @override
-  List<Object> get props => [];
-}
-
 class AddWeightLoaded extends AddWeightState {
   final String unitType;
 
   AddWeightLoaded({this.unitType});
 
-  @override
-  List<Object> get props => [];
-}
-
-class NewMeasurementAdded extends AddWeightState {
   @override
   List<Object> get props => [];
 }
