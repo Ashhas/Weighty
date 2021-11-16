@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/add_weight/add_weight_bloc.dart';
+import 'package:weighty/bloc/add_weight/date_button/date_button_bloc.dart';
 import 'package:weighty/bloc/app_init/initialization_bloc.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
 import 'package:weighty/bloc/export/export_bloc.dart';
@@ -83,6 +84,9 @@ class MyApp extends StatelessWidget {
           BlocProvider<ExportBloc>(
             create: (_) =>
                 ExportBloc(measurementRepository: measurementRepository),
+          ),
+          BlocProvider<DateButtonBloc>(
+            create: (_) => DateButtonBloc(),
           )
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
