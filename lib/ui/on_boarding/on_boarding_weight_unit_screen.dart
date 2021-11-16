@@ -119,7 +119,7 @@ class _OnBoardingUnitScreenState extends State<OnBoardingUnitScreen> {
                     style: Theme.of(context).primaryTextTheme.subtitle1,
                   ),
                   style: ElevatedButton.styleFrom(
-                    primary: Theme.of(context).accentColor,
+                    primary: Theme.of(context).primaryColor,
                     onPrimary: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),

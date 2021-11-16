@@ -6,7 +6,6 @@ class AppTheme {
   static ThemeData getLightTheme() {
     return ThemeData(
       primaryColor: ColorConst.lightPrimaryColor,
-      accentColor: ColorConst.lightAccentColor,
       focusColor: ColorConst.lightFocusColor,
       shadowColor: ColorConst.lightShadowColor,
       canvasColor: ColorConst.lightCanvasColor,
@@ -32,7 +31,6 @@ class AppTheme {
   static ThemeData getDarkTheme() {
     return ThemeData(
       primaryColor: ColorConst.darkPrimaryColor,
-      accentColor: ColorConst.darkAccentColor,
       focusColor: ColorConst.darkFocusColor,
       shadowColor: ColorConst.darkShadowColor,
       canvasColor: ColorConst.darkCanvasColor,
