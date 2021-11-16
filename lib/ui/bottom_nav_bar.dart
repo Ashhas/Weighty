@@ -95,7 +95,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Color _chooseBottomNavColor() {
     switch (_selectedIndex) {
       case 1:
-        return Theme.of(context).focusColor;
+        return Theme.of(context).primaryColor;
         break;
       default:
         return Theme.of(context).bottomAppBarColor;

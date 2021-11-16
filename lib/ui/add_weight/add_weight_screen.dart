@@ -173,6 +173,9 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
               text,
             ),
           );
+
+          // Reset Input Value
+          _clearTextInput();
         }
       },
       child: Text(UiConst.addWeightSaveLabel),
@@ -237,6 +240,14 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
       if (text != UiConst.addWeightEmptyInput) {
         text = text.substring(0, text.length - 1);
       }
+    });
+  }
+
+  // Remove input function
+  _clearTextInput() {
+    setState(() {
+      // Set value to empty
+      text = "";
     });
   }
 }
