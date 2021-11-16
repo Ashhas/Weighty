@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ColorConst {
+abstract class ColorConst {
   static const Color errorTextColor = Colors.red;
 
   //light Colors

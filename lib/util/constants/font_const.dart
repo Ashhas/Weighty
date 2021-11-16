@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weighty/util/constants/color_const.dart';
 
-class FontConst {
+abstract class FontConst {
   static const BOLD = TextStyle(
     fontWeight: FontWeight.w800,
   );

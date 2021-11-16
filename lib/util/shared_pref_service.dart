@@ -1,8 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPrefKeys {
-  SharedPrefKeys._();
-
+abstract class SharedPrefKeys {
   //User Prefs
   static const String themeDarkMode = 'themeDarkMode';
 

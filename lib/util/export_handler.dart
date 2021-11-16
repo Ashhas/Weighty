@@ -5,7 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:weighty/data/model/measurement.dart';
 import 'package:share_plus/share_plus.dart';
 
-class ExportHandler {
+abstract class ExportHandler {
   static generateExcel(List<MeasurementModel> allMeasurements,
       MeasurementModel currentWeight, double targetWeight) async {
     //Create Excel File

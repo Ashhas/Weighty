@@ -1,4 +1,4 @@
-class UiConst {
+abstract class UiConst {
   //App General Strings
   static const appName = 'Weighty';
 
