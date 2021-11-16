@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:weighty/data/model/measurement.dart';
 import 'package:weighty/data/repo/measurement_repo.dart';
 import 'package:weighty/util/common_functions.dart';
+import 'package:weighty/util/constants/variable_const.dart';
 import 'package:weighty/util/shared_pref_service.dart';
 
 part 'add_weight_event.dart';
@@ -38,7 +39,7 @@ class AddWeightBloc extends Bloc<AddWeightEvent, AddWeightState> {
       DateTime measurementDate, String measurementInput) async* {
     if (CommonFunctions.isToday(measurementDate)) {
       await measurementRepository.setNewMeasurement(MeasurementModel(
-          DateTime.now(), double.parse(measurementInput.replaceAll(',', '.'))));
+          kToday, double.parse(measurementInput.replaceAll(',', '.'))));
     } else {
       await measurementRepository.setNewMeasurement(MeasurementModel(
           measurementDate,

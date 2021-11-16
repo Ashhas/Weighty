@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:weighty/util/constants/variable_const.dart';
 
 part 'date_button_event.dart';
 
@@ -20,7 +21,7 @@ class DateButtonBloc extends Bloc<DateButtonEvent, DateButtonState> {
   }
 
   Stream<DateButtonState> _mapLoadFirstDateToState() async* {
-    yield ShowChosenDate(chosenDate: DateTime.now());
+    yield ShowChosenDate(chosenDate: kToday);
   }
 
   Stream<DateButtonState> _mapSelectDateToState(DateTime date) async* {
