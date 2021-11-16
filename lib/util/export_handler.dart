@@ -3,17 +3,11 @@ import 'package:path/path.dart';
 import 'package:excel/excel.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:weighty/data/model/measurement.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ExportHandler {
   static generateExcel(List<MeasurementModel> allMeasurements,
       MeasurementModel currentWeight, double targetWeight) async {
-    //Request access to storage
-    Map<Permission, PermissionStatus> statuses = await [
-      Permission.storage,
-    ].request();
-
     //Create Excel File
     var excel = Excel.createExcel();
 
