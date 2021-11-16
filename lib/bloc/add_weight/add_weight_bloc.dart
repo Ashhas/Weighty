@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:weighty/data/model/measurement.dart';
 import 'package:weighty/data/repo/measurement_repo.dart';
+import 'package:weighty/util/common_functions.dart';
 
 part 'add_weight_event.dart';
 
@@ -34,19 +35,14 @@ class AddWeightBloc extends Bloc<AddWeightEvent, AddWeightState> {
 
   Stream<AddWeightState> _mapAddNewMeasurementToState(
       DateTime measurementDate, String measurementInput) async* {
-    if (isToday(measurementDate)) {
+    if (CommonFunctions.isToday(measurementDate)) {
       await measurementRepository.setNewMeasurement(MeasurementModel(
           DateTime.now(), double.parse(measurementInput.replaceAll(',', '.'))));
     } else {
       await measurementRepository.setNewMeasurement(MeasurementModel(
-          measurementDate, double.parse(measurementInput.replaceAll(',', '.'))));
+          measurementDate,
+          double.parse(measurementInput.replaceAll(',', '.'))));
     }
-  }
-
-  bool isToday(DateTime dateToCheck) {
-    return DateTime.now().year == dateToCheck.year &&
-        DateTime.now().month == dateToCheck.month &&
-        DateTime.now().day == dateToCheck.day;
   }
 
   @override

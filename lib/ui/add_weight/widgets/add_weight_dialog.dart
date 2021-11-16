@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:weighty/bloc/add_weight/add_weight_bloc.dart';
 import 'package:weighty/bloc/add_weight/date_button/date_button_bloc.dart';
+import 'package:weighty/util/common_functions.dart';
 import 'package:weighty/util/constants/ui_const.dart';
 import 'package:weighty/util/constants/variable_const.dart';
 
@@ -64,7 +65,8 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
               ),
               onDaySelected: _onDaySelected,
               enabledDayPredicate: (day) {
-                if (DateTime.now().isAfter(day) || isToday(day)) {
+                if (DateTime.now().isAfter(day) ||
+                    CommonFunctions.isToday(day)) {
                   return true;
                 } else {
                   return false;
@@ -81,11 +83,5 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
     BlocProvider.of<DateButtonBloc>(context).add(ChangeDate(selectedDay));
     //Close Dialog
     Navigator.of(context).pop();
-  }
-
-  bool isToday(DateTime dateToCheck) {
-    return DateTime.now().year == dateToCheck.year &&
-        DateTime.now().month == dateToCheck.month &&
-        DateTime.now().day == dateToCheck.day;
   }
 }
