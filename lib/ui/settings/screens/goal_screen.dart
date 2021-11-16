@@ -84,7 +84,7 @@ class _GoalScreenState extends State<GoalScreen> {
       elevation: 1,
       backgroundColor: Theme.of(context).canvasColor,
       leading: IconButton(
-        icon: Icon(Icons.arrow_back, color: Theme.of(context).buttonColor),
+        icon: Icon(Icons.arrow_back, color: Theme.of(context).cardColor),
         color: Colors.black,
         onPressed: () {
           Navigator.pop(context);

@@ -45,7 +45,7 @@ class _ThemeScreenState extends State<ThemeScreen> {
       leading: IconButton(
         icon: Icon(
           Icons.arrow_back,
-          color: Theme.of(context).buttonColor,
+          color: Theme.of(context).cardColor,
         ),
         color: Colors.black,
         onPressed: () {
