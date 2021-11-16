@@ -18,6 +18,7 @@ class _EditWeightDialogState extends State<EditWeightDialog> {
 
   @override
   void initState() {
+    super.initState();
     textFormController = TextEditingController();
     textFormController.text = widget.selectedMeasurement.weightEntry.toString();
   }
