@@ -57,12 +57,15 @@ class _EditTargetWeightDialogState extends State<EditTargetWeightDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  RaisedButton(
+                  ElevatedButton(
                     child: Icon(
                       Icons.check,
                       color: Colors.white,
                     ),
-                    color: Theme.of(context).canvasColor,
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          Theme.of(context).canvasColor),
+                    ),
                     onPressed: () {
                       BlocProvider.of<GoalsBloc>(context).add(
                           ChangeTargetWeight(
@@ -72,7 +75,7 @@ class _EditTargetWeightDialogState extends State<EditTargetWeightDialog> {
                       Navigator.of(context).pop();
                     },
                   ),
-                  RaisedButton(
+                  ElevatedButton(
                     child: Icon(
                       Icons.close,
                       color: Colors.grey,

@@ -59,12 +59,15 @@ class _EditWeightDialogState extends State<EditWeightDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  RaisedButton(
+                  ElevatedButton(
                     child: Icon(
                       Icons.check,
                       color: Colors.white,
                     ),
-                    color: Theme.of(context).canvasColor,
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          Theme.of(context).canvasColor),
+                    ),
                     onPressed: () {
                       BlocProvider.of<HistoryBloc>(context).add(
                         EditMeasurement(
@@ -77,7 +80,7 @@ class _EditWeightDialogState extends State<EditWeightDialog> {
                       Navigator.of(context).pop();
                     },
                   ),
-                  RaisedButton(
+                  ElevatedButton(
                     child: Icon(
                       Icons.close,
                       color: Colors.grey,
