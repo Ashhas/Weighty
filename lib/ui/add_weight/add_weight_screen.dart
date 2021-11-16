@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:numeric_keyboard/numeric_keyboard.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:weighty/bloc/add_weight/add_weight_bloc.dart';
+import 'package:weighty/bloc/add_weight/date_button/date_button_bloc.dart';
 import 'package:weighty/data/model/measurement.dart';
 import 'package:weighty/ui/add_weight/widgets/add_weight_dialog.dart';
 import 'package:weighty/util/constants/ui_const.dart';
@@ -16,90 +18,151 @@ class AddWeightScreen extends StatefulWidget {
 }
 
 class _AddWeightScreenState extends State<AddWeightScreen> {
-  List<MeasurementModel> allMeasurements = [];
+  String text = '';
+
+  // Color screenColor = Color(0xFF435094);
+  Color screenColor = Color(0xFF3F51B6);
+  Color buttonColor = Colors.black.withOpacity(0.2);
+  DateTime chosenDate = DateTime.now();
 
   @override
   void initState() {
     super.initState();
     BlocProvider.of<AddWeightBloc>(context).add(AddWeightStarted());
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
+    BlocProvider.of<DateButtonBloc>(context).add(LoadFirstDate());
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Theme.of(context).backgroundColor,
-      appBar: _buildAppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            BlocBuilder<AddWeightBloc, AddWeightState>(
-              builder: (context, state) {
-                if (state is AddWeightLoaded) {
-                  return TableCalendar(
-                    firstDay: kFirstDay,
-                    lastDay: kLastDay,
-                    focusedDay: kFocusedDay,
-                    calendarFormat: CalendarFormat.month,
-                    startingDayOfWeek: StartingDayOfWeek.monday,
-                    eventLoader: (day) {
-                      List<DateTime> sortedList = [];
-                      DateFormat formatter = DateFormat('yyyy-MM-dd');
-
-                      if (state.allMeasurements != null) {
-                        state.allMeasurements.forEach(
-                          (element) {
-                            if (formatter.format(day) ==
-                                formatter.format(element.dateAdded)) {
-                              sortedList.add(element.dateAdded);
-                            }
-                          },
-                        );
-                      }
-                      return sortedList;
-                    },
-                    headerStyle: HeaderStyle(
-                      titleCentered: true,
-                      formatButtonVisible: false,
-                      titleTextStyle:
-                          Theme.of(context).primaryTextTheme.bodyText2,
-                    ),
-                    daysOfWeekStyle: DaysOfWeekStyle(
-                      weekdayStyle:
-                          Theme.of(context).primaryTextTheme.bodyText1,
-                      weekendStyle:
-                          Theme.of(context).primaryTextTheme.bodyText1,
-                    ),
-                    calendarStyle: CalendarStyle(
-                      outsideDaysVisible: false,
-                      markerSize: 13.0,
-                      markerDecoration: BoxDecoration(
-                          color: Colors.green, shape: BoxShape.circle),
-                      todayDecoration:
-                          BoxDecoration(color: Theme.of(context).accentColor),
-                      defaultTextStyle:
-                          Theme.of(context).primaryTextTheme.bodyText1,
-                      weekendTextStyle:
-                          Theme.of(context).primaryTextTheme.bodyText1,
-                    ),
-                    onDaySelected: _onDaySelected,
-                    enabledDayPredicate: (day) {
-                      if (DateTime.now().isAfter(day) || isToday(day)) {
-                        return true;
-                      } else {
-                        return false;
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: screenColor,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              height: MediaQuery.of(context).size.height * 0.11,
+              child: Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    _openCalender();
+                  },
+                  child: BlocListener<DateButtonBloc, DateButtonState>(
+                    listener: (BuildContext context, state) {
+                      if (state is ShowChosenDate) {
+                        chosenDate = state.chosenDate;
                       }
                     },
-                  );
-                } else {
-                  return Container();
-                }
+                    child: BlocBuilder<DateButtonBloc, DateButtonState>(
+                      builder: (context, state) {
+                        if (state is ShowChosenDate) {
+                          return Text(
+                              "${isToday(state.chosenDate) ? "Today" : DateFormat("EEE").format(state.chosenDate)} | ${DateFormat("dd/MM/yy").format(state.chosenDate)}");
+                        } else {
+                          return Container();
+                        }
+                      },
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    elevation: MaterialStateProperty.all(0),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    backgroundColor: MaterialStateProperty.all(
+                      buttonColor,
+                    ),
+                    fixedSize: MaterialStateProperty.all(
+                      Size(
+                        MediaQuery.of(context).size.width * 0.41,
+                        MediaQuery.of(context).size.height * 0.066,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.25,
+              child: Center(
+                child: Text(
+                  "$text KG",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.05,
+              child: Center(
+                child: Text(
+                  "Enter New Weight Measurement",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              color: screenColor,
+              child: NumericKeyboard(
+                onKeyboardTap: _onKeyboardTap,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                textColor: Colors.white,
+                rightButtonFn: () {
+                  setState(() {
+                    text = text.substring(0, text.length - 1);
+                  });
+                },
+                rightIcon: Icon(
+                  Icons.backspace,
+                  color: Colors.white,
+                ),
+                leftButtonFn: () {
+                  _onDecimalSeparatorTapped();
+                },
+                leftIcon: Icon(
+                  Icons.circle,
+                  size: 6,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                BlocProvider.of<AddWeightBloc>(context).add(
+                  AddNewMeasurement(
+                    chosenDate,
+                    text,
+                  ),
+                );
               },
+              child: Text("Save"),
+              style: ButtonStyle(
+                elevation: MaterialStateProperty.all(0),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                backgroundColor: MaterialStateProperty.all(
+                  buttonColor,
+                ),
+                fixedSize: MaterialStateProperty.all(
+                  Size(
+                    MediaQuery.of(context).size.width * 0.41,
+                    MediaQuery.of(context).size.height * 0.08,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
@@ -107,35 +170,26 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
     );
   }
 
-  _buildAppBar() {
-    return AppBar(
-      elevation: 0,
-      backgroundColor: Theme.of(context).primaryColor,
-      title: Column(
-        children: [
-          Text(
-            UiConst.addWeightTitle,
-            style: TextStyle(color: Colors.white),
-          ),
-          Text(
-            UiConst.addWeightLabel,
-            style: TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.normal,
-              color: Colors.white,
-            ),
-          )
-        ],
-      ),
-      centerTitle: true,
-    );
+  // Handle keyboard tap
+  _onKeyboardTap(String value) {
+    setState(() {
+      text = text + value;
+    });
   }
 
-  void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+  // Handle decimal separator tap
+  _onDecimalSeparatorTapped() {
+    setState(() {
+      text = text + ",";
+    });
+  }
+
+  // Open Calendar widget in dialog
+  _openCalender() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AddWeightDialog(selectedDay: selectedDay);
+        return AddWeightDialog();
       },
     );
   }
