@@ -52,6 +52,8 @@ class UiConst {
   static const addWeightNumPadTitle = 'Enter New Weight Measurement';
   static const addWeightDateButtonTodayTitle = 'Today';
   static const addWeightDecimalSeparator = ',';
+  static const addWeightEmptyInput = '';
+  static const addWeightDefaultInput = '0';
   static const addWeightSaveLabel = 'Save';
 
   //History Strings
