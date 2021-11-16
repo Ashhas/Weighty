@@ -87,7 +87,7 @@ class _WeightUnitScreenState extends State<WeightUnitScreen> {
         },
       ),
       title: Text(
-        "Weight Units",
+        UiConst.weightUnitTileTitle,
         style: TextStyle(color: Colors.white),
       ),
     );
