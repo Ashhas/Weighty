@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:weighty/data/model/measurement.dart';
 import 'package:weighty/data/repo/measurement_repo.dart';
 import 'package:weighty/util/common_functions.dart';
+import 'package:weighty/util/shared_pref_service.dart';
 
 part 'add_weight_event.dart';
 
@@ -27,10 +28,10 @@ class AddWeightBloc extends Bloc<AddWeightEvent, AddWeightState> {
   }
 
   Stream<AddWeightState> _mapAddWeightStartedToState() async* {
-    final List<MeasurementModel> measurements =
-        await measurementRepository.getAllMeasurements();
+    final sharedPrefService = await SharedPreferencesService.instance;
+    String unitType = sharedPrefService.getWeightUnitType;
 
-    yield AddWeightLoaded(measurements);
+    yield AddWeightLoaded(unitType: unitType);
   }
 
   Stream<AddWeightState> _mapAddNewMeasurementToState(

@@ -19,9 +19,9 @@ class AddWeightLoading extends AddWeightState {
 }
 
 class AddWeightLoaded extends AddWeightState {
-  final List<MeasurementModel> allMeasurements;
+  final String unitType;
 
-  AddWeightLoaded(this.allMeasurements);
+  AddWeightLoaded({this.unitType});
 
   @override
   List<Object> get props => [];
