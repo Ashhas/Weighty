@@ -62,10 +62,10 @@ class _ThemeScreenState extends State<ThemeScreen> {
   }
 
   Widget _darkThemeTile() {
-    bool turnOnDarkTheme;
-
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, state) {
+        bool turnOnDarkTheme;
+
         if (state is CurrentThemeState) {
           state.isDarkTheme == null
               ? turnOnDarkTheme = false
