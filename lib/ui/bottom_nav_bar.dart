@@ -83,12 +83,32 @@ class _BottomNavBarState extends State<BottomNavBar> {
         type: BottomNavigationBarType.fixed,
         selectedLabelStyle: TextStyle(fontSize: 12),
         unselectedLabelStyle: TextStyle(fontSize: 12),
-        backgroundColor: Theme.of(context).bottomAppBarColor,
-        selectedItemColor: Theme.of(context).focusColor,
+        backgroundColor: _chooseBottomNavColor(),
+        selectedItemColor: _chooseSelectedItemColor(),
         unselectedItemColor: Theme.of(context).hintColor,
         elevation: 6.0,
         onTap: _onItemTapped,
       ),
     );
+  }
+
+  Color _chooseBottomNavColor() {
+    switch (_selectedIndex) {
+      case 1:
+        return Theme.of(context).focusColor;
+        break;
+      default:
+        return Theme.of(context).bottomAppBarColor;
+    }
+  }
+
+  Color _chooseSelectedItemColor() {
+    switch (_selectedIndex) {
+      case 1:
+        return Colors.white;
+        break;
+      default:
+        return Theme.of(context).focusColor;
+    }
   }
 }
