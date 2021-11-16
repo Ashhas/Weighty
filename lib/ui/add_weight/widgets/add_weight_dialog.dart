@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:weighty/bloc/add_weight/add_weight_bloc.dart';
 import 'package:weighty/bloc/add_weight/date_button/date_button_bloc.dart';
 import 'package:weighty/util/common_functions.dart';
-import 'package:weighty/util/constants/ui_const.dart';
 import 'package:weighty/util/constants/variable_const.dart';
 
 class AddWeightDialog extends StatefulWidget {
@@ -20,6 +17,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
 
   @override
   void initState() {
+    super.initState();
     textFormController = TextEditingController();
   }
 
@@ -59,7 +57,7 @@ class _AddWeightDialogState extends State<AddWeightDialog> {
                 markerDecoration:
                     BoxDecoration(color: Colors.green, shape: BoxShape.circle),
                 todayDecoration:
-                    BoxDecoration(color: Theme.of(context).accentColor),
+                    BoxDecoration(color: Theme.of(context).primaryColor),
                 defaultTextStyle: Theme.of(context).primaryTextTheme.bodyText1,
                 weekendTextStyle: Theme.of(context).primaryTextTheme.bodyText1,
               ),

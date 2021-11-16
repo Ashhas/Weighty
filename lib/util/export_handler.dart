@@ -4,8 +4,6 @@ import 'package:excel/excel.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:weighty/data/model/measurement.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:weighty/data/repo/measurement_repo.dart';
-import 'package:weighty/util/shared_pref_service.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ExportHandler {

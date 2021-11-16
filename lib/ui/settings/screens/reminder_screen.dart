@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:weighty/ui/settings/widgets/settings_tile.dart';
 import 'package:weighty/util/constants/ui_const.dart';
-import 'package:weighty/util/constants/variable_const.dart';
 
 class ReminderScreen extends StatefulWidget {
   ReminderScreen();
