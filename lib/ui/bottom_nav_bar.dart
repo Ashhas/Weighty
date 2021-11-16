@@ -13,7 +13,7 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
 
   @override
   void initState() {
