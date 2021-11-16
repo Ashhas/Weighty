@@ -18,8 +18,6 @@ class UiConst {
   static const targetButtonTitle = 'Finish';
   static const incompleteInputError = 'Not everything has been filled in';
 
-
-
   //Navbar Strings
   static const dashboardTitle = 'Dashboard';
   static const statisticsTitle = 'Stats';
@@ -51,6 +49,10 @@ class UiConst {
   //Add Weight Strings
   static const addWeightTitle = 'Add Weight';
   static const addWeightLabel = 'Select date and add your weight';
+  static const addWeightNumPadTitle = 'Enter New Weight Measurement';
+  static const addWeightDateButtonTodayTitle = 'Today';
+  static const addWeightDecimalSeparator = ',';
+  static const addWeightSaveLabel = 'Save';
 
   //History Strings
   static const noHistoryDataTitle = 'No weight measurement has been added yet!';

@@ -64,7 +64,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
   // Handle decimal separator tap
   _onDecimalSeparatorTapped() {
     setState(() {
-      text = text + ",";
+      text = text + UiConst.addWeightDecimalSeparator;
     });
   }
 
@@ -94,7 +94,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
           builder: (context, state) {
             if (state is ShowChosenDate) {
               return Text(
-                  "${CommonFunctions.isToday(state.chosenDate) ? "Today" : DateFormat("EEE").format(state.chosenDate)} | ${DateFormat("dd/MM/yy").format(state.chosenDate)}");
+                  "${CommonFunctions.isToday(state.chosenDate) ? UiConst.addWeightDateButtonTodayTitle : DateFormat("EEE").format(state.chosenDate)} | ${DateFormat("dd/MM/yy").format(state.chosenDate)}");
             } else {
               return Container();
             }
@@ -152,7 +152,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
       height: MediaQuery.of(context).size.height * 0.05,
       child: Center(
         child: Text(
-          "Enter New Weight Measurement",
+          UiConst.addWeightNumPadTitle,
           style: TextStyle(
             color: Colors.white,
             fontSize: 14,
@@ -200,7 +200,7 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
           ),
         );
       },
-      child: Text("Save"),
+      child: Text(UiConst.addWeightSaveLabel),
       style: ButtonStyle(
         elevation: MaterialStateProperty.all(0),
         shape: MaterialStateProperty.all(
