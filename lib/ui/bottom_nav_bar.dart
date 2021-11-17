@@ -85,11 +85,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
         iconSize: 30,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard_outlined),
+            icon: Icon(Icons.bar_chart),
             label: UiConst.dashboardTitle,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add),
+            icon: Icon(Icons.add_box_outlined),
             label: UiConst.addTitle,
           ),
           BottomNavigationBarItem(
