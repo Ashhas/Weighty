@@ -36,12 +36,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
     }
   }
 
+  // Switch screens
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 
+  // Determine bottom nav color based on the selectedIndex
   Color _chooseBottomNavColor() {
     switch (_selectedIndex) {
       case 1:
@@ -52,6 +54,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     }
   }
 
+  // Determine selectedIcon color based on the selectedIndex
   Color _chooseSelectedItemColor() {
     switch (_selectedIndex) {
       case 1:
