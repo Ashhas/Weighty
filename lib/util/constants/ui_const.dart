@@ -24,6 +24,7 @@ abstract class UiConst {
   static const addTitle = 'Add';
   static const historyTitle = 'History';
   static const settingsTitle = 'Settings';
+  static const initialNavBarTab = 1;
 
   //Unit Types
   static const metricWeightUnit = 'KG';
