@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:numeric_keyboard/numeric_keyboard.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:weighty/bloc/add_weight/add_weight_bloc.dart';
 import 'package:weighty/bloc/add_weight/date_button/date_button_bloc.dart';
 import 'package:weighty/ui/add_weight/widgets/add_weight_dialog.dart';
+import 'package:weighty/ui/settings/settings_screen.dart';
 import 'package:weighty/util/common_functions.dart';
 import 'package:weighty/util/constants/ui_const.dart';
 import 'package:weighty/util/constants/variable_const.dart';
@@ -27,6 +29,58 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
     BlocProvider.of<DateButtonBloc>(context).add(LoadFirstDate());
   }
 
+  // Open Calendar widget in dialog
+  _openCalender() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AddWeightDialog();
+      },
+    );
+  }
+
+  // Handle keyboard tap
+  _onKeyboardTap(String value) {
+    setState(() {
+      // Check to replace the initial value with the value tapped
+      if (text == UiConst.addWeightDefaultInput) {
+        text = value;
+      }
+      // Check if there are 6-characters in the string
+      else if (text.length <= 6) {
+        text = text + value;
+      }
+    });
+  }
+
+  // Handle decimal separator tap
+  _onDecimalSeparatorTapped() {
+    setState(() {
+      if (text != UiConst.addWeightEmptyInput &&
+          text != UiConst.addWeightDefaultInput) {
+        text = text + UiConst.addWeightDecimalSeparator;
+      }
+    });
+  }
+
+  // Remove input function
+  _removeInput() {
+    setState(() {
+      // Check if input has a value
+      if (text != UiConst.addWeightEmptyInput) {
+        text = text.substring(0, text.length - 1);
+      }
+    });
+  }
+
+  // Remove input function
+  _clearTextInput() {
+    setState(() {
+      // Set value to empty
+      text = "";
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -39,7 +93,14 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
             Container(
               height: MediaQuery.of(context).size.height * 0.11,
               child: Center(
-                child: _dateButton(),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _emptyIconButton(),
+                    _dateButton(),
+                    _settingsIconButton(),
+                  ],
+                ),
               ),
             ),
             _numContainer(),
@@ -48,6 +109,38 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
             _saveButton(),
           ],
         ),
+      ),
+    );
+  }
+
+  // Empty iconButton, used for scaling row
+  Widget _emptyIconButton() {
+    return IconButton(
+      onPressed: () {},
+      icon: Icon(
+        Icons.circle,
+        size: 30,
+        color: Theme.of(context).primaryColor,
+      ),
+    );
+  }
+
+  // Settings iconButton
+  Widget _settingsIconButton() {
+    return IconButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          PageTransition(
+            type: PageTransitionType.bottomToTop,
+            child: SettingsScreen(),
+          ),
+        );
+      },
+      icon: Icon(
+        Icons.settings,
+        size: 30,
+        color: Theme.of(context).cardColor,
       ),
     );
   }
@@ -197,57 +290,5 @@ class _AddWeightScreenState extends State<AddWeightScreen> {
         ),
       ),
     );
-  }
-
-  // Open Calendar widget in dialog
-  _openCalender() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AddWeightDialog();
-      },
-    );
-  }
-
-  // Handle keyboard tap
-  _onKeyboardTap(String value) {
-    setState(() {
-      // Check to replace the initial value with the value tapped
-      if (text == UiConst.addWeightDefaultInput) {
-        text = value;
-      }
-      // Check if there are 6-characters in the string
-      else if (text.length <= 6) {
-        text = text + value;
-      }
-    });
-  }
-
-  // Handle decimal separator tap
-  _onDecimalSeparatorTapped() {
-    setState(() {
-      if (text != UiConst.addWeightEmptyInput &&
-          text != UiConst.addWeightDefaultInput) {
-        text = text + UiConst.addWeightDecimalSeparator;
-      }
-    });
-  }
-
-  // Remove input function
-  _removeInput() {
-    setState(() {
-      // Check if input has a value
-      if (text != UiConst.addWeightEmptyInput) {
-        text = text.substring(0, text.length - 1);
-      }
-    });
-  }
-
-  // Remove input function
-  _clearTextInput() {
-    setState(() {
-      // Set value to empty
-      text = "";
-    });
   }
 }
