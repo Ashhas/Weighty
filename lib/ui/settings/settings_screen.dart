@@ -5,7 +5,6 @@ import 'package:weighty/bloc/settings/settings_bloc.dart';
 import 'package:weighty/ui/common/common_app_bar.dart';
 import 'package:weighty/ui/settings/screens/about_screen.dart';
 import 'package:weighty/ui/settings/screens/goal_screen.dart';
-import 'package:weighty/ui/settings/screens/help_and_faq_screen.dart';
 import 'package:weighty/ui/settings/screens/manage_data_screen.dart';
 import 'package:weighty/ui/settings/screens/theme_screen.dart';
 import 'package:weighty/ui/settings/screens/weight_unit_screen.dart';

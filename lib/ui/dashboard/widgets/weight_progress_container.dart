@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:weighty/ui/dashboard/widgets/current_weight_widget.dart';
 import 'package:weighty/ui/dashboard/widgets/target_weight_widget.dart';
 
-class WeightProgressCard extends StatefulWidget {
-  WeightProgressCard() : super();
+class WeightProgressContainer extends StatefulWidget {
+  WeightProgressContainer() : super();
 
   @override
-  _WeightProgressCardState createState() => _WeightProgressCardState();
+  _WeightProgressContainerState createState() =>
+      _WeightProgressContainerState();
 }
 
-class _WeightProgressCardState extends State<WeightProgressCard> {
+class _WeightProgressContainerState extends State<WeightProgressContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(

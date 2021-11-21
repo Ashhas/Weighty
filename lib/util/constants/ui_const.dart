@@ -46,6 +46,7 @@ abstract class UiConst {
   static const weightLostStatItemTitle = 'Total Lost';
   static const weightLeftStatItemTitle = 'Left to Go';
   static const chartNoDataTitle = 'No Data';
+  static const noWeightValue = ' - ';
 
   //Add Weight Strings
   static const addWeightTitle = 'Add Weight';

@@ -17,12 +17,13 @@ class _TargetWeightWidgetState extends State<TargetWeightWidget> {
       builder: (BuildContext context, state) {
         if (state is DashboardLoaded) {
           return Column(
-            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(UiConst.weightTargetTitle,
-                  style: Theme.of(context).primaryTextTheme.subtitle1),
+              Text(
+                UiConst.weightTargetTitle,
+                style: Theme.of(context).primaryTextTheme.subtitle1,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -31,11 +32,15 @@ class _TargetWeightWidgetState extends State<TargetWeightWidget> {
                           state.targetWeight.toString(),
                           style: Theme.of(context).primaryTextTheme.headline1,
                         )
-                      : Text(" - ",
-                          style: Theme.of(context).primaryTextTheme.headline1),
+                      : Text(
+                          UiConst.noWeightValue,
+                          style: Theme.of(context).primaryTextTheme.headline1,
+                        ),
                   SizedBox(width: 4),
-                  Text(state.unitType,
-                      style: Theme.of(context).primaryTextTheme.headline4),
+                  Text(
+                    state.unitType,
+                    style: Theme.of(context).primaryTextTheme.headline4,
+                  ),
                 ],
               ),
             ],
