@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:weighty/bloc/settings/settings_bloc.dart';
+import 'package:weighty/ui/common/common_app_bar.dart';
 import 'package:weighty/ui/settings/screens/about_screen.dart';
 import 'package:weighty/ui/settings/screens/goal_screen.dart';
 import 'package:weighty/ui/settings/screens/help_and_faq_screen.dart';
 import 'package:weighty/ui/settings/screens/manage_data_screen.dart';
-import 'package:weighty/ui/settings/screens/reminder_screen.dart';
 import 'package:weighty/ui/settings/screens/theme_screen.dart';
 import 'package:weighty/ui/settings/screens/weight_unit_screen.dart';
 import 'package:weighty/ui/settings/widgets/settings_tile.dart';
@@ -27,7 +27,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: CommonAppBar(appBarTitle: UiConst.settingsTitle),
       backgroundColor: Theme.of(context).backgroundColor,
       body: BlocBuilder<SettingsBloc, SettingsState>(
         builder: (context, state) {
@@ -53,22 +53,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
           }
         },
       ),
-    );
-  }
-
-  _buildAppBar() {
-    return AppBar(
-      elevation: 0,
-      backgroundColor: Theme.of(context).primaryColor,
-      title: Column(
-        children: [
-          Text(
-            UiConst.settingsTitle,
-            style: TextStyle(color: Colors.white),
-          ),
-        ],
-      ),
-      centerTitle: true,
     );
   }
 
@@ -129,24 +113,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Widget _buildRemindersTile() {
-    return SettingsTile(
-      title: UiConst.remindersTileTitle,
-      titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
-      leading: Icon(
-        Icons.notifications_active,
-        color: Colors.grey,
-      ),
-      onPressed: (BuildContext context) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ReminderScreen()),
-        );
-      },
-      enabled: false,
-    );
-  }
-
   Widget _buildAboutTile(String appVersion) {
     return SettingsTile(
       title: UiConst.aboutTileTitle,
@@ -182,23 +148,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             type: PageTransitionType.rightToLeftWithFade,
             child: ManageDataScreen(),
           ),
-        );
-      },
-    );
-  }
-
-  Widget _buildHelpAndFaqTile() {
-    return SettingsTile(
-      title: UiConst.helpFaqTileTitle,
-      titleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
-      leading: Icon(
-        Icons.help_outline,
-        color: Colors.grey,
-      ),
-      onPressed: (BuildContext context) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => HelpFaqScreen()),
         );
       },
     );

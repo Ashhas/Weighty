@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/settings/settings_bloc.dart';
 import 'package:weighty/bloc/theme/theme_bloc.dart';
+import 'package:weighty/ui/common/common_app_bar.dart';
 import 'package:weighty/ui/settings/widgets/settings_switch_tile.dart';
 import 'package:weighty/util/constants/ui_const.dart';
 
@@ -18,7 +19,7 @@ class _ThemeScreenState extends State<ThemeScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: _buildAppBar(),
+      appBar: CommonAppBar(appBarTitle: UiConst.themeScreenTitle),
       body: BlocBuilder<SettingsBloc, SettingsState>(
         builder: (context, state) {
           if (state is SettingsLoaded) {
@@ -34,29 +35,6 @@ class _ThemeScreenState extends State<ThemeScreen> {
             return Container();
           }
         },
-      ),
-    );
-  }
-
-  Widget _buildAppBar() {
-    return AppBar(
-      elevation: 1,
-      backgroundColor: Theme.of(context).canvasColor,
-      leading: IconButton(
-        icon: Icon(
-          Icons.arrow_back,
-          color: Theme.of(context).cardColor,
-        ),
-        color: Colors.black,
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      ),
-      title: Text(
-        UiConst.themeScreenTitle,
-        style: TextStyle(
-          color: Colors.white,
-        ),
       ),
     );
   }

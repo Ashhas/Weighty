@@ -16,23 +16,29 @@ class _TargetWeightWidgetState extends State<TargetWeightWidget> {
     return BlocBuilder<DashboardBloc, DashboardState>(
       builder: (BuildContext context, state) {
         if (state is DashboardLoaded) {
-          return Container(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  children: [
-                    Text(state.targetWeight.toString(),
-                        style: Theme.of(context).primaryTextTheme.headline2),
-                    SizedBox(width: 4),
-                    Text(state.unitType,
-                        style: Theme.of(context).primaryTextTheme.headline4),
-                  ],
-                ),
-                Text(UiConst.weightTargetTitle,
-                    style: Theme.of(context).primaryTextTheme.subtitle1),
-              ],
-            ),
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(UiConst.weightTargetTitle,
+                  style: Theme.of(context).primaryTextTheme.subtitle1),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  state.targetWeight != null
+                      ? Text(
+                          state.targetWeight.toString(),
+                          style: Theme.of(context).primaryTextTheme.headline1,
+                        )
+                      : Text(" - ",
+                          style: Theme.of(context).primaryTextTheme.headline1),
+                  SizedBox(width: 4),
+                  Text(state.unitType,
+                      style: Theme.of(context).primaryTextTheme.headline4),
+                ],
+              ),
+            ],
           );
         } else {
           return Container();

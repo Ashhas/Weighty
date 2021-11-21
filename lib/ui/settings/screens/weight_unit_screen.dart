@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/settings/weight_unit/weight_unit_bloc.dart';
+import 'package:weighty/ui/common/common_app_bar.dart';
 import 'package:weighty/util/constants/ui_const.dart';
 import 'package:weighty/util/constants/variable_const.dart';
 
@@ -25,7 +26,7 @@ class _WeightUnitScreenState extends State<WeightUnitScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: _buildAppBar(),
+      appBar: CommonAppBar(appBarTitle: UiConst.weightUnitTileTitle),
       body: BlocBuilder<WeightUnitBloc, WeightUnitState>(
         builder: (context, state) {
           if (state is WeightUnitsLoaded) {
@@ -71,24 +72,6 @@ class _WeightUnitScreenState extends State<WeightUnitScreen> {
             return Container();
           }
         },
-      ),
-    );
-  }
-
-  Widget _buildAppBar() {
-    return AppBar(
-      elevation: 1,
-      backgroundColor: Theme.of(context).canvasColor,
-      leading: IconButton(
-        icon: Icon(Icons.arrow_back, color: Theme.of(context).cardColor),
-        color: Colors.black,
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      ),
-      title: Text(
-        UiConst.weightUnitTileTitle,
-        style: TextStyle(color: Colors.white),
       ),
     );
   }

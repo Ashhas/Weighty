@@ -20,7 +20,7 @@ abstract class UiConst {
 
   //Navbar Strings
   static const dashboardTitle = 'Dashboard';
-  static const statisticsTitle = 'Stats';
+  static const statisticsTitle = 'Statistics';
   static const addTitle = 'Add';
   static const historyTitle = 'History';
   static const settingsTitle = 'Settings';
@@ -38,7 +38,7 @@ abstract class UiConst {
 
   //Dashboard Strings
   static const weightStartedTitle = 'Start';
-  static const weightCurrentTitle = 'Current Weight';
+  static const weightCurrentTitle = 'Current';
   static const weightTargetTitle = 'Goal';
   static const cardStatisticsTitle = 'Statistics';
   static const cardWeightGraphTitle = 'Weight Graph';

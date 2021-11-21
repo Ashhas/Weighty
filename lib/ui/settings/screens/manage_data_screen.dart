@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/export/export_bloc.dart';
+import 'package:weighty/ui/common/common_app_bar.dart';
 import 'package:weighty/ui/settings/widgets/settings_tile.dart';
 import 'package:weighty/util/constants/ui_const.dart';
 
@@ -17,7 +18,7 @@ class _ManageDataScreenState extends State<ManageDataScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: _buildAppBar(),
+      appBar: CommonAppBar(appBarTitle: UiConst.manageDataScreenTitle),
       body: Container(
         width: double.infinity,
         child: Column(
@@ -36,24 +37,6 @@ class _ManageDataScreenState extends State<ManageDataScreen> {
             Divider(height: 1, thickness: 1),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildAppBar() {
-    return AppBar(
-      elevation: 1,
-      backgroundColor: Theme.of(context).canvasColor,
-      leading: IconButton(
-        icon: Icon(Icons.arrow_back, color: Theme.of(context).cardColor),
-        color: Colors.black,
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      ),
-      title: Text(
-        UiConst.manageDataScreenTitle,
-        style: TextStyle(color: Colors.white),
       ),
     );
   }

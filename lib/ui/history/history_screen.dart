@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/history/history_bloc.dart';
 import 'package:weighty/data/model/measurement.dart';
+import 'package:weighty/ui/common/common_app_bar.dart';
 import 'package:weighty/ui/history/widgets/edit_weight_dialog.dart';
 import 'package:weighty/util/constants/ui_const.dart';
 
@@ -32,7 +33,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: _buildAppBar(),
+      appBar: CommonAppBar(appBarTitle: UiConst.historyTitle),
       body: Column(
         children: [
           _buildCustomHeader(),
@@ -57,22 +58,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
           }),
         ],
       ),
-    );
-  }
-
-  _buildAppBar() {
-    return AppBar(
-      elevation: 0,
-      backgroundColor: Theme.of(context).primaryColor,
-      title: Column(
-        children: [
-          Text(
-            UiConst.historyTitle,
-            style: TextStyle(color: Colors.white),
-          ),
-        ],
-      ),
-      centerTitle: true,
     );
   }
 

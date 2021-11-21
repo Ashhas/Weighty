@@ -25,8 +25,8 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
                 decoration: BoxDecoration(
                   color: Theme.of(context).backgroundColor,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(25),
-                    topRight: Radius.circular(25),
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15),
                   ),
                 ),
                 child: BlocBuilder<DashboardBloc, DashboardState>(
@@ -35,16 +35,45 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
                       return IntrinsicHeight(
                         child: Padding(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 20),
+                              horizontal: 20, vertical: 20),
                           child: Column(
                             children: [
                               _titleView(
                                   titleName: UiConst.cardStatisticsTitle),
-                              _simpleStatsRow(
-                                  totalLost: state.totalLost,
-                                  amountLeft: state.amountLeft,
-                                  percentageCompleted: state.percentageDone,
-                                  unitType: state.unitType),
+                              Container(
+                                height: 180,
+                                child: GridView.count(
+                                  physics: NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  crossAxisCount: 2,
+                                  childAspectRatio: 1 / 0.5,
+                                  children: [
+                                    statCard(
+                                      cardTitle: UiConst.completedStatItemTitle,
+                                      cardValue:
+                                          "${(state.percentageDone * 100).toStringAsFixed(2)}%",
+                                      unitType: state.unitType,
+                                      cardIcon: Icons.check_circle_outline,
+                                    ),
+                                    statCard(
+                                      cardTitle:
+                                          UiConst.weightLostStatItemTitle,
+                                      cardValue:
+                                          "${state.totalLost.toStringAsFixed(2)} ${state.unitType}",
+                                      unitType: state.unitType,
+                                      cardIcon: Icons.exposure_minus_1,
+                                    ),
+                                    statCard(
+                                      cardTitle:
+                                          UiConst.weightLeftStatItemTitle,
+                                      cardValue:
+                                          "${state.amountLeft.toStringAsFixed(2)} ${state.unitType}",
+                                      unitType: state.unitType,
+                                      cardIcon: Icons.alternate_email,
+                                    ),
+                                  ],
+                                ),
+                              ),
                               SizedBox(height: 30),
                               _titleView(
                                   titleName: UiConst.cardWeightGraphTitle),
@@ -83,102 +112,42 @@ class _WeightStatsWidgetState extends State<WeightStatsWidget> {
     );
   }
 
-  Widget _simpleStatsRow(
-      {double totalLost,
-      double amountLeft,
-      double percentageCompleted,
-      String unitType}) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 5),
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        _statItemPercentage(
-          numberValue: percentageCompleted,
-          itemTitle: UiConst.completedStatItemTitle,
-        ),
-        Divider(),
-        _statItemGeneral(
-          numberValue: totalLost,
-          unitType: unitType,
-          itemTitle: UiConst.weightLostStatItemTitle,
-        ),
-        Divider(),
-        _statItemGeneral(
-          numberValue: amountLeft,
-          unitType: unitType,
-          itemTitle: UiConst.weightLeftStatItemTitle,
-        ),
-      ]),
-    );
-  }
-
-  Widget _statItemPercentage({double numberValue, String itemTitle}) {
-    return Column(
-      children: [
-        Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              width: 70,
-              height: 70,
-              decoration: BoxDecoration(
-                color: Theme.of(context).shadowColor,
-                shape: BoxShape.circle,
-              ),
-            ),
+  Widget statCard(
+      {String cardTitle,
+      String cardValue,
+      String unitType,
+      IconData cardIcon}) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      color: Colors.grey,
+      elevation: 0,
+      child: Padding(
+        padding: EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                    numberValue != null
-                        ? (numberValue * 100).round().toString()
-                        : "-",
-                    style: Theme.of(context).primaryTextTheme.headline5),
-                SizedBox(width: 3),
-                Text("%", style: Theme.of(context).primaryTextTheme.headline5),
-              ],
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        Text(itemTitle, style: Theme.of(context).primaryTextTheme.subtitle2),
-      ],
-    );
-  }
-
-  Widget _statItemGeneral(
-      {double numberValue, String unitType, String itemTitle}) {
-    return Column(
-      children: [
-        Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              width: 70,
-              height: 70,
-              decoration: BoxDecoration(
-                color: Theme.of(context).shadowColor,
-                shape: BoxShape.circle,
-              ),
-            ),
-            Row(
-              children: [
-                Text(numberValue != null ? numberValue.toStringAsFixed(1) : "-",
-                    style: Theme.of(context).primaryTextTheme.headline5),
-                SizedBox(width: 3),
-                Text(
-                  unitType,
-                  style: Theme.of(context).primaryTextTheme.headline4,
+                  cardTitle,
+                  style: TextStyle(color: Colors.white),
                 ),
+                Icon(cardIcon),
               ],
+            ),
+            Text(
+              cardValue.toString(),
+              style: TextStyle(color: Colors.white),
             ),
           ],
         ),
-        SizedBox(
-          height: 10,
-        ),
-        Text(itemTitle, style: Theme.of(context).primaryTextTheme.subtitle2),
-      ],
+      ),
     );
   }
 }

@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
+import 'package:weighty/ui/common/common_app_bar.dart';
 import 'package:weighty/ui/dashboard/widgets/weight_progress_card.dart';
 import 'package:weighty/ui/dashboard/widgets/weight_stats_card.dart';
+import 'package:weighty/util/constants/ui_const.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen() : super();
@@ -22,7 +24,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: CommonAppBar(appBarTitle: UiConst.statisticsTitle),
       backgroundColor: Theme.of(context).canvasColor,
       body: Column(
         children: [
@@ -31,23 +33,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
           SizedBox(height: 15),
           WeightStatsWidget(),
         ],
-      ),
-    );
-  }
-
-  _buildAppBar() {
-    return AppBar(
-      elevation: 0,
-      centerTitle: true,
-      backgroundColor: Theme.of(context).canvasColor,
-      title: Container(
-        height: 30,
-        width: 80,
-        child: Center(
-          child: Image(
-            image: AssetImage("assets/weighty_name_white.png"),
-          ),
-        ),
       ),
     );
   }

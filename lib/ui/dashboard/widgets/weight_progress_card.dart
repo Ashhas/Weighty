@@ -1,9 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weighty/bloc/dashboard/dashboard_bloc.dart';
 import 'package:flutter/material.dart';
-import 'current_weight_widget.dart';
-import 'start_weight_widget.dart';
-import 'target_weight_widget.dart';
+import 'package:weighty/ui/dashboard/widgets/current_weight_widget.dart';
+import 'package:weighty/ui/dashboard/widgets/target_weight_widget.dart';
 
 class WeightProgressCard extends StatefulWidget {
   WeightProgressCard() : super();
@@ -15,31 +14,35 @@ class WeightProgressCard extends StatefulWidget {
 class _WeightProgressCardState extends State<WeightProgressCard> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DashboardBloc, DashboardState>(
-      builder: (context, state) {
-        if (state is DashboardLoaded) {
-          return Container(
-            height: 180,
-            width: double.infinity,
-            color: Theme.of(context).canvasColor,
-            child: Row(
+    return Container(
+      height: 80,
+      width: double.infinity,
+      color: Theme.of(context).canvasColor,
+      child: BlocBuilder<DashboardBloc, DashboardState>(
+        builder: (context, state) {
+          if (state is DashboardLoaded) {
+            return Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                StartWeightWidget(),
-                CurrentWeightWidget(),
-                TargetWeightWidget(),
+                SizedBox(
+                  height: 50,
+                  width: 110,
+                  child: CurrentWeightWidget(),
+                ),
+                Icon(Icons.stream, color: Colors.white),
+                SizedBox(
+                  height: 50,
+                  width: 110,
+                  child: TargetWeightWidget(),
+                ),
               ],
-            ),
-          );
-        } else {
-          return Container(
-            height: 180,
-            width: double.infinity,
-            color: Theme.of(context).canvasColor,
-          );
-        }
-      },
+            );
+          } else {
+            return Container();
+          }
+        },
+      ),
     );
   }
 }

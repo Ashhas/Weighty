@@ -20,7 +20,7 @@ class _AboutScreenState extends State<AboutScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: _buildAppBar(),
+      appBar: _buildAboutAppBar(),
       body: Container(
         width: double.infinity,
         child: Column(
@@ -47,7 +47,7 @@ class _AboutScreenState extends State<AboutScreen> {
     );
   }
 
-  Widget _buildAppBar() {
+  Widget _buildAboutAppBar() {
     return AppBar(
       elevation: 1,
       toolbarHeight: 180,
