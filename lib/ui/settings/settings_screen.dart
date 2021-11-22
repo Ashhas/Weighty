@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
@@ -8,6 +9,7 @@ import 'package:weighty/ui/settings/screens/goal_screen.dart';
 import 'package:weighty/ui/settings/screens/manage_data_screen.dart';
 import 'package:weighty/ui/settings/screens/theme_screen.dart';
 import 'package:weighty/ui/settings/screens/weight_unit_screen.dart';
+import 'package:weighty/ui/settings/widgets/settings_section.dart';
 import 'package:weighty/ui/settings/widgets/settings_tile.dart';
 import 'package:weighty/util/constants/ui_const.dart';
 
@@ -36,13 +38,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(height: 20),
+
+                  //User Pref. Section
+                  SettingsSection(
+                    sectionTitle: "User Information",
+                  ),
                   _buildGoalTile(),
+                  Divider(height: 1, thickness: 1, indent: 15, endIndent: 15),
                   _buildWeightUnitTile(),
-                  Divider(height: 1, thickness: 1),
+                  Divider(height: 1, thickness: 1, indent: 15, endIndent: 15),
+                  SizedBox(height: 45),
+
+                  //App Pref. Section
+                  SettingsSection(
+                    sectionTitle: "App Preferences",
+                  ),
                   _buildThemeTile(),
+                  Divider(height: 1, thickness: 1, indent: 15, endIndent: 15),
                   _buildManageDataTile(),
-                  Divider(height: 1, thickness: 1),
+                  Divider(height: 1, thickness: 1, indent: 15, endIndent: 15),
+                  SizedBox(height: 45),
+
+                  //About Section
+                  SettingsSection(
+                    sectionTitle: "About Me",
+                  ),
                   _buildAboutTile(state.appVersion),
+                  Divider(height: 1, thickness: 1, indent: 15, endIndent: 15),
                   SizedBox(height: 100),
                 ],
               ),
