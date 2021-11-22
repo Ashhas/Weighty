@@ -18,6 +18,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   void initState() {
     super.initState();
+    // Setup Dashboard Screen
     BlocProvider.of<DashboardBloc>(context).add(DashboardStarted());
   }
 

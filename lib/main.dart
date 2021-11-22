@@ -20,10 +20,10 @@ import 'package:weighty/util/constants/theme_const.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  //Initialize Bloc Observer
+  // Initialize Bloc Observer
   Bloc.observer = SimpleBlocObserver();
 
-  //Set Orientation and Run App
+  // Set Orientation and Run App
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(MyApp());
