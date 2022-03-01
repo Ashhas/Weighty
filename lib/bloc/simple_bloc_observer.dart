@@ -1,16 +1,18 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:intl/intl.dart';
 
 class SimpleBlocObserver extends BlocObserver {
   @override
-  void onEvent(Bloc bloc, Object event) {
+  void onEvent(Bloc bloc, Object? event) {
     super.onEvent(bloc, event);
-    log('onEvent', event);
+    log('onEvent', event!);
   }
 
   @override
-  void onError(BlocBase blocBase, Object error, StackTrace stackTrace) {
-    super.onError(blocBase, error, stackTrace);
+  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
+    super.onError(bloc, error, stackTrace);
     log('onError', error);
   }
 
@@ -24,7 +26,8 @@ class SimpleBlocObserver extends BlocObserver {
   }
 
   void log(String name, Object msg) {
-    print(
+    log("message", msg);
+    log(
         '===== ${DateFormat("HH:mm:ss-dd MMM, yyyy").format(DateTime.now())}: $name\n'
         '$msg');
   }

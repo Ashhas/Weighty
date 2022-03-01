@@ -20,14 +20,15 @@ import 'package:weighty/util/constants/theme_const.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Bloc Observer
-  Bloc.observer = SimpleBlocObserver();
-
-  // Set Orientation and Run App
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
-    runApp(MyApp());
-  });
+  BlocOverrides.runZoned(
+    () {
+      SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+          .then((_) {
+        runApp(MyApp());
+      });
+    },
+    blocObserver: SimpleBlocObserver(),
+  );
 }
 
 class MyApp extends StatelessWidget {
